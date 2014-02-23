@@ -32,7 +32,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git z textmate sublime ruby history-substring-search brew gitfast osx terminalapp tmuxinator vagrant web-search)
+plugins=(git z textmate sublime ruby history-substring-search brew gitfast osx terminalapp vagrant web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -44,9 +44,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$(brew --prefix ruby)/bin:$PATH"
 export NODE_PATH="/usr/local/lib/node"
 export PATH="/usr/local/share/npm/bin:$PATH"
-export PATH="$HOME/.tmuxifier/bin:$PATH"
 eval "$(rbenv init -)"
-eval "$(tmuxifier init -)"
 
 
 export GNUTERM=X11
@@ -59,8 +57,6 @@ export EDITOR='vim'
 
 export GREP_COLOR=32
 
-export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts"
-
 # Shortcuts
 alias blade="cd \"/Volumes/Blade 32GB/\""
 alias p="~/Documents/projects"
@@ -69,7 +65,6 @@ alias p="~/Documents/projects"
 alias grep="grep --color=auto"
 alias beer="bundle exec rake"
 alias ll="ls -al"
-alias mux="tmuxifier"
 
 # Functions
 gcat () {
@@ -85,3 +80,5 @@ alias vim="reattach-to-user-namespace vim"
 alias ag="ag --color"
 # Syntax Highlighting
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

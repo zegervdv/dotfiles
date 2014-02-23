@@ -334,3 +334,7 @@ nnoremap <leader>u :GundoToggle<CR>
 nnoremap <silent> <leader>y :YRShow<CR>
 
 let g:livepreview_previewer = 'open -a Preview'
+
+if filereadable($HOME . "/.vimrc.local")
+  source ~/.vimrc.local
+endif

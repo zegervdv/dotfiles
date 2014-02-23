@@ -44,6 +44,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$(brew --prefix ruby)/bin:$PATH"
 export NODE_PATH="/usr/local/lib/node"
 export PATH="/usr/local/share/npm/bin:$PATH"
+export PATH=$PATH:$HOME/.bin
 eval "$(rbenv init -)"
 
 

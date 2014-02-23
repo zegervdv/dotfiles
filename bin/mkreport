@@ -1,0 +1,5 @@
+#!/bin/sh
+# Create a new latex report from template
+
+cp $HOME/.templates/report.tex .
+echo "Created report.tex"

@@ -80,6 +80,9 @@ inoremap <C-e> <C-o>A
 " Jump one character in insert mode
 inoremap <C-f> <C-o>l
 
+" Switch between the last two files
+nnoremap <SPACE><SPACE> <C-^>
+
 " Very Magic search patterns
 nmap / /\v
 cmap s/ s/\v
@@ -87,7 +90,7 @@ cmap s/ s/\v
 
 inoremap £ \
 
-nnoremap <SPACE> <C-e>
+" nnoremap <SPACE> <C-e>
 
 " Close Quickfix window (,qq)
 map <leader>qq :cclose<CR>

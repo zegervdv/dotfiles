@@ -1,0 +1,4 @@
+graphics_toolkit gnuplot
+
+edit mode async
+EDITOR("mvim %s")

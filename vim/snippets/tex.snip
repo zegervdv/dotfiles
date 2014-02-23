@@ -1,0 +1,14 @@
+# Latex Snippets
+
+snippet     subfigure
+abbr        subfigure
+options     head
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{${1:image}}
+  \end{subfigure}
+
+snippet     SI
+abbr        SI
+alias       \SI si
+  $\SI{${1:value}}{${2:unit}}$

@@ -1,0 +1,108 @@
+# Ruby Snippets #
+
+snippet     class
+abbr        class
+options     head
+  class ${1:name}
+    ${2}
+  end
+
+snippet     mod
+abbr        module
+options     head
+  module ${1:name}
+    ${2}
+  end
+
+snippet     defm
+abbr        def method_missing
+options     head
+  def method_missing(method, *args, &block)
+    ${1}
+  end
+
+snippet     ea
+abbr        each do
+options     head
+  each do |${1:value}|
+    ${2}
+  end
+
+# ActiveRecord #
+
+snippet     create_table
+abbr        create_table
+options     head
+  create_table :${1:name} do |t|
+    ${0}
+    t.timestamps
+  end
+
+# RSpec Snippets #
+
+snippet     desc
+abbr        describe
+options     head
+  describe '${1:subject}' do
+    ${2}
+  end
+
+snippet     cont
+abbr        context
+options     head
+  context '${1:context}' do
+    ${2}
+  end
+
+snippet     bef
+abbr        before
+options     head
+  before :${1:each} do
+    ${2}
+  end
+
+snippet     aft
+abbr        after
+options     head
+  after :${:each}
+    ${2}
+  end
+
+snippet     let
+abbr        let
+options     head
+  let(:${1:object}) { ${2} }
+
+snippet     subj
+abbr        subject
+options     head
+  subject { ${1} }
+
+snippet     exp
+abbr        exp
+options     head
+  expect { ${1:expression} }.to ${2:expectance}
+
+snippet     it
+abbr        it
+options     head
+  it '${1:spec}' do
+    ${2}
+  end
+
+snippet     is
+abbr        it should
+options     head
+  it { should ${1} }
+
+snippet     isn
+abbr        it should not
+options     head
+  it { should_not ${1} }
+
+snippet     expt
+abbr        expect {}
+options     head
+  expect {
+    ${1:block}
+  }.to ${2}

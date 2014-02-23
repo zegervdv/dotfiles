@@ -93,7 +93,7 @@ inoremap £ \
 " nnoremap <SPACE> <C-e>
 
 " Close Quickfix window (,qq)
-map <leader>qq :cclose<CR>
+" map <leader>qq :cclose<CR>
 
 nnoremap <silent> n   n:call HLNext(0.4)<cr>
 nnoremap <silent> N   N:call HLNext(0.4)<cr>
@@ -206,6 +206,11 @@ let g:ctrl_cmd = 'CtrlP'
 
 map <C-l> :CtrlPBuffer<CR>
 map <C-m> :CtrlPTag<CR>
+
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
+endif
 
 " ctrl p - Commands
 map <leader>p :CtrlPCmdPalette<CR>

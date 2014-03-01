@@ -1,0 +1,21 @@
+session:
+  name: "HOP - Drone"
+  windows:
+    - name: "report"
+      root: "~/Documents/UGent/HOPDrone/report"
+      panes:
+        - cmd: "vim report.tex"
+          height: 75
+        - cmd: "l images/"
+          height: 25
+    - name: "code"
+      root: "~/Documents/UGent/HOPDrone/code"
+      panes:
+        - cmd: "vim src/main.c"
+          width: 60
+        - cmd: "git status"
+          width: 40
+          height: 40
+        - cmd:
+          - "vagrant up"
+          - "vagrant ssh"

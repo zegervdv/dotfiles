@@ -79,7 +79,7 @@ alias tmux='nocorrect tmux'
 alias mvim="reattach-to-user-namespace mvim"
 alias vim="reattach-to-user-namespace vim"
 alias ag="ag --color"
-# Syntax Highlighting
-# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#
+
+compctl -g '~/.teamocil/*(:t:r)' teamocil
+
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

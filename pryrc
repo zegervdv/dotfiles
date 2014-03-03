@@ -1,1 +1,1 @@
-$EDITOR=mvim
+Pry.config.editor = "vim"

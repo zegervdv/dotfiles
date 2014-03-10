@@ -341,8 +341,16 @@ nnoremap <leader>u :GundoToggle<CR>
 " Yank ring
 nnoremap <silent> <leader>y :YRShow<CR>
 
+" Open pdf in Preview
 let g:livepreview_previewer = 'open -a Preview'
 
+
+" Smalls
+nmap s <Plug>(smalls)
+omap s <Plug>(smalls)
+xmap s <Plug>(smalls)
+
+" Load local vimrc
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif

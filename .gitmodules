@@ -130,3 +130,6 @@
 [submodule "vim/bundle/smalls"]
 	path = vim/bundle/smalls
 	url = https://github.com/t9md/vim-smalls.git
+[submodule "vim/bundle/textmanip"]
+	path = vim/bundle/textmanip
+	url = https://github.com/t9md/vim-textmanip.git

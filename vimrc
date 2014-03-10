@@ -138,14 +138,6 @@ let g:indent_guides_guide_size = 1
 highlight IndentGuidesEven guibg=background
 highlight IndentGuidesOdd guibg='#282a2e'
 
-" Visual Block Dragging
-vmap  <expr>  H  DVB_Drag('left')
-vmap  <expr>  L  DVB_Drag('right')
-vmap  <expr>  J  DVB_Drag('down')
-vmap  <expr>  K  DVB_Drag('up')
-vmap  <expr>  D  DVB_Duplicate()
-let g:DVB_TrimWS = 1
-
 " Show trailing whitespaces
 " exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 " set list
@@ -349,6 +341,13 @@ let g:livepreview_previewer = 'open -a Preview'
 nmap s <Plug>(smalls)
 omap s <Plug>(smalls)
 xmap s <Plug>(smalls)
+
+" Textmanip
+xmap <C-j> <Plug>(textmanip-move-down)
+xmap <C-k> <Plug>(textmanip-move-up)
+xmap <C-h> <Plug>(textmanip-move-left)
+xmap <C-l> <Plug>(textmanip-move-right)
+xmap <F10> <Plug>(textmanip-toggle-mode)
 
 " Load local vimrc
 if filereadable($HOME . "/.vimrc.local")

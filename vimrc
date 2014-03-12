@@ -64,6 +64,15 @@ autocmd FileType ruby set tabstop=2|set shiftwidth=2
 
 set clipboard=unnamed
 
+set viminfo='10,\"100,:20,%,n~/.viminfo
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it for commit messages, when the position is invalid, or when
+" inside an event handler (happens when dropping a file on gvim).
+autocmd BufReadPost *
+  \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "normal g`\"" |
+  \ endif
 
 map <Leader>d  :bp<bar>sp<bar>bn<bar>bd<CR>
 

@@ -40,7 +40,7 @@ set textwidth=80
 
 set history=100
 set wildmenu
-Set wildmode=full
+set wildmode=full
 
 set diffopt+=iwhite
 

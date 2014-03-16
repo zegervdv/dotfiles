@@ -75,3 +75,4 @@ doc/
 # Latex Files
 *.aux
 *.log
+*.pdf

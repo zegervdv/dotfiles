@@ -25,7 +25,12 @@ set wrapmargin=2
 set linebreak
 set lbr
 set tabstop=2 shiftwidth=2
-color hybrid
+if has("gui_running")
+  set background=dark
+  color base16-ocean
+else
+  color hybrid
+endif
 set guifont=Inconsolata\ for\ Powerline:h12
 set autowrite
 set hidden

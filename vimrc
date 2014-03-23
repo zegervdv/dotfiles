@@ -27,7 +27,7 @@ set lbr
 set tabstop=2 shiftwidth=2
 if has("gui_running")
   set background=dark
-  color base16-ocean
+  color hybrid
 else
   color hybrid
 endif

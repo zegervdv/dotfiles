@@ -107,6 +107,7 @@ inoremap £ \
 
 " nnoremap <SPACE> <C-e>
 
+
 " Close Quickfix window (,qq)
 " map <leader>qq :cclose<CR>
 
@@ -264,6 +265,8 @@ autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
     let g:neocomplete#sources#omni#input_patterns = {}
   endif
 
+autocmd FileType c NeoCompleteTagMakeCache
+
 " Neo Snippets
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -373,3 +376,5 @@ xmap <F10> <Plug>(textmanip-toggle-mode)
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
+
+nnoremap <Enter> o<ESC>

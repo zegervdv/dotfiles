@@ -378,3 +378,6 @@ if filereadable($HOME . "/.vimrc.local")
 endif
 
 nnoremap <Enter> o<ESC>
+
+
+let g:startify_session_dir = "~/.vim/sessions"

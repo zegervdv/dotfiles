@@ -133,3 +133,6 @@
 [submodule "vim/bundle/textmanip"]
 	path = vim/bundle/textmanip
 	url = https://github.com/t9md/vim-textmanip.git
+[submodule "vim/bundle/startify"]
+	path = vim/bundle/startify
+	url = git@github.com:mhinz/vim-startify.git

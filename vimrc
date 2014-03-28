@@ -265,7 +265,7 @@ autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
     let g:neocomplete#sources#omni#input_patterns = {}
   endif
 
-autocmd FileType c NeoCompleteTagMakeCache
+" autocmd FileType c NeoCompleteTagMakeCache
 
 " Neo Snippets
 imap <C-k> <Plug>(neosnippet_expand_or_jump)

@@ -139,3 +139,6 @@
 [submodule "vim/bundle/rbenv"]
 	path = vim/bundle/rbenv
 	url = git@github.com:tpope/vim-rbenv.git
+[submodule "vim/bundle/clang_complete"]
+	path = vim/bundle/clang_complete
+	url = git@github.com:Rip-Rip/clang_complete.git

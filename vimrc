@@ -1,3 +1,6 @@
+" vim:fdm=marker
+
+" General Settings {{{
 set nocompatible
 set laststatus=2
 set noshowmode
@@ -71,7 +74,8 @@ autocmd FileType ruby set tabstop=2|set shiftwidth=2
 set clipboard=unnamed
 
 set viminfo='10,\"100,:20,%,n~/.viminfo
-
+" }}}
+" Custom remaps and tricks {{{
 " When editing a file, always jump to the last known cursor position.
 " Don't do it for commit messages, when the position is invalid, or when
 " inside an event handler (happens when dropping a file on gvim).
@@ -107,9 +111,6 @@ inoremap £ \
 
 " nnoremap <SPACE> <C-e>
 
-
-" Close Quickfix window (,qq)
-" map <leader>qq :cclose<CR>
 
 nnoremap <silent> n   n:call HLNext(0.4)<cr>
 nnoremap <silent> N   N:call HLNext(0.4)<cr>
@@ -158,6 +159,8 @@ highlight IndentGuidesOdd guibg='#282a2e'
 " exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 " set list
 
+" }}}
+" Plugin Settings {{{
 " Vim Math plugin; make simple calculations
 vmap <expr>  ++  VMATH_YankAndAnalyse()
 nmap         ++  vip++
@@ -242,6 +245,13 @@ let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions'
         \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -372,12 +382,12 @@ xmap <C-h> <Plug>(textmanip-move-left)
 xmap <C-l> <Plug>(textmanip-move-right)
 xmap <F10> <Plug>(textmanip-toggle-mode)
 
+let g:startify_session_dir = "~/.vim/sessions"
+" }}}
+
 " Load local vimrc
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
 
 nnoremap <Enter> o<ESC>
-
-
-let g:startify_session_dir = "~/.vim/sessions"

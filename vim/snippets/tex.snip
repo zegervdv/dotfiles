@@ -12,3 +12,16 @@ snippet     SI
 abbr        SI
 alias       \SI si
   $\SI{${1:value}}{${2:unit}}$
+
+snippet     frame
+abbr        frame
+options     head
+  \begin{frame}
+    \frametitle{${1:title}}
+    ${2:content}
+  \end{frame}
+
+snippet     toc
+abbr        table of contents
+options     head
+  \tableofcontents[currentsection]

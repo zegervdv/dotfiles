@@ -12,7 +12,7 @@ for $file (@files) {
   open FILE, "$file" or die $!;
   my @lines = <FILE>;
   for $i (keys @lines) {
-    if ($lines[$i] =~ /\<{2,}/) {
+    if ($lines[$i] =~ /\<{3,}/) {
       $linenr = $i + 1;
       print color("blue"), "$file", color("reset");
       print ":";

@@ -20,7 +20,7 @@
 [mergetool]
         keepBackup = false
 [difftool]
-        prompt = false
+	prompt = false
 [help]
         autocorrect = 1
 [include]
@@ -33,3 +33,7 @@
         default = simple
 [init]
 	templatedir = ~/.templates/git
+[diff]
+	tool = mvimdiff
+[difftool "mvimdiff"]
+    cmd = mvim -f -d \"$LOCAL\" \"$REMOTE\"

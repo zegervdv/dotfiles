@@ -7,6 +7,8 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="custom"
 
+setopt correct_all
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -32,7 +34,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git z textmate sublime ruby history-substring-search brew gitfast osx terminalapp vagrant web-search gitignore)
+plugins=(git z textmate sublime ruby history-substring-search brew gitfast osx terminalapp vagrant web-search gitignore brew-cask rake-fast)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -66,6 +68,8 @@ alias p="~/Documents/projects"
 alias grep="grep --color=auto"
 alias beer="bundle exec rake"
 alias ll="ls -al"
+alias l="ls -l"
+alias gsl="git sl"
 
 # Functions
 gcat () {

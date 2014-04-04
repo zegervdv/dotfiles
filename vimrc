@@ -40,6 +40,7 @@ set hidden
 set hlsearch
 set incsearch
 set ignorecase
+set gdefault
 set smartcase
 set smartindent
 set autoindent
@@ -73,7 +74,11 @@ autocmd FileType ruby set tabstop=2|set shiftwidth=2
 
 set clipboard=unnamed
 
+set undofile
 set viminfo='10,\"100,:20,%,n~/.viminfo
+
+" set list
+" set listchars=tab:▸\ ,eol:¬
 " }}}
 " Custom remaps and tricks {{{
 " When editing a file, always jump to the last known cursor position.
@@ -106,11 +111,16 @@ nnoremap <SPACE><SPACE> <C-^>
 nmap / /\v
 cmap s/ s/\v
 
-
 inoremap £ \
 
-" nnoremap <SPACE> <C-e>
+nnoremap <TAB> %
+vnoremap <TAB> %
 
+" Move between windows
+nnoremap <C-l> <C-w><C-l>
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
 
 nnoremap <silent> n   n:call HLNext(0.4)<cr>
 nnoremap <silent> N   N:call HLNext(0.4)<cr>
@@ -154,10 +164,6 @@ let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
 highlight IndentGuidesEven guibg=background
 highlight IndentGuidesOdd guibg='#282a2e'
-
-" Show trailing whitespaces
-" exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
-" set list
 
 " }}}
 " Plugin Settings {{{
@@ -215,8 +221,8 @@ noremap <C-p> :CtrlP<CR>
 let g:ctrl_map = '<c-p>'
 let g:ctrl_cmd = 'CtrlP'
 
-map <C-l> :CtrlPBuffer<CR>
-map <C-m> :CtrlPTag<CR>
+map <C-m> :CtrlPBuffer<CR>
+" map <C-m> :CtrlPTag<CR>
 
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'

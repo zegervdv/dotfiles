@@ -99,10 +99,16 @@ map k gk
 nmap <C-$> <C-]>
 
 " Jump to end of line in insert mode
+inoremap <C-a> <C-o>I
 inoremap <C-e> <C-o>A
 
-" Jump one character in insert mode
-inoremap <C-f> <C-o>l
+nnoremap <C-a> ^
+nnoremap <C-e> $
+
+nnoremap + <C-a>
+
+" Jump out of inner bracket
+inoremap <C-f> <ESC>%%a
 
 " Switch between the last two files
 nnoremap <SPACE><SPACE> <C-^>
@@ -122,6 +128,10 @@ nnoremap <C-h> <C-w><C-h>
 nnoremap <C-j> <C-w><C-j>
 nnoremap <C-k> <C-w><C-k>
 
+" highlight last inserted text
+nnoremap gV `[v`]
+
+" Briefly change colour of last highlight
 nnoremap <silent> n   n:call HLNext(0.4)<cr>
 nnoremap <silent> N   N:call HLNext(0.4)<cr>
 
@@ -221,7 +231,7 @@ noremap <C-p> :CtrlP<CR>
 let g:ctrl_map = '<c-p>'
 let g:ctrl_cmd = 'CtrlP'
 
-map <C-m> :CtrlPBuffer<CR>
+nnoremap <C-o> :CtrlPBuffer<CR>
 " map <C-m> :CtrlPTag<CR>
 
 if executable('ag')

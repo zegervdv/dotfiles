@@ -1,5 +1,11 @@
 #!/bin/sh
 # Create a new latex report from template
 
-cp $HOME/.templates/report.tex .
-echo "Created report.tex"
+if [ $1 ]; then
+  name=$1
+else
+  name='report.tex'
+fi
+
+cp $HOME/.templates/report.tex $name
+echo "Created $name"

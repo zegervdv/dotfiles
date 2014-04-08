@@ -125,8 +125,13 @@ vnoremap <TAB> %
 " Move between windows
 nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
-nnoremap <C-j> <C-w><C-j>
+nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w><C-k>
+
+nnoremap <C-S-TAB>  :tabprevious<CR>
+nnoremap <C-TAB>    :tabnext<CR>
+inoremap <C-S-TAB>  <ESC>:tabprevious<CR>
+inoremap <C-TAB>    <ESC>:tabnext<CR>
 
 " highlight last inserted text
 nnoremap gV `[v`]
@@ -193,7 +198,6 @@ let g:airline_theme = 'tomorrow'
 let g:airline#extensions#syntastic#enabled = 0
 
 nnoremap <F5> :buffers<CR>:buffer<Space>
-noremap <C-TAB> <C-w><C-w>
 
 " Set leader to ,
 let mapleader = ","
@@ -286,18 +290,6 @@ let s:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
 if isdirectory(s:clang_library_path)
     let g:clang_library_path=s:clang_library_path
 endif
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_overwrite_completefunc = 1
-let g:neocomplete#force_omni_input_patterns.c =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.cpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-let g:neocomplete#force_omni_input_patterns.objc =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.objcpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 0
 let g:clang_use_library = 1

@@ -76,3 +76,5 @@ doc/
 *.aux
 *.log
 *.pdf
+
+.rake_tasks

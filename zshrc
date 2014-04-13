@@ -6,7 +6,6 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="custom"
-
 setopt correct_all
 
 # Example aliases
@@ -87,3 +86,4 @@ alias ag="ag --color"
 compctl -g '~/.teamocil/*(:t:r)' teamocil
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+

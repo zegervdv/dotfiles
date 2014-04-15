@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.github.maid</string>
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict>
+      <key>Hour</key>
+      <integer>12</integer>
+      <key>Day</key>
+      <integer>1</integer>
+    </dict>
+    <dict>
+      <key>Hour</key>
+      <integer>12</integer>
+      <key>Day</key>
+      <integer>14</integer>
+    </dict>
+  </array>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/zegervdv/.rbenv/shims/maid</string>
+    <string>clean</string>
+    <string>-r</string>
+    <string>/Users/zegervdv/.maid/general.rb</string>
+  </array>
+  <key>ServiceDescription</key>
+  <string>Maid</string>
+</dict>
+</plist>

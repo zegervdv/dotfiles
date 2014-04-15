@@ -7,6 +7,7 @@ install vim
 install tmux
 install brew-cask
 install git
+install hub
 
 install the_silver_searcher
 
@@ -22,6 +23,11 @@ install python
 
 install ssh-copy-id
 
+cask install qlcolorcode
+cask install qlstephen
+cask install qlmarkdown
+cask install quicklook-csv
+cask install betterzipql
 
 cask install handbrake
 cask install transmission

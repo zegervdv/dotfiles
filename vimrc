@@ -90,6 +90,11 @@ autocmd BufReadPost *
   \   exe "normal g`\"" |
   \ endif
 
+nnoremap <F5> :buffers<CR>:buffer<Space>
+
+" Set leader to ,
+let mapleader = ","
+
 map <Leader>d  :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " See long lines as line breaks
@@ -117,6 +122,9 @@ nnoremap <SPACE><SPACE> <C-^>
 " Very Magic search patterns
 nmap / /\v
 cmap s/ s/\v
+
+" Clear highlight
+nnoremap <silent> <leader>n :nohlsearch<CR>
 
 inoremap £ \
 
@@ -182,12 +190,11 @@ highlight IndentGuidesEven guibg=background
 highlight IndentGuidesOdd guibg='#282a2e'
 
 " }}}
-" Plugin Settings {{{
-" Vim Math plugin; make simple calculations
+" Vim Math plugin; make simple calculations {{{
 vmap <expr>  ++  VMATH_YankAndAnalyse()
 nmap         ++  vip++
-
-" Airline configuration
+" }}}
+" Airline configuration {{{
 let g:airline_inactive_collapse=0
 let g:airline_powerline_fonts=1
 
@@ -197,41 +204,27 @@ let g:airline_right_sep = ''
 let g:airline_theme = 'tomorrow'
 
 let g:airline#extensions#syntastic#enabled = 0
-
-nnoremap <F5> :buffers<CR>:buffer<Space>
-
-" Set leader to ,
-let mapleader = ","
-
-" Custom key mappings
-
+" }}}
+" YankRing {{{
 let g:yankring_replace_n_pkey = 'cp'
-
-" Nerdtree
+nnoremap <silent> <leader>y :YRShow<CR>
+" }}}
+" Nerdtree {{{
 map <F2> :NERDTreeToggle<CR>
 map <Leader>e :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.aux$', '\.log$', '\.out$']
-
-" Vim - Rspec
+" }}}
+" Vim - Rspec {{{
 map <leader>t :call RunCurrentSpecFile()<CR>
 map <leader>s :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>r :call RunAllSpecs()<CR>
-
-" Cucumber
+" }}}
+" Cucumber {{{
 map <leader>f :call RunAllFeatures()<CR>
 map <leader>k :call RunCurrentFeature()<CR>
-
-" Autocomplete
-inoremap <C-Space> <C-N>
-
-" Single char insertion
-" nmap <Space> i_<Esc>r
-
-" Clear highlight
-nnoremap <silent> <leader>n :nohlsearch<CR>
-
-" ctrl p - Fuzzy file finder
+" }}}
+" ctrl p - Fuzzy file finder {{{
 noremap <C-p> :CtrlP<CR>
 let g:ctrl_map = '<c-p>'
 let g:ctrl_cmd = 'CtrlP'
@@ -247,14 +240,14 @@ endif
 
 " ctrl p - Commands
 map <leader>p :CtrlPCmdPalette<CR>
-
-" Markdown
+" }}}
+" Markdown {{{
 let g:vim_markdown_folding_disabled=1
-
-" tComment remap
+" }}}
+" tComment {{{
 nmap <leader>c <C-_><C-_>
-
-" Neo Complete
+" }}}
+" Neo Complete {{{
 let g:acp_enableAtStartup                           = 0
 let g:neocomplete#enable_at_startup                 = 1
 let g:neocomplete#enable_smart_case                 = 1
@@ -307,8 +300,8 @@ autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
   endif
 
 " autocmd FileType c NeoCompleteTagMakeCache
-
-" Neo Snippets
+" }}}
+" Neo Snippets {{{
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
@@ -327,8 +320,8 @@ smap <expr><TAB> neosnippet#expandable() == 1 ? "\<Plug>(neosnippet_expand_or_ju
 let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
 let g:neosnippet#snippets_directory='~/.vim/snippets'
-
-" Tabular
+" }}}
+" Tabular {{{
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
 function! s:align()
@@ -354,16 +347,8 @@ vmap <Leader>a: :Tabularize /:\zs/l0l1<CR>
 nmap <Leader>a, :Tabularize /,\zs/l0l1<CR>
 vmap <Leader>a, :Tabularize /,\zs/l0l1<CR>
 vmap <Leader>a- :Tabularize /-<CR>
-
-
-
-augroup markdown
-    au!
-    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup END
-
-
-" Latex plugin
+" }}}
+" Latex plugin {{{
 au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
 au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
 au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
@@ -378,41 +363,26 @@ let g:Tex_TreatMacViewerAsUNIX = 1
 let g:Tex_ExecuterUNIXViewerInForeground = 1
 let g:Tex_ViewRule_pdf = 'open -a Preview'
 let g:Tex_ViewRule_ps = 'open -a Preview'
-
-" Tagbar mapping
+" }}}
+" Tagbar {{{
 nmap <F8> :TagbarToggle<CR>
-
-" The silver searcher
-" let g:ackprg = 'ag --nogroup --nocolor --column'
-
-" Multiple cursor insert
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-m>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-
-" Gundo tree
+" }}}
+" Gundo tree {{{
 nnoremap <leader>u :GundoToggle<CR>
-
-" Yank ring
-nnoremap <silent> <leader>y :YRShow<CR>
-
-" Open pdf in Preview
-let g:livepreview_previewer = 'open -a Preview'
-
-
-" Smalls
+" }}}
+" Smalls {{{
 nmap s <Plug>(smalls)
 omap s <Plug>(smalls)
 xmap s <Plug>(smalls)
-
-" Textmanip
+" }}}
+" Textmanip {{{
 xmap <C-j> <Plug>(textmanip-move-down)
 xmap <C-k> <Plug>(textmanip-move-up)
 xmap <C-h> <Plug>(textmanip-move-left)
 xmap <C-l> <Plug>(textmanip-move-right)
 xmap <F10> <Plug>(textmanip-toggle-mode)
-
+" }}}
+" Startify {{{
 let g:startify_session_dir = "~/.vim/sessions"
 " }}}
 

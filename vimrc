@@ -236,6 +236,7 @@ noremap <C-p> :CtrlP<CR>
 let g:ctrl_map = '<c-p>'
 let g:ctrl_cmd = 'CtrlP'
 
+let g:ctrlp_working_path=0
 nnoremap <C-o> :CtrlPBuffer<CR>
 " map <C-m> :CtrlPTag<CR>
 

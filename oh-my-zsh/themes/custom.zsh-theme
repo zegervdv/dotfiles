@@ -14,8 +14,9 @@ else
     git=0
 fi
 
-PROMPT=$'%{$fg[cyan]%}%m %{$fg[yellow]%}$(get_pwd)
-%{$reset_color%}→ '
+PROMPT='%{$fg[cyan]%}%M%{$reset_color%} in %{$fg[yellow]%}%~%b%{$reset_color%}
+%{$reset_color%}%(?.%{$fg[white]%}.%{$fg[red]%})→ '
+
 
 RPROMPT='$my_gray$(git_prompt_info) $(git_prompt_status)%{$reset_color%}%'
 

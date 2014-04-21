@@ -20,7 +20,7 @@ Maid.rules do
   end
 
   rule 'Remove empty folders' do
-    trash(dir('~/Downloads/**/*').select { |path| File.directory?(path) && File.stat(path).size < 1.megabyte })
+    trash(dir('~/Downloads/**/*').select { |path| File.directory?(path) && (File.stat(path).size < 1.megabyte || dir("#{path}/*").empty? ) })
   end
 
   rule 'Remove old files' do

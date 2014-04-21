@@ -5,6 +5,7 @@ set nocompatible
 set laststatus=2
 set noshowmode
 
+let g:pathogen_disabled = ['ack']
 execute pathogen#infect()
 
 set backspace=2
@@ -189,7 +190,11 @@ let g:indent_guides_guide_size = 1
 highlight IndentGuidesEven guibg=background
 highlight IndentGuidesOdd guibg='#282a2e'
 
+au FileType c setl foldmethod=syntax
+
+
 " }}}
+
 " Vim Math plugin; make simple calculations {{{
 vmap <expr>  ++  VMATH_YankAndAnalyse()
 nmap         ++  vip++
@@ -212,7 +217,7 @@ nnoremap <silent> <leader>y :YRShow<CR>
 " Nerdtree {{{
 map <F2> :NERDTreeToggle<CR>
 map <Leader>e :NERDTreeToggle<CR>
-let NERDTreeIgnore = ['\.aux$', '\.log$', '\.out$']
+let NERDTreeIgnore = ['\.aux$', '\.log$', '\.out$', '\.o$', '\.hex$', '\.bin$', '\.elf$']
 " }}}
 " Vim - Rspec {{{
 map <leader>t :call RunCurrentSpecFile()<CR>

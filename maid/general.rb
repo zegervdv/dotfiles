@@ -28,4 +28,8 @@ Maid.rules do
       trash(file) if 4.weeks.since?(accessed_at(file))
     end
   end
+
+  rule 'Clean up Mail Downloads' do
+    trash(dir('~/Library/Containers/com.apple.mail/Data/Library/Mail\ Downloads/*'))
+  end
 end

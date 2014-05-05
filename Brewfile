@@ -8,6 +8,7 @@ install tmux
 install brew-cask
 install git
 install hub
+install rubber
 
 install the_silver_searcher
 

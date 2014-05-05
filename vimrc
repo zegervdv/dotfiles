@@ -378,8 +378,12 @@ let g:Tex_DefaultTargetFormat = 'pdf'
 let g:tex_flavor = 'latex'
 let g:Tex_TreatMacViewerAsUNIX = 1
 let g:Tex_ExecuterUNIXViewerInForeground = 1
-let g:Tex_ViewRule_pdf = 'open -a Preview'
+" let g:Tex_ViewRule_pdf = 'open -a Preview'
+let g:Tex_ViewRule_pdf = 'open -a /Applications/TeX/TeXShop.app'
+
 let g:Tex_ViewRule_ps = 'open -a Preview'
+
+nnoremap <leader>m :w<CR>:!rubber --pdf --warn all %<CR>
 " }}}
 " Tagbar {{{
 nmap <F8> :TagbarToggle<CR>

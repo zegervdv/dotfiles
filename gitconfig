@@ -37,3 +37,5 @@
 	tool = mvimdiff
 [difftool "mvimdiff"]
     cmd = mvim -f -d \"$LOCAL\" \"$REMOTE\"
+[status]
+	branch = 1

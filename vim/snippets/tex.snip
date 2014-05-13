@@ -25,3 +25,16 @@ snippet     toc
 abbr        table of contents
 options     head
   \tableofcontents[currentsection]
+
+snippet     columns
+abbr        columns
+options     head
+  \begin{columns}[t]
+    \begin{column}[T]{.5\textwidth}
+      ${1:content_1}
+    \end{column}
+    \begin{column}[T]{.5\textwidth}
+      ${2:content_2}
+    \end{column}
+  \end{columns}
+

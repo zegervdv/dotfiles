@@ -406,6 +406,9 @@ xmap <F10> <Plug>(textmanip-toggle-mode)
 " Startify {{{
 let g:startify_session_dir = "~/.vim/sessions"
 " }}}
+" Vimwiki {{{
+let g:vimwiki_list=[{'path':'$HOME/.vimwiki'}]
+" }}}
 
 " Load local vimrc
 if filereadable($HOME . "/.vimrc.local")

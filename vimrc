@@ -409,6 +409,9 @@ let g:startify_session_dir = "~/.vim/sessions"
 " Vimwiki {{{
 let g:vimwiki_list=[{'path':'$HOME/.vimwiki'}]
 " }}}
+" Vim Sessions {{{
+let g:session_autosave = 'no'
+" }}}
 
 " Load local vimrc
 if filereadable($HOME . "/.vimrc.local")

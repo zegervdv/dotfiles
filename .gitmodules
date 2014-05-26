@@ -151,3 +151,9 @@
 [submodule "vimwiki"]
 	path = vimwiki
 	url = git@bitbucket.org:zegervdv/vimwiki.git
+[submodule "vim/bundle/vim-session"]
+	path = vim/bundle/vim-session
+	url = git@github.com:xolox/vim-session.git
+[submodule "vim/bundle/misc"]
+	path = vim/bundle/misc
+	url = git@github.com:xolox/vim-misc.git

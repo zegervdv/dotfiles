@@ -4,6 +4,10 @@ if [ ! -e $HOME/.vim ]; then
   ln -s $HOME/.dotfiles/vim $HOME/.vim
 fi
 
+if [ ! -e $HOME/.vimwiki ]; then
+  ln -s $HOME/.dotfiles/vimwiki $HOME/.vimwiki
+fi
+
 # Update plugins
 cd $HOME/.dotfiles
 git submodule init

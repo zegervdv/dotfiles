@@ -1,9 +1,10 @@
 tap thoughtbot/formulae
+tap caskroom/cask
 install rcm
 
 install zsh
 install macvim --with-lua --with-ruby
-install vim
+install vim --with-lua --with-ruby
 install tmux
 install brew-cask
 install git
@@ -32,7 +33,6 @@ cask install betterzipql
 
 cask install handbrake
 cask install transmission
-cask install tvshows
 cask install xquartz
 cask install virtualbox
 cask install subler

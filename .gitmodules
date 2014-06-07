@@ -157,3 +157,9 @@
 [submodule "vim/bundle/misc"]
 	path = vim/bundle/misc
 	url = git@github.com:xolox/vim-misc.git
+[submodule "vim/bundle/rspec-syntax"]
+	path = vim/bundle/rspec-syntax
+	url = git@github.com:sheerun/rspec.vim.git
+[submodule "vim/bundle/git"]
+	path = vim/bundle/git
+	url = git@github.com:tpope/vim-git.git

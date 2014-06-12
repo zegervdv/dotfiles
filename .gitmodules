@@ -135,34 +135,34 @@
 	url = https://github.com/t9md/vim-textmanip.git
 [submodule "vim/bundle/startify"]
 	path = vim/bundle/startify
-	url = git@github.com:mhinz/vim-startify.git
+	url = https://github.com/mhinz/vim-startify.git
 [submodule "vim/bundle/rbenv"]
 	path = vim/bundle/rbenv
-	url = git@github.com:tpope/vim-rbenv.git
+	url = https://github.com/tpope/vim-rbenv.git
 [submodule "vim/bundle/clang_complete"]
 	path = vim/bundle/clang_complete
-	url = git@github.com:Rip-Rip/clang_complete.git
+	url = https://github.com/Rip-Rip/clang_complete.git
 [submodule "vim/bundle/base16"]
 	path = vim/bundle/base16
-	url = git@github.com:chriskempson/base16-vim.git
+	url = https://github.com/chriskempson/base16-vim.git
 [submodule "vim/bundle/vimwiki"]
 	path = vim/bundle/vimwiki
-	url = git@github.com:vimwiki/vimwiki.git
+	url = https://github.com/vimwiki/vimwiki.git
 [submodule "vimwiki"]
 	path = vimwiki
 	url = git@bitbucket.org:zegervdv/vimwiki.git
 [submodule "vim/bundle/vim-session"]
 	path = vim/bundle/vim-session
-	url = git@github.com:xolox/vim-session.git
+	url = https://github.com/xolox/vim-session.git
 [submodule "vim/bundle/misc"]
 	path = vim/bundle/misc
-	url = git@github.com:xolox/vim-misc.git
+	url = https://github.com/xolox/vim-misc.git
 [submodule "vim/bundle/rspec-syntax"]
 	path = vim/bundle/rspec-syntax
-	url = git@github.com:sheerun/rspec.vim.git
+	url = https://github.com/sheerun/rspec.vim.git
 [submodule "vim/bundle/git"]
 	path = vim/bundle/git
-	url = git@github.com:tpope/vim-git.git
+	url = https://github.com/tpope/vim-git.git
 [submodule "vim/bundle/merginal"]
 	path = vim/bundle/merginal
-	url = git@github.com:idanarye/vim-merginal.git
+	url = https://github.com/idanarye/vim-merginal.git

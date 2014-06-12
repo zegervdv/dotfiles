@@ -163,3 +163,6 @@
 [submodule "vim/bundle/git"]
 	path = vim/bundle/git
 	url = git@github.com:tpope/vim-git.git
+[submodule "vim/bundle/merginal"]
+	path = vim/bundle/merginal
+	url = git@github.com:idanarye/vim-merginal.git

@@ -29,6 +29,12 @@ Maid.rules do
     end
   end
 
+  rule 'Remove old powerpoints' do
+    dir('~/Downloads/**/*.pptx?').each do |file|
+      trash(file) if 3.days.since?(accessed_at(file))
+    end
+  end
+
   rule 'Clean up Mail Downloads' do
     trash(dir('~/Library/Containers/com.apple.mail/Data/Library/Mail\ Downloads/*'))
   end

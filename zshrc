@@ -87,3 +87,4 @@ compctl -g '~/.teamocil/*(:t:r)' teamocil
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
+source ~/.fzf.zsh

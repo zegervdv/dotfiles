@@ -163,3 +163,12 @@
 [submodule "vim/bundle/merginal"]
 	path = vim/bundle/merginal
 	url = https://github.com/idanarye/vim-merginal.git
+[submodule "vim/bundle/vimproc"]
+	path = vim/bundle/vimproc
+	url = https://github.com/Shougo/vimproc.vim
+[submodule "vim/bundle/reunions"]
+	path = vim/bundle/reunions
+	url = https://github.com/osyo-manga/vim-reunions
+[submodule "vim/bundle/marching"]
+	path = vim/bundle/marching
+	url = https://github.com/osyo-manga/vim-marching.git

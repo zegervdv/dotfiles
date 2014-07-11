@@ -1,6 +1,6 @@
 " ~/.dotfiles/vim/sessions/quadcopter.vim:
 " Vim session script.
-" Created by session.vim 2.4.14 on 26 juni 2014 at 18:27:48.
+" Created by session.vim 2.4.14 on 28 juni 2014 at 16:21:41.
 " Open this file in Vim and run :source % to restore your session.
 
 set guioptions=egm
@@ -39,8 +39,8 @@ badd +457 STM32F3-Discovery_FW_V1.1.0/Utilities/STM32F3_Discovery/stm32f3_discov
 badd +1 ~/Documents/projects/STM-Quadcopter
 badd +1 source/bluetooth.h
 badd +1 source/sensor_data.h
-badd +1 debug/read_sensors.c
-badd +1 debug/Makefile
+badd +84 debug/read_sensors.c
+badd +22 debug/Makefile
 badd +0 STM32F3-Discovery_FW_V1.1.0/Utilities/STM32F3_Discovery/stm32f3_discovery_lsm303dlhc.h
 " argglobal
 silent! argdel *
@@ -59,9 +59,9 @@ set nosplitbelow
 wincmd t
 set winheight=1 winwidth=1
 exe 'vert 1resize ' . ((&columns * 93 + 93) / 187)
-exe '2resize ' . ((&lines * 35 + 35) / 70)
+exe '2resize ' . ((&lines * 35 + 34) / 69)
 exe 'vert 2resize ' . ((&columns * 93 + 93) / 187)
-exe '3resize ' . ((&lines * 32 + 35) / 70)
+exe '3resize ' . ((&lines * 31 + 34) / 69)
 exe 'vert 3resize ' . ((&columns * 93 + 93) / 187)
 " argglobal
 setlocal fdm=syntax
@@ -74,15 +74,15 @@ setlocal fdn=20
 setlocal fen
 17
 silent! normal! zo
-31
+29
 silent! normal! zo
-54
+51
 silent! normal! zo
-let s:l = 49 - ((33 * winheight(0) + 34) / 68)
+let s:l = 1 - ((0 * winheight(0) + 33) / 67)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-49
+1
 normal! 0
 wincmd w
 " argglobal
@@ -105,11 +105,11 @@ silent! normal! zo
 normal! zc
 108
 silent! normal! zo
-let s:l = 91 - ((47 * winheight(0) + 17) / 35)
+let s:l = 1 - ((0 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-91
+1
 normal! 018|
 wincmd w
 " argglobal
@@ -123,17 +123,17 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 28 - ((2 * winheight(0) + 16) / 32)
+let s:l = 1 - ((0 * winheight(0) + 15) / 31)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-28
+1
 normal! 0
 wincmd w
 exe 'vert 1resize ' . ((&columns * 93 + 93) / 187)
-exe '2resize ' . ((&lines * 35 + 35) / 70)
+exe '2resize ' . ((&lines * 35 + 34) / 69)
 exe 'vert 2resize ' . ((&columns * 93 + 93) / 187)
-exe '3resize ' . ((&lines * 32 + 35) / 70)
+exe '3resize ' . ((&lines * 31 + 34) / 69)
 exe 'vert 3resize ' . ((&columns * 93 + 93) / 187)
 tabedit source/sensors.c
 set splitbelow splitright
@@ -149,9 +149,9 @@ set nosplitbelow
 wincmd t
 set winheight=1 winwidth=1
 exe 'vert 1resize ' . ((&columns * 93 + 93) / 187)
-exe '2resize ' . ((&lines * 21 + 35) / 70)
+exe '2resize ' . ((&lines * 21 + 34) / 69)
 exe 'vert 2resize ' . ((&columns * 93 + 93) / 187)
-exe '3resize ' . ((&lines * 46 + 35) / 70)
+exe '3resize ' . ((&lines * 46 + 34) / 69)
 exe 'vert 3resize ' . ((&columns * 93 + 93) / 187)
 " argglobal
 setlocal fdm=syntax
@@ -168,11 +168,11 @@ silent! normal! zo
 silent! normal! zo
 61
 normal! zc
-let s:l = 42 - ((41 * winheight(0) + 34) / 68)
+let s:l = 1 - ((0 * winheight(0) + 34) / 68)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-42
+1
 normal! 01|
 wincmd w
 " argglobal
@@ -186,11 +186,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 63 - ((20 * winheight(0) + 10) / 21)
+let s:l = 1 - ((0 * winheight(0) + 10) / 21)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-63
+1
 normal! 039|
 wincmd w
 " argglobal
@@ -209,46 +209,18 @@ silent! normal! zo
 silent! normal! zo
 54
 silent! normal! zo
-let s:l = 43 - ((22 * winheight(0) + 23) / 46)
+let s:l = 1 - ((0 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-43
+1
 normal! 033|
 wincmd w
 exe 'vert 1resize ' . ((&columns * 93 + 93) / 187)
-exe '2resize ' . ((&lines * 21 + 35) / 70)
+exe '2resize ' . ((&lines * 21 + 34) / 69)
 exe 'vert 2resize ' . ((&columns * 93 + 93) / 187)
-exe '3resize ' . ((&lines * 46 + 35) / 70)
+exe '3resize ' . ((&lines * 46 + 34) / 69)
 exe 'vert 3resize ' . ((&columns * 93 + 93) / 187)
-tabedit debug/read_sensors.c
-set splitbelow splitright
-set nosplitbelow
-wincmd t
-set winheight=1 winwidth=1
-" argglobal
-setlocal fdm=syntax
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-11
-silent! normal! zo
-65
-silent! normal! zo
-71
-silent! normal! zo
-79
-silent! normal! zo
-let s:l = 76 - ((59 * winheight(0) + 34) / 68)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-76
-normal! 015|
 tabedit source/sensor_data.h
 set splitbelow splitright
 set nosplitbelow
@@ -264,23 +236,17 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 10 - ((9 * winheight(0) + 34) / 68)
+let s:l = 1 - ((0 * winheight(0) + 33) / 67)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-10
+1
 normal! 0
 tabedit source/Makefile
 set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
 set nosplitbelow
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 93 + 93) / 187)
-exe 'vert 2resize ' . ((&columns * 93 + 93) / 187)
 " argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -291,33 +257,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 25 - ((23 * winheight(0) + 34) / 68)
+let s:l = 1 - ((0 * winheight(0) + 33) / 67)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-25
-normal! 017|
-wincmd w
-" argglobal
-edit debug/Makefile
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 22 - ((21 * winheight(0) + 34) / 68)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-22
-normal! 09|
-wincmd w
-exe 'vert 1resize ' . ((&columns * 93 + 93) / 187)
-exe 'vert 2resize ' . ((&columns * 93 + 93) / 187)
+1
+normal! 0
 tabedit STM32F3-Discovery_FW_V1.1.0/Utilities/STM32F3_Discovery/stm32f3_discovery_lsm303dlhc.h
 set splitbelow splitright
 set nosplitbelow
@@ -333,13 +278,13 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 478 - ((33 * winheight(0) + 34) / 68)
+let s:l = 1 - ((0 * winheight(0) + 33) / 67)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-478
+1
 normal! 0
-tabnext 3
+tabnext 1
 if exists('s:wipebuf')
 "   silent exe 'bwipe ' . s:wipebuf
 endif
@@ -356,7 +301,7 @@ let &so = s:so_save | let &siso = s:siso_save
 " by :mksession out of the box).
 
 1wincmd w
-tabnext 3
+tabnext 1
 if exists('s:wipebuf')
   if empty(bufname(s:wipebuf))
 if !getbufvar(s:wipebuf, '&modified')

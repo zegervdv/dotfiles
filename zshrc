@@ -66,8 +66,8 @@ alias p="~/Documents/projects"
 # Commands
 alias grep="grep --color=auto"
 alias beer="bundle exec rake"
-alias ll="ls -al"
-alias l="ls -l"
+alias ll="ls -altr"
+alias l="ls -ltr"
 alias gsl="git sl"
 
 # Functions

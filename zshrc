@@ -82,6 +82,7 @@ alias tmux='nocorrect tmux'
 alias mvim="reattach-to-user-namespace mvim"
 alias vim="reattach-to-user-namespace vim"
 alias ag="ag --color"
+alias dot="cd ~/.dotfiles"
 
 compctl -g '~/.teamocil/*(:t:r)' teamocil
 

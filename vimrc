@@ -52,8 +52,11 @@ set textwidth=80
 set history=100
 set wildmenu
 set wildmode=full
+set ttyfast
 
 set diffopt+=iwhite
+
+set tags=.git/tags
 
 set formatoptions=
 set formatoptions+=c " Format comments

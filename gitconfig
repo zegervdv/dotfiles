@@ -32,10 +32,10 @@
         # Setting to git 2.0 default to surpress warning message
         default = simple
 [init]
-	templatedir = ~/.templates/git
+        templatedir = ~/.templates/git
 [diff]
-	tool = mvimdiff
+        tool = mvimdiff
 [difftool "mvimdiff"]
-    cmd = mvim -f -d \"$LOCAL\" \"$REMOTE\"
+        cmd = mvim -f -d \"$LOCAL\" \"$REMOTE\"
 [status]
-	branch = 1
+        branch = 1

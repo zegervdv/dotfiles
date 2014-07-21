@@ -82,6 +82,8 @@ set clipboard=unnamed
 set undofile
 set viminfo='10,\"100,:20,%,n~/.viminfo
 
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex
+
 " set list
 " set listchars=tab:▸\ ,eol:¬
 " }}}
@@ -211,7 +213,7 @@ let g:airline_right_sep = ''
 
 let g:airline_theme = 'tomorrow'
 
-let g:airline#extensions#syntastic#enabled = 0
+let g:airline#extensions#syntastic#enabled = 1
 " }}}
 " YankRing {{{
 let g:yankring_replace_n_pkey = 'cp'
@@ -232,7 +234,7 @@ map <leader>r :call RunAllSpecs()<CR>
 map <leader>f :call RunAllFeatures()<CR>
 map <leader>k :call RunCurrentFeature()<CR>
 " }}}
-" ctrl p - Fuzzy file finder {{{
+" Ctrl P - Fuzzy file finder {{{
 noremap <C-p> :CtrlP<CR>
 let g:ctrl_map = '<c-p>'
 let g:ctrl_cmd = 'CtrlP'
@@ -245,6 +247,11 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   let g:ctrlp_use_caching = 0
 endif
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ }
 
 " ctrl p - Commands
 map <leader>p :CtrlPCmdPalette<CR>

@@ -6,7 +6,6 @@ eval my_gray='$FG[237]'
 eval my_orange='$FG[214]'
 
 
-
 local git=$(git_prompt_info)
 if [ ${#git} != 0 ]; then
     ((git=${#git} - 10))
@@ -15,7 +14,7 @@ else
 fi
 
 PROMPT='%{$fg[cyan]%}%n%{$reset_color%} in %{$fg[yellow]%}%~%b%{$reset_color%}
-%{$reset_color%}%(?.%{$fg[white]%}.%{$fg[red]%})→ '
+%{$reset_color%}%(?.%{$fg[white]%}.%{$fg[red]%})→ %{$reset_color%}'
 
 
 RPROMPT='$my_gray$(git_prompt_info) $(git_prompt_status)%{$reset_color%}%'

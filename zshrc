@@ -33,7 +33,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git z textmate sublime ruby history-substring-search brew gitfast osx terminalapp vagrant web-search gitignore brew-cask rake-fast)
+plugins=(git z textmate sublime ruby history-substring-search brew gitfast osx terminalapp vagrant web-search gitignore brew-cask rake-fast colorize colored-man extract)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -66,8 +66,8 @@ alias p="~/Documents/projects"
 # Commands
 alias grep="grep --color=auto"
 alias beer="bundle exec rake"
-alias ll="ls -altr"
-alias l="ls -ltr"
+alias ll="ls -altrh"
+alias l="ls -lthr"
 alias gsl="git sl"
 
 # Functions

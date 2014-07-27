@@ -143,8 +143,11 @@ nnoremap <C-h> <C-w><C-h>
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w><C-k>
 
-nnoremap <C-S-TAB>  :tabprevious<CR>
-nnoremap <C-TAB>    :tabnext<CR>
+nnoremap <S-j>  :tabprevious<CR>
+nnoremap <S-k>  :tabnext<CR>
+nnoremap <S-h>  :tabfirst<CR>
+nnoremap <S-l>  :tablast<CR>
+nnoremap <S-t>  :tabnew<CR>
 inoremap <C-S-TAB>  <ESC>:tabprevious<CR>
 inoremap <C-TAB>    <ESC>:tabnext<CR>
 

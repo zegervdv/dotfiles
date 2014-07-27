@@ -3,14 +3,12 @@
 " Created by session.vim 2.6.1 on 27 juli 2014 at 20:08:24.
 " Open this file in Vim and run :source % to restore your session.
 
-set guioptions=egm
-silent! set guifont=Inconsolata\ for\ Powerline:h12
 if exists('g:syntax_on') != 1 | syntax on | endif
 if exists('g:did_load_filetypes') != 1 | filetype on | endif
 if exists('g:did_load_ftplugin') != 1 | filetype plugin on | endif
 if exists('g:did_indent_on') != 1 | filetype indent on | endif
-if &background != 'dark'
-	set background=dark
+if &background != 'light'
+	set background=light
 endif
 if !exists('g:colors_name') || g:colors_name != 'hybrid' | colorscheme hybrid | endif
 call setqflist([{'lnum': 1217, 'col': 6, 'valid': 1, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'filename': 'STM32F3-Discovery_FW_V1.1.0/Libraries/STM32F30x_StdPeriph_Driver/inc/stm32f30x_tim.h', 'text': 'void TIM_SetCompare1(TIM_TypeDef* TIMx, uint32_t Compare1);'}, {'lnum': 1275, 'col': 6, 'valid': 1, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'filename': 'STM32F3-Discovery_FW_V1.1.0/Libraries/STM32F30x_StdPeriph_Driver/src/stm32f30x_tim.c', 'text': 'void TIM_SetCompare1(TIM_TypeDef* TIMx, uint32_t Compare1)'}])
@@ -19,7 +17,7 @@ if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/Documents/projects/STM-Quadcopter
+cd ~/Documents/Projects/STM-Quadrocopter
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -191,7 +189,7 @@ if exists('s:wipebuf')
 "   silent exe 'bwipe ' . s:wipebuf
 endif
 " unlet! s:wipebuf
-set winheight=1 winwidth=20 shortmess=filnxtToO
+set winheight=1 winwidth=20 shortmess=filnxtToOc
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if file_readable(s:sx)
   exe "source " . fnameescape(s:sx)

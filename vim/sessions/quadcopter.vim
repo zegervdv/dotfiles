@@ -1,6 +1,6 @@
 " ~/.dotfiles/vim/sessions/quadcopter.vim:
 " Vim session script.
-" Created by session.vim 2.4.14 on 28 juni 2014 at 16:21:41.
+" Created by session.vim 2.6.1 on 27 juli 2014 at 20:08:24.
 " Open this file in Vim and run :source % to restore your session.
 
 set guioptions=egm
@@ -13,7 +13,7 @@ if &background != 'dark'
 	set background=dark
 endif
 if !exists('g:colors_name') || g:colors_name != 'hybrid' | colorscheme hybrid | endif
-call setqflist([])
+call setqflist([{'lnum': 1217, 'col': 6, 'valid': 1, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'filename': 'STM32F3-Discovery_FW_V1.1.0/Libraries/STM32F30x_StdPeriph_Driver/inc/stm32f30x_tim.h', 'text': 'void TIM_SetCompare1(TIM_TypeDef* TIMx, uint32_t Compare1);'}, {'lnum': 1275, 'col': 6, 'valid': 1, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'filename': 'STM32F3-Discovery_FW_V1.1.0/Libraries/STM32F30x_StdPeriph_Driver/src/stm32f30x_tim.c', 'text': 'void TIM_SetCompare1(TIM_TypeDef* TIMx, uint32_t Compare1)'}])
 let SessionLoad = 1
 if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
@@ -24,204 +24,146 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +45 source/sensors.c
-badd +27 source/main.c
-badd +81 source/bluetooth.c
-badd +44 Makefile
-badd +54 source/Makefile
-badd +55 STM32F3-Discovery_FW_V1.1.0/Libraries/STM32F30x_StdPeriph_Driver/inc/stm32f30x_dma.h
-badd +442 STM32F3-Discovery_FW_V1.1.0/Libraries/STM32F30x_StdPeriph_Driver/src/stm32f30x_dma.c
-badd +1 STM32F3-Discovery_FW_V1.1.0/Utilities/STM32F3_Discovery/stm32f3_discovery.c
-badd +39 STM32F3-Discovery_FW_V1.1.0/Utilities/STM32F3_Discovery/stm32f3_discovery_l3gd20.h
-badd +13 source/sensors.h
-badd +1 STM32F3-Discovery_FW_V1.1.0/Utilities/STM32F3_Discovery/stm32f3_discovery.h
-badd +457 STM32F3-Discovery_FW_V1.1.0/Utilities/STM32F3_Discovery/stm32f3_discovery_l3gd20.c
-badd +1 ~/Documents/projects/STM-Quadcopter
+badd +39 source/motors.c
+badd +0 source/motors.h
+badd +293 STM32F3-Discovery_FW_V1.1.0/Libraries/STM32F30x_StdPeriph_Driver/inc/stm32f30x_gpio.h
+badd +67 STM32F3-Discovery_FW_V1.1.0/Libraries/STM32F30x_StdPeriph_Driver/inc/stm32f30x_tim.h
+badd +43 source/Makefile
+badd +1276 STM32F3-Discovery_FW_V1.1.0/Libraries/STM32F30x_StdPeriph_Driver/src/stm32f30x_tim.c
+badd +0 source/main.c
 badd +1 source/bluetooth.h
-badd +1 source/sensor_data.h
-badd +84 debug/read_sensors.c
-badd +22 debug/Makefile
-badd +0 STM32F3-Discovery_FW_V1.1.0/Utilities/STM32F3_Discovery/stm32f3_discovery_lsm303dlhc.h
+badd +1 source/bluetooth.c
 " argglobal
 silent! argdel *
-argadd ~/Documents/projects/STM-Quadcopter
-edit source/main.c
+argadd .
+edit source/motors.c
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
 1wincmd h
 wincmd w
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
 set nosplitbelow
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 93 + 93) / 187)
-exe '2resize ' . ((&lines * 35 + 34) / 69)
-exe 'vert 2resize ' . ((&columns * 93 + 93) / 187)
-exe '3resize ' . ((&lines * 31 + 34) / 69)
-exe 'vert 3resize ' . ((&columns * 93 + 93) / 187)
+exe 'vert 1resize ' . ((&columns * 73 + 73) / 147)
+exe 'vert 2resize ' . ((&columns * 73 + 73) / 147)
 " argglobal
 setlocal fdm=syntax
 setlocal fde=0
 setlocal fmr={{{,}}}
 setlocal fdi=#
-setlocal fdl=2
+setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-17
+7
 silent! normal! zo
-29
-silent! normal! zo
-51
-silent! normal! zo
-let s:l = 1 - ((0 * winheight(0) + 33) / 67)
+let s:l = 39 - ((20 * winheight(0) + 20) / 41)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+39
+normal! 03|
+lcd ~/Documents/projects/STM-Quadcopter
+wincmd w
+" argglobal
+edit ~/Documents/projects/STM-Quadcopter/source/motors.h
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 41 - ((29 * winheight(0) + 20) / 41)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+41
+normal! 0
+lcd ~/Documents/projects/STM-Quadcopter
+wincmd w
+exe 'vert 1resize ' . ((&columns * 73 + 73) / 147)
+exe 'vert 2resize ' . ((&columns * 73 + 73) / 147)
+tabedit ~/Documents/projects/STM-Quadcopter/source/bluetooth.h
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+set nosplitbelow
+wincmd t
+set winheight=1 winwidth=1
+exe 'vert 1resize ' . ((&columns * 73 + 73) / 147)
+exe 'vert 2resize ' . ((&columns * 73 + 73) / 147)
+" argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 1 - ((0 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
 normal! 0
+lcd ~/Documents/projects/STM-Quadcopter
 wincmd w
 " argglobal
-edit source/bluetooth.c
+edit ~/Documents/projects/STM-Quadcopter/source/bluetooth.c
 setlocal fdm=syntax
 setlocal fde=0
 setlocal fmr={{{,}}}
 setlocal fdi=#
-setlocal fdl=3
+setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-55
-normal! zc
-72
-normal! zc
-80
+76
 silent! normal! zo
-97
-normal! zc
-108
-silent! normal! zo
-let s:l = 1 - ((0 * winheight(0) + 17) / 35)
+let s:l = 79 - ((78 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+79
+normal! 0
+lcd ~/Documents/projects/STM-Quadcopter
+wincmd w
+2wincmd w
+exe 'vert 1resize ' . ((&columns * 73 + 73) / 147)
+exe 'vert 2resize ' . ((&columns * 73 + 73) / 147)
+tabedit ~/Documents/projects/STM-Quadcopter/source/main.c
+set splitbelow splitright
+set nosplitbelow
+wincmd t
+set winheight=1 winwidth=1
+" argglobal
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+20
+silent! normal! zo
+let s:l = 9 - ((8 * winheight(0) + 20) / 41)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+9
 normal! 018|
-wincmd w
-" argglobal
-edit source/bluetooth.h
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 15) / 31)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 0
-wincmd w
-exe 'vert 1resize ' . ((&columns * 93 + 93) / 187)
-exe '2resize ' . ((&lines * 35 + 34) / 69)
-exe 'vert 2resize ' . ((&columns * 93 + 93) / 187)
-exe '3resize ' . ((&lines * 31 + 34) / 69)
-exe 'vert 3resize ' . ((&columns * 93 + 93) / 187)
-tabedit source/sensors.c
-set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
-set nosplitbelow
-wincmd t
-set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 93 + 93) / 187)
-exe '2resize ' . ((&lines * 21 + 34) / 69)
-exe 'vert 2resize ' . ((&columns * 93 + 93) / 187)
-exe '3resize ' . ((&lines * 46 + 34) / 69)
-exe 'vert 3resize ' . ((&columns * 93 + 93) / 187)
-" argglobal
-setlocal fdm=syntax
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-61
-silent! normal! zo
-64
-silent! normal! zo
-61
-normal! zc
-let s:l = 1 - ((0 * winheight(0) + 34) / 68)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 01|
-wincmd w
-" argglobal
-edit source/sensors.h
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 10) / 21)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 039|
-wincmd w
-" argglobal
-edit source/main.c
-setlocal fdm=syntax
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=1
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-17
-silent! normal! zo
-31
-silent! normal! zo
-54
-silent! normal! zo
-let s:l = 1 - ((0 * winheight(0) + 23) / 46)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 033|
-wincmd w
-exe 'vert 1resize ' . ((&columns * 93 + 93) / 187)
-exe '2resize ' . ((&lines * 21 + 34) / 69)
-exe 'vert 2resize ' . ((&columns * 93 + 93) / 187)
-exe '3resize ' . ((&lines * 46 + 34) / 69)
-exe 'vert 3resize ' . ((&columns * 93 + 93) / 187)
-tabedit source/sensor_data.h
+lcd ~/Documents/projects/STM-Quadcopter
+2wincmd w
+tabedit ~/Documents/projects/STM-Quadcopter/source/Makefile
 set splitbelow splitright
 set nosplitbelow
 wincmd t
@@ -236,55 +178,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 33) / 67)
+let s:l = 12 - ((5 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 0
-tabedit source/Makefile
-set splitbelow splitright
-set nosplitbelow
-wincmd t
-set winheight=1 winwidth=1
-" argglobal
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 33) / 67)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 0
-tabedit STM32F3-Discovery_FW_V1.1.0/Utilities/STM32F3_Discovery/stm32f3_discovery_lsm303dlhc.h
-set splitbelow splitright
-set nosplitbelow
-wincmd t
-set winheight=1 winwidth=1
-" argglobal
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 33) / 67)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 0
-tabnext 1
+12
+normal! 014|
+lcd ~/Documents/projects/STM-Quadcopter
+2wincmd w
+tabnext 2
 if exists('s:wipebuf')
 "   silent exe 'bwipe ' . s:wipebuf
 endif
@@ -300,8 +202,8 @@ let &so = s:so_save | let &siso = s:siso_save
 " Everything down here is generated by vim-session (not supported
 " by :mksession out of the box).
 
-1wincmd w
-tabnext 1
+2wincmd w
+tabnext 2
 if exists('s:wipebuf')
   if empty(bufname(s:wipebuf))
 if !getbufvar(s:wipebuf, '&modified')

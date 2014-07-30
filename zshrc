@@ -88,4 +88,14 @@ compctl -g '~/.teamocil/*(:t:r)' teamocil
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
+bindkey '\e[A' history-beginning-search-backward
+bindkey '\e[B' history-beginning-search-forward
+
 source ~/.fzf.zsh
+q() {
+  if [[ -z "$*" ]]; then
+    cd "$(_z -l 2>&1 | sed -n 's/^[ 0-9.,]*//p' | fzf)"
+  else
+    _z "$@"
+  fi
+}

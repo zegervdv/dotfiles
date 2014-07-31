@@ -53,6 +53,7 @@ set history=100
 set wildmenu
 set wildmode=full
 set ttyfast
+set lazyredraw
 
 set diffopt+=iwhite
 
@@ -85,7 +86,7 @@ set viminfo='10,\"100,:20,%,n~/.viminfo
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex
 
 " set list
-" set listchars=tab:▸\ ,eol:¬
+set listchars=tab:▸\ ,eol:¬
 " }}}
 " Custom remaps and tricks {{{
 " When editing a file, always jump to the last known cursor position.
@@ -108,7 +109,13 @@ map j gj
 map k gk
 
 " remap tag-search to better place
-nmap <C-$> <C-]>
+" nmap <C-$> <C-]>
+function! JumpToTagInSplit()
+    execute "normal! \<c-w>v\<c-]>mzzMzvzz15\<c-e>"
+    execute "keepjumps normal! `z"
+    Pulse
+endfunction
+nnoremap <c-$> :silent! call JumpToTag()<cr>
 
 " Jump to end of line in insert mode
 inoremap <C-a> <C-o>I
@@ -129,6 +136,15 @@ nnoremap <SPACE><SPACE> <C-^>
 nmap / /\v
 cmap s/ s/\v
 
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Show local search results in quickfix
+nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+nnoremap <silent> <leader>? :Ag <cword><CR>
+" nnoremap <silent> <leader>? :execute "Ag! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "","") . "'"<CR>
+
 " Clear highlight
 nnoremap <silent> <leader>n :nohlsearch<CR>
 
@@ -137,12 +153,7 @@ inoremap £ \
 nnoremap <TAB> %
 vnoremap <TAB> %
 
-" Move between windows
-nnoremap <C-l> <C-w><C-l>
-nnoremap <C-h> <C-w><C-h>
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w><C-k>
-
+" Move between tabs
 nnoremap <S-j>  :tabprevious<CR>
 nnoremap <S-k>  :tabnext<CR>
 nnoremap <S-h>  :tabfirst<CR>
@@ -169,6 +180,9 @@ function! HLNext (blinktime)
     call matchdelete(ring)
     redraw
 endfunction
+
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Swap v and CTRL-V
 nnoremap    v   <C-V>
@@ -200,6 +214,37 @@ highlight IndentGuidesOdd guibg='#282a2e'
 
 au FileType c setl foldmethod=syntax
 
+au VimResized * exe "normal! \<c-w>="
+
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+
+" Swap backticks and quotes
+nnoremap ` '
+nnoremap ' `
+
+" Note that this will overwrite the contents of the z mark.  I never use it, but
+" if you do you'll probably want to use another mark.
+inoremap <C-u> <esc>mzgUiw`za
+
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+
+function! MyFoldText() " {{{
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+endfunction " }}}
+set foldtext=MyFoldText()
 
 " }}}
 
@@ -426,4 +471,3 @@ if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
 
-nnoremap <Enter> o<ESC>

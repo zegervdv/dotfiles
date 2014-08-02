@@ -1,5 +1,5 @@
-\documentclass[a4paper]{article}        % Standaard een kolom layout
-\usepackage[english]{babel}             % Stel woordafbrekingen en referentienamen in
+\documentclass[<%= @options.class_opts.join(',') %>]{article}        % Standaard een kolom layout
+\usepackage[<%= @options.lang %>]{babel}        % Stel woordafbrekingen en referentienamen in
 \usepackage{graphicx}                   % Afbeeldingen weergeven
 \usepackage{float}                      % Figuren op plaats waar ze gedefinieerd staan: [H]
 \usepackage{lmodern}                    % Gebruik modern lettertype
@@ -11,17 +11,19 @@
 
 \DeclareSIUnit\dbm{\decibel{}m}         % Voeg dBm toe als eenheid
 
-\title{}
+\title{<%= @options.title %>}
 \author{Zeger Van de Vannet}
 \date{\today}
 
 \begin{document}
 \maketitle
 
-% Inhoudstafel
-% \newpage
-%   \tableofcontents
-% \newpage
+<% if @options.toc %>
+  % Inhoudstafel
+  \newpage
+    \tableofcontents
+  \newpage
+<% end %>
 
 \end{document}
 

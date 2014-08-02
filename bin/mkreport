@@ -1,11 +1,46 @@
-#!/bin/sh
-# Create a new latex report from template
+#!/usr/bin/env ruby
 
-if [ $1 ]; then
-  name=$1
+# 2014, Zeger Van de Vannet
+#
+# mkreport: Create a new latex report from template
+
+require 'optparse'
+require 'ostruct'
+require 'erb'
+
+TEMPLATE_DIR = File.expand_path(".templates", "~")
+LANGS = {
+  "nl" => 'dutch',
+  "en" => 'english'
+}
+
+options = OpenStruct.new
+# defaults
+options.title = "TITLE HERE"
+options.lang = "english"
+options.class_opts = ["a4paper"]
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: mkreport [options] [filename]"
+  opts.on('-t', '--title TITLE', 'Set the title') { |opt| options.title = opt }
+  opts.on('-l','--language LANG', 'Set the language' ) { |opt| options.lang = LANGS[opt] || options.lang }
+  opts.on('--toc', 'Add Table of contents') { |opt| options.toc = true }
+  opts.on('-v', '--verbose', 'Show more (debugging) information') { |opt| options.verbose = true }
+  opts.on('--titlepage', 'Set a title page') { |opt| options.class_opts << 'titlepage' }
+end.parse!
+
+if ARGV.empty?
+  options.filename = 'report.tex'
 else
-  name='report.tex'
-fi
+  options.filename = "#{ARGV.first}.tex"
+end
 
-cp $HOME/.templates/report.tex $name
-echo "Created $name"
+puts options.inspect if options.verbose
+
+template = File.read(File.expand_path('report.tex.erb', TEMPLATE_DIR))
+
+File.open(options.filename, 'w') do |report|
+  @options = options
+  report.puts ERB.new(template).result()
+  puts "Created #{options.filename}"
+end

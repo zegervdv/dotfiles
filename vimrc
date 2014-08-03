@@ -424,7 +424,8 @@ let g:ctrl_cmd = 'CtrlP'
 
 let g:ctrlp_working_path=0
 nnoremap <C-o> :CtrlPBuffer<CR>
-" map <C-m> :CtrlPTag<CR>
+
+let g:ctrlp_extensions = ['tag']
 
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -446,65 +447,102 @@ let g:vim_markdown_folding_disabled=1
 nmap <leader>c <C-_><C-_>
 " }}}
 " Neo Complete {{{
-let g:acp_enableAtStartup                           = 0
-let g:neocomplete#enable_at_startup                 = 1
-let g:neocomplete#enable_smart_case                 = 1
-let g:neocomplete#enable_fuzzy_completion           = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern          = '\*ku\*'
+" Taken from https://github.com/spf13/spf13-vim/blob/3.0/.vimrc
+          let g:acp_enableAtStartup = 0
+          let g:neocomplete#enable_at_startup = 1
+          let g:neocomplete#enable_smart_case = 1
+          let g:neocomplete#enable_auto_delimiter = 1
+          let g:neocomplete#max_list = 15
+          let g:neocomplete#force_overwrite_completefunc = 1
 
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
 
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
+          " Define dictionary.
+          let g:neocomplete#sources#dictionary#dictionaries = {
+                      \ 'default' : '',
+                      \ 'vimshell' : $HOME.'/.vimshell_hist',
+                      \ 'scheme' : $HOME.'/.gosh_completions'
+                      \ }
 
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  " return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+          " Define keyword.
+          if !exists('g:neocomplete#keyword_patterns')
+              let g:neocomplete#keyword_patterns = {}
+          endif
+          let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_overwrite_completefunc = 1
-" let g:neocomplete#force_omni_input_patterns.c =
-      " \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.cpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-let g:neocomplete#force_omni_input_patterns.objc =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.objcpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+          " Plugin key-mappings {
+              " These two lines conflict with the default digraph mapping of <C-K>
+                " <C-k> Complete Snippet
+                " <C-k> Jump to next snippet point
+                imap <silent><expr><C-k> neosnippet#expandable() ?
+                            \ "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ?
+                            \ "\<C-e>" : "\<Plug>(neosnippet_expand_or_jump)")
+                smap <TAB> <Right><Plug>(neosnippet_jump_or_expand)
 
-let g:marching_enable_neocomplete = 1
+                inoremap <expr><C-g> neocomplete#undo_completion()
+                inoremap <expr><C-l> neocomplete#complete_common_string()
+                "inoremap <expr><CR> neocomplete#complete_common_string()
 
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
- if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-  endif
+                " <CR>: close popup
+                " <s-CR>: close popup and save indent.
+                inoremap <expr><s-CR> pumvisible() ? neocomplete#smart_close_popup()"\<CR>" : "\<CR>"
 
-" autocmd FileType c NeoCompleteTagMakeCache
+                function! CleverCr()
+                    if pumvisible()
+                        if neosnippet#expandable()
+                            let exp = "\<Plug>(neosnippet_expand)"
+                            return exp . neocomplete#smart_close_popup()
+                        else
+                            return neocomplete#smart_close_popup()
+                        endif
+                    else
+                        return "\<CR>"
+                    endif
+                endfunction
+
+                " <CR> close popup and save indent or expand snippet 
+                imap <expr> <CR> CleverCr() 
+                " <C-h>, <BS>: close popup and delete backword char.
+                inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+                inoremap <expr><C-y> neocomplete#smart_close_popup()
+
+              " <TAB>: completion.
+              inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+              inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+
+              " Courtesy of Matteo Cavalleri
+
+              function! CleverTab()
+                  if pumvisible()
+                      return "\<C-n>"
+                  endif 
+                  let substr = strpart(getline('.'), 0, col('.') - 1)
+                  let substr = matchstr(substr, '[^ \t]*$')
+                  if strlen(substr) == 0
+                      " nothing to match on empty string
+                      return "\<Tab>"
+                  else
+                      " existing text matching
+                      if neosnippet#expandable_or_jumpable()
+                          return "\<Plug>(neosnippet_expand_or_jump)"
+                      else
+                          return neocomplete#start_manual_complete()
+                      endif
+                  endif
+              endfunction
+
+              imap <expr> <Tab> CleverTab()
+          " }
+
+          " Enable heavy omni completion.
+          if !exists('g:neocomplete#sources#omni#input_patterns')
+              let g:neocomplete#sources#omni#input_patterns = {}
+          endif
+          let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+          let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+          let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+          let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+          let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+  " }
 " }}}
 " Neo Snippets {{{
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -522,7 +560,7 @@ xmap <C-k> <Plug>(neosnippet_expand_target)
 imap <expr><TAB> neosnippet#expandable() == 1 ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 imap <expr><C-k> neosnippet#expandable_or_jumpable() == 1 ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable() == 1 ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+" let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
 let g:neosnippet#snippets_directory='~/.vim/snippets'
 " }}}

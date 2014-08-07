@@ -404,7 +404,7 @@ let g:airline_theme = 'tomorrow'
 let g:airline#extensions#syntastic#enabled = 1
 " }}}
 " Unite {{{
-  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+  call unite#filters#matcher_default#use(['matcher_fuzzy','matcher_regexp'])
   call unite#filters#sorter_default#use(['sorter_rank'])
   call unite#set_profile('files', 'smartcase', 1)
   call unite#custom#source('line,outline', 'matchers', 'matcher_fuzzy')
@@ -580,6 +580,9 @@ let g:vimwiki_list=[{'path':'$HOME/.vimwiki'}]
 " }}}
 " Vim Sessions {{{
 let g:session_autosave = 'no'
+" }}}
+" Jedi {{{
+let g:jedi#auto_vim_configuration=0
 " }}}
 
 " Load local vimrc

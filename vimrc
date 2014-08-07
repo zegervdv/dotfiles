@@ -441,11 +441,6 @@ let g:airline#extensions#syntastic#enabled = 1
   nnoremap <silent> <SPACE>s :<C-u>Unite -quick-match buffer<cr>
   nnoremap <silent> <C-p>    :<C-u>Unite -start-insert file_rec/async<CR>
 " }}}
-" Nerdtree {{{
-map <F2> :NERDTreeToggle<CR>
-map <Leader>e :NERDTreeToggle<CR>
-let NERDTreeIgnore = ['\.aux$', '\.log$', '\.out$', '\.o$', '\.hex$', '\.bin$', '\.elf$']
-" }}}
 " Vim - Rspec {{{
 map <leader>t :call RunCurrentSpecFile()<CR>
 map <leader>s :call RunNearestSpec()<CR>

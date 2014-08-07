@@ -5,7 +5,7 @@ set nocompatible
 set laststatus=2
 set noshowmode
 
-let g:pathogen_disabled = ['ack']
+let g:pathogen_disabled = ['ack','ctrlp', 'yankring']
 execute pathogen#infect()
 
 set backspace=2
@@ -402,9 +402,43 @@ let g:airline_theme = 'tomorrow'
 
 let g:airline#extensions#syntastic#enabled = 1
 " }}}
-" YankRing {{{
-let g:yankring_replace_n_pkey = 'cp'
-nnoremap <silent> <leader>y :YRShow<CR>
+" Unite {{{
+  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+  call unite#filters#sorter_default#use(['sorter_rank'])
+  call unite#set_profile('files', 'smartcase', 1)
+  call unite#custom#source('line,outline', 'matchers', 'matcher_fuzzy')
+  " sort file results by length
+  call unite#custom#source('file', 'sorters', 'sorter_length')
+  call unite#custom#source('file_rec/async', 'sorters', 'sorter_length')
+  let g:unite_enable_start_insert=0
+  let g:unite_source_history_yank_enable=1
+  let g:unite_source_rec_max_cache_files=5000
+  let g:unite_prompt='» '
+  if executable('ag')
+    let g:unite_source_grep_command='ag'
+    let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S -C4'
+    let g:unite_source_grep_recursive_opt=''
+  elseif executable('ack')
+    let g:unite_source_grep_command='ack'
+    let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
+    let g:unite_source_grep_recursive_opt=''
+  endif
+  function! s:unite_settings()
+    nmap <buffer> Q <plug>(unite_exit)
+    nmap <buffer> <esc> <plug>(unite_exit)
+    imap <buffer> <C-j> <Plug>(unite_select_next_line)
+    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+  endfunction
+  autocmd FileType unite call s:unite_settings()
+
+  nnoremap <silent> <C-m>    :<C-u>Unite -auto-preview -buffer-name=recent file_mru<cr>
+  nnoremap <silent> <SPACE>y :<C-u>Unite -buffer-name=yanks history/yank<cr>
+  nnoremap <silent> <SPACE>l :<C-u>Unite -start-insert -auto-resize -buffer-name=line line<cr>
+  nnoremap <silent> <SPACE>b :<C-u>Unite -auto-resize -buffer-name=buffers buffer<cr>
+  nnoremap <silent> <SPACE>/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
+  nnoremap <silent> <SPACE>m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
+  nnoremap <silent> <SPACE>s :<C-u>Unite -quick-match buffer<cr>
+  nnoremap <silent> <C-p>    :<C-u>Unite -start-insert file_rec/async<CR>
 " }}}
 " Nerdtree {{{
 map <F2> :NERDTreeToggle<CR>
@@ -420,29 +454,6 @@ map <leader>r :call RunAllSpecs()<CR>
 " Cucumber {{{
 map <leader>f :call RunAllFeatures()<CR>
 map <leader>k :call RunCurrentFeature()<CR>
-" }}}
-" Ctrl P - Fuzzy file finder {{{
-noremap <C-p> :CtrlP<CR>
-let g:ctrl_map = '<c-p>'
-let g:ctrl_cmd = 'CtrlP'
-
-let g:ctrlp_working_path=0
-nnoremap <C-o> :CtrlPBuffer<CR>
-
-let g:ctrlp_extensions = ['tag']
-
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
-endif
-
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
-
-" ctrl p - Commands
-map <leader>p :CtrlPCmdPalette<CR>
 " }}}
 " Markdown {{{
 let g:vim_markdown_folding_disabled=1

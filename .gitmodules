@@ -1,9 +1,6 @@
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule "vim/bundle/ctrlp"]
-	path = vim/bundle/ctrlp
-	url = https://github.com/kien/ctrlp.vim.git
 [submodule "vim/bundle/cucumber"]
 	path = vim/bundle/cucumber
 	url = https://github.com/tpope/vim-cucumber.git
@@ -79,9 +76,6 @@
 [submodule "vim/bundle/tagbar"]
 	path = vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
-[submodule "vim/bundle/ctrlp-cmdpalette"]
-	path = vim/bundle/ctrlp-cmdpalette
-	url = https://github.com/fisadev/vim-ctrlp-cmdpalette.git
 [submodule "vim/bundle/a"]
 	path = vim/bundle/a
 	url = https://github.com/vim-scripts/a.vim.git
@@ -100,9 +94,6 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule "vim/bundle/yankring"]
-	path = vim/bundle/yankring
-	url = https://github.com/vim-scripts/YankRing.vim.git
 [submodule "vim/bundle/neocomplete"]
 	path = vim/bundle/neocomplete
 	url = https://github.com/Shougo/neocomplete.vim.git
@@ -175,3 +166,9 @@
 [submodule "vim/bundle/jedi"]
 	path = vim/bundle/jedi
 	url = https://github.com/davidhalter/jedi-vim.git
+[submodule "vim/bundle/unite"]
+	path = vim/bundle/unite
+	url = https://github.com/Shougo/unite.vim.git
+[submodule "vim/bundle/neomru"]
+	path = vim/bundle/neomru
+	url = https://github.com/Shougo/neomru.vim.git

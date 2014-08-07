@@ -5,7 +5,7 @@ set nocompatible
 set laststatus=2
 set noshowmode
 
-let g:pathogen_disabled = ['ack','ctrlp', 'yankring']
+let g:pathogen_disabled = ['ack']
 execute pathogen#infect()
 
 set backspace=2
@@ -104,8 +104,6 @@ nnoremap <F5> :buffers<CR>:buffer<Space>
 " Set leader to ,
 let mapleader = ","
 
-map <Leader>d  :bp<bar>sp<bar>bn<bar>bd<CR>
-
 " See long lines as line breaks
 map j gj
 map k gk
@@ -117,7 +115,7 @@ function! JumpToTagInSplit()
     execute "keepjumps normal! `z"
     Pulse
 endfunction
-nnoremap <c-$> :silent! call JumpToTag()<cr>
+nnoremap <C-$> :silent! call JumpToTagInSplit()<CR>
 
 " Jump to end of line in insert mode
 inoremap <C-a> <C-o>I
@@ -170,8 +168,8 @@ inoremap <C-TAB>    <ESC>:tabnext<CR>
 nnoremap gV `[v`]
 
 " Briefly change colour of last highlight
-nnoremap <silent> n   n:call HLNext(0.4)<cr>
-nnoremap <silent> N   N:call HLNext(0.4)<cr>
+" nnoremap <silent> n   n:call HLNext(0.4)<cr>
+" nnoremap <silent> N   N:call HLNext(0.4)<cr>
 
 function! HLNext (blinktime)
     highlight WhiteOnRed ctermfg=white ctermbg=red guifg=white guibg=red
@@ -184,6 +182,9 @@ function! HLNext (blinktime)
     call matchdelete(ring)
     redraw
 endfunction
+
+" Highlight matching parenthesis in different color so I don't mess up
+hi MatchParen cterm=underline ctermbg=none ctermfg=white gui=underline guifg=white
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'

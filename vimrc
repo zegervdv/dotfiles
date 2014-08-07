@@ -69,6 +69,8 @@ set formatoptions+=2 " Use indent from 2nd line of a paragraph
 set formatoptions+=l " Don't break lines that are already long
 set formatoptions+=1 " Break before 1-letter words
 
+set complete+=kspell
+
 set splitright
 set virtualedit=block
 set conceallevel=0
@@ -123,6 +125,8 @@ inoremap <C-e> <C-o>A
 
 nnoremap <C-a> ^
 nnoremap <C-e> $
+
+nnoremap <C-s> <C-e>
 
 nnoremap + <C-a>
 
@@ -531,8 +535,8 @@ let g:Tex_DefaultTargetFormat = 'pdf'
 let g:tex_flavor = 'latex'
 let g:Tex_TreatMacViewerAsUNIX = 1
 let g:Tex_ExecuterUNIXViewerInForeground = 1
-" let g:Tex_ViewRule_pdf = 'open -a Preview'
-let g:Tex_ViewRule_pdf = 'open -a /Applications/TeX/TeXShop.app'
+let g:Tex_ViewRule_pdf = 'open -a Preview'
+" let g:Tex_ViewRule_pdf = 'open -a /Applications/TeX/TeXShop.app'
 
 let g:Tex_ViewRule_ps = 'open -a Preview'
 

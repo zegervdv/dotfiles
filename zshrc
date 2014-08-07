@@ -81,8 +81,6 @@ zstyle ':completion:*:options'         auto-description '%d'
 
 # describe options in full
 zstyle ':completion:*:options'         description 'yes'
-# Provide more processes in completion of programs like killall:
-zstyle ':completion:*:processes-names' command 'ps c -u ${USER} -o command | uniq'
 
 # complete manual by their section
 zstyle ':completion:*:manuals'    separate-sections true

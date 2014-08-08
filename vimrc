@@ -439,6 +439,7 @@ let g:airline#extensions#syntastic#enabled = 1
   nnoremap <silent> <SPACE>/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
   nnoremap <silent> <SPACE>m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
   nnoremap <silent> <SPACE>s :<C-u>Unite -quick-match buffer<cr>
+  nnoremap <silent> <SPACE>o :<C-u>Unite outline<CR>
   nnoremap <silent> <C-p>    :<C-u>Unite -start-insert file_rec/async<CR>
 " }}}
 " Vimfiler {{{

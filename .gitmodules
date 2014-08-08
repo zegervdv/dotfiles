@@ -175,3 +175,6 @@
 [submodule "vim/bundle/neossh"]
 	path = vim/bundle/neossh
 	url = https://github.com/Shougo/neossh.vim.git
+[submodule "vim/bundle/unite-outline"]
+	path = vim/bundle/unite-outline
+	url = https://github.com/Shougo/unite-outline.git

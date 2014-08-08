@@ -178,3 +178,6 @@
 [submodule "vim/bundle/unite-outline"]
 	path = vim/bundle/unite-outline
 	url = https://github.com/Shougo/unite-outline.git
+[submodule "vim/bundle/unite-tag"]
+	path = vim/bundle/unite-tag
+	url = https://github.com/tsukkee/unite-tag.git

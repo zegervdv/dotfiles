@@ -440,6 +440,7 @@ let g:airline#extensions#syntastic#enabled = 1
   nnoremap <silent> <SPACE>m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
   nnoremap <silent> <SPACE>s :<C-u>Unite -quick-match buffer<cr>
   nnoremap <silent> <SPACE>o :<C-u>Unite outline<CR>
+  nnoremap <silent> <SPACE>t :<C-u>Unite tag<CR>
   nnoremap <silent> <C-p>    :<C-u>Unite -start-insert file_rec/async<CR>
 " }}}
 " Vimfiler {{{

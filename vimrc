@@ -430,9 +430,11 @@ let g:airline#extensions#syntastic#enabled = 1
   let g:unite_source_rec_max_cache_files=5000
   let g:unite_prompt='» '
   if executable('ag')
-    let g:unite_source_grep_command='ag'
-    let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S -C4'
-    let g:unite_source_grep_recursive_opt=''
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts =
+          \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+          \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    let g:unite_source_grep_recursive_opt = ''
   elseif executable('ack')
     let g:unite_source_grep_command='ack'
     let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
@@ -481,9 +483,8 @@ nmap <leader>c <C-_><C-_>
 " Neo Complete {{{
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplet#enable_smart_case = 1
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#completions_enabled = 0
 let g:marching_enable_neocomplete = 1
+let g:neocomplete#enable_fuzzy_completion = 1
 
 inoremap <expr><s-CR> pumvisible() ? neocomplete#smart_close_popup()"\<CR>" : "\<CR>"
 inoremap <expr><C-g> neocomplete#undo_completion()
@@ -579,6 +580,7 @@ let g:session_autosave = 'no'
 " }}}
 " Jedi {{{
 let g:jedi#auto_vim_configuration=0
+let g:jedi#completions_enabled = 0
 " }}}
 
 " Load local vimrc

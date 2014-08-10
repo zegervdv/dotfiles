@@ -13,7 +13,7 @@ else
     git=0
 fi
 
-PROMPT='%{$fg[cyan]%}%n%{$reset_color%} in %{$fg[yellow]%}%~%b%{$reset_color%}
+PROMPT='%{$fg[cyan]%}%n@%m%{$reset_color%} in %{$fg[yellow]%}%~%b%{$reset_color%}
 %{$reset_color%}%(?.%{$fg[white]%}.%{$fg[red]%})→ %{$reset_color%}'
 
 

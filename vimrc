@@ -459,6 +459,9 @@ let g:airline#extensions#syntastic#enabled = 1
   nnoremap <silent> <SPACE>t :<C-u>Unite tag<CR>
   nnoremap <silent> <C-p>    :<C-u>Unite -start-insert file_rec/async<CR>
 " }}}
+" Unite Build {{{
+" TODO: Create builders eg Latex, Vagrant?
+" }}}
 " Vimfiler {{{
 " Use vimfiler as default
 let g:vimfiler_as_default_explorer = 1

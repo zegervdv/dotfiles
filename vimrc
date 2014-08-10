@@ -5,7 +5,7 @@ set nocompatible
 set laststatus=2
 set noshowmode
 
-let g:pathogen_disabled = ['ack']
+let g:pathogen_disabled = ['ack','latex']
 execute pathogen#infect()
 
 set backspace=2
@@ -91,6 +91,13 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex
 " set listchars=tab:▸\ ,eol:¬
 " }}}
 " Custom remaps and tricks {{{
+" Enable spelling only for latex and text
+au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
+au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
+au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
+au BufNewFile,BufRead,BufEnter *.txt setlocal textwidth=0
+
+
 " When editing a file, always jump to the last known cursor position.
 " Don't do it for commit messages, when the position is invalid, or when
 " inside an event handler (happens when dropping a file on gvim).
@@ -388,6 +395,12 @@ function! s:NextTextObject(motion, dir)
 endfunction
 " }}}
 " }}}
+" Latex {{{
+" Compile using rubber
+nnoremap <leader>m :w<CR>:VimProcBang rubber --pdf --warn all %<CR>
+" Open pdf
+nnoremap <silent> <leader>v :!open %:r.pdf<CR><CR>
+" }}}
 " Vim Math plugin; make simple calculations {{{
 vmap <expr>  ++  VMATH_YankAndAnalyse()
 nmap         ++  vip++
@@ -408,6 +421,7 @@ let g:airline#extensions#syntastic#enabled = 1
   call unite#filters#sorter_default#use(['sorter_rank'])
   call unite#set_profile('files', 'smartcase', 1)
   call unite#custom#source('line,outline', 'matchers', 'matcher_fuzzy')
+  call unite#custom#source( 'buffer', 'converters', ['converter_file_directory'])
   " sort file results by length
   call unite#custom#source('file', 'sorters', 'sorter_length')
   call unite#custom#source('file_rec/async', 'sorters', 'sorter_length')
@@ -536,26 +550,6 @@ nmap <Leader>a, :Tabularize /,\zs/l0l1<CR>
 vmap <Leader>a, :Tabularize /,\zs/l0l1<CR>
 vmap <Leader>a- :Tabularize /-<CR>
 " }}}
-" Latex plugin {{{
-au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
-au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
-au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
-au BufNewFile,BufRead,BufEnter *.txt setlocal textwidth=0
-
-let g:tex_conseal = ""
-
-let g:tex_comment_nospell=1
-let g:Tex_DefaultTargetFormat = 'pdf'
-let g:tex_flavor = 'latex'
-let g:Tex_TreatMacViewerAsUNIX = 1
-let g:Tex_ExecuterUNIXViewerInForeground = 1
-let g:Tex_ViewRule_pdf = 'open -a Preview'
-" let g:Tex_ViewRule_pdf = 'open -a /Applications/TeX/TeXShop.app'
-
-let g:Tex_ViewRule_ps = 'open -a Preview'
-
-nnoremap <leader>m :w<CR>:!rubber --pdf --warn all %<CR>
-" }}}
 " Tagbar {{{
 nmap <F8> :TagbarToggle<CR>
 " }}}

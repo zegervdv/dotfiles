@@ -399,7 +399,7 @@ endfunction
 " Compile using rubber
 nnoremap <leader>m :w<CR>:VimProcBang rubber --pdf --warn all %<CR>
 " Open pdf
-nnoremap <silent> <leader>v :!open %:r.pdf<CR><CR>
+nnoremap <silent> <leader>v :silent !open %:r.pdf<CR><CR>
 " }}}
 " Vim Math plugin; make simple calculations {{{
 vmap <expr>  ++  VMATH_YankAndAnalyse()

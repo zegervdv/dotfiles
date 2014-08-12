@@ -141,9 +141,17 @@ gcat () {
 alias tmux='nocorrect tmux'
 alias mvim="reattach-to-user-namespace mvim"
 alias vim="reattach-to-user-namespace vim"
-alias ag="ag --color"
+# alias ag="ag --color"
 alias dot="cd ~/.dotfiles"
 
+# ag tab complete
+_ag() {
+  if (( CURRENT == 2 )); then
+    compadd $(cut -f 1 .git/tags tmp/tags 2>/dev/null | grep -v '!_TAG')
+  fi
+}
+
+compdef _ag ag
 compctl -g '~/.teamocil/*(:t:r)' teamocil
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

@@ -80,6 +80,7 @@ set cryptmethod=blowfish
 filetype plugin indent on
 autocmd FileType ruby set tabstop=2|set shiftwidth=2
 
+set pastetoggle=<F2>
 set clipboard=unnamed
 
 set undofile
@@ -105,8 +106,6 @@ autocmd BufReadPost *
   \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal g`\"" |
   \ endif
-
-nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " Set leader to ,
 let mapleader = ","
@@ -155,7 +154,7 @@ nnoremap <silent> <leader>? :Ag <cword><CR>
 " nnoremap <silent> <leader>? :execute "Ag! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "","") . "'"<CR>
 
 " Clear highlight
-nnoremap <silent> <leader>n :nohlsearch<CR>
+nnoremap <silent> <C-l> :nohl<CR>
 
 inoremap £ \
 
@@ -163,13 +162,14 @@ nnoremap <TAB> %
 vnoremap <TAB> %
 
 " Move between tabs
-nnoremap <S-j>  :tabprevious<CR>
-nnoremap <S-k>  :tabnext<CR>
-nnoremap <S-h>  :tabfirst<CR>
-nnoremap <S-l>  :tablast<CR>
-nnoremap <S-t>  :tabnew<CR>
-inoremap <C-S-TAB>  <ESC>:tabprevious<CR>
-inoremap <C-TAB>    <ESC>:tabnext<CR>
+map <leader> w <ESC>:tabprevious<CR>
+map <leader> m <ESC>:tabnext<CR>
+
+" Move between splits
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <C-h> <C-w>h
 
 " highlight last inserted text
 nnoremap gV `[v`]
@@ -191,7 +191,7 @@ function! HLNext (blinktime)
 endfunction
 
 " Highlight matching parenthesis in different color so I don't mess up
-hi MatchParen cterm=underline ctermbg=none ctermfg=white gui=underline guifg=white
+hi MatchParen cterm=underline ctermbg=none ctermfg=white gui=underline guibg=black guifg=white
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -448,12 +448,12 @@ let g:airline#extensions#syntastic#enabled = 1
   endfunction
   autocmd FileType unite call s:unite_settings()
 
-  nnoremap <silent> <C-m>    :<C-u>Unite -auto-preview -buffer-name=recent file_mru<cr>
+  nnoremap <silent> <SPACE>m :<C-u>Unite -auto-preview -buffer-name=recent file_mru<cr>
   nnoremap <silent> <SPACE>y :<C-u>Unite -buffer-name=yanks history/yank<cr>
   nnoremap <silent> <SPACE>l :<C-u>Unite -start-insert -auto-resize -buffer-name=line line<cr>
   nnoremap <silent> <SPACE>b :<C-u>Unite -auto-resize -buffer-name=buffers buffer<cr>
   nnoremap <silent> <SPACE>/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
-  nnoremap <silent> <SPACE>m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
+  nnoremap <silent> <SPACE>k :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
   nnoremap <silent> <SPACE>s :<C-u>Unite -quick-match buffer<cr>
   nnoremap <silent> <SPACE>o :<C-u>Unite outline<CR>
   nnoremap <silent> <SPACE>t :<C-u>Unite tag<CR>

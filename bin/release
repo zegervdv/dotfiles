@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ssh imac-van-zeger.local "blueutil power 1"

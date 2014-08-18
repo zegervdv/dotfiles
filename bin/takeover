@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ssh imac-van-zeger.local "osascript -e 'set Volume 5' && blueutil power 0"

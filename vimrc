@@ -466,6 +466,7 @@ let g:airline#extensions#syntastic#enabled = 1
 " Use vimfiler as default
 let g:vimfiler_as_default_explorer = 1
 nnoremap <leader>e :VimFilerExplorer<CR>
+let g:vimfiler_ignore_pattern = '\%(.o\|.bin\|.elf\|.un\~\|.swp\)$'
 " }}}
 " Vim - Rspec {{{
 map <leader>t :call RunCurrentSpecFile()<CR>

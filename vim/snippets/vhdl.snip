@@ -1,0 +1,44 @@
+snippet     entity
+abbr        entity
+options     head
+  entity ${1:name} is
+    port(
+      ${2}
+    );
+  end entity $1;
+
+snippet     architecture
+abbr        architecture
+options     head
+  architecture ${1:arch} of ${2:name} is
+    ${4}
+  begin
+    ${4}
+  end architecture $1;
+
+snippet     process
+abbr        process
+options     head
+  process(${1:args}) is
+    ${2}
+  end process;
+
+snippet     case
+abbr        case
+options     head
+  case ${1:var} is
+    ${2}
+  end case;
+
+snippet     when
+abbr        when
+options     head
+  when ${1:option} =>
+   ${2}
+
+snippet     if
+abbr        if
+options     head
+  if ${1:value} then
+    ${2}
+  end if;

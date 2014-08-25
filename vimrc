@@ -163,7 +163,7 @@ vnoremap <TAB> %
 
 " Move between tabs
 map <leader> w <ESC>:tabprevious<CR>
-map <leader> m <ESC>:tabnext<CR>
+map <leader> n <ESC>:tabnext<CR>
 
 " Move between splits
 map <C-j> <C-w>j
@@ -395,6 +395,9 @@ function! s:NextTextObject(motion, dir)
 endfunction
 " }}}
 " }}}
+
+" VHDL ctags
+let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:entities;a:architecture specifications;t:type declarations;p:processes;f:functions;r:procedures'
 " Latex {{{
 " Compile using rubber
 nnoremap <leader>m :w<CR>:VimProcBang rubber --pdf --warn all %<CR>

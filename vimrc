@@ -322,6 +322,8 @@ let g:airline#extensions#syntastic#enabled = 1
   nnoremap <silent> <SPACE>o :<C-u>Unite outline<CR>
   nnoremap <silent> <SPACE>t :<C-u>Unite tag<CR>
   nnoremap <silent> <C-p>    :<C-u>Unite -start-insert file_rec/async<CR>
+  nnoremap <silent> <SPACE>h :<C-u>Unite ssh://Hurricane/STM-Quadcopter/source<CR>
+  nnoremap <silent> <SPACE>i :<C-u>Unite ssh://imac-van-zeger.local/Documents<CR>
 " }}}
 " Unite Build {{{
 " TODO: Create builders eg Latex, Vagrant?

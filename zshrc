@@ -143,6 +143,7 @@ alias mvim="reattach-to-user-namespace mvim"
 alias vim="reattach-to-user-namespace vim"
 # alias ag="ag --color"
 alias dot="cd ~/.dotfiles"
+alias ranger="EDITOR=mvim ranger"
 
 # ag tab complete
 _ag() {

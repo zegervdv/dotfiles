@@ -15,6 +15,7 @@
 [core]
         excludesfile = ~/.gitignore
         editor = vim
+	autocrlf = input
 [apply]
         whitespace = nowarn
 [mergetool]
@@ -42,3 +43,7 @@
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
+[pull]
+	rebase = true
+[rerere]
+	enabled = true

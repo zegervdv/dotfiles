@@ -283,7 +283,8 @@ let g:airline#extensions#syntastic#enabled = 1
 " Unite {{{
   call unite#filters#matcher_default#use(['matcher_fuzzy','matcher_regexp'])
   call unite#filters#sorter_default#use(['sorter_rank'])
-  call unite#set_profile('files', 'smartcase', 1)
+  " call unite#set_profile('files', 'smartcase', 1)
+  call unite#custom#profile('files', 'context.smartcase', 1)
   call unite#custom#source('line,outline', 'matchers', 'matcher_fuzzy')
   call unite#custom#source( 'buffer', 'converters', ['converter_file_directory'])
   " sort file results by length
@@ -291,7 +292,7 @@ let g:airline#extensions#syntastic#enabled = 1
   call unite#custom#source('file_rec/async', 'sorters', 'sorter_length')
   let g:unite_enable_start_insert=0
   let g:unite_source_history_yank_enable=1
-  let g:unite_source_rec_max_cache_files=5000
+  let g:unite_source_rec_max_cache_files=3000
   let g:unite_prompt='» '
   if executable('ag')
     let g:unite_source_grep_command = 'ag'
@@ -299,6 +300,7 @@ let g:airline#extensions#syntastic#enabled = 1
           \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
           \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
     let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
   elseif executable('ack')
     let g:unite_source_grep_command='ack'
     let g:unite_source_grep_default_opts='--no-heading --no-color -C4'

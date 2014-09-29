@@ -42,6 +42,7 @@ source $ZSH/oh-my-zsh.sh
 setopt nobeep
 setopt notify
 REPORTTIME=5
+
 # GRML style completion
 # activate color-completion
 zstyle ':completion:*:default'         list-colors ${(s.:.)LS_COLORS}
@@ -97,8 +98,10 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin \
                                            /usr/X11R6/bin
 
 # provide .. as a completion
-zstyle ':completion:*' special-dirs ..
+zstyle ':completion:*' specal-dirs ..
 
+
+zstyle ':completion::*:(m|)vim:*' ignored-patterns '*.(o|hex|elf|pyc)'
 # Customize to your needs...
 export PATH=$PATH:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/sbin
 export PATH="/usr/local/bin:$PATH"
@@ -139,8 +142,8 @@ gcat () {
 
 # Disable Autocorrections
 alias tmux='nocorrect tmux'
-alias mvim="reattach-to-user-namespace mvim"
-alias vim="reattach-to-user-namespace vim"
+# alias mvim="reattach-to-user-namespace mvim"
+# alias vim="reattach-to-user-namespace vim"
 # alias ag="ag --color"
 alias dot="cd ~/.dotfiles"
 alias ranger="EDITOR=mvim ranger"
@@ -153,6 +156,7 @@ _ag() {
 }
 
 compdef _ag ag
+
 compctl -g '~/.teamocil/*(:t:r)' teamocil
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
@@ -168,3 +172,4 @@ q() {
     _z "$@"
   fi
 }
+

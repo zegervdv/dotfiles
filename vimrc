@@ -32,9 +32,9 @@ set tabstop=2 shiftwidth=2
 if has("gui_running")
   set background=dark
   " color base16-ocean
-  color hybrid
+  color Tomorrow-Night
 else
-  color hybrid
+  color Tomorrow-Night
 endif
 set guifont=Inconsolata\ for\ Powerline:h12
 set autowrite

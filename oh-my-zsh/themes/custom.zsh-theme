@@ -13,7 +13,10 @@ else
     git=0
 fi
 
-PROMPT='%{$fg[cyan]%}%n@%m%{$reset_color%} in %{$fg[yellow]%}%~%b%{$reset_color%}
+local my_prompt_name='%n'  
+[[ "$SSH_CONNECTION" != '' ]] && my_prompt_name='%n@%m'
+
+PROMPT='%{$fg[cyan]%}$my_prompt_name%{$reset_color%} in %{$fg[yellow]%}%~%b%{$reset_color%}
 %{$reset_color%}%(?.%{$fg[white]%}.%{$fg[red]%})→ %{$reset_color%}'
 
 
@@ -30,3 +33,4 @@ ZSH_THEME_GIT_PROMPT_PREFIX="${my_gray}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$my_gray%{$reset_color%}"
+

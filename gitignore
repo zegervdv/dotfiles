@@ -78,3 +78,5 @@ doc/
 *.pdf
 
 .rake_tasks
+
+.sync

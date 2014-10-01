@@ -30,7 +30,7 @@ set linebreak
 set lbr
 set tabstop=2 shiftwidth=2
 if has("gui_running")
-  set background=dark
+  " set background=dark
   " color base16-ocean
   color Tomorrow-Night
 else

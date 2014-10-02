@@ -34,6 +34,7 @@ if has("gui_running")
   " color base16-ocean
   color Tomorrow-Night
 else
+  set background=dark
   color Tomorrow-Night
 endif
 set guifont=Inconsolata\ for\ Powerline:h12
@@ -414,8 +415,11 @@ let g:airline_powerline_fonts=1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 
-let g:airline_theme = 'base16'
-
+if has("gui_running")
+  let g:airline_theme = 'base16'
+else
+  let g:airline_theme = 'tomorrow'
+endif
 let g:airline#extensions#syntastic#enabled = 1
 " }}}
 " Unite {{{

@@ -599,6 +599,9 @@ let g:jedi#completions_enabled = 0
 " Vimux {{{
 nnoremap <silent><leader>s :w<CR>:call VimuxRunCommand('%run -i ' . expand('%'))<CR>
 " }}}
+" Tmuxline {{{
+let g:tmuxline_powerline_separators=0
+" }}}
 
 " Load local vimrc
 if filereadable($HOME . "/.vimrc.local")

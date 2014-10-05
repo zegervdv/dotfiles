@@ -596,6 +596,9 @@ let g:session_autosave = 'no'
 let g:jedi#auto_vim_configuration=0
 let g:jedi#completions_enabled = 0
 " }}}
+" Vimux {{{
+nnoremap <leader>s :call VimuxRunCommand('%run -i ' . expand('%'))<CR>
+" }}}
 
 " Load local vimrc
 if filereadable($HOME . "/.vimrc.local")

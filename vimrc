@@ -597,7 +597,7 @@ let g:jedi#auto_vim_configuration=0
 let g:jedi#completions_enabled = 0
 " }}}
 " Vimux {{{
-nnoremap <leader>s :call VimuxRunCommand('%run -i ' . expand('%'))<CR>
+nnoremap <silent><leader>s :w<CR>:call VimuxRunCommand('%run -i ' . expand('%'))<CR>
 " }}}
 
 " Load local vimrc

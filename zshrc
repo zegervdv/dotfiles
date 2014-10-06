@@ -132,6 +132,7 @@ alias beer="bundle exec rake"
 alias ll="ls -altrh"
 alias l="ls -lthr"
 alias gsl="git sl"
+alias gaa='git add --all --intent-to-add'
 
 # Functions
 gcat () {

@@ -47,3 +47,5 @@
 	rebase = true
 [rerere]
 	enabled = true
+[web]
+  browser = open

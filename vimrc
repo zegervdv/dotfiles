@@ -99,6 +99,8 @@ au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
 au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
 au BufNewFile,BufRead,BufEnter *.txt setlocal textwidth=0
 
+highlight SpellBad ctermbg=256 ctermfg=210
+highlight SpellLocal ctermbg=240 ctermfg=010
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it for commit messages, when the position is invalid, or when
@@ -480,9 +482,9 @@ let g:vimfiler_ignore_pattern = '\%(.o\|.bin\|.elf\|.un\~\|.swp\)$'
 " }}}
 " Vim - Rspec {{{
 map <leader>t :call RunCurrentSpecFile()<CR>
-map <leader>s :call RunNearestSpec()<CR>
-map <leader>l :call RunLastSpec()<CR>
-map <leader>r :call RunAllSpecs()<CR>
+" map <leader>s :call RunNearestSpec()<CR>
+" map <leader>l :call RunLastSpec()<CR>
+" map <leader>r :call RunAllSpecs()<CR>
 " }}}
 " Cucumber {{{
 map <leader>f :call RunAllFeatures()<CR>

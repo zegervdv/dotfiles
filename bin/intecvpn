@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cd /usr/local/etc/openvpn
+sudo openvpn --config /usr/local/etc/openvpn/intec-tech.ovpn
+

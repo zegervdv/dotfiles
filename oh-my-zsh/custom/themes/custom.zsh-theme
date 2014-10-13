@@ -17,7 +17,7 @@ local my_prompt_name='%n'
 [[ "$SSH_CONNECTION" != '' ]] && my_prompt_name='%n@%m'
 
 PROMPT='%{$fg[cyan]%}$my_prompt_name%{$reset_color%} in %{$fg[yellow]%}%~%b%{$reset_color%}
-%{$reset_color%}%(?.%{$fg[white]%}.%{$fg[red]%})→ %{$reset_color%}'
+%{$reset_color%}%(1j.%j .)%(?.%{$fg[white]%}.%{$fg[red]%})→ %{$reset_color%}'
 
 
 RPROMPT='$my_gray$(git_prompt_info) $(git_prompt_status)%{$reset_color%}%'

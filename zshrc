@@ -101,7 +101,7 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin \
 zstyle ':completion:*' specal-dirs ..
 
 
-zstyle ':completion::*:(m|)vim:*' ignored-patterns '*.(o|hex|elf|pyc)'
+zstyle ':completion::*:(m|)vim:*' ignored-patterns '*.(o|hex|elf|pyc|pdf|out|aux|toc|out|fls|bbl|synctex.gz|dvi|blg|fdb_latexmk)'
 # Customize to your needs...
 export PATH=$PATH:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/sbin
 export PATH="/usr/local/bin:$PATH"

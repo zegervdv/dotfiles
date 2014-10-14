@@ -187,3 +187,6 @@
 [submodule "vim/bundle/tmuxline"]
 	path = vim/bundle/tmuxline
 	url = https://github.com/edkolev/tmuxline.vim.git
+[submodule "vim/bundle/unite-everything"]
+	path = vim/bundle/unite-everything
+	url = https://github.com/sgur/unite-everything.git

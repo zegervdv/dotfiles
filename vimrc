@@ -461,13 +461,13 @@ let g:airline#extensions#syntastic#enabled = 1
   nnoremap <silent> <SPACE>m :<C-u>Unite -auto-preview -buffer-name=recent file_mru<cr>
   nnoremap <silent> <SPACE>y :<C-u>Unite -buffer-name=yanks history/yank<cr>
   nnoremap <silent> <SPACE>l :<C-u>Unite -start-insert -auto-resize -buffer-name=line line<cr>
-  nnoremap <silent> <SPACE>b :<C-u>Unite -auto-resize -buffer-name=buffers buffer<cr>
+  nnoremap <silent> <SPACE>b :<C-u>Unite everything/async<cr>
   nnoremap <silent> <SPACE>/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
   nnoremap <silent> <SPACE>k :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
   nnoremap <silent> <SPACE>s :<C-u>Unite -quick-match buffer<cr>
   nnoremap <silent> <SPACE>o :<C-u>Unite outline<CR>
   nnoremap <silent> <SPACE>t :<C-u>Unite tag<CR>
-  nnoremap <silent> <C-p>    :<C-u>Unite -start-insert file_rec/async<CR>
+  nnoremap <silent> <C-p>    :<C-u>Unite -start-insert file_rec/async buffer<CR>
   nnoremap <silent> <SPACE>h :<C-u>Unite ssh://Hurricane/STM-Quadcopter/source<CR>
   nnoremap <silent> <SPACE>i :<C-u>Unite ssh://imac-van-zeger.local/Documents<CR>
 " }}}

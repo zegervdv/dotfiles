@@ -106,9 +106,9 @@ highlight SpellLocal ctermbg=240 ctermfg=010
 " Don't do it for commit messages, when the position is invalid, or when
 " inside an event handler (happens when dropping a file on gvim).
 autocmd BufReadPost *
-  \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-  \   exe "normal g`\"" |
-  \ endif
+      \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal g`\"" |
+      \ endif
 
 " Set leader to ,
 let mapleader = ","
@@ -120,9 +120,9 @@ map k gk
 " remap tag-search to better place
 " nmap <C-$> <C-]>
 function! JumpToTagInSplit()
-    execute "normal! \<c-w>v\<c-]>mzzMzvzz15\<c-e>"
-    execute "keepjumps normal! `z"
-    Pulse
+  execute "normal! \<c-w>v\<c-]>mzzMzvzz15\<c-e>"
+  execute "keepjumps normal! `z"
+  Pulse
 endfunction
 nnoremap <C-$> :silent! call JumpToTagInSplit()<CR>
 
@@ -142,6 +142,9 @@ inoremap <C-f> <ESC>%%a
 
 " Switch between the last two files
 nnoremap <SPACE><SPACE> <C-^>
+" Move between buffers
+nnoremap gb :bnext<CR>
+nnoremap gB :bprevious<CR>
 
 " Very Magic search patterns
 nmap / /\v
@@ -182,15 +185,15 @@ nnoremap gV `[v`]
 " nnoremap <silent> N   N:call HLNext(0.4)<cr>
 
 function! HLNext (blinktime)
-    highlight WhiteOnRed ctermfg=white ctermbg=red guifg=white guibg=red
-    let [bufnum, lnum, col, off] = getpos('.')
-    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-    let target_pat = '\c\%#'.@/
-    let ring = matchadd('WhiteOnRed', target_pat, 101)
-    redraw
-    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-    call matchdelete(ring)
-    redraw
+  highlight WhiteOnRed ctermfg=white ctermbg=red guifg=white guibg=red
+  let [bufnum, lnum, col, off] = getpos('.')
+  let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+  let target_pat = '\c\%#'.@/
+  let ring = matchadd('WhiteOnRed', target_pat, 101)
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  call matchdelete(ring)
+  redraw
 endfunction
 
 " Highlight matching parenthesis in different color so I don't mess up
@@ -214,12 +217,12 @@ vmap <expr> > KeepVisualSelection(">")
 vmap <expr> < KeepVisualSelection("<")
 
 function! KeepVisualSelection(cmd)
-    set nosmartindent
-    if mode() ==# "V"
-        return a:cmd . ":set smartindent\<CR>gv"
-    else
-        return a:cmd . ":set smartindent\<CR>"
-    endif
+  set nosmartindent
+  if mode() ==# "V"
+    return a:cmd . ":set smartindent\<CR>gv"
+  else
+    return a:cmd . ":set smartindent\<CR>"
+  endif
 endfunction
 
 let g:indent_guides_auto_colors = 0
@@ -245,19 +248,19 @@ inoremap <C-u> <esc>mzgUiw`za
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 function! MyFoldText() " {{{
-    let line = getline(v:foldstart)
+  let line = getline(v:foldstart)
 
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
+  let nucolwidth = &fdc + &number * &numberwidth
+  let windowwidth = winwidth(0) - nucolwidth - 3
+  let foldedlinecount = v:foldend - v:foldstart
 
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
+  " expand tabs into spaces
+  let onetab = strpart('          ', 0, &tabstop)
+  let line = substitute(line, '\t', onetab, 'g')
 
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+  let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+  return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
 
@@ -305,96 +308,96 @@ xnoremap il :<c-u>call <SID>NextTextObject('i', '?')<cr>
 
 
 function! s:NextTextObject(motion, dir)
-    let c = nr2char(getchar())
-    let d = ''
+  let c = nr2char(getchar())
+  let d = ''
 
-    if c ==# "b" || c ==# "(" || c ==# ")"
-        let c = "("
-    elseif c ==# "B" || c ==# "{" || c ==# "}"
-        let c = "{"
-    elseif c ==# "r" || c ==# "[" || c ==# "]"
-        let c = "["
+  if c ==# "b" || c ==# "(" || c ==# ")"
+    let c = "("
+  elseif c ==# "B" || c ==# "{" || c ==# "}"
+    let c = "{"
+  elseif c ==# "r" || c ==# "[" || c ==# "]"
+    let c = "["
+  elseif c ==# "'"
+    let c = "'"
+  elseif c ==# '"'
+    let c = '"'
+  else
+    return
+  endif
+
+  " Find the next opening-whatever.
+  execute "normal! " . a:dir . c . "\<cr>"
+
+  if a:motion ==# 'a'
+    " If we're doing an 'around' method, we just need to select around it
+    " and we can bail out to Vim.
+    execute "normal! va" . c
+  else
+    " Otherwise we're looking at an 'inside' motion.  Unfortunately these
+    " get tricky when you're dealing with an empty set of delimiters because
+    " Vim does the wrong thing when you say vi(.
+
+    let open = ''
+    let close = ''
+
+    if c ==# "(" 
+      let open = "("
+      let close = ")"
+    elseif c ==# "{"
+      let open = "{"
+      let close = "}"
+    elseif c ==# "["
+      let open = "\\["
+      let close = "\\]"
     elseif c ==# "'"
-        let c = "'"
+      let open = "'"
+      let close = "'"
     elseif c ==# '"'
-        let c = '"'
-    else
-        return
+      let open = '"'
+      let close = '"'
     endif
 
-    " Find the next opening-whatever.
-    execute "normal! " . a:dir . c . "\<cr>"
+    " We'll start at the current delimiter.
+    let start_pos = getpos('.')
+    let start_l = start_pos[1]
+    let start_c = start_pos[2]
 
-    if a:motion ==# 'a'
-        " If we're doing an 'around' method, we just need to select around it
-        " and we can bail out to Vim.
-        execute "normal! va" . c
+    " Then we'll find it's matching end delimiter.
+    if c ==# "'" || c ==# '"'
+      " searchpairpos() doesn't work for quotes, because fuck me.
+      let end_pos = searchpos(open)
     else
-        " Otherwise we're looking at an 'inside' motion.  Unfortunately these
-        " get tricky when you're dealing with an empty set of delimiters because
-        " Vim does the wrong thing when you say vi(.
-
-        let open = ''
-        let close = ''
-
-        if c ==# "(" 
-            let open = "("
-            let close = ")"
-        elseif c ==# "{"
-            let open = "{"
-            let close = "}"
-        elseif c ==# "["
-            let open = "\\["
-            let close = "\\]"
-        elseif c ==# "'"
-            let open = "'"
-            let close = "'"
-        elseif c ==# '"'
-            let open = '"'
-            let close = '"'
-        endif
-
-        " We'll start at the current delimiter.
-        let start_pos = getpos('.')
-        let start_l = start_pos[1]
-        let start_c = start_pos[2]
-
-        " Then we'll find it's matching end delimiter.
-        if c ==# "'" || c ==# '"'
-            " searchpairpos() doesn't work for quotes, because fuck me.
-            let end_pos = searchpos(open)
-        else
-            let end_pos = searchpairpos(open, '', close)
-        endif
-
-        let end_l = end_pos[0]
-        let end_c = end_pos[1]
-
-        call setpos('.', start_pos)
-
-        if start_l == end_l && start_c == (end_c - 1)
-            " We're in an empty set of delimiters.  We'll append an "x"
-            " character and select that so most Vim commands will do something
-            " sane.  v is gonna be weird, and so is y.  Oh well.
-            execute "normal! ax\<esc>\<left>"
-            execute "normal! vi" . c
-        elseif start_l == end_l && start_c == (end_c - 2)
-            " We're on a set of delimiters that contain a single, non-newline
-            " character.  We can just select that and we're done.
-            execute "normal! vi" . c
-        else
-            " Otherwise these delimiters contain something.  But we're still not
-            " sure Vim's gonna work, because if they contain nothing but
-            " newlines Vim still does the wrong thing.  So we'll manually select
-            " the guts ourselves.
-            let whichwrap = &whichwrap
-            set whichwrap+=h,l
-
-            execute "normal! va" . c . "hol"
-
-            let &whichwrap = whichwrap
-        endif
+      let end_pos = searchpairpos(open, '', close)
     endif
+
+    let end_l = end_pos[0]
+    let end_c = end_pos[1]
+
+    call setpos('.', start_pos)
+
+    if start_l == end_l && start_c == (end_c - 1)
+      " We're in an empty set of delimiters.  We'll append an "x"
+      " character and select that so most Vim commands will do something
+      " sane.  v is gonna be weird, and so is y.  Oh well.
+      execute "normal! ax\<esc>\<left>"
+      execute "normal! vi" . c
+    elseif start_l == end_l && start_c == (end_c - 2)
+      " We're on a set of delimiters that contain a single, non-newline
+      " character.  We can just select that and we're done.
+      execute "normal! vi" . c
+    else
+      " Otherwise these delimiters contain something.  But we're still not
+      " sure Vim's gonna work, because if they contain nothing but
+      " newlines Vim still does the wrong thing.  So we'll manually select
+      " the guts ourselves.
+      let whichwrap = &whichwrap
+      set whichwrap+=h,l
+
+      execute "normal! va" . c . "hol"
+
+      let &whichwrap = whichwrap
+    endif
+  endif
 endfunction
 " }}}
 " VHDL ctags
@@ -423,53 +426,59 @@ else
   let g:airline_theme = 'tomorrow'
 endif
 let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
 " }}}
 " Unite {{{
-  call unite#filters#matcher_default#use(['matcher_fuzzy','matcher_regexp'])
-  call unite#filters#sorter_default#use(['sorter_rank'])
-  " call unite#set_profile('files', 'smartcase', 1)
-  call unite#custom#profile('files', 'context.smartcase', 1)
-  call unite#custom#source('line,outline', 'matchers', 'matcher_fuzzy')
-  call unite#custom#source( 'buffer', 'converters', ['converter_file_directory'])
-  " sort file results by length
-  call unite#custom#source('file', 'sorters', 'sorter_length')
-  call unite#custom#source('file_rec/async', 'sorters', 'sorter_length')
-  let g:unite_enable_start_insert=0
-  let g:unite_source_history_yank_enable=1
-  let g:unite_source_rec_max_cache_files=3000
-  let g:unite_prompt='» '
-  if executable('ag')
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts =
-          \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-          \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-    let g:unite_source_grep_recursive_opt = ''
-    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
-  elseif executable('ack')
-    let g:unite_source_grep_command='ack'
-    let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
-    let g:unite_source_grep_recursive_opt=''
-  endif
-  function! s:unite_settings()
-    nmap <buffer> Q <plug>(unite_exit)
-    nmap <buffer> <esc> <plug>(unite_exit)
-    imap <buffer> <C-j> <Plug>(unite_select_next_line)
-    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
-  endfunction
-  autocmd FileType unite call s:unite_settings()
+call unite#filters#matcher_default#use(['matcher_fuzzy','matcher_regexp'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+" call unite#set_profile('files', 'smartcase', 1)
+call unite#custom#profile('files', 'context.smartcase', 1)
+call unite#custom#source('line,outline', 'matchers', 'matcher_fuzzy')
+call unite#custom#source( 'buffer', 'converters', ['converter_file_directory'])
+" sort file results by length
+call unite#custom#source('file', 'sorters', 'sorter_length')
+call unite#custom#source('file_rec/async', 'sorters', 'sorter_length')
+let g:unite_enable_start_insert=0
+let g:unite_source_history_yank_enable=1
+let g:unite_source_rec_max_cache_files=3000
+let g:unite_prompt='» '
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts =
+        \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+        \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_recursive_opt = ''
+  let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
+elseif executable('ack')
+  let g:unite_source_grep_command='ack'
+  let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
+  let g:unite_source_grep_recursive_opt=''
+endif
+function! s:unite_settings()
+  nmap <buffer> Q <plug>(unite_exit)
+  nmap <buffer> <esc> <plug>(unite_exit)
+  imap <buffer> <C-j> <Plug>(unite_select_next_line)
+  imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+endfunction
+autocmd FileType unite call s:unite_settings()
 
-  nnoremap <silent> <SPACE>m :<C-u>Unite -auto-preview -buffer-name=recent file_mru<cr>
-  nnoremap <silent> <SPACE>y :<C-u>Unite -buffer-name=yanks history/yank<cr>
-  nnoremap <silent> <SPACE>l :<C-u>Unite -start-insert -auto-resize -buffer-name=line line<cr>
-  nnoremap <silent> <SPACE>b :<C-u>Unite everything/async<cr>
-  nnoremap <silent> <SPACE>/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
-  nnoremap <silent> <SPACE>k :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
-  nnoremap <silent> <SPACE>s :<C-u>Unite -quick-match buffer<cr>
-  nnoremap <silent> <SPACE>o :<C-u>Unite outline<CR>
-  nnoremap <silent> <SPACE>t :<C-u>Unite tag<CR>
-  nnoremap <silent> <C-p>    :<C-u>Unite -start-insert file_rec/async buffer<CR>
-  nnoremap <silent> <SPACE>h :<C-u>Unite ssh://Hurricane/STM-Quadcopter/source<CR>
-  nnoremap <silent> <SPACE>i :<C-u>Unite ssh://imac-van-zeger.local/Documents<CR>
+nnoremap <silent> <SPACE>m :<C-u>Unite -auto-preview -buffer-name=recent file_mru<cr>
+nnoremap <silent> <SPACE>y :<C-u>Unite -buffer-name=yanks history/yank<cr>
+nnoremap <silent> <SPACE>l :<C-u>Unite -start-insert -auto-resize -buffer-name=line line<cr>
+nnoremap <silent> <SPACE>b :<C-u>Unite everything/async<cr>
+nnoremap <silent> <SPACE>/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
+nnoremap <silent> <SPACE>k :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
+nnoremap <silent> <SPACE>s :<C-u>Unite -quick-match buffer<cr>
+nnoremap <silent> <SPACE>o :<C-u>Unite outline<CR>
+nnoremap <silent> <SPACE>t :<C-u>Unite tag<CR>
+nnoremap <silent> <C-p>    :<C-u>Unite -start-insert file_rec/async buffer<CR>
+nnoremap <silent> <SPACE>h :<C-u>Unite ssh://Hurricane/STM-Quadcopter/source<CR>
+nnoremap <silent> <SPACE>i :<C-u>Unite ssh://imac-van-zeger.local/Documents<CR>
 " }}}
 " Unite Build {{{
 " TODO: Create builders eg Latex, Vagrant?

@@ -27,6 +27,7 @@ set title
 set wrap
 set wrapmargin=2
 set linebreak
+set breakindent
 set lbr
 set tabstop=2 shiftwidth=2
 if has("gui_running")

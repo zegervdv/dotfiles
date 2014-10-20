@@ -21,7 +21,8 @@ chatnets = {
 
 channels = (
   { name = "#vim"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#raspberrypi"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#raspberrypi"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#archlinux-arm"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -197,6 +198,16 @@ windows = {
         type = "CHANNEL";
         chat_type = "IRC";
         name = "#raspberrypi";
+        tag = "freenode";
+      }
+    );
+  };
+  8 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#archlinux-arm";
         tag = "freenode";
       }
     );

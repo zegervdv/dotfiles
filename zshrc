@@ -15,6 +15,9 @@ source ~/.zsh/z.sh
 
 precmd() {
   if [[ -n "$TMUX" ]]; then
+    export TERM=screen-256color
     tmux setenv "$(tmux display -p 'TMUX_PWD_#D')" "$PWD"
   fi
 }
+
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

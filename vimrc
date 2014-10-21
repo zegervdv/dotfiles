@@ -609,6 +609,7 @@ let g:jedi#auto_vim_configuration=0
 let g:jedi#completions_enabled = 0
 " }}}
 " Vimux {{{
+let g:VimuxUseNearest = 1
 nnoremap <silent><leader>s :w<CR>:call VimuxRunCommand('%run -i ' . expand('%'))<CR>
 " }}}
 " Tmuxline {{{

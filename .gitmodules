@@ -190,3 +190,6 @@
 [submodule "vim/bundle/unite-everything"]
 	path = vim/bundle/unite-everything
 	url = https://github.com/sgur/unite-everything.git
+[submodule "tmux/plugins/tpm"]
+	path = tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm

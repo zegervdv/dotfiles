@@ -196,6 +196,3 @@
 [submodule "zsh/plugins/zsh-autosuggestions"]
 	path = zsh/plugins/zsh-autosuggestions
 	url = https://github.com/tarruda/zsh-autosuggestions
-[submodule "zsh/plugins/k"]
-	path = zsh/plugins/k
-	url = https://github.com/supercrabtree/k.git

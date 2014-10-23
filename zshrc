@@ -13,6 +13,7 @@ source ~/.fzf.zsh
 source ~/.zsh/zsh-history-substring-search.zsh
 source ~/.zsh/z.sh
 source ~/.zsh/plugins/zsh-autosuggestions/autosuggestions.zsh
+source ~/.zsh/plugins/k/k.sh
 
 precmd() {
   if [[ -n "$TMUX" ]]; then

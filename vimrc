@@ -90,6 +90,9 @@ set viminfo='10,\"100,:20,%,n~/.viminfo
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex
 
+" Sentences are ended with double spaces
+set cpo+=J
+
 " set list
 " set listchars=tab:▸\ ,eol:¬
 " }}}

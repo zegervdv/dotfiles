@@ -277,7 +277,7 @@ set foldtext=MyFoldText()
 " object of the given type.  These don't necessarily have to be in the current
 " line.
 "
-" Currently works for (, [, {, and their shortcuts b, r, B. 
+" Currently works for (, [, {, and their shortcuts b, r, B.
 "
 " Next kind of works for ' and " as long as there are no escaped versions of
 " them in the string (TODO: fix that).  Last is currently broken for quotes
@@ -344,7 +344,7 @@ function! s:NextTextObject(motion, dir)
     let open = ''
     let close = ''
 
-    if c ==# "(" 
+    if c ==# "("
       let open = "("
       let close = ")"
     elseif c ==# "{"
@@ -403,7 +403,9 @@ function! s:NextTextObject(motion, dir)
     endif
   endif
 endfunction
+
 " }}}
+
 " VHDL ctags
 let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:entities;a:architecture specifications;t:type declarations;p:processes;f:functions;r:procedures'
 " }}}
@@ -530,8 +532,8 @@ function! CleverCr()
     return "\<CR>"
   endif
 endfunction
-" <CR> close popup and save indent or expand snippet 
-imap <expr> <CR> CleverCr() 
+" <CR> close popup and save indent or expand snippet
+imap <expr> <CR> CleverCr()
 " }}}
 " Neo Snippets {{{
 imap <C-k> <Plug>(neosnippet_expand_or_jump)

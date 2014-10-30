@@ -616,6 +616,7 @@ let g:jedi#completions_enabled = 0
 " Vimux {{{
 let g:VimuxUseNearest = 1
 nnoremap <silent><leader>s :w<CR>:call VimuxRunCommand('%run -i ' . expand('%'))<CR>
+nnoremap <silent><leader>r :w<CR>:call VimuxRunCommand('rake spec')<CR>
 " }}}
 " Tmuxline {{{
 let g:tmuxline_powerline_separators=0

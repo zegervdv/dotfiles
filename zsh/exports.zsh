@@ -1,6 +1,6 @@
 export PATH=$PATH:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/sbin
 export PATH="/usr/local/bin:$PATH"
-export NODE_PATH="/usr/local/lib/node"
+export NODE_PATH="/usr/local/lib/node_modules"
 export PATH="/usr/local/share/npm/bin:$PATH"
 export PATH=$PATH:$HOME/.bin
 # if rbenv is present, configure it for use

@@ -611,8 +611,9 @@ let g:jedi#completions_enabled = 0
 " }}}
 " Vimux {{{
 let g:VimuxUseNearest = 1
-nnoremap <silent><leader>s :w<CR>:call VimuxRunCommand('%run -i ' . expand('%'))<CR>
-nnoremap <silent><leader>r :w<CR>:call VimuxRunCommand('rake spec')<CR>
+autocmd FileType python nnoremap <buffer> <silent><leader>s :w<CR>:call VimuxRunCommand('%run -i ' . expand('%'))<CR>
+autocmd FileType ruby nnoremap <buffer> <silent><leader>s :w<CR>:call VimuxRunCommand('rake spec')<CR>
+autocmd FileType  c nnoremap <buffer> <silent><leader>s :w<CR>:call VimuxRunCommand('make')<CR>
 " }}}
 " Tmuxline {{{
 let g:tmuxline_powerline_separators=0

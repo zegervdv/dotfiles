@@ -114,8 +114,8 @@ autocmd BufReadPost *
       \   exe "normal g`\"" |
       \ endif
 
-" Set leader to ,
-let mapleader = ","
+" Set leader to space
+let mapleader = "\<SPACE>"
 
 " See long lines as line breaks
 map j gj
@@ -473,18 +473,14 @@ function! s:unite_settings()
 endfunction
 autocmd FileType unite call s:unite_settings()
 
-nnoremap <silent> <SPACE>m :<C-u>Unite -auto-preview -buffer-name=recent file_mru<cr>
-nnoremap <silent> <SPACE>y :<C-u>Unite -buffer-name=yanks history/yank<cr>
-nnoremap <silent> <SPACE>l :<C-u>Unite -start-insert -auto-resize -buffer-name=line line<cr>
-nnoremap <silent> <SPACE>b :<C-u>Unite everything/async<cr>
-nnoremap <silent> <SPACE>/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
-nnoremap <silent> <SPACE>k :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
-nnoremap <silent> <SPACE>s :<C-u>Unite -quick-match buffer<cr>
-nnoremap <silent> <SPACE>o :<C-u>Unite outline<CR>
-nnoremap <silent> <SPACE>t :<C-u>Unite tag<CR>
+nnoremap <silent> <SPACE>k :<C-u>Unite -auto-preview -buffer-name=recent file_mru<cr>
+nnoremap <silent> <leader>y :<C-u>Unite -buffer-name=yanks history/yank<cr>
+nnoremap <silent> <leader>/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
+nnoremap <silent> <leader>o :<C-u>Unite outline<CR>
+nnoremap <silent> <leader>t :<C-u>Unite tag<CR>
 nnoremap <silent> <C-p>    :<C-u>Unite -start-insert file_rec/async buffer<CR>
-nnoremap <silent> <SPACE>h :<C-u>Unite ssh://Hurricane/STM-Quadcopter/source<CR>
-nnoremap <silent> <SPACE>i :<C-u>Unite ssh://imac-van-zeger.local/Documents<CR>
+nnoremap <silent> <leader>h :<C-u>Unite ssh://Hurricane/STM-Quadcopter/source<CR>
+nnoremap <silent> <leader>i :<C-u>Unite ssh://imac-van-zeger.local/Documents<CR>
 " }}}
 " Unite Build {{{
 " TODO: Create builders eg Latex, Vagrant?
@@ -502,8 +498,8 @@ map <leader>t :call RunCurrentSpecFile()<CR>
 " map <leader>r :call RunAllSpecs()<CR>
 " }}}
 " Cucumber {{{
-map <leader>f :call RunAllFeatures()<CR>
-map <leader>k :call RunCurrentFeature()<CR>
+" map <leader>f :call RunAllFeatures()<CR>
+" map <leader>k :call RunCurrentFeature()<CR>
 " }}}
 " Markdown {{{
 let g:vim_markdown_folding_disabled=1

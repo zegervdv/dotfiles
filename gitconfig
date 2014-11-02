@@ -50,3 +50,5 @@
 	enabled = true
 [web]
   browser = open
+[user]
+	signingkey = Zeger Van de Vannet <zegervdv@me.com>

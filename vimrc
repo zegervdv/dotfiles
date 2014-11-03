@@ -103,6 +103,8 @@ au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
 au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
 au BufNewFile,BufRead,BufEnter *.txt setlocal textwidth=0
 
+autocmd BufRead *_spec.rb set filetype=rspec
+
 highlight SpellBad ctermbg=256 ctermfg=210
 highlight SpellLocal ctermbg=240 ctermfg=010
 
@@ -440,7 +442,7 @@ let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 " }}}
 " Unite {{{
-call unite#filters#matcher_default#use(['matcher_fuzzy','matcher_regexp'])
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 " call unite#set_profile('files', 'smartcase', 1)
 call unite#custom#profile('files', 'context.smartcase', 1)
@@ -478,7 +480,7 @@ nnoremap <silent> <leader>y :<C-u>Unite -buffer-name=yanks history/yank<cr>
 nnoremap <silent> <leader>/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
 nnoremap <silent> <leader>o :<C-u>Unite outline<CR>
 nnoremap <silent> <leader>t :<C-u>Unite tag<CR>
-nnoremap <silent> <C-p>    :<C-u>Unite -start-insert file_rec/async buffer<CR>
+nnoremap <silent> <C-p>    :<C-u>Unite -start-insert buffer file_rec/async<CR>
 nnoremap <silent> <leader>h :<C-u>Unite ssh://Hurricane/STM-Quadcopter/source<CR>
 nnoremap <silent> <leader>i :<C-u>Unite ssh://imac-van-zeger.local/Documents<CR>
 " }}}
@@ -530,6 +532,7 @@ function! CleverCr()
 endfunction
 " <CR> close popup and save indent or expand snippet
 imap <expr> <CR> CleverCr()
+
 " }}}
 " Neo Snippets {{{
 imap <C-k> <Plug>(neosnippet_expand_or_jump)

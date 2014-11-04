@@ -250,6 +250,10 @@ inoremap <C-u> <esc>mzgUiw`za
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
+" Move lines from visual selection
+vnoremap <S-j> :m '>+1<CR>gv=gv
+vnoremap <S-k> :m '<-2<CR>gv=gv
+
 function! MyFoldText() " {{{
   let line = getline(v:foldstart)
 

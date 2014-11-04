@@ -476,7 +476,7 @@ autocmd FileType unite call s:unite_settings()
 
 nnoremap <silent> <SPACE>k :<C-u>Unite -auto-preview -buffer-name=recent file_mru<cr>
 nnoremap <silent> <leader>y :<C-u>Unite -buffer-name=yanks history/yank<cr>
-nnoremap <silent> <leader>/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
+nnoremap <silent> <leader>f :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
 nnoremap <silent> <leader>o :<C-u>Unite outline<CR>
 nnoremap <silent> <leader>t :<C-u>Unite tag<CR>
 nnoremap <silent> <C-p>    :<C-u>Unite -start-insert buffer file_rec/async<CR>

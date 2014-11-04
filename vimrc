@@ -450,7 +450,9 @@ call unite#custom#source('line,outline', 'matchers', 'matcher_fuzzy')
 call unite#custom#source( 'buffer', 'converters', ['converter_file_directory'])
 " sort file results by length
 call unite#custom#source('file', 'sorters', 'sorter_length')
-call unite#custom#source('file_rec/async', 'sorters', 'sorter_length')
+call unite#custom#source('file_rec/async', 'converters', [])
+call unite#custom#source('file_rec/async', 'sorters', [])
+call unite#custom#source('file_rec/async', 'max_candidates', 20)
 let g:unite_enable_start_insert=0
 let g:unite_source_history_yank_enable=1
 let g:unite_source_rec_max_cache_files=3000

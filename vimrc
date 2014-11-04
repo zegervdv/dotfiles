@@ -57,6 +57,8 @@ set wildmode=full
 set ttyfast
 set lazyredraw
 
+set ttimeoutlen=10
+" Set the timeout to a minimum
 set diffopt+=iwhite
 
 set tags=.git/tags
@@ -117,7 +119,8 @@ autocmd BufReadPost *
       \ endif
 
 " Set leader to space
-let mapleader = "\<SPACE>"
+" let mapleader = " "
+map <space> <leader>
 
 " See long lines as line breaks
 map j gj
@@ -483,8 +486,8 @@ nnoremap <silent> <leader>/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
 nnoremap <silent> <leader>o :<C-u>Unite outline<CR>
 nnoremap <silent> <leader>t :<C-u>Unite tag<CR>
 nnoremap <silent> <C-p>    :<C-u>Unite -start-insert buffer file_rec/async<CR>
-nnoremap <silent> <leader>h :<C-u>Unite ssh://Hurricane/STM-Quadcopter/source<CR>
-nnoremap <silent> <leader>i :<C-u>Unite ssh://imac-van-zeger.local/Documents<CR>
+" nnoremap <silent> <leader>h :<C-u>Unite ssh://Hurricane/STM-Quadcopter/source<CR>
+" nnoremap <silent> <leader>i :<C-u>Unite ssh://imac-van-zeger.local/Documents<CR>
 " }}}
 " Unite Build {{{
 " TODO: Create builders eg Latex, Vagrant?
@@ -616,6 +619,7 @@ let g:jedi#completions_enabled = 0
 " }}}
 " Vimux {{{
 let g:VimuxUseNearest = 1
+nnoremap <buffer> <silent><leader>s :w<CR>
 autocmd FileType python nnoremap <buffer> <silent><leader>s :w<CR>:call VimuxRunCommand('%run -i ' . expand('%'))<CR>
 autocmd FileType ruby nnoremap <buffer> <silent><leader>s :w<CR>:call VimuxRunCommand('rake spec')<CR>
 autocmd FileType  c nnoremap <buffer> <silent><leader>s :w<CR>:call VimuxRunCommand('make')<CR>

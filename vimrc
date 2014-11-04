@@ -122,6 +122,9 @@ autocmd BufReadPost *
 " let mapleader = " "
 map <space> <leader>
 
+" Fix weird error where space n hangs vim with search
+noremap <space>n <nop>
+
 " See long lines as line breaks
 map j gj
 map k gk
@@ -150,7 +153,7 @@ nnoremap + <C-a>
 inoremap <C-f> <ESC>%%a
 
 " Switch between the last two files
-nnoremap <SPACE><SPACE> <C-^>
+nnoremap <leader><leader> <C-^>
 " Move between buffers
 nnoremap gb :bnext<CR>
 nnoremap gB :bprevious<CR>
@@ -163,11 +166,6 @@ cmap s/ s/\v
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" Show local search results in quickfix
-nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-nnoremap <silent> <leader>? :Ag <cword><CR>
-" nnoremap <silent> <leader>? :execute "Ag! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "","") . "'"<CR>
-
 " Clear highlight
 nnoremap <silent> <C-l> :nohl<CR>
 
@@ -175,10 +173,6 @@ inoremap £ \
 
 nnoremap <TAB> %
 vnoremap <TAB> %
-
-" Move between tabs
-map <leader> w <ESC>:tabprevious<CR>
-map <leader> n <ESC>:tabnext<CR>
 
 " Move between splits
 map <C-j> <C-w>j
@@ -497,12 +491,6 @@ nnoremap <silent> <C-p>    :<C-u>Unite -start-insert buffer file_rec/async<CR>
 let g:vimfiler_as_default_explorer = 1
 nnoremap <leader>e :VimFilerExplorer<CR>
 let g:vimfiler_ignore_pattern = '\%(.o\|.bin\|.elf\|.un\~\|.swp\)$'
-" }}}
-" Vim - Rspec {{{
-map <leader>t :call RunCurrentSpecFile()<CR>
-" map <leader>s :call RunNearestSpec()<CR>
-" map <leader>l :call RunLastSpec()<CR>
-" map <leader>r :call RunAllSpecs()<CR>
 " }}}
 " Cucumber {{{
 " map <leader>f :call RunAllFeatures()<CR>

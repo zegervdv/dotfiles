@@ -1,5 +1,5 @@
 " vim:fdm=marker
-
+runtime bundle/pathogen/autoload/pathogen.vim
 " General Settings {{{
 set nocompatible
 set laststatus=2

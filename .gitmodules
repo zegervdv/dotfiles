@@ -154,3 +154,6 @@
 [submodule "vim/bundle/coffeescript"]
 	path = vim/bundle/coffeescript
 	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule "vim/bundle/pathogen"]
+	path = vim/bundle/pathogen
+	url = https://github.com/tpope/vim-pathogen.git

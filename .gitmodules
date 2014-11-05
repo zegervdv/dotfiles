@@ -157,3 +157,6 @@
 [submodule "vim/bundle/pathogen"]
 	path = vim/bundle/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
+[submodule "vim/bundle/after-object"]
+	path = vim/bundle/after-object
+	url = https://github.com/junegunn/vim-after-object.git

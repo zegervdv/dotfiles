@@ -5,7 +5,7 @@ set nocompatible
 set laststatus=2
 set noshowmode
 
-let g:pathogen_disabled = ['ack','latex']
+let g:pathogen_disabled = []
 execute pathogen#infect()
 
 set backspace=2

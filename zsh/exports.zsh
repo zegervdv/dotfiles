@@ -29,3 +29,13 @@ export PAGER='less'
 export EDITOR='vim'
 # CTAGS Sorting in VIM/Emacs is better behaved with this in place
 export LC_COLLATE=C
+
+# Color Man Pages
+export LESS_TERMCAP_mb=$(printf "\e[1;31m")
+export LESS_TERMCAP_md=$(printf "\e[1;31m")
+export LESS_TERMCAP_me=$(printf "\e[0m")
+export LESS_TERMCAP_se=$(printf "\e[0m")
+export LESS_TERMCAP_so=$(printf "\e[1;44;33m")
+export LESS_TERMCAP_ue=$(printf "\e[0m")
+export LESS_TERMCAP_us=$(printf "\e[1;32m")
+

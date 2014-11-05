@@ -27,5 +27,4 @@ zle-line-init() {
 }
 zle -N zle-line-init
 
-
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

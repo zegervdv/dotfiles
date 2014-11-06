@@ -1,1 +1,1 @@
-EXCLUDES="vim Brewfile README.md Rakefile Gemfile vimwiki"
+EXCLUDES="Brewfile README.md Rakefile Gemfile vimwiki"

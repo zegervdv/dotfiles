@@ -1,12 +1,79 @@
 " vim:fdm=marker
-runtime bundle/pathogen/autoload/pathogen.vim
+" Vim-Plug {{{
+let g:plug_window='topleft new'
+call plug#begin('~/.vim/plugged')
+" General Plugins
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-abolish'
+Plug 'bling/vim-airline'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-fugitive'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
+Plug 'kshenoy/vim-signature'
+Plug 'tpope/vim-repeat'
+Plug 't9md/vim-smalls'
+Plug 'mhinz/vim-startify'
+Plug 'xolox/vim-session'
+Plug 'tpope/vim-eunuch'
+Plug 'junegunn/vim-after-object'
+Plug 'scrooloose/syntastic'
+
+" Undo
+Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
+
+" Tmux
+Plug 'benmills/vimux', { 'on': 'VimuxRunCommand' }
+Plug 'edkolev/tmuxline.vim', { 'on': 'TmuxLineSnapshot'  }
+
+" Search and Complete
+Plug 'Shougo/neocomplete'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/vimproc', { 'do': 'make' }
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimfiler.vim'
+Plug 'Shougo/unite-outline'
+Plug 'tsukkee/unite-tag'
+
+" Ruby
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'tpope/vim-bundler', { 'for': 'ruby' }
+Plug 'tpope/vim-rake', { 'for': 'ruby' }
+Plug 'slim-template/vim-slim', { 'for': 'ruby' }
+Plug 'duwanis/tomdoc.vim', { 'for': 'ruby' }
+
+" Markdown
+Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+
+" C
+Plug 'vim-scripts/a.vim', { 'for': 'c' }
+Plug 'osyo-manga/vim-reunions', { 'for': 'c' }
+Plug 'osyo-manga/vim-marching', { 'for': 'c' }
+
+" Python
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+
+" Coffeescript
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffeescript' }
+
+" Dependencies
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+
+Plug 'xolox/vim-misc'
+Plug 'tpope/vim-git'
+
+
+call plug#end()
+" }}}
 " General Settings {{{
 set nocompatible
 set laststatus=2
 set noshowmode
-
-let g:pathogen_disabled = []
-execute pathogen#infect()
 
 set backspace=2
 set autowrite

@@ -27,6 +27,7 @@ Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 " Tmux
 Plug 'benmills/vimux', { 'on': 'VimuxRunCommand' }
 Plug 'edkolev/tmuxline.vim', { 'on': 'TmuxlinSnapshot' }
+Plug 'christoomey/vim-tmux-navigator'
 
 " Search and Complete
 Plug 'Shougo/neocomplete'
@@ -249,10 +250,10 @@ nnoremap <TAB> %
 vnoremap <TAB> %
 
 " Move between splits
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-map <C-h> <C-w>h
+" map <C-j> <C-w>j
+" map <C-k> <C-w>k
+" map <C-l> <C-w>l
+" map <C-h> <C-w>h
 
 " highlight last inserted text
 nnoremap gV `[v`]
@@ -567,7 +568,9 @@ let g:tmuxline_preset = {
 " After-objects {{{
 autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
 " }}}
-
+" Vim-tmux-navigator {{{
+" nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
+" }}}
 " Load local vimrc
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local

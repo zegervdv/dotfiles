@@ -26,7 +26,7 @@ Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
 " Tmux
 Plug 'benmills/vimux', { 'on': 'VimuxRunCommand' }
-Plug 'edkolev/tmuxline.vim', { 'on': 'TmuxLineSnapshot'  }
+Plug 'edkolev/tmuxline.vim', { 'on': 'TmuxlinSnapshot' }
 
 " Search and Complete
 Plug 'Shougo/neocomplete'
@@ -55,7 +55,7 @@ Plug 'osyo-manga/vim-reunions', { 'for': 'c' }
 Plug 'osyo-manga/vim-marching', { 'for': 'c' }
 
 " Python
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+" Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
 " Coffeescript
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffeescript' }
@@ -159,7 +159,11 @@ set clipboard=unnamed
 
 set undofile
 set viminfo='10,\"100,:20,%,n~/.viminfo
-
+set backupdir=/tmp//,.
+set directory=/tmp//,.
+if v:version >= 703
+  set undodir=/tmp//,.
+endif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex
 
 " Sentences are ended with double spaces
@@ -318,7 +322,7 @@ nnoremap ' `
 " if you do you'll probably want to use another mark.
 inoremap <C-u> <esc>mzgUiw`za
 
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :split $MYVIMRC<cr>
 
 " Move lines from visual selection
 vnoremap <S-j> :m '>+1<CR>gv=gv
@@ -545,12 +549,20 @@ let g:jedi#completions_enabled = 0
 " Vimux {{{
 let g:VimuxUseNearest = 1
 nnoremap <buffer> <silent><leader>s :w<CR>
-autocmd FileType python nnoremap <buffer> <silent><leader>s :w<CR>:call VimuxRunCommand('%run -i ' . expand('%'))<CR>
-autocmd FileType ruby nnoremap <buffer> <silent><leader>s :w<CR>:call VimuxRunCommand('rake spec')<CR>
-autocmd FileType  c nnoremap <buffer> <silent><leader>s :w<CR>:call VimuxRunCommand('make')<CR>
+autocmd FileType python nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand('%run -i ' . expand('%'))<CR>
+autocmd FileType ruby nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand('rake spec')<CR>
+autocmd FileType  c nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand('make')<CR>
 " }}}
 " Tmuxline {{{
 let g:tmuxline_powerline_separators=0
+let g:tmuxline_preset = {
+      \ 'a': '#S',
+      \ 'b': '#F',
+      \ 'c': '#W',
+      \ 'win': ['#I', '#W'],
+      \ 'cwin': ['#I', '#W'],
+      \ 'y': ['%a %b %d', '%R'],
+      \ 'z': '#h'}
 " }}}
 " After-objects {{{
 autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')

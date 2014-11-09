@@ -20,13 +20,13 @@ Plug 'xolox/vim-session'
 Plug 'tpope/vim-eunuch'
 Plug 'junegunn/vim-after-object'
 Plug 'scrooloose/syntastic'
-
+Plug 'chriskempson/base16-vim'
 " Undo
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
 " Tmux
 Plug 'benmills/vimux', { 'on': 'VimuxRunCommand' }
-Plug 'edkolev/tmuxline.vim', { 'on': 'TmuxlinSnapshot' }
+Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Search and Complete
@@ -98,14 +98,8 @@ set linebreak
 set breakindent
 set lbr
 set tabstop=2 shiftwidth=2
-if has("gui_running")
-  " set background=dark
-  " color base16-ocean
-  color Tomorrow-Night
-else
-  set background=dark
-  color Tomorrow-Night
-endif
+set background=dark
+color Tomorrow-Night
 set guifont=Inconsolata\ for\ Powerline:h12
 set autowrite
 set hidden

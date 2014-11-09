@@ -179,6 +179,7 @@ au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
 au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
 au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
 au BufNewFile,BufRead,BufEnter *.txt setlocal textwidth=0
+au FileType gitcommit setlocal spell spelllang=en_gb
 
 autocmd BufRead *_spec.rb set filetype=rspec
 
@@ -302,11 +303,6 @@ function! KeepVisualSelection(cmd)
     return a:cmd . ":set smartindent\<CR>"
   endif
 endfunction
-
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_guide_size = 1
-highlight IndentGuidesEven guibg=background
-highlight IndentGuidesOdd guibg='#282a2e'
 
 au FileType c setl foldmethod=syntax
 
@@ -518,6 +514,9 @@ vmap <Leader>a- :Tabularize /-<CR>
 " }}}
 " Tagbar {{{
 nmap <F8> :TagbarToggle<CR>
+" }}}
+" Syntastic {{{
+let g:syntastic_check_on_open=1
 " }}}
 " Gundo tree {{{
 nnoremap <leader>u :GundoToggle<CR>

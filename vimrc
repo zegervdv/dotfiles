@@ -98,9 +98,15 @@ set linebreak
 set breakindent
 set lbr
 set tabstop=2 shiftwidth=2
+
+" Layout
+set t_Co=256
 set background=dark
 color Tomorrow-Night
 set guifont=Inconsolata\ for\ Powerline:h12
+" Make background color same as terminal ("transparent")
+" hi Normal ctermbg=none
+
 set autowrite
 set hidden
 set hlsearch
@@ -352,6 +358,7 @@ nmap         ++  vip++
 " Airline configuration {{{
 let g:airline_inactive_collapse=0
 let g:airline_powerline_fonts=1
+let g:airline#extensions#tmuxline#enabled = 0
 
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
@@ -550,13 +557,24 @@ autocmd FileType  c nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand('
 " Tmuxline {{{
 let g:tmuxline_powerline_separators=0
 let g:tmuxline_preset = {
-      \ 'a': '#S',
-      \ 'b': '#F',
-      \ 'c': '#W',
+      \ 'a': '',
+      \ 'b': '',
+      \ 'c': '',
       \ 'win': ['#I', '#W'],
       \ 'cwin': ['#I', '#W'],
-      \ 'y': ['%a %b %d', '%R'],
-      \ 'z': '#h'}
+      \ 'y': '',
+      \ 'z': ''}
+let g:tmuxline_theme = {
+      \ 'a'  : [250, 109],
+      \ 'b': [250, 239],
+      \ 'c': [250, 235],
+      \ 'win': [241, 235],
+      \ 'cwin': [250, 235],
+      \ 'x' : [250, 235],
+      \ 'y': [250, 235],
+      \ 'z': [250, 235],
+      \ 'bg' : [250, 235],
+      \ }
 " }}}
 " After-objects {{{
 autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')

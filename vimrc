@@ -5,7 +5,7 @@ call plug#begin('~/.vim/plugged')
 " General Plugins
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-abolish'
-Plug 'bling/vim-airline'
+" Plug 'bling/vim-airline'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'godlygeek/tabular'
@@ -26,7 +26,7 @@ Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
 " Tmux
 Plug 'benmills/vimux', { 'on': 'VimuxRunCommand' }
-Plug 'edkolev/tmuxline.vim'
+" Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Search and Complete
@@ -173,6 +173,29 @@ set cpo+=J
 " set list
 " set listchars=tab:▸\ ,eol:¬
 " }}}
+" Status line {{{
+" set statusline=
+" set statusline+=»
+" set statusline+=\ %f  
+" set statusline+=%1*%m%0*
+" set statusline+=\ [%{strlen(&ft)?&ft:'unknown'}]
+" set statusline+=%=
+" set statusline+=%P\ 
+
+function! Status()
+  let statusline = ''
+  let statusline .= "»\ "
+  let statusline .= "%f"
+  let statusline .= "%1*%m%0*"
+  let statusline .= "\ [%{strlen(&ft)?&ft:'unknown'}]"
+  let statusline .= "%="
+  let statusline .= "%P\ "
+  return statusline
+endfunction
+
+set statusline=%!Status()
+
+" }}}
 " Custom remaps and tricks {{{
 " Enable spelling only for latex and text
 au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
@@ -356,25 +379,25 @@ vmap <expr>  ++  VMATH_YankAndAnalyse()
 nmap         ++  vip++
 " }}}
 " Airline configuration {{{
-let g:airline_inactive_collapse=0
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tmuxline#enabled = 0
-
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-
-if has("gui_running")
-  let g:airline_theme = 'base16'
-else
-  let g:airline_theme = 'tomorrow'
-endif
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#right_sep = ''
-let g:airline#extensions#tabline#right_alt_sep = ''
+" let g:airline_inactive_collapse=0
+" let g:airline_powerline_fonts=1
+" let g:airline#extensions#tmuxline#enabled = 0
+"
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
+"
+" if has("gui_running")
+"   let g:airline_theme = 'base16'
+" else
+"   let g:airline_theme = 'tomorrow'
+" endif
+" let g:airline#extensions#syntastic#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#tabline#left_sep = ''
+" let g:airline#extensions#tabline#left_alt_sep = ''
+" let g:airline#extensions#tabline#right_sep = ''
+" let g:airline#extensions#tabline#right_alt_sep = ''
 " }}}
 " Unite {{{
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -555,26 +578,26 @@ autocmd FileType ruby nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand
 autocmd FileType  c nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand('make')<CR>
 " }}}
 " Tmuxline {{{
-let g:tmuxline_powerline_separators=0
-let g:tmuxline_preset = {
-      \ 'a': '',
-      \ 'b': '',
-      \ 'c': '',
-      \ 'win': ['#I', '#W'],
-      \ 'cwin': ['#I', '#W'],
-      \ 'y': '',
-      \ 'z': ''}
-let g:tmuxline_theme = {
-      \ 'a'  : [250, 109],
-      \ 'b': [250, 239],
-      \ 'c': [250, 235],
-      \ 'win': [241, 235],
-      \ 'cwin': [250, 235],
-      \ 'x' : [250, 235],
-      \ 'y': [250, 235],
-      \ 'z': [250, 235],
-      \ 'bg' : [250, 235],
-      \ }
+" let g:tmuxline_powerline_separators=0
+" let g:tmuxline_preset = {
+"       \ 'a': '',
+"       \ 'b': '',
+"       \ 'c': '',
+"       \ 'win': ['#I', '#W'],
+"       \ 'cwin': ['#I', '#W'],
+"       \ 'y': '',
+"       \ 'z': ''}
+" let g:tmuxline_theme = {
+"       \ 'a'  : [250, 109],
+"       \ 'b': [250, 239],
+"       \ 'c': [250, 235],
+"       \ 'win': [241, 235],
+"       \ 'cwin': [250, 235],
+"       \ 'x' : [250, 235],
+"       \ 'y': [250, 235],
+"       \ 'z': [250, 235],
+"       \ 'bg' : [250, 235],
+"       \ }
 " }}}
 " After-objects {{{
 autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')

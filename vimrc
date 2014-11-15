@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 " General Plugins
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-abolish'
-" Plug 'bling/vim-airline'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'godlygeek/tabular'
@@ -15,18 +14,14 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-repeat'
 Plug 't9md/vim-smalls'
-Plug 'mhinz/vim-startify'
 Plug 'xolox/vim-session'
 Plug 'tpope/vim-eunuch'
-Plug 'junegunn/vim-after-object'
 Plug 'scrooloose/syntastic'
-Plug 'chriskempson/base16-vim'
 " Undo
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
 " Tmux
 Plug 'benmills/vimux', { 'on': 'VimuxRunCommand' }
-" Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Search and Complete
@@ -55,9 +50,6 @@ Plug 'vim-scripts/a.vim', { 'for': 'c' }
 Plug 'osyo-manga/vim-reunions', { 'for': 'c' }
 Plug 'osyo-manga/vim-marching', { 'for': 'c' }
 
-" Python
-" Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-
 " Coffeescript
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffeescript' }
 
@@ -74,7 +66,6 @@ call plug#end()
 " General Settings {{{
 set nocompatible
 set laststatus=2
-set noshowmode
 
 set backspace=2
 set autowrite
@@ -174,14 +165,6 @@ set cpo+=J
 " set listchars=tab:▸\ ,eol:¬
 " }}}
 " Status line {{{
-" set statusline=
-" set statusline+=»
-" set statusline+=\ %f  
-" set statusline+=%1*%m%0*
-" set statusline+=\ [%{strlen(&ft)?&ft:'unknown'}]
-" set statusline+=%=
-" set statusline+=%P\ 
-
 function! Status()
   let statusline = ''
   let statusline .= "»\ "
@@ -194,7 +177,6 @@ function! Status()
 endfunction
 
 set statusline=%!Status()
-
 " }}}
 " Custom remaps and tricks {{{
 " Enable spelling only for latex and text
@@ -378,27 +360,6 @@ nnoremap <silent> <leader>v :silent !open %:r.pdf<CR><CR>
 vmap <expr>  ++  VMATH_YankAndAnalyse()
 nmap         ++  vip++
 " }}}
-" Airline configuration {{{
-" let g:airline_inactive_collapse=0
-" let g:airline_powerline_fonts=1
-" let g:airline#extensions#tmuxline#enabled = 0
-"
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
-"
-" if has("gui_running")
-"   let g:airline_theme = 'base16'
-" else
-"   let g:airline_theme = 'tomorrow'
-" endif
-" let g:airline#extensions#syntastic#enabled = 1
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#fnamemod = ':t'
-" let g:airline#extensions#tabline#left_sep = ''
-" let g:airline#extensions#tabline#left_alt_sep = ''
-" let g:airline#extensions#tabline#right_sep = ''
-" let g:airline#extensions#tabline#right_alt_sep = ''
-" }}}
 " Unite {{{
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
@@ -566,41 +527,12 @@ let g:vimwiki_list=[{'path':'$HOME/.vimwiki'}]
 " Vim Sessions {{{
 let g:session_autosave = 'no'
 " }}}
-" Jedi {{{
-let g:jedi#auto_vim_configuration=0
-let g:jedi#completions_enabled = 0
-" }}}
 " Vimux {{{
 let g:VimuxUseNearest = 1
 nnoremap <buffer> <silent><leader>s :w<CR>
 autocmd FileType python nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand('%run -i ' . expand('%'))<CR>
 autocmd FileType ruby nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand('rake spec')<CR>
 autocmd FileType  c nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand('make')<CR>
-" }}}
-" Tmuxline {{{
-" let g:tmuxline_powerline_separators=0
-" let g:tmuxline_preset = {
-"       \ 'a': '',
-"       \ 'b': '',
-"       \ 'c': '',
-"       \ 'win': ['#I', '#W'],
-"       \ 'cwin': ['#I', '#W'],
-"       \ 'y': '',
-"       \ 'z': ''}
-" let g:tmuxline_theme = {
-"       \ 'a'  : [250, 109],
-"       \ 'b': [250, 239],
-"       \ 'c': [250, 235],
-"       \ 'win': [241, 235],
-"       \ 'cwin': [250, 235],
-"       \ 'x' : [250, 235],
-"       \ 'y': [250, 235],
-"       \ 'z': [250, 235],
-"       \ 'bg' : [250, 235],
-"       \ }
-" }}}
-" After-objects {{{
-autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
 " }}}
 " Vim-tmux-navigator {{{
 " nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>

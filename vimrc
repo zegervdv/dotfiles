@@ -53,12 +53,13 @@ Plug 'osyo-manga/vim-marching', { 'for': 'c' }
 " Coffeescript
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffeescript' }
 
+" Git
+Plug 'tpope/vim-git'
+
 " Dependencies
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-
 Plug 'xolox/vim-misc'
-Plug 'tpope/vim-git'
 
 
 call plug#end()
@@ -155,7 +156,7 @@ set directory=/tmp//,.
 if v:version >= 703
   set undodir=/tmp//,.
 endif
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**
 
 " Sentences are ended with double spaces
 set cpo+=J
@@ -370,7 +371,8 @@ call unite#custom#source( 'buffer', 'converters', ['converter_file_directory'])
 call unite#custom#source('file', 'sorters', 'sorter_length')
 call unite#custom#source('file_rec/async', 'converters', [])
 call unite#custom#source('file_rec/async', 'sorters', [])
-call unite#custom#source('file_rec/async', 'max_candidates', 20)
+call unite#custom#source('file_rec/async', 'ignore_globs', split(&wildignore, ','))
+call unite#custom#source('file_rec/async', 'max_candidates', 50)
 let g:unite_enable_start_insert=0
 let g:unite_source_history_yank_enable=1
 let g:unite_source_rec_max_cache_files=3000

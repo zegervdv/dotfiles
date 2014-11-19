@@ -12,7 +12,7 @@ source ~/.zsh/zsh_hooks.zsh
 source ~/.fzf.zsh
 source ~/.zsh/zsh-history-substring-search.zsh
 source ~/.zsh/z.sh
-source ~/.zsh/plugins/zsh-autosuggestions/autosuggestions.zsh
+# source ~/.zsh/plugins/zsh-autosuggestions/autosuggestions.zsh
 
 precmd() {
   if [[ -n "$TMUX" ]]; then
@@ -20,11 +20,5 @@ precmd() {
     tmux setenv "$(tmux display -p 'TMUX_PWD_#D')" "$PWD"
   fi
 }
-
-# Enable autosuggestions automatically
-zle-line-init() {
-    zle autosuggest-start
-}
-zle -N zle-line-init
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

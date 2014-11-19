@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 " General Plugins
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-abolish'
-Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-endwise'
@@ -17,6 +16,7 @@ Plug 't9md/vim-smalls'
 Plug 'xolox/vim-session'
 Plug 'tpope/vim-eunuch'
 Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-commentary'
 " Undo
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
@@ -65,7 +65,6 @@ call plug#end()
 " }}}
 " General Settings {{{
 set nocompatible
-set laststatus=2
 
 set backspace=2
 set autowrite
@@ -167,7 +166,7 @@ set cpo+=J
 " Status line {{{
 function! Status()
   let statusline = ''
-  let statusline .= "»\ "
+  let statusline .= "%n\ "
   let statusline .= "%f"
   let statusline .= "%1*%m%0*"
   let statusline .= "\ [%{strlen(&ft)?&ft:'unknown'}]"
@@ -175,7 +174,7 @@ function! Status()
   let statusline .= "%P\ "
   return statusline
 endfunction
-
+set laststatus=2
 set statusline=%!Status()
 " }}}
 " Custom remaps and tricks {{{
@@ -421,9 +420,6 @@ let g:vimfiler_ignore_pattern = '\%(.o\|.bin\|.elf\|.un\~\|.swp\)$'
 " }}}
 " Markdown {{{
 let g:vim_markdown_folding_disabled=1
-" }}}
-" tComment {{{
-nmap <leader>c <C-_><C-_>
 " }}}
 " Neo Complete {{{
 let g:neocomplete#enable_at_startup = 1

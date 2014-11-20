@@ -43,6 +43,7 @@ var mainLeft = S.operation("move", {
 var HPsetupLayout = S.layout("HPsetupLayout", {
   "Terminal" : {
     "operations" : [bottomRight, topRight],
+    "title-order-regex" : [".+⌘1$"],
     "repeat" : true
   },
   "Safari" : {

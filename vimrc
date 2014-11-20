@@ -188,6 +188,9 @@ au FileType gitcommit setlocal spell spelllang=en_gb
 
 autocmd BufRead *_spec.rb set filetype=rspec
 
+" Fix comments for matlab
+autocmd FileType matlab setlocal commentstring=\%\ %s
+
 highlight SpellBad ctermbg=256 ctermfg=210
 highlight SpellLocal ctermbg=240 ctermfg=010
 
@@ -356,10 +359,6 @@ nnoremap <leader>m :w<CR>:VimProcBang rubber --pdf --warn all %<CR>
 " Open pdf
 nnoremap <silent> <leader>v :silent !open %:r.pdf<CR><CR>
 " }}}
-" Vim Math plugin; make simple calculations {{{
-vmap <expr>  ++  VMATH_YankAndAnalyse()
-nmap         ++  vip++
-" }}}
 " Unite {{{
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
@@ -397,7 +396,7 @@ function! s:unite_settings()
 endfunction
 autocmd FileType unite call s:unite_settings()
 
-nnoremap <silent> <SPACE>k :<C-u>Unite -auto-preview -buffer-name=recent file_mru<cr>
+nnoremap <silent> <leader>k :<C-u>Unite -auto-preview -buffer-name=recent file_mru<cr>
 nnoremap <silent> <leader>y :<C-u>Unite -buffer-name=yanks history/yank<cr>
 nnoremap <silent> <leader>f :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
 nnoremap <silent> <leader>g :<C-u>Unite -no-quit -buffer-name=search grep:.<CR><C-r><C-w><CR>

@@ -39,8 +39,32 @@ var mainLeft = S.operation("move", {
   "height" : "1020",
 });
 
+var halfRight = S.operation("move", {
+  "screen" : monMain,
+  "x" : "screenSizeX/2",
+  "y" : "0",
+  "width" : "screenSizeX/2",
+  "height" : "screenSizeY"
+});
+
+var hideChat = S.operation("hide", { "app" : "Terminal" });
+var showChat = S.operation("show", {
+  "app" : ["Terminal"]
+});
+var focusTerm = S.operation("focus", { "app" : "Terminal" });
+
+var twoThirdsLeft = S.operation("move", {
+  "screen" : monMain,
+  "x" : "0",
+  "y" : "0",
+  "width" : "screenSizeX * 2 / 3",
+  "height" : "screenSizeY"
+});
+
 // Layout
-var HPsetupLayout = S.layout("HPsetupLayout", {
+var HPSetupLayout = S.layout("HPSetupLayout", {
+  "_before_" : { "operations" : showChat, "repeat-last" : true },
+  "_after_" : { "operations" : focusTerm },
   "Terminal" : {
     "operations" : [bottomRight, topRight],
     "title-order-regex" : [".+⌘1$"],
@@ -51,5 +75,18 @@ var HPsetupLayout = S.layout("HPsetupLayout", {
   }
 });
 
-S.bind("space:ctrl", S.operation("layout", { "name" : HPsetupLayout }));
-S.default([monHP,monMain], HPsetupLayout);
+var SingleSetupLayout = S.layout("SingleSetupLayout", {
+  "Terminal" : {
+    "operations" : [halfRight, hideChat],
+    "title-order-regex" : [".+⌘1$"],
+    "repeat" : true
+  },
+  "Safari" : {
+    "operations" : [twoThirdsLeft]
+  }
+});
+
+S.bind("space:ctrl", S.operation("layout", { "name" : HPSetupLayout }));
+// S.bind("space:ctrl", S.operation("layout", { "name" : SingleSetupLayout }));
+S.default([monHP,monMain], HPSetupLayout);
+S.default([monMain], SingleSetupLayout);

@@ -233,8 +233,8 @@ nnoremap <C-s> <C-e>
 
 nnoremap + <C-a>
 
-" Jump out of inner bracket
-inoremap <C-f> <ESC>%%a
+" Move while in insert mode
+inoremap <C-f> <right>
 
 " Switch between the last two files
 nnoremap <leader><leader> <C-^>

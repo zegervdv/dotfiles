@@ -17,6 +17,7 @@ Plug 'xolox/vim-session'
 Plug 'tpope/vim-eunuch'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
+Plug 'wellle/targets.vim'
 " Undo
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 

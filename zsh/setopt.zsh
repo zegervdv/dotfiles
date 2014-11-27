@@ -49,7 +49,6 @@ setopt transient_rprompt
 
 setopt multios
 
-
 unsetopt MENU_COMPLETE
 setopt AUTO_MENU
 
@@ -58,3 +57,9 @@ setopt notify
 REPORTTIME=5
 
 setopt correct_all
+
+# Directory history
+setopt autopushd
+setopt pushdminus
+setopt pushdsilent
+setopt pushdtohome

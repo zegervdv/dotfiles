@@ -505,9 +505,9 @@ let g:syntastic_check_on_open=1
 nnoremap <leader>u :GundoToggle<CR>
 " }}}
 " Smalls {{{
-nmap s <Plug>(smalls)
-omap s <Plug>(smalls)
-xmap s <Plug>(smalls)
+nmap <C-s> <Plug>(smalls)
+omap <C-s> <Plug>(smalls)
+xmap <C-s> <Plug>(smalls)
 " }}}
 " Textmanip {{{
 xmap <C-j> <Plug>(textmanip-move-down)

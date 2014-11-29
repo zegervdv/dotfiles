@@ -61,6 +61,14 @@ var twoThirdsLeft = S.operation("move", {
   "height" : "screenSizeY"
 });
 
+var upAndCenter = S.operation("move", {
+  "screen" : monMain,
+  "x" : "screenOriginX + 75",
+  "y" : "screenOriginY + 40",
+  "width" : "1030",
+  "height" : "680"
+});
+
 // Layout
 var HPSetupLayout = S.layout("HPSetupLayout", {
   "_before_" : { "operations" : showChat, "repeat-last" : true },
@@ -77,16 +85,16 @@ var HPSetupLayout = S.layout("HPSetupLayout", {
 
 var SingleSetupLayout = S.layout("SingleSetupLayout", {
   "Terminal" : {
-    "operations" : [halfRight, hideChat],
+    "operations" : [upAndCenter],
     "title-order-regex" : [".+⌘1$"],
     "repeat" : true
   },
   "Safari" : {
-    "operations" : [twoThirdsLeft]
+    "operations" : [upAndCenter]
   }
 });
 
-S.bind("space:ctrl", S.operation("layout", { "name" : HPSetupLayout }));
-// S.bind("space:ctrl", S.operation("layout", { "name" : SingleSetupLayout }));
+// S.bind("space:ctrl", S.operation("layout", { "name" : HPSetupLayout }));
+S.bind("space:ctrl", S.operation("layout", { "name" : SingleSetupLayout }));
 S.default([monHP,monMain], HPSetupLayout);
 S.default([monMain], SingleSetupLayout);

@@ -18,6 +18,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
+Plug 'tpope/vim-dispatch'
 " Undo
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
@@ -133,6 +134,10 @@ set formatoptions+=2 " Use indent from 2nd line of a paragraph
 set formatoptions+=l " Don't break lines that are already long
 set formatoptions+=1 " Break before 1-letter words
 
+" Enable cursorline
+set cursorline
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
 
 set sessionoptions-=options
 
@@ -359,6 +364,7 @@ let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:en
 nnoremap <leader>m :w<CR>:VimProcBang rubber --pdf --warn all %<CR>
 " Open pdf
 nnoremap <silent> <leader>v :silent !open %:r.pdf<CR><CR>
+autocmd FileType tex set makeprg=rubber\ --pdf\ %
 " }}}
 " Unite {{{
 call unite#filters#matcher_default#use(['matcher_fuzzy'])

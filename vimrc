@@ -6,7 +6,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
-Plug 'godlygeek/tabular'
+Plug 'godlygeek/tabular', { 'on' : 'Tabularize' }
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
@@ -14,17 +14,19 @@ Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-repeat'
 Plug 't9md/vim-smalls'
 Plug 'xolox/vim-session'
-Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
-Plug 'tpope/vim-dispatch'
+Plug 'mtth/scratch.vim'
+
 " Undo
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
 " Tmux
 Plug 'benmills/vimux', { 'on': 'VimuxRunCommand' }
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-dispatch'
 
 " Search and Complete
 Plug 'Shougo/neocomplete'
@@ -541,6 +543,7 @@ autocmd FileType  c nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand('
 " Vim-tmux-navigator {{{
 " nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
 " }}}
+
 " Load local vimrc
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local

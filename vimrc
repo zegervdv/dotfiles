@@ -24,7 +24,6 @@ Plug 'mtth/scratch.vim'
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
 " Tmux
-Plug 'benmills/vimux', { 'on': 'VimuxRunCommand' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-dispatch'
 
@@ -201,6 +200,7 @@ autocmd FileType matlab setlocal commentstring=\%\ %s
 
 highlight SpellBad ctermbg=256 ctermfg=210
 highlight SpellLocal ctermbg=240 ctermfg=010
+highlight SpellCap ctermbg=256 ctermfg=211
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it for commit messages, when the position is invalid, or when
@@ -362,11 +362,10 @@ set foldtext=MyFoldText()
 let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:entities;a:architecture specifications;t:type declarations;p:processes;f:functions;r:procedures'
 " }}}
 " Latex {{{
-" Compile using rubber
-nnoremap <leader>m :w<CR>:VimProcBang rubber --pdf --warn all %<CR>
 " Open pdf
-nnoremap <silent> <leader>v :silent !open %:r.pdf<CR><CR>
-autocmd FileType tex set makeprg=rubber\ --pdf\ %
+nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
+" Set compiler to rubber
+autocmd FileType tex setlocal makeprg=rubber\ --pdf\ %
 " }}}
 " Unite {{{
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -533,15 +532,8 @@ let g:vimwiki_list=[{'path':'$HOME/.vimwiki'}]
 " Vim Sessions {{{
 let g:session_autosave = 'no'
 " }}}
-" Vimux {{{
-let g:VimuxUseNearest = 1
-nnoremap <buffer> <silent><leader>s :w<CR>
-autocmd FileType python nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand('%run -i ' . expand('%'))<CR>
-autocmd FileType ruby nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand('rake spec')<CR>
-autocmd FileType  c nnoremap <buffer> <silent><leader>s :w<CR>:VimuxRunCommand('make')<CR>
-" }}}
-" Vim-tmux-navigator {{{
-" nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
+" Dispatch {{{
+nnoremap <leader>s :Make<CR>
 " }}}
 
 " Load local vimrc

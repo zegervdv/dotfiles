@@ -27,8 +27,6 @@ export ARCHFLAGS='-arch x86_64'
 export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
 export EDITOR='vim'
-# CTAGS Sorting in VIM/Emacs is better behaved with this in place
-export LC_COLLATE=C
 
 # Color Man Pages
 export LESS_TERMCAP_mb=$(printf "\e[1;31m")
@@ -40,4 +38,6 @@ export LESS_TERMCAP_ue=$(printf "\e[0m")
 export LESS_TERMCAP_us=$(printf "\e[1;32m")
 
 export LANGUAGE=$LANG
+export LC_CTYPE=$LANG
+export LC_ALL=$LANG
 

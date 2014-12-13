@@ -534,6 +534,7 @@ let g:session_autosave = 'no'
 " }}}
 " Dispatch {{{
 nnoremap <leader>s :Make<CR>
+autocmd FileType python setlocal makeprg=ipython\ --pdb\ %
 " }}}
 
 " Load local vimrc

@@ -19,6 +19,7 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 Plug 'mtth/scratch.vim'
+Plug 'mrmargolis/dogmatic.vim'
 
 " Undo
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -167,6 +168,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**
 
 " Sentences are ended with double spaces
 set cpo+=J
+
 
 " set list
 " set listchars=tab:▸\ ,eol:¬
@@ -535,6 +537,7 @@ let g:session_autosave = 'no'
 " Dispatch {{{
 nnoremap <leader>s :Make<CR>
 autocmd FileType python setlocal makeprg=ipython\ --pdb\ %
+autocmd FileType ruby setlocal makeprg=ruby\ %
 " }}}
 
 " Load local vimrc

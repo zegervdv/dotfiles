@@ -367,7 +367,7 @@ let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:en
 " Open pdf
 nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
 " Set compiler to rubber
-autocmd FileType tex setlocal makeprg=rubber\ --pdf\ %
+autocmd FileType tex setlocal makeprg=latexmk\ -pdf\ %:r
 " }}}
 " Unite {{{
 call unite#filters#matcher_default#use(['matcher_fuzzy'])

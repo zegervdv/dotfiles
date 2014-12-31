@@ -196,6 +196,7 @@ au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
 au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
 au BufNewFile,BufRead,BufEnter *.txt setlocal textwidth=0
 au FileType gitcommit setlocal spell spelllang=en_gb
+set thesaurus+=~/.vim/thesaurus/mthesaur.txt
 
 autocmd BufRead *_spec.rb set filetype=rspec
 

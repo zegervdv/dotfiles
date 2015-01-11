@@ -1,15 +1,11 @@
 #!/bin/sh
 
-if [ ! -e $HOME/.vim ]; then
-  ln -s $HOME/.dotfiles/vim $HOME/.vim
-fi
-
-if [ ! -e $HOME/.vimwiki ]; then
-  ln -s $HOME/.dotfiles/vimwiki $HOME/.vimwiki
+if [ ! -e $HOME/.vim/notes ]; then
+  ln -s $HOME/.dotfiles/vim/notes $HOME/.vim/notes
 fi
 
 # Update plugins
-cd $HOME/.dotfiles
-git submodule init
-git submodule update
+# cd $HOME/.dotfiles
+# git submodule init
+# git submodule update
 

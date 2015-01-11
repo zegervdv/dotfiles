@@ -20,6 +20,8 @@ Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 Plug 'mtth/scratch.vim'
 Plug 'mrmargolis/dogmatic.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
 
 " Undo
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -529,7 +531,7 @@ xmap <F10> <Plug>(textmanip-toggle-mode)
 let g:startify_session_dir = "~/.vim/sessions"
 " }}}
 " Vimwiki {{{
-let g:vimwiki_list=[{'path':'$HOME/.vimwiki'}]
+let g:notes_directories = ['~/.vim/notes']
 " }}}
 " Vim Sessions {{{
 let g:session_autosave = 'no'

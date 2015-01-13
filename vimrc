@@ -437,7 +437,8 @@ let g:vim_markdown_folding_disabled=1
 " }}}
 " Neo Complete {{{
 let g:neocomplete#enable_at_startup = 1
-let g:neocomplet#enable_smart_case = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#force_overwrite_completefunc = 1
 let g:marching_enable_neocomplete = 1
 let g:neocomplete#enable_fuzzy_completion = 1
 

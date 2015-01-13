@@ -296,8 +296,20 @@ function! HLNext (blinktime)
   redraw
 endfunction
 
-" Highlight matching parenthesis in different color so I don't mess up
-hi MatchParen cterm=underline ctermbg=none ctermfg=white gui=underline guibg=black guifg=white
+" This is adapted from
+" http://vim.wikia.com/wiki/Windo_and_restore_current_window
+function! KeepWin(command)
+  let currwin=winnr()
+  execute a:command
+  execute currwin . 'wincmd w'
+endfunction
+
+augroup insertMatch
+    au!
+    au VimEnter * NoMatchParen
+    au InsertEnter * call KeepWin("DoMatchParen")
+    au InsertLeave * call KeepWin("NoMatchParen")
+augroup END
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'

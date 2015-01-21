@@ -38,6 +38,8 @@ Plug 'tpope/vim-dispatch'
 
 " Completing and snippets
 Plug 'ajh17/VimCompletesMe'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Vim file navigation
 Plug 'tpope/vim-vinegar'

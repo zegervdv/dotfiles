@@ -4,41 +4,52 @@ let g:plug_window='topleft new'
 call plug#begin('~/.vim/plugged')
 " General Plugins
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
-Plug 'godlygeek/tabular', { 'on' : 'Tabularize' }
-Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-repeat'
+
+" Spelling
+Plug 'tpope/vim-abolish'
+
+" Brackets
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
-Plug 'kshenoy/vim-signature'
-Plug 'tpope/vim-repeat'
-Plug 't9md/vim-smalls'
-Plug 'xolox/vim-session'
-Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-commentary'
-Plug 'wellle/targets.vim'
-Plug 'mtth/scratch.vim'
-Plug 'mrmargolis/dogmatic.vim'
-Plug 'whatyouhide/vim-gotham'
 
-" Undo
+" Formatting
+Plug 'godlygeek/tabular', { 'on' : 'Tabularize' }
+
+" Comments
+Plug 'tpope/vim-commentary'
+
+" Moving in files
+Plug 'wellle/targets.vim'
+
+" Command line
+Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
+
+" Syntax and checking
+Plug 'scrooloose/syntastic'
+
+" Undoing
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-dispatch'
 
-" Search and Complete
-" Plug 'Shougo/neocomplete'
+" Completing and snippets
 Plug 'ajh17/VimCompletesMe'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/vimproc', { 'do': 'make' }
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimfiler.vim'
-Plug 'Shougo/unite-outline'
-Plug 'tsukkee/unite-tag'
+
+" Vim file navigation
+Plug 'tpope/vim-vinegar'
+
+" Open and find files
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Don't use arrows!
+Plug 'mrmargolis/dogmatic.vim'
+
+" Theme
+Plug 'whatyouhide/vim-gotham'
 
 " Ruby
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
@@ -61,18 +72,12 @@ Plug 'kchmck/vim-coffee-script', { 'for': 'coffeescript' }
 
 " Git
 Plug 'tpope/vim-git'
-
-" Dependencies
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'xolox/vim-misc'
-
-
 call plug#end()
 " }}}
-" General Settings {{{
-set nocompatible
 
+" General Settings and options {{{
+set nocompatible
+" Backspace over everything, like normal 
 set backspace=2
 set autowrite
 
@@ -96,15 +101,12 @@ set breakindent
 set lbr
 set tabstop=2 shiftwidth=2
 
-" Layout
+" Theme and style
 set t_Co=256
 set background=dark
 color gotham
 set guifont=Inconsolata\ for\ Powerline:h12
-" Make background color same as terminal ("transparent")
-" hi Normal ctermbg=none
 
-set autowrite
 set hidden
 set hlsearch
 set incsearch
@@ -170,11 +172,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**
 
 " Sentences are ended with double spaces
 set cpo+=J
-
-
-" set list
-" set listchars=tab:▸\ ,eol:¬
-" }}}
+" }}}
 " Status line {{{
 function! Status()
   let statusline = ''
@@ -189,51 +187,17 @@ endfunction
 set laststatus=2
 set statusline=%!Status()
 " }}}
-" Custom remaps and tricks {{{
-" Enable spelling only for latex and text
-au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
-au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
-au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
-au BufNewFile,BufRead,BufEnter *.txt setlocal textwidth=0
-au FileType gitcommit setlocal spell spelllang=en_gb
-set thesaurus+=~/.vim/thesaurus/mthesaur.txt
 
-autocmd BufRead *_spec.rb set filetype=rspec
-
-" Fix comments for matlab
-autocmd FileType matlab setlocal commentstring=\%\ %s
-
-highlight SpellBad ctermbg=256 ctermfg=210
-highlight SpellLocal ctermbg=240 ctermfg=010
-highlight SpellCap ctermbg=256 ctermfg=211
-
-" When editing a file, always jump to the last known cursor position.
-" Don't do it for commit messages, when the position is invalid, or when
-" inside an event handler (happens when dropping a file on gvim).
-autocmd BufReadPost *
-      \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-      \   exe "normal g`\"" |
-      \ endif
-
-" Set leader to space
-" let mapleader = " "
+" Mappings {{{
+" Set leader to spacebar
 map <space> <leader>
-
-" Fix weird error where space n hangs vim with search
-noremap <space>n <nop>
 
 " See long lines as line breaks
 map j gj
 map k gk
 
-" remap tag-search to better place
-" nmap <C-$> <C-]>
-function! JumpToTagInSplit()
-  execute "normal! \<c-w>v\<c-]>mzzMzvzz15\<c-e>"
-  execute "keepjumps normal! `z"
-  Pulse
-endfunction
-nnoremap <C-$> :silent! call JumpToTagInSplit()<CR>
+" Remap tag-search to better place
+nmap <C-$> <C-]>
 
 " Jump to end of line in insert mode
 inoremap <C-a> <C-o>I
@@ -251,9 +215,6 @@ inoremap <C-f> <right>
 
 " Switch between the last two files
 nnoremap <leader><leader> <C-^>
-" Move between buffers
-nnoremap gb :bnext<CR>
-nnoremap gB :bprevious<CR>
 
 " Very Magic search patterns
 nmap / /\v
@@ -268,48 +229,8 @@ nnoremap <silent><leader>l :noh<CR>
 
 inoremap £ \
 
-nnoremap <TAB> %
-vnoremap <TAB> %
-
-" Move between splits
-" map <C-j> <C-w>j
-" map <C-k> <C-w>k
-" map <C-l> <C-w>l
-" map <C-h> <C-w>h
-
-" highlight last inserted text
+" Highlight last inserted text
 nnoremap gV `[v`]
-
-" Briefly change colour of last highlight
-" nnoremap <silent> n   n:call HLNext(0.4)<cr>
-" nnoremap <silent> N   N:call HLNext(0.4)<cr>
-
-function! HLNext (blinktime)
-  highlight WhiteOnRed ctermfg=white ctermbg=red guifg=white guibg=red
-  let [bufnum, lnum, col, off] = getpos('.')
-  let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-  let target_pat = '\c\%#'.@/
-  let ring = matchadd('WhiteOnRed', target_pat, 101)
-  redraw
-  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-  call matchdelete(ring)
-  redraw
-endfunction
-
-" This is adapted from
-" http://vim.wikia.com/wiki/Windo_and_restore_current_window
-function! KeepWin(command)
-  let currwin=winnr()
-  execute a:command
-  execute currwin . 'wincmd w'
-endfunction
-
-augroup insertMatch
-    au!
-    au VimEnter * NoMatchParen
-    au InsertEnter * call KeepWin("DoMatchParen")
-    au InsertLeave * call KeepWin("NoMatchParen")
-augroup END
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -337,27 +258,44 @@ function! KeepVisualSelection(cmd)
   endif
 endfunction
 
-au FileType c setl foldmethod=syntax
-
-au VimResized * exe "normal! \<c-w>="
-
+" Some emacs behavior 
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
 
 " Swap backticks and quotes
 nnoremap ` '
 nnoremap ' `
+" }}}
 
-" Note that this will overwrite the contents of the z mark.  I never use it, but
-" if you do you'll probably want to use another mark.
-inoremap <C-u> <esc>mzgUiw`za
+" Functions {{{
+" When editing a file, always jump to the last known cursor position.
+" Don't do it for commit messages, when the position is invalid, or when
+" inside an event handler (happens when dropping a file on gvim).
+autocmd BufReadPost *
+      \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal g`\"" |
+      \ endif
 
-nnoremap <leader>ev :split $MYVIMRC<cr>
+" Make matching parenthesis more clear
+" This is adapted from
+" http://vim.wikia.com/wiki/Windo_and_restore_current_window
+function! KeepWin(command)
+  let currwin=winnr()
+  execute a:command
+  execute currwin . 'wincmd w'
+endfunction
 
-" Move lines from visual selection
-vnoremap <S-j> :m '>+1<CR>gv=gv
-vnoremap <S-k> :m '<-2<CR>gv=gv
+augroup insertMatch
+    au!
+    au VimEnter * NoMatchParen
+    au InsertEnter * call KeepWin("DoMatchParen")
+    au InsertLeave * call KeepWin("NoMatchParen")
+augroup END
 
+" Resize splits after window resize
+au VimResized * exe "normal! \<c-w>="
+
+" Custom folding by Steve Losh
 function! MyFoldText() " {{{
   let line = getline(v:foldstart)
 
@@ -374,125 +312,42 @@ function! MyFoldText() " {{{
   return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
-
-" VHDL ctags
-let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:entities;a:architecture specifications;t:type declarations;p:processes;f:functions;r:procedures'
 " }}}
+
+" Filetype specific settings
 " Latex {{{
 " Open pdf
 nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
 " Set compiler to rubber
 autocmd FileType tex setlocal makeprg=latexmk\ -pdf\ %:r
-" }}}
-" Unite {{{
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-" call unite#set_profile('files', 'smartcase', 1)
-call unite#custom#profile('files', 'context.smartcase', 1)
-call unite#custom#source('line,outline', 'matchers', 'matcher_fuzzy')
-call unite#custom#source( 'buffer', 'converters', ['converter_file_directory'])
-" sort file results by length
-call unite#custom#source('file', 'sorters', 'sorter_length')
-call unite#custom#source('file_rec/async', 'converters', [])
-call unite#custom#source('file_rec/async', 'sorters', [])
-call unite#custom#source('file_rec/async', 'ignore_globs', split(&wildignore, ','))
-call unite#custom#source('file_rec/async', 'max_candidates', 50)
-let g:unite_enable_start_insert=0
-let g:unite_source_history_yank_enable=1
-let g:unite_source_rec_max_cache_files=3000
-let g:unite_prompt='» '
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-        \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-        \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-  let g:unite_source_grep_recursive_opt = ''
-  let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
-elseif executable('ack')
-  let g:unite_source_grep_command='ack'
-  let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
-  let g:unite_source_grep_recursive_opt=''
-endif
-function! s:unite_settings()
-  nmap <buffer> Q <plug>(unite_exit)
-  nmap <buffer> <esc> <plug>(unite_exit)
-  imap <buffer> <C-j> <Plug>(unite_select_next_line)
-  imap <buffer> <C-k> <Plug>(unite_select_previous_line)
-endfunction
-autocmd FileType unite call s:unite_settings()
-
-nnoremap <silent> <leader>k :<C-u>Unite -auto-preview -buffer-name=recent file_mru<cr>
-nnoremap <silent> <leader>y :<C-u>Unite -buffer-name=yanks history/yank<cr>
-nnoremap <silent> <leader>f :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
-nnoremap <silent> <leader>g :<C-u>Unite -no-quit -buffer-name=search grep:.<CR><C-r><C-w><CR>
-nnoremap <silent> <leader>o :<C-u>Unite outline<CR>
-nnoremap <silent> <leader>t :<C-u>Unite tag<CR>
-nnoremap <silent> <C-p>    :<C-u>Unite -start-insert buffer file_rec/async<CR>
-" nnoremap <silent> <leader>h :<C-u>Unite ssh://Hurricane/STM-Quadcopter/source<CR>
-" nnoremap <silent> <leader>i :<C-u>Unite ssh://imac-van-zeger.local/Documents<CR>
-" }}}
-" Unite Build {{{
-" TODO: Create builders eg Latex, Vagrant?
-" }}}
-" Vimfiler {{{
-" Use vimfiler as default
-let g:vimfiler_as_default_explorer = 1
-nnoremap <leader>e :VimFilerExplorer<CR>
-let g:vimfiler_ignore_pattern = '\%(.o\|.bin\|.elf\|.un\~\|.swp\)$'
-" }}}
-" Cucumber {{{
-" map <leader>f :call RunAllFeatures()<CR>
-" map <leader>k :call RunCurrentFeature()<CR>
+au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
+au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
 " }}}
 " Markdown {{{
 let g:vim_markdown_folding_disabled=1
 " }}}
-" Neo Complete {{{
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#force_overwrite_completefunc = 1
-let g:marching_enable_neocomplete = 1
-let g:neocomplete#enable_fuzzy_completion = 1
-
-inoremap <expr><s-CR> pumvisible() ? neocomplete#smart_close_popup()"\<CR>" : "\<CR>"
-inoremap <expr><C-g> neocomplete#undo_completion()
-inoremap <expr><C-l> neocomplete#complete_common_string()
-function! CleverCr()
-  if pumvisible()
-    if neosnippet#expandable()
-      let exp = "\<Plug>(neosnippet_expand)"
-      return exp . neocomplete#smart_close_popup()
-    else
-      return neocomplete#smart_close_popup()
-    endif
-  else
-    return "\<CR>"
-  endif
-endfunction
-" <CR> close popup and save indent or expand snippet
-imap <expr> <CR> CleverCr()
-
-" }}}
-" Neo Snippets {{{
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-
-" imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"       \ "\<Plug>(neosnippet_expand_or_jump)"
-"       \: pumvisible() ? "\<C-n>" : "\<TAB>"
-" smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"       \ "\<Plug>(neosnippet_expand_or_jump)"
-"       \: "\<TAB>"
-
-
-imap <expr><TAB> neosnippet#expandable() == 1 ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-imap <expr><C-k> neosnippet#expandable_or_jumpable() == 1 ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() == 1 ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-" let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-
-let g:neosnippet#snippets_directory='~/.vim/snippets'
+" Text {{{
+au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
+au BufNewFile,BufRead,BufEnter *.txt setlocal textwidth=0
 " }}}
+" Git commit messages {{{
+au FileType gitcommit setlocal spell spelllang=en_gb
+" }}}
+" Ruby {{{
+autocmd BufRead *_spec.rb set filetype=rspec
+" }}}
+" Matlab {{{
+autocmd FileType matlab setlocal commentstring=\%\ %s
+" }}}
+" C {{{
+au FileType c setlocal foldmethod=syntax
+" }}}
+" VHDL {{{
+" VHDL ctags
+let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:entities;a:architecture specifications;t:type declarations;p:processes;f:functions;r:procedures'
+" }}}
+
+" Plugin settings
 " Tabular {{{
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
@@ -519,9 +374,6 @@ vmap <Leader>a: :Tabularize /:\zs/l0l1<CR>
 nmap <Leader>a, :Tabularize /,\zs/l0l1<CR>
 vmap <Leader>a, :Tabularize /,\zs/l0l1<CR>
 vmap <Leader>a- :Tabularize /-<CR>
-" }}}
-" Tagbar {{{
-nmap <F8> :TagbarToggle<CR>
 " }}}
 " Syntastic {{{
 let g:syntastic_check_on_open=1
@@ -529,31 +381,18 @@ let g:syntastic_check_on_open=1
 " Gundo tree {{{
 nnoremap <leader>u :GundoToggle<CR>
 " }}}
-" Smalls {{{
-nmap <C-s> <Plug>(smalls)
-omap <C-s> <Plug>(smalls)
-xmap <C-s> <Plug>(smalls)
-" }}}
-" Textmanip {{{
-xmap <C-j> <Plug>(textmanip-move-down)
-xmap <C-k> <Plug>(textmanip-move-up)
-xmap <C-h> <Plug>(textmanip-move-left)
-xmap <C-l> <Plug>(textmanip-move-right)
-xmap <F10> <Plug>(textmanip-toggle-mode)
-" }}}
-" Startify {{{
-let g:startify_session_dir = "~/.vim/sessions"
-" }}}
-" Vimwiki {{{
-let g:notes_directories = ['~/.vim/notes']
-" }}}
-" Vim Sessions {{{
-let g:session_autosave = 'no'
-" }}}
 " Dispatch {{{
 nnoremap <leader>s :Make<CR>
 autocmd FileType python setlocal makeprg=ipython\ --pdb\ %
 autocmd FileType ruby setlocal makeprg=ruby\ %
+" }}}
+" CtrlP {{{
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --color
+
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
+endif
 " }}}
 
 " Load local vimrc

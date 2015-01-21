@@ -20,8 +20,7 @@ Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 Plug 'mtth/scratch.vim'
 Plug 'mrmargolis/dogmatic.vim'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
+Plug 'whatyouhide/vim-gotham'
 
 " Undo
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -31,7 +30,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-dispatch'
 
 " Search and Complete
-Plug 'Shougo/neocomplete'
+" Plug 'Shougo/neocomplete'
+Plug 'ajh17/VimCompletesMe'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/vimproc', { 'do': 'make' }
@@ -99,7 +99,7 @@ set tabstop=2 shiftwidth=2
 " Layout
 set t_Co=256
 set background=dark
-color Tomorrow-Night
+color gotham
 set guifont=Inconsolata\ for\ Powerline:h12
 " Make background color same as terminal ("transparent")
 " hi Normal ctermbg=none

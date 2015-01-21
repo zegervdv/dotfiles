@@ -37,9 +37,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-dispatch'
 
 " Completing and snippets
-Plug 'ajh17/VimCompletesMe'
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'shougo/neocomplete.vim'
+Plug 'shougo/neosnippet.vim'
+Plug 'shougo/neosnippet-snippets'
 
 " Vim file navigation
 Plug 'tpope/vim-vinegar'
@@ -149,7 +149,8 @@ autocmd WinLeave * setlocal nocursorline
 
 set sessionoptions-=options
 
-set complete+=kspell
+" Scan files for completion
+set complete=.,w,b,u,k,kspell,t,i,d
 
 set splitright
 set virtualedit=block
@@ -158,7 +159,6 @@ set conceallevel=0
 set cryptmethod=blowfish
 
 filetype plugin indent on
-autocmd FileType ruby set tabstop=2|set shiftwidth=2
 
 set pastetoggle=<F2>
 set clipboard=unnamed
@@ -170,6 +170,7 @@ set directory=/tmp//,.
 if v:version >= 703
   set undodir=/tmp//,.
 endif
+
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**
 
 " Sentences are ended with double spaces
@@ -398,6 +399,19 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   let g:ctrlp_use_caching = 0
 endif
+" }}}
+" Neocomplete {{{
+let g:neocomplete#enable_at_startup=1
+" let g:neocomplete#data_directory=s:get_cache_dir('neocomplete')
+" }}}
+" Neosnippet {{{
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets,~/.vim/snippets'
+let g:neosnippet#enable_snipmate_compatibility=1
+
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ? "\<C-n>" : "\<TAB>")
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
+smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
 " }}}
 
 " Load local vimrc

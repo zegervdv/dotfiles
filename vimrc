@@ -51,7 +51,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mrmargolis/dogmatic.vim'
 
 " Theme
-Plug 'whatyouhide/vim-gotham'
+Plug 'w0ng/vim-hybrid'
 
 " Ruby
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
@@ -71,6 +71,9 @@ Plug 'osyo-manga/vim-marching', { 'for': 'c' }
 
 " Coffeescript
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffeescript' }
+
+" Latex
+Plug 'lervag/vim-latex', { 'for': 'tex' }
 
 " Git
 Plug 'tpope/vim-git'
@@ -106,8 +109,7 @@ set tabstop=2 shiftwidth=2
 " Theme and style
 set t_Co=256
 set background=dark
-color gotham
-set guifont=Inconsolata\ for\ Powerline:h12
+color hybrid
 
 set hidden
 set hlsearch
@@ -408,10 +410,17 @@ let g:neocomplete#enable_at_startup=1
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets,~/.vim/snippets'
 let g:neosnippet#enable_snipmate_compatibility=1
 
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ? "\<C-n>" : "\<TAB>")
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
-smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
+imap <expr><TAB> neosnippet#expandable() == 1 ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><C-k> neosnippet#expandable_or_jumpable() == 1 ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() == 1 ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.tex =
+      \ '\v\\\a*(ref|cite)\a*([^]]*\])?\{([^}]*,)*[^}]*'
 " }}}
 
 " Load local vimrc

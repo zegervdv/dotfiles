@@ -265,6 +265,9 @@ cnoremap <c-e> <end>
 " Swap backticks and quotes
 nnoremap ` '
 nnoremap ' `
+
+" Open vimrc
+nnoremap <leader>ev :e $MYVIMRC<CR>
 " }}}
 
 " Functions {{{

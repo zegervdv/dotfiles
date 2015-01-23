@@ -109,7 +109,8 @@ set tabstop=2 shiftwidth=2
 " Theme and style
 set t_Co=256
 set background=dark
-color hybrid
+colorscheme Tomorrow-Night
+set guifont=Fira\ Mono:h11
 
 set hidden
 set hlsearch

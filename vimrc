@@ -202,10 +202,11 @@ endfunction
 set laststatus=2
 set statusline=%!Status()
 " }}}
-" Fix Colors in colorscheme
+" Fix Colors in colorscheme {{{
 highlight SpellBad ctermbg=256 ctermfg=210
 highlight SpellLocal ctermbg=240 ctermfg=010
 highlight SpellCap ctermbg=256 ctermfg=211
+"}}}
 
 " Mappings {{{
 " Set leader to spacebar

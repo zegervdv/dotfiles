@@ -1,4 +1,13 @@
 " vim:fdm=marker
+
+" Include Vim-Plug {{{
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !mkdir -p ~/.vim/autoload
+  silent !curl -fLo ~/.vim/autoload/plug.vim
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+" }}}
 " Vim-Plug {{{
 let g:plug_window='topleft new'
 call plug#begin('~/.vim/plugged')
@@ -184,7 +193,7 @@ function! Status()
   let statusline = ''
   let statusline .= "%n\ "
   let statusline .= "%f"
-  let statusline .= "%1*%m%0*"
+  let statusline .= "%m"
   let statusline .= "\ [%{strlen(&ft)?&ft:'unknown'}]"
   let statusline .= "%="
   let statusline .= "%P\ "
@@ -193,6 +202,10 @@ endfunction
 set laststatus=2
 set statusline=%!Status()
 " }}}
+" Fix Colors in colorscheme
+highlight SpellBad ctermbg=256 ctermfg=210
+highlight SpellLocal ctermbg=240 ctermfg=010
+highlight SpellCap ctermbg=256 ctermfg=211
 
 " Mappings {{{
 " Set leader to spacebar

@@ -25,6 +25,7 @@ Plug 'jiangmiao/auto-pairs'
 
 " Formatting
 Plug 'godlygeek/tabular', { 'on' : 'Tabularize' }
+Plug 'pelodelfuego/vim-swoop', { 'on' : ['Swoop', 'SwoopSelection', 'SwoopMulti', 'SwoopMultiSelection'] }
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -436,6 +437,9 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 endif
 let g:neocomplete#sources#omni#input_patterns.tex =
       \ '\v\\\a*(ref|cite)\a*([^]]*\])?\{([^}]*,)*[^}]*'
+" }}}
+" Swoop {{{
+let g:swoopUseDefaultKeyMap = 0
 " }}}
 
 " Load local vimrc

@@ -32,6 +32,7 @@ Plug 'tpope/vim-commentary'
 
 " Moving in files
 Plug 'wellle/targets.vim'
+Plug 'rking/ag.vim'
 
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
@@ -440,6 +441,29 @@ let g:neocomplete#sources#omni#input_patterns.tex =
 " }}}
 " Swoop {{{
 let g:swoopUseDefaultKeyMap = 0
+" }}}
+" Ag {{{
+" Ack motions by Steve Losh, adapted for Ag
+nnoremap <silent> \a :set opfunc=<SID>AckMotion<CR>g@
+xnoremap <silent> \a :<C-U>call <SID>AckMotion(visualmode())<CR>
+ 
+function! s:CopyMotionForType(type)
+    if a:type ==# 'v'
+        silent execute "normal! `<" . a:type . "`>y"
+    elseif a:type ==# 'char'
+        silent execute "normal! `[v`]y"
+    endif
+endfunction
+ 
+function! s:AckMotion(type) abort
+    let reg_save = @@
+ 
+    call s:CopyMotionForType(a:type)
+ 
+    execute "normal! :Ag --literal " . shellescape(@@) . "\<cr>"
+ 
+    let @@ = reg_save
+endfunction
 " }}}
 
 " Load local vimrc

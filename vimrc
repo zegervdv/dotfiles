@@ -16,6 +16,9 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 
+" Session Management
+Plug 'tpope/vim-obsession'
+
 " Spelling
 Plug 'tpope/vim-abolish'
 

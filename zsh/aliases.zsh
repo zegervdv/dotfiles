@@ -51,3 +51,6 @@ alias 8='cd -8'
 alias 9='cd -9'
 
 alias d='dirs -v | head -10'
+
+# Open existing sessions
+alias vims='vim -S Session.vim'

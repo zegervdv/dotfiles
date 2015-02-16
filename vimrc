@@ -84,7 +84,7 @@ Plug 'osyo-manga/vim-reunions', { 'for': 'c' }
 Plug 'osyo-manga/vim-marching', { 'for': 'c' }
 
 " Coffeescript
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffeescript' }
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
 " Latex
 Plug 'lervag/vim-latex', { 'for': 'tex' }

@@ -239,7 +239,7 @@ nnoremap + <C-a>
 inoremap <C-f> <right>
 
 " Switch between the last two files
-nnoremap <leader><leader> <C-^>
+nnoremap <space><space> <C-^>
 
 " Very Magic search patterns
 nmap / /\v
@@ -373,6 +373,9 @@ au FileType c setlocal foldmethod=syntax
 " VHDL {{{
 " VHDL ctags
 let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:entities;a:architecture specifications;t:type declarations;p:processes;f:functions;r:procedures'
+" }}}
+" Spice {{{
+autocmd BufRead *.{net,lib} set filetype=spice
 " }}}
 
 " Plugin settings

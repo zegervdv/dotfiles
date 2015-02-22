@@ -346,7 +346,6 @@ set foldtext=MyFoldText()
 " Latex {{{
 " Open pdf
 nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
-" Set compiler to rubber
 autocmd FileType tex setlocal makeprg=latexmk\ -pdf\ %:r
 au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
 au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
@@ -450,8 +449,8 @@ let g:swoopUseDefaultKeyMap = 0
 " }}}
 " Ag {{{
 " Ack motions by Steve Losh, adapted for Ag
-nnoremap <silent> \a :set opfunc=<SID>AckMotion<CR>g@
-xnoremap <silent> \a :<C-U>call <SID>AckMotion(visualmode())<CR>
+nnoremap <silent> <Leader>a :set opfunc=<SID>AckMotion<CR>g@
+xnoremap <silent> <Leader>a :<C-U>call <SID>AckMotion(visualmode())<CR>
  
 function! s:CopyMotionForType(type)
     if a:type ==# 'v'

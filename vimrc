@@ -28,7 +28,6 @@ Plug 'jiangmiao/auto-pairs'
 
 " Formatting
 Plug 'godlygeek/tabular', { 'on' : 'Tabularize' }
-Plug 'pelodelfuego/vim-swoop', { 'on' : ['Swoop', 'SwoopSelection', 'SwoopMulti', 'SwoopMultiSelection'] }
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -241,9 +240,9 @@ inoremap <C-f> <right>
 " Switch between the last two files
 nnoremap <space><space> <C-^>
 
-" Very Magic search patterns
-nmap / /\v
-cmap s/ s/\v
+" " Very Magic search patterns
+" nmap / /\v
+" cmap s/ s/\v
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
@@ -443,9 +442,6 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 endif
 let g:neocomplete#sources#omni#input_patterns.tex =
       \ '\v\\\a*(ref|cite)\a*([^]]*\])?\{([^}]*,)*[^}]*'
-" }}}
-" Swoop {{{
-let g:swoopUseDefaultKeyMap = 0
 " }}}
 " Ag {{{
 " Ack motions by Steve Losh, adapted for Ag

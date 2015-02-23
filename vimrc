@@ -345,7 +345,7 @@ set foldtext=MyFoldText()
 " Latex {{{
 " Open pdf
 nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
-autocmd FileType tex setlocal makeprg=latexmk\ -pdf\ %:r
+" autocmd FileType tex setlocal makeprg=latexmk\ -pdf\ %:r
 au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
 au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
 " }}}

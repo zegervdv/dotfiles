@@ -38,4 +38,8 @@ Maid.rules do
   rule 'Clean up Mail Downloads' do
     trash(dir('~/Library/Containers/com.apple.mail/Data/Library/Mail\ Downloads/*'))
   end
+
+  rule 'Clean old tmux-resurrect/continuum files' do
+    dir('~/.tmux/resurrect/*.txt').each { |file| trash(file) if 3.days.since?(created_at(file)) }
+  end
 end

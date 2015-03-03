@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rsi'
 
 " Session Management
 Plug 'tpope/vim-obsession'
@@ -348,6 +349,7 @@ nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
 " autocmd FileType tex setlocal makeprg=latexmk\ -pdf\ %:r
 au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
 au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
+nnoremap <leader>ml :Dispatch latexmk -pdf %<CR>
 " }}}
 " Markdown {{{
 let g:vim_markdown_folding_disabled=1

@@ -58,9 +58,6 @@ Plug 'shougo/neosnippet-snippets'
 " Vim file navigation
 Plug 'tpope/vim-vinegar'
 
-" Open and find files
-Plug 'ctrlpvim/ctrlp.vim'
-
 " Don't use arrows!
 Plug 'mrmargolis/dogmatic.vim'
 
@@ -416,14 +413,6 @@ nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>s :Make<CR>
 autocmd FileType python setlocal makeprg=ipython\ --pdb\ %
 autocmd FileType ruby setlocal makeprg=ruby\ %
-" }}}
-" CtrlP {{{
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --color
-
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
-endif
 " }}}
 " Neocomplete {{{
 let g:neocomplete#enable_at_startup=1

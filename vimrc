@@ -37,6 +37,9 @@ Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 Plug 'rking/ag.vim'
 
+" Finding files
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
 
@@ -116,6 +119,8 @@ set linebreak
 set breakindent
 set lbr
 set tabstop=2 shiftwidth=2
+
+set magic
 
 " Theme and style
 set t_Co=256
@@ -456,6 +461,9 @@ function! s:AckMotion(type) abort
  
     let @@ = reg_save
 endfunction
+" }}}
+" FZF {{{
+nnoremap <silent> <C-p> :call fzf#run({'tmux_height': '20%', 'sink': 'e'})<CR>
 " }}}
 
 " Load local vimrc

@@ -1,0 +1,46 @@
+# ** vim:ft=sh
+
+# export FZF_DEFAULT_COMMAND='fd -I --type file --color=always'
+export FZF_DEFAULT_OPTS='--ansi'
+
+__git_log () {
+    git log --format="%C(auto)%h %<(15)%C(auto, green)%cr %>(20)%C(auto, magenta)%an %C(auto)%s %D"
+}
+
+_fzf_complete_git() {
+    ARGS="$@"
+
+    if [[ $ARGS=='git show'* || \
+          $ARGS=='git cherry-pick'* || \
+          $ARGS=='git checkout'* || \
+          $ARGS=='git commit -a --fixup'* || \
+          $ARGS=='git reset'* ]]; then
+        _fzf_complete "--reverse --multi" "$@" < <(__git_log)
+    fi
+}
+
+_fzf_complete_git_post() {
+    sed -e 's/^[^a-z0-9]*//' | awk '{print $1}'
+}
+
+complete -F _fzf_complete_git -o default -o bashdefault git
+
+__hg_log () {
+   hg ls
+}
+
+_fzf_complete_hg() {
+   ARGS="$@"
+
+   if [[ $ARGS=='hg rebase'* ]]; then
+      _fzf_complete "--reverse --multi" "$@" < <(hg log --graph --rev=wip --template=oneline)
+   elif [[ $ARGS=='hg ls'* ]]; then
+      _fzf_complete "--reverse --multi" "$@" < <(hg ls -l 100)
+   fi
+}
+
+_fzf_complete_hg_post() {
+    sed -e 's/^[^0-9]*//' | awk '{print $1}'
+}
+
+complete -F _fzf_complete_hg -o default -o bashdefault hg

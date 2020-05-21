@@ -1,0 +1,37 @@
+[user]
+	email = {{ .email }}
+	name = {{ .name }}
+	signingkey = {{ .signingkey }}
+[rebase]
+	autosquash = true
+	autostash = true
+[commit]
+	gpgsign = true
+	verbose = true
+[pull]
+	rebase = true
+[gpg]
+	program = gpg
+[merge]
+	tool = splice
+[mergetool "splice"]
+	cmd = "nvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+	trustExitCode = true
+[alias]
+	ls = log --format=\"%C(auto)%h %<(15)%C(auto, green)%cr %>(20)%C(auto, magenta)%an %C(auto)%s %D\"
+[core]
+	excludesfile = ~/.gitignore
+	editor = nvim
+	autocrlf = input
+	pager = less -+F
+[help]
+	autocorrect = 1
+[color]
+	diff = always
+	status = always
+	branch = always
+	ui = true
+{{- if eq .chezmoi.username "zvandeva" }}
+[url "https://"]
+	insteadOf = git://
+{{- end }}

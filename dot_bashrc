@@ -25,6 +25,8 @@ shopt -s histappend
 shopt -s cmdhist
 export HISTINGORE="pwd:ls:history"
 
+export XDG_CONFIG_HOME=$HOME/.config
+
 PATH=$HOME/bin:$PATH
 
 cd_func ()

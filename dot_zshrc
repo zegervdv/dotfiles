@@ -1,0 +1,159 @@
+# vim:ft=zsh
+
+export LC_ALL=$LANG
+
+PROMPT='%F{cyan}%T%f %F{red}%m%f %F{blue}%~%b%f
+%j > '
+
+
+vim_ins_mode="%F{yellow}[INS]%f"
+vim_cmd_mode="%F{green}[NRM]%f"
+vim_mode=$vim_ins_mode
+
+function zle-keymap-select {
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+function zle-line-finish {
+  vim_mode=$vim_ins_mode
+}
+zle -N zle-line-finish
+
+function TRAPINT() {
+  vim_mode=$vim_ins_mode
+  return $(( 128 + $1 ))
+}
+
+RPROMPT='${vim_mode}'
+
+zmodload -i zsh/complist
+
+bindkey -v
+
+export CLICOLOR=1
+export LS_COLORS='no=00;37:fi=00:di=00;33:ln=04;36:pi=40;33:so=01;35:bd=40;33;01:'
+
+# Options
+setopt monitor
+setopt auto_cd
+setopt cdablevars
+setopt pushd_ignore_dups
+setopt interactive_comments
+setopt append_history
+setopt inc_append_history
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+setopt hist_reduce_blanks
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_verify
+setopt share_history
+setopt transient_rprompt
+setopt prompt_subst
+setopt multios
+setopt correct_all
+setopt autopushd
+setopt pushdminus
+setopt pushdsilent
+setopt nobeep
+setopt notify
+REPORTTIME=5
+
+HISTSIZE=3000
+SAVEHIST=3000
+HISTFILE=~/.zsh_history
+
+# Completion
+setopt complete_in_word
+setopt always_to_end
+setopt auto_menu
+
+# activate color-completion
+zstyle ':completion:*:default'         list-colors ${(s.:.)LS_COLORS}
+
+# format on completion
+zstyle ':completion:*:descriptions'    format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}'
+
+# insert all expansions for expand completer
+zstyle ':completion:*:expand:*'        tag-order all-expansions
+zstyle ':completion:*:history-words'   list false
+
+# activate menu
+zstyle ':completion:*:history-words'   menu yes
+
+# ignore duplicate entries
+zstyle ':completion:*:history-words'   remove-all-dups yes
+zstyle ':completion:*:history-words'   stop yes
+
+zstyle ':completion:*:matches'         group 'yes'
+zstyle ':completion:*'                 group-name ''
+if [[ "$NOMENU" -eq 0 ]] ; then
+  # if there are more than 5 options allow selecting from a menu
+  zstyle ':completion:*'               menu select=5
+else
+  # don't use any menus at all
+  setopt no_auto_menu
+fi
+
+zstyle ':completion:*:messages'        format '%d'
+zstyle ':completion:*:options'         auto-description '%d'
+
+# describe options in full
+zstyle ':completion:*:options'         description 'yes'
+
+# complete manual by their section
+zstyle ':completion:*:manuals'    separate-sections true
+zstyle ':completion:*:manuals.*'  insert-sections   true
+zstyle ':completion:*:man:*'      menu yes select
+
+# Search path for sudo completion
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin \
+                                           /usr/local/bin  \
+                                           /usr/sbin       \
+                                           /usr/bin        \
+                                           /sbin           \
+                                           /bin            \
+                                           /usr/X11R6/bin
+
+# provide .. as a completion
+zstyle ':completion:*' specal-dirs ..
+
+# case insensitive path-completion
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
+
+# nvim completion
+zstyle ':completion::*:nvim:*' ignored-patterns '*.(o|hex|elf|pyc|pdf|dup)'
+
+autoload -U compinit && compinit
+
+# fg when pressing Ctrl+Z
+function fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    if [[ $(jobs | wc -l) -gt 0 ]]; then
+      BUFFER='fg'
+      zle accept-line
+    fi
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
+# Aliases
+alias l="ls -haltr --color"
+alias ll="ls -haltr --color"
+alias xclip='xclip -selection clipboard'
+
+# Exports
+export XDG_CONFIG_HOME=$HOME/.config
+export PATH=$HOME/bin:$PATH
+
+export EDITOR=nvim
+export HGEDITOR=nvim
+
+[ -f ~/.fzf.zsh ] &&source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag -g ""'

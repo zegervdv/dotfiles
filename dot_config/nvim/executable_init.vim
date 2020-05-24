@@ -248,6 +248,9 @@ let g:PaperColor_Theme_Options = {
       \   }
       \ }
       \}
+let g:onedark_color_overrides = {
+      \ "yellow": {"cterm": "3", "gui": "#ffc24b"}
+      \}
 set background=dark
 colorscheme onedark
 if s:darwin

@@ -1,5 +1,8 @@
 # vim:ft=zsh
 
+source ~/.zsh/zsh-history-substring-search.zsh
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=black'
+
 export LC_ALL=$LANG
 
 PROMPT='%F{cyan}%T%f %F{red}%m%f %F{blue}%~%b%f
@@ -10,14 +13,37 @@ vim_ins_mode="%F{yellow}[INS]%f"
 vim_cmd_mode="%F{green}[NRM]%f"
 vim_mode=$vim_ins_mode
 
+# Cursor mapping from nyquase/vi-mode
+function select_cursor() {
+  case $KEYMAP in
+    # Block cursor in normal and visual mode
+    vicmd) echo -ne "\e[2 q";;
+    # Line cursor in insert mode
+    main|viins) echo -ne "\e[5 q";;
+    # Else Block cursor
+    *) echo -ne "\e[2 q";;
+  esac
+}
+
 function zle-keymap-select {
   vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
   zle reset-prompt
+  zle -R
+  select_cursor
 }
 zle -N zle-keymap-select
 
+function zle-line-init() {
+  echoti smkx
+  zle reset-prompt
+  select_cursor
+}
+zle -N zle-line-init
+
 function zle-line-finish {
   vim_mode=$vim_ins_mode
+  echoti rmkx
+  echo -ne "\e[2 q"
 }
 zle -N zle-line-finish
 
@@ -31,6 +57,14 @@ RPROMPT='${vim_mode}'
 zmodload -i zsh/complist
 
 bindkey -v
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey '^p' history-substring-search-up
+bindkey '^n' history-substring-search-down
+
 
 export CLICOLOR=1
 export LS_COLORS='no=00;37:fi=00:di=00;33:ln=04;36:pi=40;33:so=01;35:bd=40;33;01:'

@@ -1270,7 +1270,7 @@ nnoremap <leader>cd :call ChipScoperUnMark()<CR>
 augroup cs_vhdl
   autocmd!
   autocmd FileType vhdl packadd chipscoper
-  autocmd FileType vhdl call ChipScoperSetup()
+  autocmd FileType vhdl silent! call ChipScoperSetup()
 augroup END
 " }}}
 " GDB {{{

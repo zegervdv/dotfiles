@@ -1233,6 +1233,8 @@ inoremap <silent><expr> <TAB>
 let g:completion_enable_snippet = 'UltiSnips'
 "Fallback for https://github.com/Raimondi/delimitMate expanding on enter
 let g:completion_confirm_key_rhs = "\<Plug>delimitMateCR"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " }}}
 " Background make {{{
 nnoremap <F9> :PMake<CR>

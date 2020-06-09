@@ -197,5 +197,6 @@ export PATH=$HOME/bin:$PATH
 export EDITOR=nvim
 export HGEDITOR=nvim
 
-[ -f ~/.fzf.zsh ] &&source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag -g ""'
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

@@ -189,6 +189,7 @@ alias l="ls -haltr --color"
 alias ll="ls -haltr --color"
 alias ls="ls --color"
 alias xclip='xclip -selection clipboard'
+alias view='nvim -R'
 
 # Exports
 export XDG_CONFIG_HOME=$HOME/.config

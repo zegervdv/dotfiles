@@ -635,6 +635,11 @@ augroup focus_lost
   au FocusLost * if !&readonly | :wa | endif
 augroup END
 
+augroup LuaHighlight
+  autocmd!
+  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+augroup END
+
 " Resize splits after window resize {{{
 augroup vim_resize
   au!
@@ -1285,7 +1290,7 @@ let g:context_enabled = 0
 let g:ale_virtualtext_cursor=1
 augroup fmt
   autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
+  autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 augroup END
 " }}}
 " }}}

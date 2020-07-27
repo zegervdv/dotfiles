@@ -140,6 +140,8 @@ Plug 'sbdchd/neoformat'
 " Debugging
 Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 
+Plug 'Glench/Vim-Jinja2-Syntax'
+
 if s:darwin
   " Ruby
   Plug 'tpope/vim-rails', { 'for': 'ruby' }

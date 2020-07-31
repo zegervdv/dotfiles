@@ -134,7 +134,8 @@ Plug 'joshdick/onedark.vim'
 "Tcl
 Plug 'vim-scripts/tcl.vim--smithfield-indent', { 'for': 'tcl'}
 
-Plug 'zegervdv/ale', { 'branch': 'add_verible' }
+" Plug 'zegervdv/ale', { 'branch': 'add_verible' }
+Plug 'dense-analysis/ale'
 Plug 'sbdchd/neoformat'
 
 " Debugging
@@ -1290,10 +1291,10 @@ let g:context_enabled = 0
 " }}}
 " ALE {{{
 let g:ale_virtualtext_cursor=1
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
-augroup END
+" augroup fmt
+"   autocmd!
+"   autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
+" augroup END
 " }}}
 " }}}
 

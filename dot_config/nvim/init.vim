@@ -115,8 +115,8 @@ if has('nvim')
    " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
    " Plug 'neoclide/coc-sources'
    Plug 'neovim/nvim-lsp'
-   Plug 'haorenW1025/completion-nvim'
-   Plug 'haorenW1025/diagnostic-nvim'
+   Plug 'nvim-lua/completion-nvim'
+   Plug 'nvim-lua/diagnostic-nvim'
 endif
 
 " Copying

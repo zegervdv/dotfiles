@@ -1118,7 +1118,7 @@ augroup ft_systemverilog
   au FileType systemverilog setlocal suffixesadd+=.sv,.v
   au FileType systemverilog setlocal foldmethod=marker
   au FileType systemverilog,verilog call SVAlign()
-  au FileType systemverilog,verilog let b:delimitMate_quotes = "\" '"
+  au FileType systemverilog,verilog let b:delimitMate_quotes = "\""
 augroup END
 
 function! SVAlign()
@@ -1146,6 +1146,7 @@ augroup f_python
   autocmd FileType python setlocal shiftwidth=4
   au FileType python setlocal formatprg=autopep8\ -
   autocmd FileType python setlocal path-=**
+  autocmd Filetype python let b:delimitMate_nesting_quotes = ['"', "'"]
 augroup END
 lua << EOF
   vim.lsp.set_log_level("debug")
@@ -1243,6 +1244,9 @@ let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_confirm_key_rhs = "\<Plug>delimitMateCR"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
 " }}}
 " Background make {{{
 nnoremap <F9> :PMake<CR>

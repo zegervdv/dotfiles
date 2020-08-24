@@ -284,11 +284,7 @@ endif
 set fixendofline
 
 set expandtab " Expand tabs to spaces
-if s:darwin
-  set tabstop=2 shiftwidth=2 " Tab is 2 spaces
-else
-  set tabstop=3 shiftwidth=3
-endif
+set tabstop=2 shiftwidth=2 " Tab is 2 spaces
 
 set shiftround " Round shift indents to nearest value
 

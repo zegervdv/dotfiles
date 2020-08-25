@@ -19,6 +19,7 @@
 	trustExitCode = true
 [alias]
 	ls = log --format=\"%C(auto)%h %<(15)%C(auto, green)%cr %>(20)%C(auto, magenta)%an %C(auto)%s %D\"
+	tags = tag -l --sort creatordate --column
 [core]
 	excludesfile = ~/.gitignore
 	editor = nvim

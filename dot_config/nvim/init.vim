@@ -112,12 +112,11 @@ Plug 'tpope/vim-dispatch'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 if has('nvim')
-   " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-   " Plug 'neoclide/coc-sources'
    Plug 'neovim/nvim-lsp'
    Plug 'nvim-lua/completion-nvim'
    Plug 'nvim-lua/diagnostic-nvim'
    Plug 'nvim-treesitter/nvim-treesitter'
+   Plug 'steelsojka/completion-buffers'
 endif
 
 " Copying

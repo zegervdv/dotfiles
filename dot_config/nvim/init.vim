@@ -1145,15 +1145,6 @@ augroup f_python
   autocmd FileType python setlocal path-=**
   autocmd Filetype python let b:delimitMate_nesting_quotes = ['"', "'"]
 augroup END
-lua << EOF
-  vim.lsp.set_log_level("debug")
-EOF
-lua << EOF
-require'nvim_lsp'.pyls.setup{
-    cmd = {"pyls"},
-    on_attach = require'on_attach'.on_attach
-}
-EOF
 
 let g:python_highlight_all=1
 " }}}
@@ -1283,37 +1274,6 @@ let g:ale_virtualtext_cursor=1
 "   autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 " augroup END
 " }}}
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    }
-  },
-  refactor = {
-    smart_rename = {
-      enable = true,
-      keymaps = {
-        smart_rename = "grr",
-      },
-    },
-    navigation = {
-      enable = true,
-      keymaps = {
-        goto_definition = "gnd",
-        list_definitions = "gnD",
-      },
-    },
-  },
-}
-EOF
 " }}}
 
 function! SendOSCClipboard(lines, regtype)
@@ -1332,6 +1292,8 @@ let g:clipboard = {
       \   },
       \   'cache_enabled': 1,
       \ }
+
+luafile ~/.config/nvim/init.lua
 
 " Load local vimrc
 if filereadable($HOME . '/.vimrc.local')

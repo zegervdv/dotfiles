@@ -115,7 +115,9 @@ if has('nvim')
    Plug 'neovim/nvim-lsp'
    Plug 'nvim-lua/completion-nvim'
    Plug 'nvim-lua/diagnostic-nvim'
-   Plug 'nvim-treesitter/nvim-treesitter'
+   " Plug 'nvim-treesitter/nvim-treesitter'
+   Plug '~/Projects/nvim-treesitter'
+   Plug 'nvim-treesitter/playground'
    Plug 'steelsojka/completion-buffers'
 endif
 
@@ -130,6 +132,7 @@ Plug 'tpope/vim-projectionist'
 " Theme
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'joshdick/onedark.vim'
+Plug 'rakr/vim-one'
 
 "Tcl
 Plug 'vim-scripts/tcl.vim--smithfield-indent', { 'for': 'tcl'}
@@ -241,9 +244,6 @@ augroup END
 " augroup END
 
 
-if !has("nvim")
-  set t_Co=256
-end
 let g:PaperColor_Theme_Options = {
       \ 'theme': {
       \   'default': {
@@ -254,8 +254,13 @@ let g:PaperColor_Theme_Options = {
 let g:onedark_color_overrides = {
       \ "yellow": {"cterm": "3", "gui": "#ffc24b"}
       \}
+" colorscheme onedark
+set termguicolors
+
+let g:one_allow_italics=1
+colorscheme one
 set background=dark
-colorscheme onedark
+
 if s:darwin
   set background=dark
   colorscheme tomorrow-night
@@ -264,10 +269,6 @@ elseif s:windows
   set background=light
   colorscheme PaperColor
   set guifont=consolas:h10
-endif
-
-if has('nvim')
-  set notermguicolors
 endif
 
 set showmatch " Highlight matching brackets
@@ -1303,3 +1304,4 @@ endif
 if filereadable('.vimrc.local')
   source .vimrc.local
 endif
+

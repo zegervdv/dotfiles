@@ -59,7 +59,7 @@ Plug 'sgur/vim-editorconfig'
 " Brackets
 Plug 'tpope/vim-surround'
 Plug 'raimondi/delimitMate'
-Plug 'tommcdo/vim-exchange'
+Plug 'zegervdv/vim-endwise'
 
 " Formatting
 Plug 'junegunn/vim-easy-align', { 'on' : [] }
@@ -1205,27 +1205,19 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" " Coc only does snippet and additional edit on confirm.
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" " Or use `complete_info` if your vim support it, like:
-" " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-" autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-" Use <Tab> and <S-Tab> to navigate through popup menu
-" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Auto close popup menu when finish completion
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ completion#trigger_completion()
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing message extra message when using completion
+set shortmess+=c
 
 let g:completion_enable_snippet = 'UltiSnips'
 "Fallback for https://github.com/Raimondi/delimitMate expanding on enter

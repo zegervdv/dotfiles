@@ -119,6 +119,7 @@ if has('nvim')
    Plug '~/Projects/nvim-treesitter'
    Plug 'nvim-treesitter/playground'
    Plug 'steelsojka/completion-buffers'
+   Plug 'nvim-treesitter/completion-treesitter'
 endif
 
 " Copying

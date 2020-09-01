@@ -44,6 +44,7 @@ local chain_complete_list = {
     default = {
       {complete_items = {'lsp', 'snippet'}},
       {complete_items = {'path'}, triggered_only = {'/'}},
+      {complete_items = {'ts'}},
       {complete_items = {'buffer'}},
     },
     string = {

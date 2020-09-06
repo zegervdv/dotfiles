@@ -33,9 +33,7 @@ else
 endif
 
 " General Plugins
-if !has("nvim")
-  Plug 'tpope/vim-sensible'
-endif
+Plug 'tpope/vim-sensible'
 
 if s:darwin
   Plug 'vim-scripts/gitignore'
@@ -78,7 +76,6 @@ augroup load_targets
   autocmd InsertEnter * call plug#load('targets.vim') | autocmd! load_targets
 augroup END
 Plug 'mhinz/vim-grepper', { 'on' : 'Grepper' }
-Plug 'wellle/context.vim'
 
 " Indentation
 Plug 'nathanaelkane/vim-indent-guides'
@@ -88,9 +85,6 @@ Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir'
 
 " Undoing
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
-
-" Pasting
-" Plug 'junegunn/vim-peekaboo'
 
 " Tabs
 Plug 'gcmt/taboo.vim'
@@ -102,10 +96,8 @@ Plug 'tpope/vim-apathy'
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-" Plug 'roxma/vim-tmux-clipboard'
 
 " Background make
-" Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-dispatch'
 
 " Completing and snippets
@@ -126,24 +118,18 @@ endif
 Plug 'ShikChen/osc52.vim'
 
 " Vim file navigation
-" Plug 'tpope/vim-vinegar'
 Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-projectionist'
 
 " Theme
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'joshdick/onedark.vim'
 Plug 'rakr/vim-one'
 
 "Tcl
 Plug 'vim-scripts/tcl.vim--smithfield-indent', { 'for': 'tcl'}
 
-" Plug 'zegervdv/ale', { 'branch': 'add_verible' }
 Plug 'dense-analysis/ale'
 Plug 'sbdchd/neoformat'
-
-" Debugging
-Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 
 Plug 'Glench/Vim-Jinja2-Syntax'
 

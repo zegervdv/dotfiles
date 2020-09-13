@@ -112,6 +112,9 @@ if has('nvim')
    Plug 'nvim-treesitter/playground'
    Plug 'steelsojka/completion-buffers'
    Plug 'nvim-treesitter/completion-treesitter'
+   Plug 'nvim-lua/popup.nvim'
+   Plug 'nvim-lua/plenary.nvim'
+   Plug 'nvim-lua/telescope.nvim'
 endif
 
 " Copying

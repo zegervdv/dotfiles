@@ -110,6 +110,7 @@ shopt -s cdspell
 shopt -s dirspell
 shopt -s histverify
 shopt -s nocaseglob
+shopt -s direxpand
 
 set -o vi
 

@@ -3,6 +3,8 @@
 source ~/.zsh/zsh-history-substring-search.zsh
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=black'
 
+export TERM=xterm-256color
+
 export LC_ALL=$LANG
 
 PROMPT='%F{cyan}%T%f %F{red}%m%f %F{blue}%~%b%f

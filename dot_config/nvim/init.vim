@@ -223,14 +223,14 @@ augroup IndentColors
   autocmd ColorScheme * call IndentGuidesColor()
 augroup END
 
-" function! ColorOverrides() abort
-"   highlight Special ctermfg=31
-" endfunction
+function! ColorOverrides() abort
+  highlight! link LspDiagnosticsError WarningMsg
+endfunction
 
-" augroup ColorOverrides
-"   autocmd!
-"   autocmd ColorScheme * call ColorOverrides()
-" augroup END
+augroup ColorOverrides
+  autocmd!
+  autocmd ColorScheme * call ColorOverrides()
+augroup END
 
 
 let g:PaperColor_Theme_Options = {

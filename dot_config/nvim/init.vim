@@ -78,7 +78,9 @@ augroup END
 Plug 'mhinz/vim-grepper', { 'on' : 'Grepper' }
 
 " Indentation
-Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentline'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
@@ -1220,9 +1222,6 @@ let delimitMate_expand_space = 1
 " Background make {{{
 nnoremap <F9> :PMake<CR>
 " }}}
-" LanguageClient {{{
-
-" }}}
 " Splice {{{
 let g:splice_initial_diff_grid=1
 let g:splice_initial_diff_compare=1
@@ -1245,15 +1244,15 @@ augroup END
 " GDB {{{
 let  g:nvimgdb_disable_start_keymaps = 1
 " }}}
-" context {{{
-let g:context_enabled = 0
-" }}}
 " ALE {{{
 let g:ale_virtualtext_cursor=1
 " augroup fmt
 "   autocmd!
 "   autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 " augroup END
+" }}}
+" Indents {{{
+let g:indentLine_char = '|'
 " }}}
 " }}}
 

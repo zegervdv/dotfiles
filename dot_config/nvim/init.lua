@@ -83,3 +83,7 @@ lsp.pyls.setup{
     cmd = {"pyls"},
     on_attach = on_attach;
 }
+
+lsp.veridian.setup{
+  on_attach = on_attach;
+}

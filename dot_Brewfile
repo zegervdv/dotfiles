@@ -1,0 +1,12 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "universal-ctags/universal-ctags"
+brew "bat"
+brew "fd"
+brew "mercurial"
+brew "mosh", args: ["HEAD"]
+brew "ripgrep"
+brew "rust"
+brew "scc"
+brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]

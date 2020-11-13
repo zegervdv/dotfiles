@@ -223,6 +223,8 @@ augroup END
 
 function! ColorOverrides() abort
   highlight! link LspDiagnosticsError WarningMsg
+  highlight! link LspDiagnosticsVirtualTextError WarningMsg
+  highlight! link LspDiagnosticsDefaultError WarningMsg
 endfunction
 
 augroup ColorOverrides

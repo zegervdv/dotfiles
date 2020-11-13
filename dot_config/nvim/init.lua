@@ -55,9 +55,6 @@ local chain_complete_list = {
 }
 
 local on_attach = function(client)
-  require'diagnostic'.on_attach({
-    enable_virtual_text = 1,
-  })
   require'completion'.on_attach({
     sorting = 'alphabet',
     matching_strategy_list = {'exact', 'fuzzy'},
@@ -68,7 +65,7 @@ local on_attach = function(client)
     vim.fn.nvim_buf_set_keymap(0, mode, key, result, {noremap=true, silent=true})
   end
 
-  vim.api.nvim_command('autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()')
+  vim.api.nvim_command('autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()')
   mapper('n', 'gd', '<cmd>lua vim.lsp.buf.declaration()<CR>')
   mapper('n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<CR>')
   mapper('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
@@ -77,6 +74,7 @@ local on_attach = function(client)
   mapper('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
   mapper('n', 'g0', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
   mapper('i', '<c-l>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+  mapper('n', '<leader>f', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 end
 
 lsp.pyls.setup{

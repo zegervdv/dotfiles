@@ -80,7 +80,7 @@ Plug 'mhinz/vim-grepper', { 'on' : 'Grepper' }
 " Indentation
 " Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Yggdroot/indentline'
-Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}

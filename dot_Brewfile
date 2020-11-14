@@ -6,6 +6,7 @@ brew "bat"
 brew "fd"
 brew "mercurial"
 brew "mosh", args: ["HEAD"]
+brew "neovim", args: ["HEAD"]
 brew "ripgrep"
 brew "rust"
 brew "scc"

@@ -109,6 +109,8 @@ if has('nvim')
    Plug 'neovim/nvim-lsp'
    Plug 'nvim-lua/completion-nvim'
    Plug 'nvim-treesitter/nvim-treesitter'
+   Plug 'nvim-treesitter/nvim-treesitter-refactor'
+   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
    Plug 'nvim-treesitter/playground'
    Plug 'steelsojka/completion-buffers'
    Plug 'nvim-treesitter/completion-treesitter'
@@ -464,7 +466,6 @@ noremap <expr> k (v:count? 'k' : 'gk')
 
 " Remap tag-search to better place
 nnoremap <C-$> g<C-]>
-nnoremap <C-y> g<C-]>
 nnoremap <C-w>y <C-w>g<C-]>
 
 nnoremap <C-s> <C-e>
@@ -1102,7 +1103,8 @@ augroup END
 augroup ft_systemverilog
   au!
   au FileType systemverilog setlocal suffixesadd+=.sv,.v
-  au FileType systemverilog setlocal foldmethod=marker
+  au FileType systemverilog setlocal foldmethod=expr
+  au FileType systemverilog setlocal foldexpr=nvim_treesitter#foldexpr()
   au FileType systemverilog,verilog call SVAlign()
   au FileType systemverilog,verilog let b:delimitMate_quotes = "\""
 augroup END

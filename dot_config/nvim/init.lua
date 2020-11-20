@@ -1,7 +1,6 @@
 local lsp = require'nvim_lsp'
 
 require "nvim-treesitter.highlight"
--- local hlmap = vim.treesitter.TSHighlighter.hl_map
 
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -32,6 +31,23 @@ require'nvim-treesitter.configs'.setup {
       },
     },
   },
+  textobjects = {
+    move = {
+      enable = true,
+      goto_next_start = {
+        ["]]"] = "@block.outer",
+      },
+      goto_previous_start = {
+        ["[["] = "@block.outer",
+      },
+      goto_next_end = {
+        ["]["] = "@block.outer",
+      },
+      goto_previous_end = {
+        ["[]"] = "@block.outer",
+      },
+    },
+  },
   playground = {
     enable = true,
     disable = {},
@@ -43,7 +59,7 @@ require'nvim-treesitter.configs'.setup {
 local chain_complete_list = {
   default = {
     default = {
-      {complete_items = {'lsp', 'snippet', 'buffer'}},
+      {complete_items = {'lsp', 'snippet', 'ts', 'buffer'}},
       {complete_items = {'path'}, triggered_only = {'/'}},
       {complete_items = {'ts'}},
     },

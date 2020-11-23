@@ -99,6 +99,8 @@ lsp.pyls.setup{
     on_attach = on_attach;
 }
 
-lsp.veridian.setup{
-  on_attach = on_attach;
-}
+if (vim.fn.executable('veridian') == 1) then
+  lsp.veridian.setup{
+    on_attach = on_attach;
+  }
+end

@@ -91,6 +91,7 @@ local on_attach = function(client)
   mapper('n', 'g0', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
   mapper('i', '<c-l>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   mapper('n', '<leader>f', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+  mapper('n', '<c-p>', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 end
 
 lsp.pyls.setup{

@@ -125,7 +125,7 @@ Plug 'tpope/vim-projectionist'
 
 " Theme
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'rakr/vim-one'
+Plug 'zegervdv/nvcode-color-schemes.vim'
 
 "Tcl
 Plug 'vim-scripts/tcl.vim--smithfield-indent', { 'for': 'tcl'}
@@ -212,28 +212,6 @@ set scrolloff=4 " Stay 4 lines from top/bottom
 set showcmd
 
 " Theme and style
-" Override needs to be defined before calling colorscheme
-function! IndentGuidesColor() abort
-  highlight IndentGuidesOdd ctermbg=254
-  highlight IndentGuidesEven ctermbg=254
-endfunction
-
-augroup IndentColors
-  autocmd!
-  autocmd ColorScheme * call IndentGuidesColor()
-augroup END
-
-function! ColorOverrides() abort
-  highlight! link LspDiagnosticsError WarningMsg
-  highlight! link LspDiagnosticsVirtualTextError WarningMsg
-  highlight! link LspDiagnosticsDefaultError WarningMsg
-endfunction
-
-augroup ColorOverrides
-  autocmd!
-  autocmd ColorScheme * call ColorOverrides()
-augroup END
-
 
 let g:PaperColor_Theme_Options = {
       \ 'theme': {
@@ -242,13 +220,11 @@ let g:PaperColor_Theme_Options = {
       \   }
       \ }
       \}
-let g:onedark_color_overrides = {
-      \ "yellow": {"cterm": "3", "gui": "#ffc24b"}
-      \}
-" colorscheme onedark
+
 set termguicolors
 
 let g:one_allow_italics=1
+let g:nvcode_termcolors=256
 colorscheme one
 set background=dark
 

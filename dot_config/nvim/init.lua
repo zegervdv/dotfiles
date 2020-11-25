@@ -1,4 +1,5 @@
 local lsp = require'lspconfig'
+local lsputil = require'lspconfig.util'
 
 require "nvim-treesitter.highlight"
 
@@ -102,5 +103,12 @@ lsp.pyls.setup{
 if (vim.fn.executable('veridian') == 1) then
   lsp.veridian.setup{
     on_attach = on_attach;
+  }
+end
+
+if (vim.fn.executable('efm-langserver') == 1) then
+  lsp.efm.setup{
+    on_attach = on_attach;
+    root_dir = lsputil.root_pattern('.git', '.hg');
   }
 end

@@ -78,8 +78,11 @@ local on_attach = function(client)
     chain_complete_list = chain_complete_list,
   })
   -- This came from https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/lua/lsp_config.lua
-  local mapper = function(mode, key, result)
-    vim.fn.nvim_buf_set_keymap(0, mode, key, result, {noremap=true, silent=true})
+  local mapper = function(mode, key, result, noremap)
+    if noremap == nil then
+      noremap = true
+    end
+    vim.fn.nvim_buf_set_keymap(0, mode, key, result, {noremap=noremap, silent=true})
   end
 
   vim.api.nvim_command('autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()')
@@ -93,6 +96,9 @@ local on_attach = function(client)
   mapper('i', '<c-l>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   mapper('n', '<leader>f', '<cmd>lua vim.lsp.buf.code_action()<CR>')
   mapper('n', '<c-p>', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+  mapper("i", "<c-n>", "<Plug>(completion_trigger)", false)
+  mapper("i", "<c-j>", "<Plug>(completion_next_source)", false)
+  mapper("i", "<c-k>", "<Plug>(completion_prev_source)", false)
 end
 
 lsp.pyls.setup{

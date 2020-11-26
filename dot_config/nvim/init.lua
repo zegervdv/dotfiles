@@ -60,6 +60,7 @@ require'nvim-treesitter.configs'.setup {
 local chain_complete_list = {
   default = {
     default = {
+      {complete_items = {'lsp'}},
       {complete_items = {'lsp', 'snippet', 'ts', 'buffer'}},
       {complete_items = {'path'}, triggered_only = {'/'}},
       {complete_items = {'ts'}},

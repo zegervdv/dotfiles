@@ -109,9 +109,9 @@ vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
     if not vim.api.nvim_buf_get_option(bufnr, "modified") then
         local view = vim.fn.winsaveview()
         vim.lsp.util.apply_text_edits(result, bufnr)
-        vim.fn.winrestview(view)
         -- Fix to reload Treesitter
-        vim.api.nvim_command("edit")
+        vim.api.nvim_command("noautocmd edit")
+        vim.fn.winrestview(view)
     end
 end
 

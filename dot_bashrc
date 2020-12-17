@@ -30,6 +30,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 
 PATH=$HOME/bin:$PATH
 PATH=$HOME/.cargo/bin:$PATH
+PATH=$HOME/.local/bin:$PATH
 
 cd_func ()
  {

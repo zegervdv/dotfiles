@@ -1193,6 +1193,7 @@ let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_confirm_key_rhs = "\<Plug>delimitMateCR"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:completion_enable_auto_paren=1
 
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1

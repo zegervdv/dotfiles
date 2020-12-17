@@ -1244,7 +1244,7 @@ let g:clipboard = {
       \   'cache_enabled': 1,
       \ }
 
-luafile ~/.config/nvim/init.lua
+luafile ~/.config/nvim/config.lua
 
 " Load local vimrc
 if filereadable($HOME . '/.vimrc.local')

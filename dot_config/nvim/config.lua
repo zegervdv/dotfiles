@@ -132,6 +132,24 @@ end
 if (vim.fn.executable('efm-langserver') == 1) then
   lsp.efm.setup{
     on_attach = on_attach;
+    init_options = {documentFormatting = true};
     root_dir = lsputil.root_pattern('.git', '.hg');
+    settings = {
+      rootMarkers = {".git/", ".hg/"},
+      languages = {
+        python = {
+          {
+            formatCommand = "black -",
+            formatStdin = true
+          },
+          {
+            lintCommand = "flake8 --stdin-display-name ${INPUT} -",
+            lintStdin = true,
+            lintIgnoreExitCode = true,
+            lintFormats = {"%f:%l:%c: %m"}
+          }
+        }
+      }
+    };
   }
 end

@@ -130,23 +130,12 @@ if (vim.fn.executable('veridian') == 1) then
 end
 
 if (vim.fn.executable('efm-langserver') == 1) then
-  languages = {};
+  require 'efm/python'
 
-  languages.python = {};
-  if (vim.fn.executable('black') == 1) then
-    table.insert(languages.python, {
-      formatCommand = "black -",
-      formatStdin = true
-    })
-  end
-  if (vim.fn.executable('flake8') == 1) then
-    table.insert(languages.python, {
-      lintCommand = "flake8 --stdin-display-name ${INPUT} -",
-      lintStdin = true,
-      lintIgnoreExitCode = true,
-      lintFormats = {"%f:%l:%c: %m"}
-    })
-  end
+  -- May not be installed, use pcall to handle errors
+  pcall(require, 'efm/systemverilog')
+
+  local language_cfg = require'efm/languages'
 
   lsp.efm.setup{
     on_attach = on_attach;
@@ -154,7 +143,7 @@ if (vim.fn.executable('efm-langserver') == 1) then
     root_dir = lsputil.root_pattern('.git', '.hg');
     settings = {
       rootMarkers = {".git/", ".hg/"},
-      languages = languages
+      languages = language_cfg
     };
   }
 end

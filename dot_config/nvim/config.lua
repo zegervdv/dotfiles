@@ -130,26 +130,31 @@ if (vim.fn.executable('veridian') == 1) then
 end
 
 if (vim.fn.executable('efm-langserver') == 1) then
+  languages = {};
+
+  languages.python = {};
+  if (vim.fn.executable('black') == 1) then
+    table.insert(languages.python, {
+      formatCommand = "black -",
+      formatStdin = true
+    })
+  end
+  if (vim.fn.executable('flake8') == 1) then
+    table.insert(languages.python, {
+      lintCommand = "flake8 --stdin-display-name ${INPUT} -",
+      lintStdin = true,
+      lintIgnoreExitCode = true,
+      lintFormats = {"%f:%l:%c: %m"}
+    })
+  end
+
   lsp.efm.setup{
     on_attach = on_attach;
     init_options = {documentFormatting = true};
     root_dir = lsputil.root_pattern('.git', '.hg');
     settings = {
       rootMarkers = {".git/", ".hg/"},
-      languages = {
-        python = {
-          {
-            formatCommand = "black -",
-            formatStdin = true
-          },
-          {
-            lintCommand = "flake8 --stdin-display-name ${INPUT} -",
-            lintStdin = true,
-            lintIgnoreExitCode = true,
-            lintFormats = {"%f:%l:%c: %m"}
-          }
-        }
-      }
+      languages = languages
     };
   }
 end

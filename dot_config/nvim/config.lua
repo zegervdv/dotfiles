@@ -1,3 +1,108 @@
+--
+-- Neovim dotfiles
+--
+--
+
+local execute = vim.api.nvim_command
+local fn = vim.fn
+
+-- Bootstrap package manager
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+
+if fn.empty(fn.glob(install_path)) > 0 then
+  execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+end
+
+require('packer').startup(function()
+  use {'wbthomason/packer.nvim'}
+
+  -- General plugins
+  use {'tpope/vim-sensible'}
+  use {'tpope/vim-repeat'}
+  use {'tpope/vim-rsi'}
+  use {'sgur/vim-editorconfig'}
+  use {'ShikChen/osc52.vim'}
+  use {'einfachtoll/didyoumean'}
+
+  use {'tpope/vim-obsession'}
+  use {
+    'tpope/vim-eunuch',
+    cmd = {
+      'Remove',
+      'Unlink',
+      'Move',
+      'Rename',
+      'Mkdir',
+      'Chmod',
+      'Find',
+      'Locate',
+      'SudoEdit',
+      'SudoWrite'
+    }
+  }
+
+  -- Spelling/autocorrection
+  use {'tpope/vim-abolish'}
+
+  -- Git/VCS
+  use {'vim-scripts/gitignore'}
+  use {'sjl/splice.vim', opt = true, cmd = {'SpliceInit'}}
+  use {'tpope/vim-git'}
+
+  -- Comments
+  use {'tpope/vim-commentary'}
+
+  -- Undoing
+  use {'sjl/gundo.vim', cmd = {'GundoToggle'}}
+
+  -- Parentheses etc
+  use {'tpope/vim-surround'}
+  use {'raimondi/delimitMate'}
+  use {'zegervdv/vim-endwise'}
+
+  -- Moving around within lines
+  use {'wellle/targets.vim', event = 'InsertEnter *'}
+
+  -- Searching
+  use {'mhinz/vim-grepper', cmd = {'Grepper'}}
+
+  -- Indent lines
+  use {'Yggdroot/indentline'}
+  use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+
+  -- Tmux
+  use {'christoomey/vim-tmux-navigator', cond = os.getenv('TMUX')}
+  use {'tmux-plugins/vim-tmux-focus-events', cond = os.getenv('TMUX')}
+
+  -- Completion/snippets/LSP
+  use {'neovim/nvim-lspconfig'}
+  use {
+    'nvim-lua/completion-nvim',
+    'steelsojka/completion-buffers'
+  }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter-refactor',
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    {'nvim-treesitter/playground', opt = true}
+  }
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      'nvim-lua/popup.nvim',
+      'nvim-lua/plenary.nvim'
+    }
+  }
+
+  -- File navigation
+  use {'justinmk/vim-dirvish'}
+
+  -- Colorscheme
+  use {'zegervdv/nvcode-color-schemes.vim'}
+
+end)
+
+
 local lsp = require'lspconfig'
 local lsputil = require'lspconfig.util'
 

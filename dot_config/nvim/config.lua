@@ -7,100 +7,111 @@ local execute = vim.api.nvim_command
 local fn = vim.fn
 
 -- Bootstrap package manager
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
   execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
 end
 
-require('packer').startup(function()
-  use {'wbthomason/packer.nvim'}
+-- Packer configuration is compiled and only needs to be loaded on changes
+function packer_enable()
+  vim.cmd "packadd packer.nvim"
 
-  -- General plugins
-  use {'tpope/vim-sensible'}
-  use {'tpope/vim-repeat'}
-  use {'tpope/vim-rsi'}
-  use {'sgur/vim-editorconfig'}
-  use {'ShikChen/osc52.vim'}
-  use {'einfachtoll/didyoumean'}
+  require('packer').startup(function()
+    use {'wbthomason/packer.nvim', opt = true}
 
-  use {'tpope/vim-obsession'}
-  use {
-    'tpope/vim-eunuch',
-    cmd = {
-      'Remove',
-      'Unlink',
-      'Move',
-      'Rename',
-      'Mkdir',
-      'Chmod',
-      'Find',
-      'Locate',
-      'SudoEdit',
-      'SudoWrite'
+    -- General plugins
+    use {'tpope/vim-sensible'}
+    use {'tpope/vim-repeat'}
+    use {'tpope/vim-rsi'}
+    use {'sgur/vim-editorconfig'}
+    use {'ShikChen/osc52.vim'}
+    use {'einfachtoll/didyoumean'}
+
+    use {'tpope/vim-obsession'}
+    use {
+      'tpope/vim-eunuch',
+      cmd = {
+        'Remove',
+        'Unlink',
+        'Move',
+        'Rename',
+        'Mkdir',
+        'Chmod',
+        'Find',
+        'Locate',
+        'SudoEdit',
+        'SudoWrite'
+      }
     }
-  }
 
-  -- Spelling/autocorrection
-  use {'tpope/vim-abolish'}
+    use {'psliwka/vim-smoothie'}
 
-  -- Git/VCS
-  use {'vim-scripts/gitignore'}
-  use {'sjl/splice.vim', opt = true, cmd = {'SpliceInit'}}
-  use {'tpope/vim-git'}
+    -- Spelling/autocorrection
+    use {'tpope/vim-abolish'}
 
-  -- Comments
-  use {'tpope/vim-commentary'}
+    -- Git/VCS
+    use {'vim-scripts/gitignore'}
+    use {'sjl/splice.vim', opt = true, cmd = {'SpliceInit'}}
+    use {'tpope/vim-git'}
 
-  -- Undoing
-  use {'sjl/gundo.vim', cmd = {'GundoToggle'}}
+    -- Comments
+    use {'tpope/vim-commentary'}
 
-  -- Parentheses etc
-  use {'tpope/vim-surround'}
-  use {'raimondi/delimitMate'}
-  use {'zegervdv/vim-endwise'}
+    -- Undoing
+    use {'sjl/gundo.vim', cmd = {'GundoToggle'}}
 
-  -- Moving around within lines
-  use {'wellle/targets.vim', event = 'InsertEnter *'}
+    -- Parentheses etc
+    use {'tpope/vim-surround'}
+    use {'raimondi/delimitMate'}
+    use {'zegervdv/vim-endwise'}
 
-  -- Searching
-  use {'mhinz/vim-grepper', cmd = {'Grepper'}}
+    -- Moving around within lines
+    use {'wellle/targets.vim', event = 'InsertEnter *'}
 
-  -- Indent lines
-  use {'Yggdroot/indentline'}
-  use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    -- Searching
+    use {'mhinz/vim-grepper', cmd = {'Grepper'}}
 
-  -- Tmux
-  use {'christoomey/vim-tmux-navigator', cond = os.getenv('TMUX')}
-  use {'tmux-plugins/vim-tmux-focus-events', cond = os.getenv('TMUX')}
+    -- Indent lines
+    use {'Yggdroot/indentline'}
+    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
 
-  -- Completion/snippets/LSP
-  use {'neovim/nvim-lspconfig'}
-  use {
-    'nvim-lua/completion-nvim',
-    'steelsojka/completion-buffers'
-  }
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    'nvim-treesitter/nvim-treesitter-refactor',
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    {'nvim-treesitter/playground', opt = true}
-  }
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = {
-      'nvim-lua/popup.nvim',
-      'nvim-lua/plenary.nvim'
+    -- Tmux
+    function test_tmux()
+      return os.getenv('TMUX') ~= nil
+    end
+    use {'christoomey/vim-tmux-navigator'}
+    use {'tmux-plugins/vim-tmux-focus-events', cond = test_tmux}
+
+    -- Completion/snippets/LSP
+    use {'neovim/nvim-lspconfig'}
+    use {
+      'nvim-lua/completion-nvim',
+      'steelsojka/completion-buffers'
     }
-  }
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-treesitter/nvim-treesitter-refactor',
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      {'nvim-treesitter/playground', opt = true}
+    }
+    use {'SirVer/ultisnips'}
+    use {
+      'nvim-telescope/telescope.nvim',
+      requires = {
+        'nvim-lua/popup.nvim',
+        'nvim-lua/plenary.nvim'
+      }
+    }
 
-  -- File navigation
-  use {'justinmk/vim-dirvish'}
+    -- File navigation
+    use {'justinmk/vim-dirvish'}
 
-  -- Colorscheme
-  use {'zegervdv/nvcode-color-schemes.vim'}
+    -- Colorscheme
+    use {'zegervdv/nvcode-color-schemes.vim'}
 
-end)
+  end)
+end
 
 
 local lsp = require'lspconfig'

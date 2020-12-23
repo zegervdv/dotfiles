@@ -3,6 +3,9 @@
 let s:darwin = has('mac')
 let s:windows = has('win32')
 
+luafile ~/.config/nvim/config.lua
+command! PackerLoad lua packer_enable()
+
 " Activate built in plugins {{{
 if !has('nvim')
   if has('packages')
@@ -1075,9 +1078,6 @@ let g:clipboard = {
       \   },
       \   'cache_enabled': 1,
       \ }
-
-luafile ~/.config/nvim/config.lua
-
 " Load local vimrc
 if filereadable($HOME . '/.vimrc.local')
   source ~/.vimrc.local

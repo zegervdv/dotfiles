@@ -252,6 +252,7 @@ if (vim.fn.executable('efm-langserver') == 1) then
 
   -- May not be installed, use pcall to handle errors
   pcall(require, 'efm/systemverilog')
+  pcall(require, 'efm/flp')
 
   local language_cfg = require'efm/languages'
 

@@ -17,7 +17,6 @@ source $VIMRUNTIME/ftplugin/man.vim
 
 if has('packages')
   silent! packadd! log_file
-  silent! packadd! browsify
   silent! packadd! snippets
   silent! packadd! chipscoper
 endif

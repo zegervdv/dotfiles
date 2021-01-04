@@ -47,6 +47,8 @@ function packer_enable()
 
     use {'psliwka/vim-smoothie'}
 
+    use {'zegervdv/nextval.vim', requires = {'tpope/vim-repeat'}}
+
     -- Spelling/autocorrection
     use {'tpope/vim-abolish'}
 

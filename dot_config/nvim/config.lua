@@ -66,7 +66,6 @@ function packer_enable()
     -- Parentheses etc
     use {'tpope/vim-surround'}
     use {'raimondi/delimitMate'}
-    use {'zegervdv/vim-endwise'}
 
     -- Moving around within lines
     use {'wellle/targets.vim', event = 'InsertEnter *'}
@@ -204,7 +203,6 @@ local on_attach = function(client)
     vim.fn.nvim_buf_set_keymap(0, mode, key, result, {noremap=noremap, silent=true})
   end
 
-  -- vim.api.nvim_command('autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()')
   mapper('n', '<CR>', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({show_header=false})<CR>')
   mapper('n', 'gd', '<cmd>lua vim.lsp.buf.declaration()<CR>')
   mapper('n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<CR>')

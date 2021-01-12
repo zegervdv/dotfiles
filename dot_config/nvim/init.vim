@@ -1007,6 +1007,9 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" let g:completion_confirm_key_rhs = "\<Plug>delimitMateCR"
+let g:completion_confirm_key = ""
+imap <expr> <CR> (pumvisible() ? (complete_info()["selected"] != "-1" ? "\<Plug>(completion_confirm_completion)" : "\<Plug>delimitMateCR") : "\<Plug>delimitMateCR")
 
 " Auto close popup menu when finish completion
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -1022,11 +1025,9 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
 let g:completion_enable_snippet = 'UltiSnips'
-"Fallback for https://github.com/Raimondi/delimitMate expanding on enter
-let g:completion_confirm_key_rhs = "\<Plug>delimitMateCR"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:completion_enable_auto_paren=1
+let g:completion_enable_auto_paren=0
 
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1

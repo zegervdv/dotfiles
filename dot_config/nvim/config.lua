@@ -139,7 +139,7 @@ require'nvim-treesitter.configs'.setup {
     smart_rename = {
       enable = true,
       keymaps = {
-        smart_rename = "grr",
+        smart_rename = "gsr",
       },
     },
     navigation = {
@@ -205,13 +205,12 @@ local on_attach = function(client)
   end
 
   -- vim.api.nvim_command('autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()')
-  mapper('n', '<CR>', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
+  mapper('n', '<CR>', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({show_header=false})<CR>')
   mapper('n', 'gd', '<cmd>lua vim.lsp.buf.declaration()<CR>')
   mapper('n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<CR>')
   mapper('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
   mapper('n', 'gD', '<cmd>lua vim.lsp.buf.implementation()<CR>')
   mapper('n', '1gD', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
-  -- mapper('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
   mapper('n', 'gr', "<cmd>lua require'telescope.builtin'.lsp_references()<CR>")
   mapper('n', 'g0', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
   mapper('i', '<c-l>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')

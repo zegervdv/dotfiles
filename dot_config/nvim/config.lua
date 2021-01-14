@@ -290,12 +290,6 @@ lsp.pyls.setup{
     on_attach = on_attach;
 }
 
-if (vim.fn.executable('veridian') == 1) then
-  lsp.veridian.setup{
-    on_attach = on_attach;
-  }
-end
-
 if (vim.fn.executable('efm-langserver') == 1) then
   require 'efm/python'
 
@@ -314,4 +308,10 @@ if (vim.fn.executable('efm-langserver') == 1) then
       languages = language_cfg
     };
   }
+end
+
+-- Try importing local config
+local ok, localconfig = pcall(require, 'localconfig')
+if ok then
+  localconfig.setup {on_attach=on_attach}
 end

@@ -285,8 +285,7 @@ vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
     end
 end
 
-lsp.pyls.setup{
-    cmd = {"pyls"},
+lsp.pyright.setup{
     on_attach = on_attach;
 }
 

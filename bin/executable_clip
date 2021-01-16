@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+DATA=$(cat - | base64)
+
+if [ -z "$TMUX" ]; then
+  echo -ne ""\e]52;c;${DATA}\x07""
+else
+  echo -ne "\ePtmux;\e\e]52;c;${DATA}\x07\e\\"
+fi

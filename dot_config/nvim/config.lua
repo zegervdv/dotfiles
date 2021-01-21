@@ -121,8 +121,7 @@ local mapper = function(mode, key, result, noremap)
 end
 
 -- Terminal
-mapper('n', '<c-z>', '<cmd>lua require"terminal".toggle()<CR>')
--- mapper('t', '<c-z>', '<C-\\><C-n><cmd>lua require"terminal".toggle()<CR>')
+vim.cmd "nnoremap <silent> <c-z> <cmd>lua require'terminal'.toggle()<CR>"
 vim.cmd "tnoremap <silent> <c-z> <c-\\><c-n>:lua require'terminal'.toggle()<CR>"
 
 -- LSP and Treesitter config

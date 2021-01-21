@@ -112,6 +112,20 @@ function packer_enable()
   end)
 end
 
+-- This came from https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/lua/lsp_config.lua
+local mapper = function(mode, key, result, noremap)
+  if noremap == nil then
+    noremap = true
+  end
+  vim.fn.nvim_buf_set_keymap(0, mode, key, result, {noremap=noremap, silent=true})
+end
+
+-- Terminal
+mapper('n', '<c-z>', '<cmd>lua require"terminal".toggle()<CR>')
+-- mapper('t', '<c-z>', '<C-\\><C-n><cmd>lua require"terminal".toggle()<CR>')
+vim.cmd "tnoremap <silent> <c-z> <c-\\><c-n>:lua require'terminal'.toggle()<CR>"
+
+-- LSP and Treesitter config
 
 local lsp = require'lspconfig'
 local lsputil = require'lspconfig.util'
@@ -246,13 +260,6 @@ local on_attach = function(client)
     matching_strategy_list = {'exact', 'fuzzy'},
     chain_complete_list = chain_complete_list,
   })
-  -- This came from https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/lua/lsp_config.lua
-  local mapper = function(mode, key, result, noremap)
-    if noremap == nil then
-      noremap = true
-    end
-    vim.fn.nvim_buf_set_keymap(0, mode, key, result, {noremap=noremap, silent=true})
-  end
 
   mapper('n', '<CR>', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({show_header=false})<CR>')
   mapper('n', 'gd', '<cmd>lua vim.lsp.buf.declaration()<CR>')

@@ -109,8 +109,20 @@ function packer_enable()
     -- Colorscheme
     use {'zegervdv/nvcode-color-schemes.vim'}
 
+    -- Terminal
+    use {'akinsho/nvim-toggleterm.lua'}
+
   end)
 end
+
+require'toggleterm'.setup {
+  size = 20,
+  open_mapping = [[+]],
+  shade_filetypes = {},
+  shade_terminals = true,
+  persist_size = true,
+  direction = 'horizontal',
+}
 
 -- This came from https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/lua/lsp_config.lua
 local mapper = function(mode, key, result, noremap)
@@ -119,10 +131,6 @@ local mapper = function(mode, key, result, noremap)
   end
   vim.fn.nvim_buf_set_keymap(0, mode, key, result, {noremap=noremap, silent=true})
 end
-
--- Terminal
-vim.cmd "nnoremap <silent> <c-z> <cmd>lua require'terminal'.toggle()<CR>"
-vim.cmd "tnoremap <silent> <c-z> <c-\\><c-n>:lua require'terminal'.toggle()<CR>"
 
 -- LSP and Treesitter config
 

@@ -391,7 +391,6 @@ endfunction
 nnoremap <leader>g :call ToggleDiff()<CR>
 
 if has('nvim')
-  tnoremap <space><esc> <C-\><C-n>
   tnoremap <C-h> <C-\><C-n><C-w>h
   tnoremap <C-j> <C-\><C-n><C-w>j
   tnoremap <C-k> <C-\><C-n><C-w>k
@@ -400,6 +399,7 @@ if has('nvim')
     au!
     au BufEnter * if &buftype == 'terminal' | :startinsert | endif
   augroup END
+  let $GIT_EDITOR = 'nvr -cc split --remote-wait'
 endif
 
 " Open buffers, tags... in vertical splits

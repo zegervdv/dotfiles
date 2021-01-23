@@ -837,6 +837,7 @@ endfunction
 augroup ft_git
   au!
   au FileType gitcommit setlocal spell spelllang=en_gb
+  autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 augroup END
 " }}}
 " Ruby {{{

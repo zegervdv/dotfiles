@@ -397,7 +397,9 @@ if has('nvim')
   tnoremap <C-l> <C-\><C-n><C-w>l
   augroup enter_term
     au!
-    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    autocmd TermOpen * startinsert!
+    autocmd BufEnter * if &buftype ==# 'terminal' | :startinsert! | endif
+    autocmd BufLeave * if &buftype ==# 'terminal' | :stopinsert! | endif
   augroup END
   let $GIT_EDITOR = 'nvr -cc split --remote-wait'
 endif

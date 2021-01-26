@@ -96,6 +96,12 @@ function packer_enable()
     }
     use {'SirVer/ultisnips'}
     use {
+      'glepnir/lspsaga.nvim',
+      config = function()
+        require 'lspsaga'.init_lsp_saga { max_hover_width = 300 }
+      end
+    }
+    use {
       'nvim-telescope/telescope.nvim',
       requires = {
         'nvim-lua/popup.nvim',

@@ -123,7 +123,7 @@ end
 
 require'toggleterm'.setup {
   size = 20,
-  open_mapping = [[+]],
+  open_mapping = [[<F12>]],
   shade_filetypes = {},
   shade_terminals = true,
   persist_size = true,

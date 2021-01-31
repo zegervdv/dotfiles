@@ -63,11 +63,7 @@ let g:nvcode_termcolors=256
 colorscheme one
 set background=dark
 
-if s:darwin
-  set background=dark
-  colorscheme tomorrow-night
-  set guifont=inconsolata:h13
-elseif s:windows
+if s:windows
   set background=light
   colorscheme PaperColor
   set guifont=consolas:h10

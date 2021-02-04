@@ -98,7 +98,7 @@ function packer_enable()
     use {
       'glepnir/lspsaga.nvim',
       config = function()
-        require 'lspsaga'.init_lsp_saga { max_hover_width = 300 }
+        require 'lspsaga'.init_lsp_saga { max_diag_msg_width = 300 }
       end
     }
     use {
@@ -277,7 +277,7 @@ local on_attach = function(client)
   mapper('n', '<CR>', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({show_header=false})<CR>')
   mapper('n', 'gd', '<cmd>lua vim.lsp.buf.declaration()<CR>')
   mapper('n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<CR>')
-  mapper('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+  mapper('n', 'K', '<cmd>lua require"lspsaga.hover".render_hover_doc()<CR>')
   mapper('n', 'gD', '<cmd>lua vim.lsp.buf.implementation()<CR>')
   mapper('n', '1gD', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
   mapper('n', 'gr', "<cmd>lua vim.lsp.buf.references()<CR>")
@@ -290,6 +290,7 @@ local on_attach = function(client)
   mapper("i", "<c-j>", "<Plug>(completion_next_source)", false)
   mapper("i", "<c-k>", "<Plug>(completion_prev_source)", false)
   mapper("n", "gp", "<cmd>lua peek_definition()<CR>")
+  -- mapper("n", "gp", "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>")
 end
 
 

@@ -85,8 +85,39 @@ function packer_enable()
     -- Completion/snippets/LSP
     use {'neovim/nvim-lspconfig'}
     use {
-      'nvim-lua/completion-nvim',
-      'steelsojka/completion-buffers'
+      'hrsh7th/nvim-compe',
+      config = function ()
+        require'compe'.setup {
+          enabled = true;
+          autocomplete = true;
+          debug = false;
+          min_length = 1;
+          preselect = 'enable';
+          throttle_time = 80;
+          source_timeout = 200;
+          incomplete_delay = 400;
+          max_abbr_width = 100;
+          max_kind_width = 100;
+          max_menu_width = 100;
+
+          source = {
+            path = true;
+            buffer = true;
+            calc = true;
+            -- vsnip = true;
+            nvim_lsp = true;
+            -- nvim_lua = true;
+            spell = true;
+            ultisnips = true;
+            -- tags = true;
+            -- snippets_nvim = true;
+          };
+        }
+
+        vim.cmd [[ inoremap <silent><expr> <TAB> compe#complete() ]]
+        vim.cmd [[ inoremap <silent><expr> <CR>      compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' }) ]]
+        vim.cmd [[ inoremap <silent><expr> <C-e>     compe#close('<C-e>') ]]
+      end
     }
     use {
       'nvim-treesitter/nvim-treesitter',
@@ -268,12 +299,6 @@ function peek_implementation()
 end
 
 local on_attach = function(client)
-  require'completion'.on_attach({
-    sorting = 'alphabet',
-    matching_strategy_list = {'exact', 'fuzzy'},
-    chain_complete_list = chain_complete_list,
-  })
-
   mapper('n', '<CR>', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({show_header=false})<CR>')
   mapper('n', 'gd', '<cmd>lua vim.lsp.buf.declaration()<CR>')
   mapper('n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<CR>')
@@ -286,9 +311,6 @@ local on_attach = function(client)
   mapper('i', '<c-l>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   mapper('n', '<leader>f', '<cmd>lua vim.lsp.buf.code_action()<CR>')
   mapper('n', '<c-p>', '<cmd>lua vim.lsp.buf.formatting()<CR>')
-  mapper("i", "<c-n>", "<Plug>(completion_trigger)", false)
-  mapper("i", "<c-j>", "<Plug>(completion_next_source)", false)
-  mapper("i", "<c-k>", "<Plug>(completion_prev_source)", false)
   mapper("n", "gp", "<cmd>lua peek_definition()<CR>")
   -- mapper("n", "gp", "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>")
 end

@@ -167,7 +167,7 @@ set sessionoptions-=options
 " Scan files for completion
 set complete=.,w,b,u,k,kspell,t,i,d
 " set completeopt=menuone,longest,preview,noinsert,noselect
-set completeopt=noinsert,menuone,noselect
+set completeopt=menu,menuone,noselect
 
 set splitright
 set virtualedit=block

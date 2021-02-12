@@ -94,7 +94,7 @@ function packer_enable()
           min_length = 1;
           preselect = 'enable';
           throttle_time = 80;
-          source_timeout = 200;
+          source_timeout = 2000;
           incomplete_delay = 400;
           max_abbr_width = 100;
           max_kind_width = 100;
@@ -104,13 +104,11 @@ function packer_enable()
             path = true;
             buffer = true;
             calc = true;
-            -- vsnip = true;
             nvim_lsp = true;
-            -- nvim_lua = true;
+            nvim_lua = true;
             spell = true;
             ultisnips = true;
-            -- tags = true;
-            -- snippets_nvim = true;
+            treesitter = true;
           };
         }
 

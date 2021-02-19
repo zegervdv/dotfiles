@@ -132,3 +132,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
+
+if [ ! -f ~/.lscolors.parsed.sh ]; then
+  echo 'Generating ls colors'
+  dircolors --sh ~/.lscolors > ~/.lscolors.parsed.sh
+fi
+source ~/.lscolors.parsed.sh

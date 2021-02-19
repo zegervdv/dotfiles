@@ -127,7 +127,7 @@ function packer_enable()
     use {
       'glepnir/lspsaga.nvim',
       config = function()
-        require 'lspsaga'.init_lsp_saga { max_diag_msg_width = 300 }
+        require 'lspsaga'.init_lsp_saga {}
       end
     }
     use {
@@ -176,7 +176,7 @@ require "nvim-treesitter.highlight"
 
 require'nvim-treesitter.configs'.setup {
   highlight = {
-    enable = true,
+    enable = false,
   },
   incremental_selection = {
     enable = true,

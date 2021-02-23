@@ -72,8 +72,13 @@ function packer_enable()
     use {'mhinz/vim-grepper', cmd = {'Grepper'}}
 
     -- Indent lines
-    use {'Yggdroot/indentline'}
-    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use {
+      'lukas-reineke/indent-blankline.nvim',
+      branch = 'lua',
+      config = function ()
+        vim.g.indent_blankline_buftype_exclude = {'terminal'}
+      end
+    }
 
     -- Tmux
     function test_tmux()

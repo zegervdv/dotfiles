@@ -272,7 +272,9 @@ EXEC 01;31  # Unix
 .v 32
 .vh 32
 .vhd 32
-.phsi 32
+.phsi 01;33
+.json 01;33
+.build 31
 
 ### Multimedia formats
 
@@ -455,20 +457,20 @@ EXEC 01;31  # Unix
 #.swp 01;36
 #.swo 01;36
 #*,v 01;36
-.bak 01;33
-.BAK 01;33
-.old 01;33
-.OLD 01;33
-.org_archive 01;33
-.off 01;33
-.OFF 01;33
-.dist 01;33
-.DIST 01;33
-.orig 01;33
-.ORIG 01;33
-.swp 01;33
-.swo 01;33
-*,v 01;33
+.bak 00
+.BAK 00
+.old 00
+.OLD 00
+.org_archive 00
+.off 00
+.OFF 00
+.dist 00
+.DIST 00
+.orig 00
+.ORIG 00
+.swp 00
+.swo 00
+*,v 00
 
 # The brightmagenta (Solarized: purple) color is free for you to use for your
 # custom file type

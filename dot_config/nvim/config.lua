@@ -76,7 +76,7 @@ function packer_enable()
       'lukas-reineke/indent-blankline.nvim',
       branch = 'lua',
       config = function ()
-        vim.g.indent_blankline_buftype_exclude = {'terminal'}
+        vim.g.indent_blankline_buftype_exclude = {'terminal', 'help', 'nofile'}
       end
     }
 

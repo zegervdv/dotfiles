@@ -77,6 +77,7 @@ function packer_enable()
       branch = 'lua',
       config = function ()
         vim.g.indent_blankline_buftype_exclude = {'terminal', 'help', 'nofile'}
+        vim.g.indent_blankline_char_highlight = 'Conceal'
       end
     }
 

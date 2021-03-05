@@ -916,6 +916,7 @@ augroup ft_systemverilog
   au FileType systemverilog setlocal foldexpr=nvim_treesitter#foldexpr()
   au FileType systemverilog,verilog call SVAlign()
   au FileType systemverilog,verilog let b:delimitMate_quotes = "\""
+  au FileType systemverilog,verilog set iskeyword+='
 augroup END
 
 function! SVAlign()

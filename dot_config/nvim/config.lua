@@ -77,7 +77,6 @@ function packer_enable()
       branch = 'lua',
       config = function ()
         vim.g.indent_blankline_buftype_exclude = {'terminal', 'help', 'nofile'}
-        vim.g.indent_blankline_char_highlight = 'Conceal'
       end
     }
 
@@ -144,6 +143,107 @@ function packer_enable()
       }
     }
 
+    use {
+      'glepnir/galaxyline.nvim',
+      branch = 'main',
+      -- your statusline
+      config = function() 
+        local gl = require'galaxyline'
+        local colors = require('galaxyline.theme').default
+        local condition = require('galaxyline.condition')
+        local gls = gl.section
+
+        colors.bg = '#2C323C'
+
+        gls.left[1] = {
+          RainbowRed = {
+            provider = function() return '▊ ' end,
+            highlight = {colors.blue,colors.bg}
+          },
+        }
+
+        gls.left[2] = {
+          FileName = {
+            provider = 'FileName',
+            condition = condition.buffer_not_empty,
+            highlight = {colors.magenta,colors.bg,'bold'}
+          }
+        }
+
+
+        gls.left[5] = {
+          DiagnosticError = {
+            provider = 'DiagnosticError',
+            icon = '  ',
+            highlight = {colors.red,colors.bg}
+          }
+        }
+
+        gls.right[1] = {
+          ShowLspClient = {
+            provider = 'GetLspClient',
+            condition = function ()
+              local tbl = {['dashboard'] = true,['']=true}
+              if tbl[vim.bo.filetype] then
+                return false
+              end
+              return true
+            end,
+            icon = ' LSP:',
+            highlight = {colors.green,colors.bg,'bold'}
+          }
+        }
+
+        gls.right[2] = {
+          LineInfo = {
+            provider = 'LineColumn',
+            separator = ' ',
+            separator_highlight = {'NONE',colors.bg},
+            highlight = {colors.fg,colors.bg},
+          },
+        }
+
+        gls.right[3] = {
+          PerCent = {
+            provider = 'LinePercent',
+            separator = ' ',
+            separator_highlight = {'NONE',colors.bg},
+            highlight = {colors.fg,colors.bg,'bold'},
+          }
+        }
+        gls.right[8] = {
+          RainbowBlue = {
+            provider = function() return ' ▊' end,
+            highlight = {colors.blue,colors.bg}
+          },
+        }
+
+        gls.short_line_left[1] = {
+          BufferType = {
+            provider = 'FileTypeName',
+            separator = ' ',
+            separator_highlight = {'NONE',colors.bg},
+            highlight = {colors.blue,colors.bg,'bold'}
+          }
+        }
+
+        gls.short_line_left[2] = {
+          SFileName = {
+            provider =  'SFileName',
+            condition = condition.buffer_not_empty,
+            highlight = {colors.fg,colors.bg,'bold'}
+          }
+        }
+
+        gls.short_line_right[1] = {
+          BufferIcon = {
+            provider= 'BufferIcon',
+            highlight = {colors.fg,colors.bg}
+          }
+        }
+      end,
+    }
+
     -- File navigation
     use {'justinmk/vim-dirvish'}
 
@@ -170,7 +270,7 @@ local mapper = function(mode, key, result, noremap)
   if noremap == nil then
     noremap = true
   end
-  vim.fn.nvim_buf_set_keymap(0, mode, key, result, {noremap=noremap, silent=true})
+  vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap=noremap, silent=true})
 end
 
 -- LSP and Treesitter config

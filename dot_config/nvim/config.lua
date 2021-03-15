@@ -77,7 +77,20 @@ function packer_enable()
       branch = 'lua',
       config = function ()
         vim.g.indent_blankline_buftype_exclude = {'terminal', 'help', 'nofile'}
+        vim.g.indent_blankline_show_first_indent_level = false
       end
+    }
+
+    -- Increment/decrement
+    use {
+      'zegervdv/nrpattern.nvim',
+      requires = 'tpope/vim-repeat',
+      config = function ()
+        local nrpattern = require"nrpattern"
+        local defaults = require"nrpattern.default"
+
+        nrpattern.setup(defaults)
+      end,
     }
 
     -- Tmux
@@ -251,19 +264,22 @@ function packer_enable()
     use {'zegervdv/nvcode-color-schemes.vim'}
 
     -- Terminal
-    use {'akinsho/nvim-toggleterm.lua'}
+    use {
+      'akinsho/nvim-toggleterm.lua',
+      config = function()
+        require'toggleterm'.setup {
+          size = 20,
+          open_mapping = [[<F12>]],
+          shade_filetypes = {},
+          shade_terminals = true,
+          persist_size = true,
+          direction = 'horizontal',
+        }
+      end,
+    }
 
   end)
 end
-
-require'toggleterm'.setup {
-  size = 20,
-  open_mapping = [[<F12>]],
-  shade_filetypes = {},
-  shade_terminals = true,
-  persist_size = true,
-  direction = 'horizontal',
-}
 
 -- This came from https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/lua/lsp_config.lua
 local mapper = function(mode, key, result, noremap)

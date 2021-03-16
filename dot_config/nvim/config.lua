@@ -156,6 +156,15 @@ function packer_enable()
       }
     }
 
+    -- Vanity
+    use {
+      'yamatsum/nvim-web-nonicons',
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = function()
+        require'nvim-nonicons'
+      end
+    }
+
     use {
       'glepnir/galaxyline.nvim',
       branch = 'main',
@@ -176,6 +185,14 @@ function packer_enable()
         }
 
         gls.left[2] = {
+          FileIcon = {
+            provider = 'FileIcon',
+            condition = condition.buffer_not_empty,
+            highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color, colors.bg},
+          },
+        }
+
+        gls.left[3] = {
           FileName = {
             provider = 'FileName',
             condition = condition.buffer_not_empty,
@@ -184,7 +201,7 @@ function packer_enable()
         }
 
 
-        gls.left[5] = {
+        gls.left[4] = {
           DiagnosticError = {
             provider = 'DiagnosticError',
             icon = '  ',
@@ -202,7 +219,7 @@ function packer_enable()
               end
               return true
             end,
-            icon = ' LSP:',
+            icon = require'nvim-nonicons'.get('server') .. ' LSP:',
             highlight = {colors.green,colors.bg,'bold'}
           }
         }

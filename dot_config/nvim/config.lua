@@ -454,20 +454,27 @@ end
 
 
 vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
-    if err ~= nil or result == nil then
-        return
-    end
-    if not vim.api.nvim_buf_get_option(bufnr, "modified") then
-        local view = vim.fn.winsaveview()
-        vim.lsp.util.apply_text_edits(result, bufnr)
-        -- Fix to reload Treesitter
-        -- vim.api.nvim_command("edit")
-        vim.fn.winrestview(view)
-    end
+  if err ~= nil or result == nil then
+    return
+  end
+  if not vim.api.nvim_buf_get_option(bufnr, "modified") then
+    local view = vim.fn.winsaveview()
+    vim.lsp.util.apply_text_edits(result, bufnr)
+    -- Fix to reload Treesitter
+    -- vim.api.nvim_command("edit")
+    vim.fn.winrestview(view)
+  end
+end
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
+  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    update_in_insert = false
+  })(...)
 end
 
 lsp.pyright.setup{
-    on_attach = on_attach;
+  on_attach = on_attach;
 }
 
 if (vim.fn.executable('efm-langserver') == 1) then

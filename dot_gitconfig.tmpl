@@ -6,7 +6,9 @@
 	autosquash = true
 	autostash = true
 [commit]
+{{- if ne .signingkey "" }}
 	gpgsign = true
+{{- end }}
 	verbose = true
 [pull]
 	rebase = true

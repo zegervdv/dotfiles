@@ -487,14 +487,20 @@ if (vim.fn.executable('efm-langserver') == 1) then
 
   local language_cfg = require'efm/languages'
 
+  local filetypes = {}
+  for lang, _ in pairs(language_cfg) do
+    table.insert(filetypes, lang)
+  end
+
   lsp.efm.setup{
-    on_attach = on_attach;
-    init_options = {documentFormatting = true};
-    root_dir = lsputil.root_pattern('.git', '.hg');
+    on_attach = on_attach,
+    filetypes = filetypes,
+    init_options = {documentFormatting = true},
+    root_dir = lsputil.root_pattern('.git', '.hg'),
     settings = {
       rootMarkers = {".git/", ".hg/"},
       languages = language_cfg
-    };
+    },
   }
 end
 

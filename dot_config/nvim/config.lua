@@ -112,11 +112,12 @@ function packer_enable()
           min_length = 1;
           preselect = 'enable';
           throttle_time = 80;
-          source_timeout = 2000;
+          source_timeout = 1000;
           incomplete_delay = 400;
           max_abbr_width = 100;
           max_kind_width = 100;
           max_menu_width = 100;
+          documentation = true;
 
           source = {
             path = true;
@@ -126,11 +127,11 @@ function packer_enable()
             nvim_lua = true;
             spell = true;
             ultisnips = true;
-            treesitter = true;
+            -- TODO add vsnip for LSP snippets
           };
         }
 
-        vim.cmd [[ inoremap <silent><expr> <TAB> compe#complete() ]]
+        vim.cmd [[ inoremap <silent><expr> <C-y> compe#complete() ]]
         vim.cmd [[ inoremap <silent><expr> <CR>      compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' }) ]]
         vim.cmd [[ inoremap <silent><expr> <C-e>     compe#close('<C-e>') ]]
       end

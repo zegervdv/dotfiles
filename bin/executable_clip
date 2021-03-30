@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DATA=$(cat - | base64)
+DATA=$(cat - | sed -r "s/\x1b\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" | base64)
 
 if [ -z "$TMUX" ]; then
   echo -ne "\e]52;c;${DATA}\x07"

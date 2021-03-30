@@ -145,10 +145,69 @@ function packer_enable()
       end
     }
     use {
-      'nvim-treesitter/nvim-treesitter',
+      {
+        'nvim-treesitter/nvim-treesitter',
+        config = function ()
+          require "nvim-treesitter.highlight"
+
+          require'nvim-treesitter.configs'.setup {
+            highlight = {
+              enable = false,
+            },
+            incremental_selection = {
+              enable = true,
+              keymaps = {
+                init_selection = "gnn",
+                node_incremental = "grn",
+                scope_incremental = "grc",
+                node_decremental = "grm",
+              }
+            },
+            refactor = {
+              highlight_definitions = { enable = true },
+              smart_rename = {
+                enable = true,
+                keymaps = {
+                  smart_rename = "gsr",
+                },
+              },
+              navigation = {
+                enable = true,
+                keymaps = {
+                  goto_definition = "gnd",
+                  list_definitions = "gnD",
+                },
+              },
+            },
+            textobjects = {
+              move = {
+                enable = true,
+                goto_next_start = {
+                  ["]]"] = "@block.outer",
+                },
+                goto_previous_start = {
+                  ["[["] = "@block.outer",
+                },
+                goto_next_end = {
+                  ["]["] = "@block.outer",
+                },
+                goto_previous_end = {
+                  ["[]"] = "@block.outer",
+                },
+              },
+            },
+            playground = {
+              enable = true,
+              disable = {},
+              updatetime = 25,
+              persist_queries = false
+            }
+          }
+        end
+      },
       'nvim-treesitter/nvim-treesitter-refactor',
       'nvim-treesitter/nvim-treesitter-textobjects',
-      {'nvim-treesitter/playground', opt = true}
+      {'nvim-treesitter/playground', opt = true},
     }
     use {'SirVer/ultisnips'}
     use {
@@ -322,62 +381,6 @@ end
 
 local lsp = require'lspconfig'
 local lsputil = require'lspconfig.util'
-
-require "nvim-treesitter.highlight"
-
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = false,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    }
-  },
-  refactor = {
-    highlight_definitions = { enable = true },
-    smart_rename = {
-      enable = true,
-      keymaps = {
-        smart_rename = "gsr",
-      },
-    },
-    navigation = {
-      enable = true,
-      keymaps = {
-        goto_definition = "gnd",
-        list_definitions = "gnD",
-      },
-    },
-  },
-  textobjects = {
-    move = {
-      enable = true,
-      goto_next_start = {
-        ["]]"] = "@block.outer",
-      },
-      goto_previous_start = {
-        ["[["] = "@block.outer",
-      },
-      goto_next_end = {
-        ["]["] = "@block.outer",
-      },
-      goto_previous_end = {
-        ["[]"] = "@block.outer",
-      },
-    },
-  },
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25,
-    persist_queries = false
-  }
-}
 
 local on_attach = function(client)
   mapper('n', '<CR>', '<cmd>lua require"lspsaga.diagnostic".show_line_diagnostics()<CR>')

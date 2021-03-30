@@ -88,6 +88,15 @@ function packer_enable()
       config = function ()
         local nrpattern = require"nrpattern"
         local defaults = require"nrpattern.default"
+        
+        defaults[{"input", "output"}] = {
+          priority = 12,
+          filetypes = {"verilog", "systemverilog"},
+        }
+        defaults[{"'1", "'0"}] = {
+          priority = 9,
+          filetypes = {"verilog", "systemverilog"},
+        }
 
         nrpattern.setup(defaults)
       end,
@@ -122,7 +131,6 @@ function packer_enable()
           source = {
             path = true;
             buffer = true;
-            calc = true;
             nvim_lsp = true;
             nvim_lua = true;
             spell = true;
@@ -296,6 +304,9 @@ function packer_enable()
       end,
     }
 
+    -- Filetypes
+    use {'Glench/Vim-Jinja2-Syntax'}
+
   end)
 end
 
@@ -368,74 +379,6 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 
-local chain_complete_list = {
-  default = {
-    default = {
-      {complete_items = {'lsp'}},
-      {complete_items = {'lsp', 'snippet', 'ts', 'buffer'}},
-      {complete_items = {'path'}, triggered_only = {'/'}},
-      {complete_items = {'ts'}},
-    },
-    string = {
-      {complete_items = {'path'}, triggered_only = {'/'}},
-    },
-    comment = {},
-  }
-}
-
--- Copied and modified from https://github.com/chengzeyi/.vim_runtime/blob/8a47981c81d31f88d1138211908e58fd58e4decc/lua/lsp_ext.lua
-
-function preview_location(location, context, before_context)
-  -- location may be LocationLink or Location (more useful for the former)
-  context = context or 15
-  before_context = before_context or 0
-  local uri = location.targetUri or location.uri
-  if uri == nil then
-    return
-  end
-  local bufnr = vim.uri_to_bufnr(uri)
-  if not vim.api.nvim_buf_is_loaded(bufnr) then
-    vim.fn.bufload(bufnr)
-  end
-  local range = location.targetRange or location.range
-  local contents =
-  vim.api.nvim_buf_get_lines(bufnr, range.start.line - before_context, range['end'].line + 1 + context, false)
-  local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
-  return vim.lsp.util.open_floating_preview(contents, filetype)
-end
-
-function preview_location_callback(_, method, result)
-  local context = 15
-  if result == nil or vim.tbl_isempty(result) then
-    return nil
-  end
-  if vim.tbl_islist(result) then
-    preview_location(result[1], context, 5)
-  else
-    preview_location(result, context, 5)
-  end
-end
-
-function peek_declaration()
-  local params = vim.lsp.util.make_position_params()
-  return vim.lsp.buf_request(0, 'textDocument/declaration', params, preview_location_callback)
-end
-
-function peek_definition()
-  local params = vim.lsp.util.make_position_params()
-  return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
-end
-
-function peek_type_definition()
-  local params = vim.lsp.util.make_position_params()
-  return vim.lsp.buf_request(0, 'textDocument/typeDefinition', params, preview_location_callback)
-end
-
-function peek_implementation()
-  local params = vim.lsp.util.make_position_params()
-  return vim.lsp.buf_request(0, 'textDocument/implementation', params, preview_location_callback)
-end
-
 local on_attach = function(client)
   mapper('n', '<CR>', '<cmd>lua require"lspsaga.diagnostic".show_line_diagnostics()<CR>')
   mapper('n', 'gd', '<cmd>lua vim.lsp.buf.declaration()<CR>')
@@ -449,8 +392,7 @@ local on_attach = function(client)
   mapper('i', '<c-l>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   mapper('n', '<leader>f', '<cmd>lua vim.lsp.buf.code_action()<CR>')
   mapper('n', '<c-p>', '<cmd>lua vim.lsp.buf.formatting()<CR>')
-  mapper("n", "gp", "<cmd>lua peek_definition()<CR>")
-  -- mapper("n", "gp", "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>")
+  mapper("n", "gp", "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>")
 end
 
 
@@ -482,7 +424,7 @@ if (vim.fn.executable('efm-langserver') == 1) then
   require 'efm/python'
 
   -- May not be installed, use pcall to handle errors
-  pcall(require, 'efm/systemverilog')
+  -- pcall(require, 'efm/systemverilog')
   pcall(require, 'efm/flp')
 
   local language_cfg = require'efm/languages'

@@ -4,7 +4,6 @@ let s:darwin = has('mac')
 let s:windows = has('win32')
 
 luafile ~/.config/nvim/config.lua
-command! PackerLoad lua packer_enable()
 
 " Activate built in plugins {{{
 if !has('nvim')
@@ -58,9 +57,6 @@ let g:PaperColor_Theme_Options = {
 
 set termguicolors
 
-let g:one_allow_italics=1
-let g:nvcode_termcolors=256
-colorscheme one
 set background=dark
 
 if s:windows

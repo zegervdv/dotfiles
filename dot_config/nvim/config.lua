@@ -236,23 +236,21 @@ require('packer').startup(function()
     'glepnir/lspsaga.nvim',
     config = function()
       require 'lspsaga'.init_lsp_saga {}
-    end
+    end,
   }
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
       'nvim-lua/popup.nvim',
-      'nvim-lua/plenary.nvim'
-    }
+      'nvim-lua/plenary.nvim',
+    },
   }
 
   -- Vanity
   use {
     'yamatsum/nvim-web-nonicons',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require'nvim-nonicons'
-    end
+    config = function() require'nvim-nonicons' end,
   }
 
   use {
@@ -368,7 +366,6 @@ require('packer').startup(function()
   use {'justinmk/vim-dirvish'}
 
   -- Colorscheme
-  use {'zegervdv/nvcode-color-schemes.vim'}
   use {
     'zegervdv/one-lush',
     requires = 'rktjmp/lush.nvim',

@@ -68,8 +68,20 @@ function packer_enable()
     -- Moving around within lines
     use {'wellle/targets.vim', event = 'InsertEnter *'}
 
+    -- Peek at lines
+    use {
+      'nacro90/numb.nvim',
+      config = require'numb'.setup,
+    }
+
     -- Searching
     use {'mhinz/vim-grepper', cmd = {'Grepper'}}
+
+    -- Keymaps TODO: to be removed when #13823 is merged
+    use {
+      'tjdevries/astronauta.nvim',
+      config = function() require'astronauta.keymap' end,
+    }
 
     -- Indent lines
     use {
@@ -106,8 +118,19 @@ function packer_enable()
     function test_tmux()
       return os.getenv('TMUX') ~= nil
     end
-    use {'christoomey/vim-tmux-navigator'}
     use {'tmux-plugins/vim-tmux-focus-events', cond = test_tmux}
+    use {
+      'numtostr/navigator.nvim',
+      config = function()
+        require('Navigator').setup { auto_save = 'current', disable_on_zoom = false }
+
+        local nnoremap = vim.keymap.nnoremap
+        nnoremap { '<c-h>', require'Navigator'.left }
+        nnoremap { '<c-j>', require'Navigator'.down }
+        nnoremap { '<c-k>', require'Navigator'.up }
+        nnoremap { '<c-l>', require'Navigator'.right }
+      end
+    }
 
     -- Completion/snippets/LSP
     use {'neovim/nvim-lspconfig'}
@@ -347,6 +370,15 @@ function packer_enable()
 
     -- Colorscheme
     use {'zegervdv/nvcode-color-schemes.vim'}
+    use {
+      'zegervdv/one-lush',
+      requires = 'rktjmp/lush.nvim',
+      config = function()
+        local lush = require('lush')
+        local spec = require('lush_theme.one-lush')
+        lush(spec)
+      end,
+    }
 
     -- Terminal
     use {

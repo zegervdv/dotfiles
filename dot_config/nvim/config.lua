@@ -70,7 +70,7 @@ require('packer').startup(function()
   -- Peek at lines
   use {
     'nacro90/numb.nvim',
-    config = require'numb'.setup,
+    config = function () require'numb'.setup() end,
   }
 
   -- Searching

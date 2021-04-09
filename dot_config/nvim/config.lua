@@ -55,7 +55,7 @@ require('packer').startup(function()
   use {'tpope/vim-git'}
 
   -- Comments
-  use {'tpope/vim-commentary'}
+  use {'b3nj5m1n/kommentary'}
 
   -- Undoing
   use {'sjl/gundo.vim', cmd = {'GundoToggle'}}

@@ -446,6 +446,7 @@ lsp.pyright.setup{
 
 if (vim.fn.executable('efm-langserver') == 1) then
   require 'efm/python'
+  require 'efm/lua'
 
   -- May not be installed, use pcall to handle errors
   -- pcall(require, 'efm/systemverilog')

@@ -320,9 +320,8 @@ require('packer').startup(function()
     'zegervdv/one-lush',
     requires = 'rktjmp/lush.nvim',
     config = function()
-      local lush = require('lush')
-      local spec = require('lush_theme.one-lush')
-      lush(spec)
+      require 'lush_theme.one-lush'
+      vim.cmd [[ colorscheme one-lush ]]
     end,
   }
 
@@ -331,9 +330,9 @@ require('packer').startup(function()
     'akinsho/nvim-toggleterm.lua',
     config = function()
       require'toggleterm'.setup {
-        size = 20,
+        size = 15,
         open_mapping = [[<F12>]],
-        shade_filetypes = {},
+        shade_filetypes = { 'none' },
         shade_terminals = true,
         persist_size = true,
         direction = 'horizontal',
@@ -347,6 +346,10 @@ require('packer').startup(function()
 end)
 
 -- LSP config
+vim.cmd [[ sign define LspDiagnosticsSignError text=▊ texthl=LspDiagnosticsSignError linehl= numhl= ]]
+vim.cmd [[ sign define LspDiagnosticsSignWarning text=▊ texthl=LspDiagnosticsSignWarning linehl= numhl= ]]
+vim.cmd [[ sign define LspDiagnosticsSignInformation text=▊ texthl=LspDiagnosticsSignInformation linehl= numhl= ]]
+vim.cmd [[ sign define LspDiagnosticsSignHint text=▊ texthl=LspDiagnosticsSignHint linehl= numhl= ]]
 
 local lsp = require 'lspconfig'
 local lsputil = require 'lspconfig.util'

@@ -197,10 +197,6 @@ require('packer').startup(function()
   }
   use { 'SirVer/ultisnips' }
   use { 'glepnir/lspsaga.nvim', config = function() require'lspsaga'.init_lsp_saga {} end }
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim' },
-  }
 
   -- Vanity
   use {
@@ -346,11 +342,6 @@ require('packer').startup(function()
 end)
 
 -- LSP config
-vim.cmd [[ sign define LspDiagnosticsSignError text=▊ texthl=LspDiagnosticsSignError linehl= numhl= ]]
-vim.cmd [[ sign define LspDiagnosticsSignWarning text=▊ texthl=LspDiagnosticsSignWarning linehl= numhl= ]]
-vim.cmd [[ sign define LspDiagnosticsSignInformation text=▊ texthl=LspDiagnosticsSignInformation linehl= numhl= ]]
-vim.cmd [[ sign define LspDiagnosticsSignHint text=▊ texthl=LspDiagnosticsSignHint linehl= numhl= ]]
-
 local lsp = require 'lspconfig'
 local lsputil = require 'lspconfig.util'
 
@@ -364,12 +355,16 @@ local on_attach = function(client)
   nnoremap { 'gD', vim.lsp.buf.implementation, silent = true }
   nnoremap { '1gD', vim.lsp.buf.type_definition, silent = true }
   nnoremap { 'gr', vim.lsp.buf.references, silent = true }
-  nnoremap { 'tgr', require'telescope.builtin'.lsp_references, silent = true }
   nnoremap { 'g0', vim.lsp.buf.document_symbol, silent = true }
   nnoremap { '<c-p>', vim.lsp.buf.formatting, silent = true }
   nnoremap { 'gp', require'lspsaga.provider'.preview_definition, silent = true }
 
   inoremap { '<c-l>', vim.lsp.buf.signature_help, silent = true }
+
+  vim.cmd [[ sign define LspDiagnosticsSignError text=▊ texthl=LspDiagnosticsSignError linehl= numhl= ]]
+  vim.cmd [[ sign define LspDiagnosticsSignWarning text=▊ texthl=LspDiagnosticsSignWarning linehl= numhl= ]]
+  vim.cmd [[ sign define LspDiagnosticsSignInformation text=▊ texthl=LspDiagnosticsSignInformation linehl= numhl= ]]
+  vim.cmd [[ sign define LspDiagnosticsSignHint text=▊ texthl=LspDiagnosticsSignHint linehl= numhl= ]]
 end
 
 vim.lsp.handlers['textDocument/formatting'] = function(err, _, result, _, bufnr)

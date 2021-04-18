@@ -17,7 +17,6 @@ source $VIMRUNTIME/ftplugin/man.vim
 if has('packages')
   silent! packadd! log_file
   silent! packadd! snippets
-  silent! packadd! chipscoper
 endif
 
 if has("nvim")
@@ -46,14 +45,6 @@ set scrolloff=4 " Stay 4 lines from top/bottom
 set showcmd
 
 " Theme and style
-
-let g:PaperColor_Theme_Options = {
-      \ 'theme': {
-      \   'default': {
-      \     'allow_bold': 0
-      \   }
-      \ }
-      \}
 
 set termguicolors
 
@@ -218,45 +209,6 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**,*.d
 set mouse=nic
 
 " }}}
-" Status line {{{
-hi StatusLine ctermfg=0 ctermbg=3 cterm=NONE
-hi StatusLineNC ctermfg=8 ctermbg=7 cterm=NONE
-hi User1 ctermfg=0 ctermbg=7
-hi User2 ctermfg=NONE ctermbg=NONE
-hi User3 ctermfg=0 ctermbg=3
-hi User4 ctermfg=0 ctermbg=5
-function! Status()
-  let l:statusline=''
-  let l:statusline.=' %t'
-  let l:statusline.=' %1*'
-  let l:statusline.=' %Y'
-  let l:statusline.=' %2*'
-  let l:statusline.='%='
-  let l:statusline.=' %1*'
-  let l:statusline.=' line '
-  let l:statusline.=''
-  let l:statusline.='%l'
-  let l:statusline.=' %3*'
-  let l:statusline.=' of '
-  let l:statusline.=''
-  let l:statusline.='%L '
-  let l:statusline.=''
-  return l:statusline
-endfunction
-set laststatus=2
-set statusline=%!Status()
-" }}}
-" Fix Colors in colorscheme {{{
-function! SpellHighlights() abort
-  highlight SpellBad ctermbg=256 ctermfg=210
-  highlight SpellLocal ctermbg=240 ctermfg=010
-  highlight SpellCap ctermbg=256 ctermfg=211
-endfunction
-augroup SpellColors
-  autocmd!
-  autocmd ColorScheme * call SpellHighlights()
-augroup END
-"}}}
 
 " Mappings {{{
 " Set leader to spacebar
@@ -948,13 +900,6 @@ let g:python_highlight_all=1
 " }}}
 
 " Plugin settings {{{
-" Easy-align {{{
-" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-" }}}
 " Gundo tree {{{
 nnoremap <leader>u :GundoToggle<CR>
 " }}}
@@ -1027,9 +972,6 @@ let g:completion_enable_auto_paren=0
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 " }}}
-" Background make {{{
-nnoremap <F9> :PMake<CR>
-" }}}
 " Splice {{{
 let g:splice_initial_diff_grid=1
 let g:splice_initial_diff_compare=1
@@ -1038,22 +980,6 @@ let g:splice_initial_scrollbind_grid=1
 let g:splice_initial_scrollbind_compare=1
 let g:splice_initial_scrollbind_path=1
 let g:splice_wrap="nowrap"
-" }}}
-" Chipscoper {{{
-nnoremap <leader>cm :call ChipScoperMark()<CR>
-nnoremap <leader>ci :call ChipScoperInsert()<CR>
-nnoremap <leader>cd :call ChipScoperUnMark()<CR>
-augroup cs_vhdl
-  autocmd!
-  autocmd FileType vhdl packadd chipscoper
-  autocmd FileType vhdl silent! call ChipScoperSetup()
-augroup END
-" }}}
-" GDB {{{
-let  g:nvimgdb_disable_start_keymaps = 1
-" }}}
-" Indents {{{
-let g:indentLine_char = '|'
 " }}}
 " }}}
 

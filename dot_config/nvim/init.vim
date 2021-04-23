@@ -114,6 +114,7 @@ set shortmess+=c
 
 set ttimeoutlen=-1 " Set the timeout to a minimum
 set diffopt+=iwhite " Ignore spaces in diffs"
+set diffopt+=internal,algorithm:patience " use patience algorithm for better diffs
 
 set tags=.git/tags,tags,/project/asic_fpga/tools/vim/share/vim/vimfiles/tags
 

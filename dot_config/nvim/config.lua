@@ -30,16 +30,19 @@ require('packer').startup(function()
   use {
     'tpope/vim-eunuch',
     cmd = {
-      'Remove',
+      'Delete',
       'Unlink',
       'Move',
       'Rename',
       'Mkdir',
       'Chmod',
-      'Find',
-      'Locate',
+      'Cfind',
+      'Clocate',
+      'Lfind',
+      'Llocate',
       'SudoEdit',
       'SudoWrite',
+      'Wall',
     },
   }
 

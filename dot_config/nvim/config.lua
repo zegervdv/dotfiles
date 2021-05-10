@@ -105,8 +105,6 @@ require('packer').startup(function()
   }
 
   -- Tmux
-  function test_tmux() return os.getenv('TMUX') ~= nil end
-  use { 'tmux-plugins/vim-tmux-focus-events', cond = test_tmux }
   use {
     'numtostr/navigator.nvim',
     config = function()
@@ -359,7 +357,7 @@ local on_attach = function(client)
   nnoremap { '1gD', vim.lsp.buf.type_definition, silent = true }
   nnoremap { 'gr', vim.lsp.buf.references, silent = true }
   nnoremap { 'g0', vim.lsp.buf.document_symbol, silent = true }
-  nnoremap { '<c-p>', vim.lsp.buf.formatting, silent = true }
+  nnoremap { '<c-p>', function () vim.lsp.buf.formatting_sync({}, 5000) end, silent = true }
   nnoremap { 'gp', require'lspsaga.provider'.preview_definition, silent = true }
 
   inoremap { '<c-l>', vim.lsp.buf.signature_help, silent = true }

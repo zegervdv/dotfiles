@@ -240,14 +240,6 @@ require('packer').startup(function()
         },
       }
 
-      gls.left[4] = {
-        DiagnosticError = {
-          provider = 'DiagnosticError',
-          icon = '  ',
-          highlight = { colors.red, colors.bg },
-        },
-      }
-
       gls.right[1] = {
         ShowLspClient = {
           provider = 'GetLspClient',

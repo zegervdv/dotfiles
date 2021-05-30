@@ -144,8 +144,7 @@ require('packer').startup(function()
           nvim_lsp = true,
           nvim_lua = true,
           spell = true,
-          ultisnips = true,
-          -- TODO add vsnip for LSP snippets
+          vsnip = true,
         },
       }
 
@@ -196,7 +195,7 @@ require('packer').startup(function()
     'nvim-treesitter/nvim-treesitter-textobjects',
     { 'nvim-treesitter/playground', opt = true },
   }
-  use { 'SirVer/ultisnips' }
+  use { 'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ' }
   use { 'glepnir/lspsaga.nvim', config = function() require'lspsaga'.init_lsp_saga {} end }
 
   -- Vanity
@@ -357,7 +356,7 @@ local on_attach = function(client)
   nnoremap { '1gD', vim.lsp.buf.type_definition, silent = true }
   nnoremap { 'gr', vim.lsp.buf.references, silent = true }
   nnoremap { 'g0', vim.lsp.buf.document_symbol, silent = true }
-  nnoremap { '<c-p>', function () vim.lsp.buf.formatting_sync({}, 5000) end, silent = true }
+  nnoremap { '<c-p>', function() vim.lsp.buf.formatting_sync({}, 5000) end, silent = true }
   nnoremap { 'gp', require'lspsaga.provider'.preview_definition, silent = true }
 
   inoremap { '<c-l>', vim.lsp.buf.signature_help, silent = true }

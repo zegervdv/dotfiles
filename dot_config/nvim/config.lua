@@ -117,6 +117,7 @@ require('packer').startup(function()
       nnoremap { '<c-l>', require'Navigator'.right, silent = true }
     end,
     requires = 'tjdevries/astronauta.nvim',
+    after = 'astronauta.nvim',
   }
 
   -- Completion/snippets/LSP

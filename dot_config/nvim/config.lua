@@ -198,6 +198,7 @@ require('packer').startup(function()
   }
   use { 'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ' }
   use { 'glepnir/lspsaga.nvim', config = function() require'lspsaga'.init_lsp_saga {} end }
+  use { 'rmagatti/goto-preview', config = function() require'goto-preview'.setup {} end }
 
   -- Vanity
   use {
@@ -341,7 +342,7 @@ local lsputil = require 'lspconfig.util'
 local on_attach = function(client)
   local nnoremap = vim.keymap.nnoremap
   local inoremap = vim.keymap.inoremap
-  nnoremap { '<CR>', require'lspsaga.diagnostic'.show_line_diagnostics, silent = true }
+  -- nnoremap { '', require'lspsaga.diagnostic'.show_line_diagnostics, silent = true }
   nnoremap { 'gd', vim.lsp.buf.declaration, silent = true }
   nnoremap { '<c-]>', vim.lsp.buf.definition, silent = true }
   nnoremap { 'K', require'lspsaga.hover'.render_hover_doc, silent = true }
@@ -350,7 +351,9 @@ local on_attach = function(client)
   nnoremap { 'gr', vim.lsp.buf.references, silent = true }
   nnoremap { 'g0', vim.lsp.buf.document_symbol, silent = true }
   nnoremap { '<c-p>', function() vim.lsp.buf.formatting_sync({}, 5000) end, silent = true }
-  nnoremap { 'gp', require'lspsaga.provider'.preview_definition, silent = true }
+  -- nnoremap { 'gp', require'lspsaga.provider'.preview_definition, silent = true }
+  nnoremap { 'gp', require'goto-preview'.goto_preview_definition, silent = true }
+  nnoremap { 'gP', require'goto-preview'.close_all_win, silent = true }
 
   inoremap { '<c-l>', vim.lsp.buf.signature_help, silent = true }
 

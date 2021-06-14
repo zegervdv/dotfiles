@@ -357,10 +357,10 @@ local on_attach = function(client)
 
   inoremap { '<c-l>', vim.lsp.buf.signature_help, silent = true }
 
-  vim.cmd [[ sign define LspDiagnosticsSignError text=▊ texthl=LspDiagnosticsSignError linehl= numhl= ]]
-  vim.cmd [[ sign define LspDiagnosticsSignWarning text=▊ texthl=LspDiagnosticsSignWarning linehl= numhl= ]]
-  vim.cmd [[ sign define LspDiagnosticsSignInformation text=▊ texthl=LspDiagnosticsSignInformation linehl= numhl= ]]
-  vim.cmd [[ sign define LspDiagnosticsSignHint text=▊ texthl=LspDiagnosticsSignHint linehl= numhl= ]]
+  vim.fn.sign_define("LspDiagnosticsSignError", { texthl = "LspDiagnosticsSignError", linehl="", numhl = "", text = "▎" })
+  vim.fn.sign_define("LspDiagnosticsSignWarning", { texthl = "LspDiagnosticsSignWarning", linehl="", numhl = "", text = "▎" })
+  vim.fn.sign_define("LspDiagnosticsSignInformation", { texthl = "LspDiagnosticsSignInformation", linehl="", numhl = "", text = "▎" })
+  vim.fn.sign_define("LspDiagnosticsSignHint", { texthl = "LspDiagnosticsSignHint", linehl="", numhl = "", text = "▎" })
 end
 
 vim.lsp.handlers['textDocument/formatting'] = function(err, _, result, _, bufnr)

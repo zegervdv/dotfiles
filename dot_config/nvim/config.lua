@@ -69,14 +69,14 @@ require('packer').startup(function()
   -- Moving around within lines
   use { 'wellle/targets.vim', event = 'InsertEnter *' }
 
-  -- Peek at lines
-  use { 'nacro90/numb.nvim', config = function() require'numb'.setup() end }
-
   -- Searching
   use { 'mhinz/vim-grepper', cmd = { 'Grepper' } }
 
   -- Keymaps TODO: to be removed when #13823 is merged
   use { 'tjdevries/astronauta.nvim', config = function() require 'astronauta.keymap' end }
+
+  -- Opening files
+  use { 'wsdjeg/vim-fetch' }
 
   -- Indent lines
   use {

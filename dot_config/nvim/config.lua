@@ -81,7 +81,6 @@ require('packer').startup(function()
   -- Indent lines
   use {
     'lukas-reineke/indent-blankline.nvim',
-    branch = 'lua',
     config = function()
       vim.g.indent_blankline_buftype_exclude = { 'terminal', 'help', 'nofile' }
       vim.g.indent_blankline_show_first_indent_level = false

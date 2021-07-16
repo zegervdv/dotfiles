@@ -48,6 +48,8 @@ require('packer').startup(function()
 
   use { 'psliwka/vim-smoothie' }
 
+  use { 'nvim-lua/plenary.nvim' }
+
   -- Spelling/autocorrection
   use { 'tpope/vim-abolish' }
 

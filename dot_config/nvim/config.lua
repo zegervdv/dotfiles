@@ -6,7 +6,7 @@ local execute = vim.api.nvim_command
 local fn = vim.fn
 
 -- Bootstrap package manager
-local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+local install_path = fn.stdpath 'data' .. '/site/pack/packer/opt/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
   execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
@@ -75,7 +75,12 @@ require('packer').startup(function()
   use { 'mhinz/vim-grepper', cmd = { 'Grepper' } }
 
   -- Keymaps TODO: to be removed when #13823 is merged
-  use { 'tjdevries/astronauta.nvim', config = function() require 'astronauta.keymap' end }
+  use {
+    'tjdevries/astronauta.nvim',
+    config = function()
+      require 'astronauta.keymap'
+    end,
+  }
 
   -- Opening files
   use { 'wsdjeg/vim-fetch' }
@@ -97,9 +102,8 @@ require('packer').startup(function()
       local nrpattern = require 'nrpattern'
       local defaults = require 'nrpattern.default'
 
-      defaults[{ 'input', 'output' }] =
-          { priority = 12, filetypes = { 'verilog', 'systemverilog' } }
-      defaults[{ '\'1', '\'0' }] = { priority = 9, filetypes = { 'verilog', 'systemverilog' } }
+      defaults[{ 'input', 'output' }] = { priority = 12, filetypes = { 'verilog', 'systemverilog' } }
+      defaults[{ "'1", "'0" }] = { priority = 9, filetypes = { 'verilog', 'systemverilog' } }
 
       nrpattern.setup(defaults)
     end,
@@ -112,10 +116,10 @@ require('packer').startup(function()
       require('Navigator').setup { auto_save = 'current', disable_on_zoom = true }
 
       local nnoremap = vim.keymap.nnoremap
-      nnoremap { '<c-h>', require'Navigator'.left, silent = true }
-      nnoremap { '<c-j>', require'Navigator'.down, silent = true }
-      nnoremap { '<c-k>', require'Navigator'.up, silent = true }
-      nnoremap { '<c-l>', require'Navigator'.right, silent = true }
+      nnoremap { '<c-h>', require('Navigator').left, silent = true }
+      nnoremap { '<c-j>', require('Navigator').down, silent = true }
+      nnoremap { '<c-k>', require('Navigator').up, silent = true }
+      nnoremap { '<c-l>', require('Navigator').right, silent = true }
     end,
     requires = 'tjdevries/astronauta.nvim',
     after = 'astronauta.nvim',
@@ -126,7 +130,7 @@ require('packer').startup(function()
   use {
     'hrsh7th/nvim-compe',
     config = function()
-      require'compe'.setup {
+      require('compe').setup {
         enabled = true,
         autocomplete = true,
         debug = false,
@@ -161,7 +165,7 @@ require('packer').startup(function()
       config = function()
         require 'nvim-treesitter.highlight'
 
-        require'nvim-treesitter.configs'.setup {
+        require('nvim-treesitter.configs').setup {
           highlight = { enable = false },
           incremental_selection = {
             enable = true,
@@ -198,18 +202,30 @@ require('packer').startup(function()
     { 'nvim-treesitter/playground', opt = true },
   }
   use { 'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ' }
-  use { 'glepnir/lspsaga.nvim', config = function() require'lspsaga'.init_lsp_saga {} end }
-  use { 'rmagatti/goto-preview', config = function() require'goto-preview'.setup {} end }
+  use {
+    'glepnir/lspsaga.nvim',
+    config = function()
+      require('lspsaga').init_lsp_saga {}
+    end,
+  }
+  use {
+    'rmagatti/goto-preview',
+    config = function()
+      require('goto-preview').setup {}
+    end,
+  }
   use {
     'jose-elias-alvarez/null-ls.nvim',
-    requires='nvim-lua/plenary.nvim',
+    requires = 'nvim-lua/plenary.nvim',
   }
 
   -- Vanity
   use {
     'yamatsum/nvim-web-nonicons',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = function() require 'nvim-nonicons' end,
+    config = function()
+      require 'nvim-nonicons'
+    end,
   }
 
   use {
@@ -219,14 +235,16 @@ require('packer').startup(function()
     config = function()
       local gl = require 'galaxyline'
       local colors = require('galaxyline.theme').default
-      local condition = require('galaxyline.condition')
+      local condition = require 'galaxyline.condition'
       local gls = gl.section
 
       colors.bg = '#2C323C'
 
       gls.left[1] = {
         RainbowRed = {
-          provider = function() return '▊ ' end,
+          provider = function()
+            return '▊ '
+          end,
           highlight = { colors.blue, colors.bg },
         },
       }
@@ -252,10 +270,12 @@ require('packer').startup(function()
           provider = 'GetLspClient',
           condition = function()
             local tbl = { ['dashboard'] = true, [''] = true }
-            if tbl[vim.bo.filetype] then return false end
+            if tbl[vim.bo.filetype] then
+              return false
+            end
             return true
           end,
-          icon = require'nvim-nonicons'.get('server') .. ' LSP:',
+          icon = require('nvim-nonicons').get 'server' .. ' LSP:',
           highlight = { colors.green, colors.bg, 'bold' },
         },
       }
@@ -279,7 +299,9 @@ require('packer').startup(function()
       }
       gls.right[8] = {
         RainbowBlue = {
-          provider = function() return ' ▊' end,
+          provider = function()
+            return ' ▊'
+          end,
           highlight = { colors.blue, colors.bg },
         },
       }
@@ -324,7 +346,7 @@ require('packer').startup(function()
   use {
     'akinsho/nvim-toggleterm.lua',
     config = function()
-      require'toggleterm'.setup {
+      require('toggleterm').setup {
         size = 15,
         open_mapping = [[<F12>]],
         shade_filetypes = { 'none' },
@@ -337,13 +359,12 @@ require('packer').startup(function()
 
   -- Filetypes
   use { 'Glench/Vim-Jinja2-Syntax' }
-
 end)
 
 -- LSP config
 local lsp = require 'lspconfig'
 local lsputil = require 'lspconfig.util'
-local null_ls = require'null-ls'
+local null_ls = require 'null-ls'
 
 local on_attach = function(client)
   local nnoremap = vim.keymap.nnoremap
@@ -351,20 +372,28 @@ local on_attach = function(client)
   -- nnoremap { '', require'lspsaga.diagnostic'.show_line_diagnostics, silent = true }
   nnoremap { 'gd', vim.lsp.buf.declaration, silent = true }
   nnoremap { '<c-]>', vim.lsp.buf.definition, silent = true }
-  nnoremap { 'K', require'lspsaga.hover'.render_hover_doc, silent = true }
+  nnoremap { 'K', require('lspsaga.hover').render_hover_doc, silent = true }
   nnoremap { 'gD', vim.lsp.buf.implementation, silent = true }
   nnoremap { '1gD', vim.lsp.buf.type_definition, silent = true }
   nnoremap { 'gr', vim.lsp.buf.references, silent = true }
   nnoremap { 'g0', vim.lsp.buf.document_symbol, silent = true }
-  nnoremap { '<c-p>', function() vim.lsp.buf.formatting_sync({}, 5000) end, silent = true }
+  nnoremap {
+    '<c-p>',
+    function()
+      vim.lsp.buf.formatting_sync({}, 5000)
+    end,
+    silent = true,
+  }
   -- nnoremap { 'gp', require'lspsaga.provider'.preview_definition, silent = true }
-  nnoremap { 'gp', require'goto-preview'.goto_preview_definition, silent = true }
-  nnoremap { 'gP', require'goto-preview'.close_all_win, silent = true }
+  nnoremap { 'gp', require('goto-preview').goto_preview_definition, silent = true }
+  nnoremap { 'gP', require('goto-preview').close_all_win, silent = true }
 
   inoremap { '<c-l>', vim.lsp.buf.signature_help, silent = true }
 
-  vim.fn.sign_define('LspDiagnosticsSignError',
-                     { texthl = 'LspDiagnosticsSignError', linehl = '', numhl = '', text = '▎' })
+  vim.fn.sign_define(
+    'LspDiagnosticsSignError',
+    { texthl = 'LspDiagnosticsSignError', linehl = '', numhl = '', text = '▎' }
+  )
   vim.fn.sign_define('LspDiagnosticsSignWarning', {
     texthl = 'LspDiagnosticsSignWarning',
     linehl = '',
@@ -377,12 +406,16 @@ local on_attach = function(client)
     numhl = '',
     text = '▎',
   })
-  vim.fn.sign_define('LspDiagnosticsSignHint',
-                     { texthl = 'LspDiagnosticsSignHint', linehl = '', numhl = '', text = '▎' })
+  vim.fn.sign_define(
+    'LspDiagnosticsSignHint',
+    { texthl = 'LspDiagnosticsSignHint', linehl = '', numhl = '', text = '▎' }
+  )
 end
 
 vim.lsp.handlers['textDocument/formatting'] = function(err, _, result, _, bufnr)
-  if err ~= nil or result == nil then return end
+  if err ~= nil or result == nil then
+    return
+  end
   if not vim.api.nvim_buf_get_option(bufnr, 'modified') then
     local view = vim.fn.winsaveview()
     vim.lsp.util.apply_text_edits(result, bufnr)
@@ -392,11 +425,9 @@ vim.lsp.handlers['textDocument/formatting'] = function(err, _, result, _, bufnr)
   end
 end
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] =
-    function(...)
-      vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
-                   { underline = true, update_in_insert = false })(...)
-    end
+vim.lsp.handlers['textDocument/publishDiagnostics'] = function(...)
+  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { underline = true, update_in_insert = false })(...)
+end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -405,7 +436,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'documentation',
     'detail',
     'additionalTextEdits',
-  }
+  },
 }
 
 lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities }
@@ -420,4 +451,6 @@ null_ls.setup {
 
 -- Try importing local config
 local ok, localconfig = pcall(require, 'localconfig')
-if ok then localconfig.setup { on_attach = on_attach, capabilities = capabilities } end
+if ok then
+  localconfig.setup { on_attach = on_attach, capabilities = capabilities }
+end

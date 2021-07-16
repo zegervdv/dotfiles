@@ -393,7 +393,17 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
                    { underline = true, update_in_insert = false })(...)
     end
 
-lsp.pyright.setup { on_attach = on_attach }
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
+
+lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities }
 
 if (vim.fn.executable('efm-langserver') == 1) then
   require 'efm/python'
@@ -419,4 +429,4 @@ end
 
 -- Try importing local config
 local ok, localconfig = pcall(require, 'localconfig')
-if ok then localconfig.setup { on_attach = on_attach } end
+if ok then localconfig.setup { on_attach = on_attach, capabilities = capabilities } end

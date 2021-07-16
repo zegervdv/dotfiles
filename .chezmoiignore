@@ -1,3 +1,4 @@
 README.md
 *.orig
 *.rej
+stylua.toml

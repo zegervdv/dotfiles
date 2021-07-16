@@ -200,6 +200,10 @@ require('packer').startup(function()
   use { 'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ' }
   use { 'glepnir/lspsaga.nvim', config = function() require'lspsaga'.init_lsp_saga {} end }
   use { 'rmagatti/goto-preview', config = function() require'goto-preview'.setup {} end }
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires='nvim-lua/plenary.nvim',
+  }
 
   -- Vanity
   use {
@@ -339,6 +343,7 @@ end)
 -- LSP config
 local lsp = require 'lspconfig'
 local lsputil = require 'lspconfig.util'
+local null_ls = require'null-ls'
 
 local on_attach = function(client)
   local nnoremap = vim.keymap.nnoremap
@@ -405,27 +410,12 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 
 lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities }
 
-if (vim.fn.executable('efm-langserver') == 1) then
-  require 'efm/python'
-  require 'efm/lua'
-
-  -- May not be installed, use pcall to handle errors
-  -- pcall(require, 'efm/systemverilog')
-  pcall(require, 'efm/flp')
-
-  local language_cfg = require 'efm/languages'
-
-  local filetypes = {}
-  for lang, _ in pairs(language_cfg) do table.insert(filetypes, lang) end
-
-  lsp.efm.setup {
-    on_attach = on_attach,
-    filetypes = filetypes,
-    init_options = { documentFormatting = true },
-    root_dir = lsputil.root_pattern('.git', '.hg'),
-    settings = { rootMarkers = { '.git/', '.hg/' }, languages = language_cfg },
-  }
-end
+null_ls.setup {
+  on_attach = on_attach,
+  sources = {
+    null_ls.builtins.formatting.black,
+  },
+}
 
 -- Try importing local config
 local ok, localconfig = pcall(require, 'localconfig')

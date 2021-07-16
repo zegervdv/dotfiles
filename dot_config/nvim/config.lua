@@ -145,7 +145,7 @@ require('packer').startup(function()
           buffer = true,
           nvim_lsp = true,
           nvim_lua = true,
-          spell = true,
+          spell = false,
           vsnip = true,
         },
       }

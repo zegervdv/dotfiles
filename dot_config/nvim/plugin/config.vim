@@ -3,8 +3,6 @@
 let s:darwin = has('mac')
 let s:windows = has('win32')
 
-luafile ~/.config/nvim/config.lua
-
 " Activate built in plugins {{{
 if !has('nvim')
   if has('packages')

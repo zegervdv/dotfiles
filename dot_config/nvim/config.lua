@@ -218,6 +218,9 @@ require('packer').startup(function()
     'jose-elias-alvarez/null-ls.nvim',
     requires = 'nvim-lua/plenary.nvim',
   }
+  use {
+    'folke/lua-dev.nvim',
+  }
 
   -- Vanity
   use {
@@ -363,7 +366,6 @@ end)
 
 -- LSP config
 local lsp = require 'lspconfig'
-local lsputil = require 'lspconfig.util'
 local null_ls = require 'null-ls'
 
 local on_attach = function(client)
@@ -448,6 +450,23 @@ null_ls.setup {
     null_ls.builtins.formatting.stylua,
   },
 }
+
+local luadev = require('lua-dev').setup {
+  lspconfig = {
+    cmd = { 'lua-language-server' },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { 'use' },
+        },
+      },
+    },
+  },
+}
+
+lsp.sumneko_lua.setup(luadev)
 
 -- Try importing local config
 local ok, localconfig = pcall(require, 'localconfig')

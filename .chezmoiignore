@@ -2,3 +2,4 @@ README.md
 *.orig
 *.rej
 stylua.toml
+scripts

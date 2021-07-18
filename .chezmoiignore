@@ -3,3 +3,4 @@ README.md
 *.rej
 stylua.toml
 scripts
+.pre-commit-config.yaml

@@ -410,23 +410,11 @@ local on_attach = function(client)
 
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
-end
-
-vim.lsp.handlers['textDocument/formatting'] = function(err, _, result, _, bufnr)
-  if err ~= nil or result == nil then
-    return
-  end
-  if not vim.api.nvim_buf_get_option(bufnr, 'modified') then
-    local view = vim.fn.winsaveview()
-    vim.lsp.util.apply_text_edits(result, bufnr)
-    -- Fix to reload Treesitter
-    -- vim.api.nvim_command("edit")
-    vim.fn.winrestview(view)
-  end
-end
-
-vim.lsp.handlers['textDocument/publishDiagnostics'] = function(...)
-  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { underline = true, update_in_insert = false })(...)
+  vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    update_in_insert = false,
+    virtual_text = { severity_limit = 'Warning' },
+  })
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

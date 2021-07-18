@@ -204,12 +204,6 @@ vim.defer_fn(function()
     }
     use { 'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ' }
     use {
-      'glepnir/lspsaga.nvim',
-      config = function()
-        require('lspsaga').init_lsp_saga {}
-      end,
-    }
-    use {
       'rmagatti/goto-preview',
       config = function()
         require('goto-preview').setup {}
@@ -373,10 +367,9 @@ local null_ls = require 'null-ls'
 local on_attach = function(client)
   local nnoremap = vim.keymap.nnoremap
   local inoremap = vim.keymap.inoremap
-  -- nnoremap { '', require'lspsaga.diagnostic'.show_line_diagnostics, silent = true }
   nnoremap { 'gd', vim.lsp.buf.declaration, silent = true }
   nnoremap { '<c-]>', vim.lsp.buf.definition, silent = true }
-  nnoremap { 'K', require('lspsaga.hover').render_hover_doc, silent = true }
+  nnoremap { 'K', vim.lsp.buf.hover, silent = true }
   nnoremap { 'gD', vim.lsp.buf.implementation, silent = true }
   nnoremap { '1gD', vim.lsp.buf.type_definition, silent = true }
   nnoremap { 'gr', vim.lsp.buf.references, silent = true }
@@ -414,6 +407,9 @@ local on_attach = function(client)
     'LspDiagnosticsSignHint',
     { texthl = 'LspDiagnosticsSignHint', linehl = '', numhl = '', text = '▎' }
   )
+
+  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
+  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
 end
 
 vim.lsp.handlers['textDocument/formatting'] = function(err, _, result, _, bufnr)

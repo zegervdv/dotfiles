@@ -149,7 +149,7 @@ vim.defer_fn(function()
             path = true,
             buffer = true,
             nvim_lsp = true,
-            nvim_lua = true,
+            nvim_lua = false,
             spell = false,
             vsnip = true,
           },

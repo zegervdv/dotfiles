@@ -356,7 +356,7 @@ vim.defer_fn(function()
     }
 
     -- Filetypes
-    use { 'Glench/Vim-Jinja2-Syntax' }
+    use { 'lepture/vim-jinja' }
   end)
 end, 0)
 

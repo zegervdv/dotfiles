@@ -429,12 +429,15 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 
 lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities }
 
-null_ls.setup {
-  on_attach = on_attach,
+null_ls.config {
   sources = {
     null_ls.builtins.formatting.black,
     null_ls.builtins.formatting.stylua,
   },
+}
+lsp['null-ls'].setup {
+  on_attach = on_attach,
+  root_dir = require('lspconfig.util').root_pattern('.hg', '.git'),
 }
 
 local luadev = require('lua-dev').setup {

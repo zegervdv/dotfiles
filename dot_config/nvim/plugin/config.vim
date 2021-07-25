@@ -25,164 +25,12 @@ endif
 
 " General Settings and options {{{
 
-" Backspace over everything, like normal 
-set backspace=2
-
-" Buffers
-set autoread " Read external changes
-set hidden " Change between buffers without saving
-set autowriteall " Write changes when losing focus
-
-" Visuals
-set number
-set relativenumber
-set ruler
-syntax on
-set title
-set scrolloff=4 " Stay 4 lines from top/bottom
-set showcmd
-
-" Theme and style
-
-set termguicolors
-
-set background=dark
-
-if s:windows
-  set background=light
-  colorscheme PaperColor
-  set guifont=consolas:h10
-endif
-
-set showmatch " Highlight matching brackets
-
-set wrap " Wrap lines
-set wrapmargin=2 " Stay 2 chars from side
-set textwidth=79
-set colorcolumn=81
-set linebreak " Smarter wrapping
-if v:version > 703
-  set breakindent " Indent wrapped lines to same level
-endif
-
-set fixendofline
-
-set expandtab " Expand tabs to spaces
-set tabstop=2 shiftwidth=2 " Tab is 2 spaces
-
-set shiftround " Round shift indents to nearest value
-
-" Searching
-set magic  " Use magic regexes
-set hlsearch " Highlight all matches
-set incsearch " Show matches while typing
-set ignorecase " Ignore case when searching
-set smartcase " Be case sensitive if at least one uppercase char is used
-set gdefault " Default substitute all matches on a line
-if has('nvim')
-  set inccommand=nosplit
-endif
-
-set autoindent " Automatically indent
-set cindent " Indent based on C syntax
-set cinwords+=foreach
-
-set updatetime=300
-
-if s:darwin
-  set vb
-endif
-set noerrorbells " Don't beep
-
-set guioptions-=r
-set guioptions-=l
-set guioptions-=R
-set guioptions-=L
-set guioptions-=a
-set guioptions-=m
-set guioptions-=T
-set guioptions+=c
-
-set history=100 " Set history 100
-set wildmenu " Command completion
-set wildmode=longest:full,full " Complete to fullest match
-set ttyfast " Use a fast terminal
-set lazyredraw " No need to redraw constantly
-set shortmess+=c
-
-set ttimeoutlen=-1 " Set the timeout to a minimum
-set diffopt+=iwhite " Ignore spaces in diffs"
-set diffopt+=internal,algorithm:patience " use patience algorithm for better diffs
-
-set tags=.git/tags,tags,/project/asic_fpga/tools/vim/share/vim/vimfiles/tags
-
-" Have find look through all folders
-set path+=**
-" Add PRJROOT and subdirs to path if it is set
-if exists('$PRJROOT')
-  set path+=$PRJROOT/**
-endif
-
-set formatoptions=
-set formatoptions+=c " Format comments
-set formatoptions+=r " Continue comments by default
-set formatoptions+=o " Make comment when using o or O from comment line
-set formatoptions+=q " Format comments with gq
-set formatoptions+=n " Recognize numbered lists
-set formatoptions+=2 " Use indent from 2nd line of a paragraph
-" set formatoptions+=l " Don't break lines that are already long
-set formatoptions+=1 " Break before 1-letter words
-
-set signcolumn=yes
-
-" Enable cursorline
-set cursorline
 augroup cline
   au!
   autocmd WinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
-if !s:windows
-  set list
-  set listchars=tab:»\ ,trail:·,extends:>,precedes:<,nbsp:+
-endif
-
-set sessionoptions-=options
-
-" Scan files for completion
-set complete=.,w,b,u,k,kspell,t,i,d
-set completeopt=menu,menuone,noselect
-
-set splitright
-set virtualedit=block
-
-if v:version > 703
-  set conceallevel=0
-  if !has('nvim')
-    set cryptmethod=blowfish2
-  endif
-endif
-
-filetype plugin indent on
-
-set pastetoggle=<F2> " Toggle to paste mode
-
-if v:version >= 703
-  set undofile
-endif
-set undolevels=1000
-set backup
-set noswapfile
-if has('nvim')
-  " set viminfo+=n~/.config/nvim/.viminfo
-  set backupdir=~/.config/nvim/tmp/backup/,.
-  set directory=~/.config/nvim/tmp/swap//,.
-else
-  set viminfo+=n~/.vim/.viminfo
-  set backupdir=~/.vim/tmp/backup/,.
-  set directory=~/.vim/tmp/swap//,.
-endif
 if !isdirectory(expand(&backupdir))
   call mkdir(expand(&backupdir), "p")
 endif
@@ -191,21 +39,10 @@ if !isdirectory(expand(&directory))
 endif
 
 if v:version >= 703
-  if has('nvim')
-    set undodir=~/.config/nvim/tmp/undo//,.
-  else
-    set undodir=~/.vim/tmp/undo//,.
-  endif
   if !isdirectory(expand(&undodir))
     call mkdir(expand(&undodir), "p")
   endif
 endif
-
-
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**,*.dup,.hg/**,*.orig,*.*~
-
-" No selecting via mouse (stops visual selection when scrolling)
-set mouse=nic
 
 " }}}
 
@@ -347,9 +184,9 @@ if has('nvim')
 endif
 
 " Open buffers, tags... in vertical splits
-nnoremap <leader>b :vert sbuffer 
-nnoremap <leader>t :vert stjump 
-nnoremap <leader>f :vert sfind 
+nnoremap <leader>b :vert sbuffer
+nnoremap <leader>t :vert stjump
+nnoremap <leader>f :vert sfind
 
 
 " }}}
@@ -733,25 +570,6 @@ onoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
 " }}}
 
 " Filetype specific settings {{{
-" Latex {{{
-" Open pdf
-
-function! Latexprog()
-  if !filereadable("./Makefile")
-    setlocal makeprg=latexmk\ -interaction=nonstopmode\ -synctex=1\ -file-line-error\ -pdf\ %:r
-  endif
-endfunction
-
-augroup latex
-  autocmd!
-  autocmd FileType tex call Latexprog()
-  au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
-  au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
-augroup END
-" }}}
-" Markdown {{{
-let g:vim_markdown_folding_disabled=1
-" }}}
 " Text {{{
 augroup ft_text
   au!
@@ -767,8 +585,8 @@ augroup END
 
 function! ColorRpt()
   " Color numbers based on length
-  syn match String "\v<\d{1,3}>"   
-  syn match Number "\v<\d{4,6}>"   
+  syn match String "\v<\d{1,3}>"
+  syn match Number "\v<\d{4,6}>"
   syn match Statement "\v<\d{7,9}>"
 
   " Color errors
@@ -799,32 +617,6 @@ augroup ft_c
   au!
   au FileType c setlocal foldmethod=syntax
 augroup END
-" }}}
-" VHDL {{{
-" VHDL ctags
-let g:tlist_vhdl_settings = 'vhdl;d:package declarations;b:package bodies;e:entities;a:architecture specifications;t:type declarations;p:processes;f:functions;r:procedures'
-let g:vhdl_indent_genportmap =0
-let g:vhdl_indent_rhassign = 1
-
-augroup ft_vhdl
-  au!
-  autocmd FileType vhdl call VHDLColonAlign()
-augroup END
-
-function! SetAutoAlign()
-  inoremap <silent> => =><ESC>mzvip:EasyAlign/=>/<CR>`z$a
-endfunction
-
-function! VHDLChipScopeMacro()
-  let @c = "mtyiw'Sosignal \"_cs : std_logic;'Coattribute mark_debug of \"_cs : signal is \"true\";
-attribute dont_touch of \"_cs : signal is \"true\";'Do\"_cs <= \";=='t"
-endfunction
-
-function! VHDLColonAlign()
-  let g:easy_align_delimiters = {
-        \  ':': { 'pattern': ':', 'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0}
-        \}
-endfunction
 " }}}
 " TCL {{{
 
@@ -927,7 +719,7 @@ let g:projectionist_heuristics = {
 let g:grepper = {
       \ 'tools': ['ag', 'hg'],
       \ 'highlight': 1,
-      \ 'ag': { 
+      \ 'ag': {
       \  'grepprg': 'rg --vimgrep',
       \ }}
 
@@ -973,17 +765,7 @@ smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
 " }}}
-" Splice {{{
-let g:splice_initial_diff_grid=1
-let g:splice_initial_diff_compare=1
-let g:splice_initial_diff_path=0
-let g:splice_initial_scrollbind_grid=1
-let g:splice_initial_scrollbind_compare=1
-let g:splice_initial_scrollbind_path=1
-let g:splice_wrap="nowrap"
 " }}}
 " }}}
 

@@ -56,7 +56,20 @@ vim.defer_fn(function()
 
     -- Git/VCS
     use { 'vim-scripts/gitignore' }
-    use { 'sjl/splice.vim', opt = true, cmd = { 'SpliceInit' } }
+    use {
+      'sjl/splice.vim',
+      opt = true,
+      cmd = { 'SpliceInit' },
+      config = function()
+        vim.g.splice_initial_diff_grid = 1
+        vim.g.splice_initial_diff_compare = 1
+        vim.g.splice_initial_diff_path = 0
+        vim.g.splice_initial_scrollbind_grid = 1
+        vim.g.splice_initial_scrollbind_compare = 1
+        vim.g.splice_initial_scrollbind_path = 1
+        vim.g.splice_wrap = 'nowrap'
+      end,
+    }
     use { 'tpope/vim-git' }
 
     -- Comments
@@ -67,7 +80,13 @@ vim.defer_fn(function()
 
     -- Parentheses etc
     use { 'tpope/vim-surround' }
-    use { 'raimondi/delimitMate' }
+    use {
+      'raimondi/delimitMate',
+      config = function()
+        vim.g.delimitMate_expand_cr = 1
+        vim.g.delimitMate_expand_space = 1
+      end,
+    }
 
     -- Moving around within lines
     use { 'wellle/targets.vim', event = 'InsertEnter *' }
@@ -360,6 +379,134 @@ vim.defer_fn(function()
     use { 'lepture/vim-jinja' }
   end)
 end, 0)
+
+-- Configuration
+local opt = vim.opt
+
+opt.backspace = { 'indent', 'eol', 'start' } -- Backspace everything
+
+opt.autoread = true -- Read changed files
+opt.hidden = true -- Allow to move away from modified files
+opt.autowriteall = true -- Write changes when losing focus
+
+-- Visuals
+opt.number = true
+opt.relativenumber = true
+opt.scrolloff = 4
+opt.showcmd = true -- Show incomplete commands while typing
+
+opt.termguicolors = true
+opt.background = 'dark'
+
+opt.showmatch = true -- Highligh matching braces
+
+opt.wrap = true -- Wrap lines
+opt.wrapmargin = 2 -- Stay 2 chars from side
+opt.textwidth = 79
+opt.colorcolumn = '81' -- Show indication of 81 chars
+opt.linebreak = true -- Smarter wrapping
+opt.breakindent = true -- Indent wrapped lines to same level
+
+opt.fixendofline = true -- Add EOL when missing
+
+opt.expandtab = true -- Add spaces when pressing tab
+opt.tabstop = 2 -- Tab is 2 spaces
+opt.shiftwidth = 2 -- Shift per 2 spaces
+opt.shiftround = true -- Round shifts to allign (1 space + tab = 2 spaces)
+
+-- Searching and substitute
+opt.magic = true -- Enable regexes
+opt.hlsearch = true -- Highlight all matches
+opt.incsearch = true -- Show matches while typing
+opt.ignorecase = true
+opt.smartcase = true -- When search pattern contains cases, be case sensitive
+opt.gdefault = true -- Use global flag for substitute: replace all matches on line
+opt.inccommand = 'nosplit' -- Show live replacements directly in text
+
+opt.autoindent = true
+opt.cindent = true -- C-syntax based indenting
+
+opt.updatetime = 300 -- Faster triggering of CursorHold events
+
+opt.errorbells = false -- Don't you beep to me
+
+opt.history = 1000 -- Remember last commands
+
+opt.wildmenu = true -- Command completion
+opt.wildmode = { longest = 'full', 'full' } -- Complete the fullest match
+opt.shortmess:append 'c' -- Hide ins-completion messages
+
+opt.ttyfast = true -- fast terminal
+opt.lazyredraw = true
+opt.ttimeoutlen = -1 -- Minimum timeout
+
+opt.diffopt:append 'iwhite' -- Ignore whitespace in diffs
+opt.diffopt:append 'internal' -- Internal diff engine
+opt.diffopt:append 'algorithm:patience' -- Use patience algorithm
+
+opt.tags = { '.git/tags', 'tags' }
+
+opt.path:append '**' -- Recursively search current directory
+
+opt.formatoptions = {
+  c = true, -- Wrap comments
+  r = true, -- Continue comments
+  o = true, -- Insert comment with o/O
+  q = true, -- Format comments with gq
+  n = true, -- Indent numbered lists
+  [2] = true, -- Indent from 2nd line of paragraph
+  [1] = true, -- Don't break before one letter words
+}
+
+opt.signcolumn = 'yes' -- Always show signcolumn
+
+opt.cursorline = true
+
+-- Show certain characters
+opt.list = true
+opt.listchars = { trail = '·', extends = '>', precedes = '<', nbsp = '+' }
+
+opt.sessionoptions:remove 'options' -- Remove options from saved sessions (reload from config)
+
+opt.completeopt = { 'menu', 'menuone', 'noselect' }
+
+opt.splitright = true -- Open new splits to right
+opt.virtualedit = 'block' -- Enable block editting
+
+opt.conceallevel = 0 -- Disable conceal
+
+opt.pastetoggle = '<F2>' -- Enable paste mode
+
+opt.undofile = true -- Persistently remember undos
+opt.undolevels = 1000
+opt.undodir = os.getenv 'HOME' .. '/.config/nvim/tmp/undo//'
+opt.swapfile = false -- Disable swap files
+opt.backup = true -- Keep backups
+opt.backupdir = os.getenv 'HOME' .. '/.config/nvim/tmp/backup//'
+
+-- Files to ignore from completion
+opt.wildignore:append {
+  '*/tmp/*',
+  '*.so',
+  '*.swp',
+  '*.zip',
+  '*.o',
+  '*.bin',
+  '*.elf',
+  '*.hex',
+  '*.eps',
+  '.git/*',
+  '*.dup',
+  '.hg/**',
+  '*.orig',
+  '*.*~',
+}
+
+opt.mouse = {
+  n = true, -- Normal mode
+  i = true, -- Insert mode
+  c = true, -- Commandline mode
+}
 
 -- LSP config
 local lsp = require 'lspconfig'

@@ -1013,3 +1013,7 @@ if filereadable('.vimrc.local')
   source .vimrc.local
 endif
 
+augroup Chezmoi
+  autocmd!
+  autocmd BufWritePost ~/.local/share/chezmoi/* silent !chezmoi apply --source-path %
+augroup END

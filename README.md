@@ -1,5 +1,8 @@
 # dotfiles
 
+## Nonicons
+
+Install [nonicons](https://github.com/yamatsum/nonicons/raw/master/dist/nonicons.ttf)
 
 ## Kitty installation
 

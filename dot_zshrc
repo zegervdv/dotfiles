@@ -196,9 +196,9 @@ _rg() {
 compdef _rg rg
 
 # Aliases
-alias l="ls -haltr --color"
-alias ll="ls -haltr --color"
-alias ls="ls --color"
+alias l="ls -haltr"
+alias ll="ls -haltr"
+alias ls="ls"
 alias xclip='xclip -selection clipboard'
 alias view='nvim -R'
 

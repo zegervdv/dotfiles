@@ -237,6 +237,8 @@ vim.defer_fn(function()
       'folke/lua-dev.nvim',
     }
 
+    use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
+
     -- Vanity
     use {
       'yamatsum/nvim-web-nonicons',

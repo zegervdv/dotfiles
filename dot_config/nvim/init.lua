@@ -81,10 +81,48 @@ vim.defer_fn(function()
     -- Parentheses etc
     use { 'tpope/vim-surround' }
     use {
-      'raimondi/delimitMate',
+      'windwp/nvim-autopairs',
       config = function()
-        vim.g.delimitMate_expand_cr = 1
-        vim.g.delimitMate_expand_space = 1
+        local npairs = require 'nvim-autopairs'
+        local Rule = require 'nvim-autopairs.rule'
+
+        npairs.setup()
+
+        require('nvim-autopairs.completion.compe').setup {
+          map_cr = true,
+          map_complete = true,
+        }
+
+        npairs.add_rules {
+          Rule(' ', ' '):with_pair(function(opts)
+            local pair = opts.line:sub(opts.col - 1, opts.col)
+            return vim.tbl_contains({ '()', '[]', '{}' }, pair)
+          end),
+          Rule('( ', ' )')
+            :with_pair(function()
+              return false
+            end)
+            :with_move(function(opts)
+              return opts.prev_char:match '.%)' ~= nil
+            end)
+            :use_key ')',
+          Rule('{ ', ' }')
+            :with_pair(function()
+              return false
+            end)
+            :with_move(function(opts)
+              return opts.prev_char:match '.%}' ~= nil
+            end)
+            :use_key '}',
+          Rule('[ ', ' ]')
+            :with_pair(function()
+              return false
+            end)
+            :with_move(function(opts)
+              return opts.prev_char:match '.%]' ~= nil
+            end)
+            :use_key ']',
+        }
       end,
     }
 
@@ -176,8 +214,7 @@ vim.defer_fn(function()
         }
 
         vim.cmd [[ inoremap <silent><expr> <C-y> compe#complete() ]]
-        vim.cmd [[ inoremap <silent><expr> <CR>      compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' }) ]]
-        vim.cmd [[ inoremap <silent><expr> <C-e>     compe#close('<C-e>') ]]
+        vim.cmd [[ inoremap <silent><expr> <C-e> compe#close('<C-e>') ]]
       end,
     }
     use {

@@ -738,10 +738,6 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" let g:completion_confirm_key_rhs = "\<Plug>delimitMateCR"
-let g:completion_confirm_key = ""
-imap <expr> <CR> (pumvisible() ? (complete_info()["selected"] != "-1" ? "\<Plug>(completion_confirm_completion)" : "\<Plug>delimitMateCR") : "\<Plug>delimitMateCR")
-
 " Auto close popup menu when finish completion
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 

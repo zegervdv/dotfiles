@@ -73,7 +73,12 @@ vim.defer_fn(function()
     use { 'tpope/vim-git' }
 
     -- Comments
-    use { 'b3nj5m1n/kommentary' }
+    use {
+      'b3nj5m1n/kommentary',
+      config = function()
+        require('kommentary.config').configure_language('default', { prefer_single_line_comments = true })
+      end,
+    }
 
     -- Undoing
     use { 'sjl/gundo.vim', cmd = { 'GundoToggle' } }

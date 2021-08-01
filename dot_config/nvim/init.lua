@@ -70,7 +70,7 @@ vim.defer_fn(function()
         vim.g.splice_wrap = 'nowrap'
       end,
     }
-    use { 'tpope/vim-git' }
+    use { 'tpope/vim-git', ft = { 'gitcommit', 'gitrebase' } }
 
     -- Comments
     use {
@@ -78,6 +78,7 @@ vim.defer_fn(function()
       config = function()
         require('kommentary.config').configure_language('default', { prefer_single_line_comments = true })
       end,
+      keys = { 'gcc' },
     }
 
     -- Undoing
@@ -277,6 +278,7 @@ vim.defer_fn(function()
     }
     use {
       'folke/lua-dev.nvim',
+      ft = { 'lua' },
     }
 
     use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
@@ -417,6 +419,7 @@ vim.defer_fn(function()
           direction = 'horizontal',
         }
       end,
+      keys = { [[<F12>]] },
     }
 
     -- Filetypes

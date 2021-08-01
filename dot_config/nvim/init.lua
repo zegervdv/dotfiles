@@ -480,7 +480,7 @@ opt.errorbells = false -- Don't you beep to me
 opt.history = 1000 -- Remember last commands
 
 opt.wildmenu = true -- Command completion
-opt.wildmode = { longest = 'full', 'full' } -- Complete the fullest match
+opt.wildmode = { longest = 'full' } -- Complete the fullest match
 opt.shortmess:append 'c' -- Hide ins-completion messages
 
 opt.ttyfast = true -- fast terminal

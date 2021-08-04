@@ -276,10 +276,7 @@ vim.defer_fn(function()
       'jose-elias-alvarez/null-ls.nvim',
       requires = 'nvim-lua/plenary.nvim',
     }
-    use {
-      'folke/lua-dev.nvim',
-      ft = { 'lua' },
-    }
+    use { 'folke/lua-dev.nvim' }
 
     use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
 

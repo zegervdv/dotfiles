@@ -129,6 +129,11 @@ vim.defer_fn(function()
             end)
             :use_key ']',
         }
+
+        npairs.get_rule('`')
+          :with_pair(function()
+            return vim.bo.filetype ~= 'systemverilog'
+          end)
       end,
     }
 

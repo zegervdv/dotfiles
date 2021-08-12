@@ -78,7 +78,10 @@ vim.defer_fn(function()
       config = function()
         require('kommentary.config').configure_language('default', { prefer_single_line_comments = true })
       end,
-      keys = { 'gcc' },
+      keys = {
+        { 'n',  'gcc' },
+        { 'v', 'gc' },
+      },
     }
 
     -- Undoing

@@ -79,7 +79,7 @@ vim.defer_fn(function()
         require('kommentary.config').configure_language('default', { prefer_single_line_comments = true })
       end,
       keys = {
-        { 'n',  'gcc' },
+        { 'n', 'gcc' },
         { 'v', 'gc' },
       },
     }
@@ -95,7 +95,9 @@ vim.defer_fn(function()
         local npairs = require 'nvim-autopairs'
         local Rule = require 'nvim-autopairs.rule'
 
-        npairs.setup()
+        npairs.setup {
+          ignored_next_char = string.gsub([[ [%w%%%'%[%.] ]], '%s+', ''),
+        }
 
         require('nvim-autopairs.completion.compe').setup {
           map_cr = true,
@@ -133,10 +135,9 @@ vim.defer_fn(function()
             :use_key ']',
         }
 
-        npairs.get_rule('`')
-          :with_pair(function()
-            return vim.bo.filetype ~= 'systemverilog'
-          end)
+        npairs.get_rule('`'):with_pair(function()
+          return vim.bo.filetype ~= 'systemverilog'
+        end)
       end,
     }
 

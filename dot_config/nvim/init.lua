@@ -202,7 +202,7 @@ vim.defer_fn(function()
     use { 'neovim/nvim-lspconfig' }
     use {
       'hrsh7th/nvim-cmp',
-      requires = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp' },
+      requires = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-vsnip', 'hrsh7th/cmp-path' },
       config = function()
         local cmp = require 'cmp'
         cmp.setup {
@@ -221,6 +221,8 @@ vim.defer_fn(function()
           sources = {
             { name = 'buffer' },
             { name = 'nvim_lsp' },
+            { name = 'vsnip' },
+            { name = 'path' },
           },
         }
       end,

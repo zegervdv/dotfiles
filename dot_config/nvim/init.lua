@@ -622,6 +622,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits',
   },
 }
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities }
 

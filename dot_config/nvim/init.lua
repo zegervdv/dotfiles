@@ -99,11 +99,6 @@ vim.defer_fn(function()
           ignored_next_char = string.gsub([[ [%w%%%'%[%.] ]], '%s+', ''),
         }
 
-        require('nvim-autopairs.completion.compe').setup {
-          map_cr = true,
-          map_complete = true,
-        }
-
         npairs.add_rules {
           Rule(' ', ' '):with_pair(function(opts)
             local pair = opts.line:sub(opts.col - 1, opts.col)
@@ -206,34 +201,28 @@ vim.defer_fn(function()
     -- Completion/snippets/LSP
     use { 'neovim/nvim-lspconfig' }
     use {
-      'hrsh7th/nvim-compe',
+      'hrsh7th/nvim-cmp',
+      requires = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp' },
       config = function()
-        require('compe').setup {
-          enabled = true,
-          autocomplete = true,
-          debug = false,
-          min_length = 1,
-          preselect = 'enable',
-          throttle_time = 80,
-          source_timeout = 1000,
-          incomplete_delay = 400,
-          max_abbr_width = 100,
-          max_kind_width = 100,
-          max_menu_width = 100,
-          documentation = true,
-
-          source = {
-            path = true,
-            buffer = true,
-            nvim_lsp = true,
-            nvim_lua = false,
-            spell = false,
-            vsnip = true,
+        local cmp = require 'cmp'
+        cmp.setup {
+          mapping = {
+            ['<C-p>'] = cmp.mapping.select_prev_item(),
+            ['<C-n>'] = cmp.mapping.select_next_item(),
+            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.close(),
+            ['<CR>'] = cmp.mapping.confirm {
+              behavior = cmp.ConfirmBehavior.Replace,
+              select = true,
+            },
+          },
+          sources = {
+            { name = 'buffer' },
+            { name = 'nvim_lsp' },
           },
         }
-
-        vim.cmd [[ inoremap <silent><expr> <C-y> compe#complete() ]]
-        vim.cmd [[ inoremap <silent><expr> <C-e> compe#close('<C-e>') ]]
       end,
     }
     use {

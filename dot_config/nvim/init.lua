@@ -230,8 +230,8 @@ vim.defer_fn(function()
             },
           },
           sources = {
-            { name = 'buffer' },
             { name = 'nvim_lsp' },
+            { name = 'buffer' },
             { name = 'vsnip' },
             { name = 'path' },
           },

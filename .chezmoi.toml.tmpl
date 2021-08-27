@@ -1,8 +1,10 @@
 {{- $email := promptString "email" -}}
 {{- $name := promptString "name" -}}
 {{- $signingkey := promptString "gpg key" -}}
+{{- $font_size := promptString "font_size" -}}
 
 [data]
    email = "{{ $email }}"
    name = "{{ $name }}"
    signingkey = "{{ $signingkey }}"
+   font_size = "{{ $font_size }}"

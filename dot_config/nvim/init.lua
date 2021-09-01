@@ -569,6 +569,36 @@ local on_attach = function(client)
   local inoremap = vim.keymap.inoremap
   nnoremap { 'gd', vim.lsp.buf.declaration, silent = true }
   nnoremap { '<c-]>', vim.lsp.buf.definition, silent = true }
+  nnoremap { 
+    'g<c-]>',
+    function ()
+      local params = vim.lsp.util.make_position_params()
+      opts = {}
+      local results_lsp = vim.lsp.buf_request_sync(0, "textDocument/definition", params, opts.timeout or 10000)
+          if not results_lsp or vim.tbl_isempty(results_lsp) then
+              print("No results from textDocument/definition")
+              return
+          end
+        for _, lsp_data in pairs(results_lsp) do
+          if lsp_data ~= nil and lsp_data.result ~= nil and not vim.tbl_isempty(lsp_data.result) then
+            for _, value in pairs(lsp_data.result) do
+              local range = value.range or value.targetRange
+              if range ~= nil then
+                local file = value.uri or value.targetUri
+                if file ~=nil then
+                  vim.api.nvim_command [[split]]
+                  vim.lsp.util.jump_to_location(value)
+                  return
+                end
+              end
+            end
+          end
+        end
+        -- try to call default lsp function
+        vim.lsp.buf.definition()
+    end,
+    silent = true
+  }
   nnoremap { 'K', vim.lsp.buf.hover, silent = true }
   nnoremap { 'gD', vim.lsp.buf.implementation, silent = true }
   nnoremap { '1gD', vim.lsp.buf.type_definition, silent = true }

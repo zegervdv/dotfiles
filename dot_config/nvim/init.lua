@@ -95,6 +95,12 @@ vim.defer_fn(function()
         local npairs = require 'nvim-autopairs'
         local Rule = require 'nvim-autopairs.rule'
 
+        require("nvim-autopairs.completion.cmp").setup {
+          map_cr = true, --  map <CR> on insert mode
+          map_complete = true, -- it will auto insert `(` after select function or method item
+          auto_select = false, -- automatically select the first item
+        }
+
         npairs.setup {
           ignored_next_char = string.gsub([[ [%w%%%'%[%.] ]], '%s+', ''),
         }
@@ -138,6 +144,7 @@ vim.defer_fn(function()
           return vim.bo.filetype ~= 'systemverilog'
         end)
       end,
+      after = { 'nvim-cmp' }
     }
 
     -- Moving around within lines

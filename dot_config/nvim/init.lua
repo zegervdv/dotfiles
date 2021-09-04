@@ -95,7 +95,7 @@ vim.defer_fn(function()
         local npairs = require 'nvim-autopairs'
         local Rule = require 'nvim-autopairs.rule'
 
-        require("nvim-autopairs.completion.cmp").setup {
+        require('nvim-autopairs.completion.cmp').setup {
           map_cr = true, --  map <CR> on insert mode
           map_complete = true, -- it will auto insert `(` after select function or method item
           auto_select = false, -- automatically select the first item
@@ -144,7 +144,7 @@ vim.defer_fn(function()
           return vim.bo.filetype ~= 'systemverilog'
         end)
       end,
-      after = { 'nvim-cmp' }
+      after = { 'nvim-cmp' },
     }
 
     -- Moving around within lines
@@ -215,7 +215,7 @@ vim.defer_fn(function()
         cmp.setup {
           snippet = {
             expand = function(args)
-              vim.fn["vsnip#anonymous"](args.body)
+              vim.fn['vsnip#anonymous'](args.body)
             end,
           },
           mapping = {
@@ -326,16 +326,10 @@ vim.defer_fn(function()
         }
 
         gls.left[2] = {
-          FileIcon = {
-            provider = 'FileIcon',
-            condition = condition.buffer_not_empty,
-            highlight = { require('galaxyline.provider_fileinfo').get_file_icon_color, colors.bg },
-          },
-        }
-
-        gls.left[3] = {
           FileName = {
-            provider = 'FileName',
+            provider = function()
+              return require('galaxyline.provider_fileinfo').get_current_file_name '⊙'
+            end,
             condition = condition.buffer_not_empty,
             highlight = { colors.magenta, colors.bg, 'bold' },
           },
@@ -351,7 +345,6 @@ vim.defer_fn(function()
               end
               return true
             end,
-            icon = require('nvim-nonicons').get 'server' .. ' LSP:',
             highlight = { colors.green, colors.bg, 'bold' },
           },
         }
@@ -576,35 +569,35 @@ local on_attach = function(client)
   local inoremap = vim.keymap.inoremap
   nnoremap { 'gd', vim.lsp.buf.declaration, silent = true }
   nnoremap { '<c-]>', vim.lsp.buf.definition, silent = true }
-  nnoremap { 
+  nnoremap {
     'g<c-]>',
-    function ()
+    function()
       local params = vim.lsp.util.make_position_params()
       opts = {}
-      local results_lsp = vim.lsp.buf_request_sync(0, "textDocument/definition", params, opts.timeout or 10000)
-          if not results_lsp or vim.tbl_isempty(results_lsp) then
-              print("No results from textDocument/definition")
-              return
-          end
-        for _, lsp_data in pairs(results_lsp) do
-          if lsp_data ~= nil and lsp_data.result ~= nil and not vim.tbl_isempty(lsp_data.result) then
-            for _, value in pairs(lsp_data.result) do
-              local range = value.range or value.targetRange
-              if range ~= nil then
-                local file = value.uri or value.targetUri
-                if file ~=nil then
-                  vim.api.nvim_command [[split]]
-                  vim.lsp.util.jump_to_location(value)
-                  return
-                end
+      local results_lsp = vim.lsp.buf_request_sync(0, 'textDocument/definition', params, opts.timeout or 10000)
+      if not results_lsp or vim.tbl_isempty(results_lsp) then
+        print 'No results from textDocument/definition'
+        return
+      end
+      for _, lsp_data in pairs(results_lsp) do
+        if lsp_data ~= nil and lsp_data.result ~= nil and not vim.tbl_isempty(lsp_data.result) then
+          for _, value in pairs(lsp_data.result) do
+            local range = value.range or value.targetRange
+            if range ~= nil then
+              local file = value.uri or value.targetUri
+              if file ~= nil then
+                vim.api.nvim_command [[split]]
+                vim.lsp.util.jump_to_location(value)
+                return
               end
             end
           end
         end
-        -- try to call default lsp function
-        vim.lsp.buf.definition()
+      end
+      -- try to call default lsp function
+      vim.lsp.buf.definition()
     end,
-    silent = true
+    silent = true,
   }
   nnoremap { 'K', vim.lsp.buf.hover, silent = true }
   nnoremap { 'gD', vim.lsp.buf.implementation, silent = true }

@@ -688,6 +688,30 @@ local luadev = require('lua-dev').setup {
 
 lsp.sumneko_lua.setup(luadev)
 
+-- Populate quickfix with all locations of rename
+function LspRename()
+  local params = vim.lsp.util.make_position_params()
+  params.newName = vim.fn.input("Rename: ", vim.fn.expand('<cword>'))
+  vim.lsp.buf_request(0, 'textDocument/rename', params, function(err, result, ctx, ...)
+    vim.lsp.handlers['textDocument/rename'](err, result, ctx, ...)
+    local changed = {}
+    for uri, changes in pairs(result.changes) do
+      local bufnr = vim.uri_to_bufnr(uri)
+      for _, edits in ipairs(changes) do
+        table.insert(changed, {
+          bufnr = bufnr,
+          lnum = edits.range.start.line + 1,
+          col = edits.range.start.character + 1,
+          text = vim.api.nvim_buf_get_lines(bufnr, edits.range.start.line, edits.range.start.line + 1, false)[1],
+        })
+      end
+    end
+    vim.fn.setqflist(changed, 'r')
+  end)
+end
+
+vim.cmd [[command! LspRename lua LspRename()]]
+
 -- Try importing local config
 local ok, localconfig = pcall(require, 'localconfig')
 if ok then

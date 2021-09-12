@@ -4,3 +4,20 @@ README.md
 stylua.toml
 scripts
 .pre-commit-config.yaml
+*~
+
+{{ if ne .chezmoi.os "windows" }}
+AppLocal/*
+{{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+.config/*
+.bashrc
+.zshrc
+.Brewfile
+.inputrc
+.lscolors
+.tmux.conf
+bin/*
+.zsh/*
+{{ end }}

@@ -571,8 +571,8 @@ local null_ls = require 'null-ls'
 local on_attach = function(client)
   local nnoremap = vim.keymap.nnoremap
   local inoremap = vim.keymap.inoremap
-  nnoremap { 'gd', vim.lsp.buf.declaration, silent = true }
-  nnoremap { '<c-]>', vim.lsp.buf.definition, silent = true }
+  nnoremap { 'gd', vim.lsp.buf.declaration, silent = true, buffer = 0 }
+  nnoremap { '<c-]>', vim.lsp.buf.definition, silent = true, buffer = 0 }
   nnoremap {
     'g<c-]>',
     function()
@@ -602,24 +602,26 @@ local on_attach = function(client)
       vim.lsp.buf.definition()
     end,
     silent = true,
+    buffer = 0,
   }
-  nnoremap { 'K', vim.lsp.buf.hover, silent = true }
-  nnoremap { 'gD', vim.lsp.buf.implementation, silent = true }
-  nnoremap { '1gD', vim.lsp.buf.type_definition, silent = true }
-  nnoremap { 'gr', vim.lsp.buf.references, silent = true }
-  nnoremap { 'g0', vim.lsp.buf.document_symbol, silent = true }
+  nnoremap { 'K', vim.lsp.buf.hover, silent = true, buffer = 0 }
+  nnoremap { 'gD', vim.lsp.buf.implementation, silent = true, buffer = 0 }
+  nnoremap { '1gD', vim.lsp.buf.type_definition, silent = true, buffer = 0 }
+  nnoremap { 'gr', vim.lsp.buf.references, silent = true, buffer = 0 }
+  nnoremap { 'g0', vim.lsp.buf.document_symbol, silent = true, buffer = 0 }
   nnoremap {
     '<c-p>',
     function()
       vim.lsp.buf.formatting_sync({}, 5000)
     end,
     silent = true,
+    buffer = 0,
   }
   -- nnoremap { 'gp', require'lspsaga.provider'.preview_definition, silent = true }
-  nnoremap { 'gp', require('goto-preview').goto_preview_definition, silent = true }
-  nnoremap { 'gP', require('goto-preview').close_all_win, silent = true }
+  nnoremap { 'gp', require('goto-preview').goto_preview_definition, silent = true, buffer = 0 }
+  nnoremap { 'gP', require('goto-preview').close_all_win, silent = true, buffer = 0 }
 
-  inoremap { '<c-l>', vim.lsp.buf.signature_help, silent = true }
+  inoremap { '<c-l>', vim.lsp.buf.signature_help, silent = true, buffer = 0 }
 
   vim.fn.sign_define(
     'LspDiagnosticsSignError',

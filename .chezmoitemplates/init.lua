@@ -238,6 +238,7 @@ vim.defer_fn(function()
         }
       end,
     }
+    use { 'ray-x/lsp_signature.nvim' }
     use {
       {
         'nvim-treesitter/nvim-treesitter',
@@ -531,12 +532,12 @@ opt.pastetoggle = '<F2>' -- Enable paste mode
 
 opt.undofile = true -- Persistently remember undos
 opt.undolevels = 1000
-if os.getenv('HOME') ~= nil then
+if os.getenv 'HOME' ~= nil then
   opt.undodir = os.getenv 'HOME' .. '/.config/nvim/tmp/undo//'
 end
 opt.swapfile = false -- Disable swap files
 opt.backup = true -- Keep backups
-if os.getenv('HOME') ~= nil then
+if os.getenv 'HOME' ~= nil then
   opt.backupdir = os.getenv 'HOME' .. '/.config/nvim/tmp/backup//'
 end
 
@@ -651,6 +652,8 @@ local on_attach = function(client)
     update_in_insert = false,
     virtual_text = { severity_limit = 'Warning' },
   })
+
+  require "lsp_signature".on_attach()
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -697,7 +700,7 @@ lsp.sumneko_lua.setup(luadev)
 -- Populate quickfix with all locations of rename
 function LspRename()
   local params = vim.lsp.util.make_position_params()
-  params.newName = vim.fn.input("Rename: ", vim.fn.expand('<cword>'))
+  params.newName = vim.fn.input('Rename: ', vim.fn.expand '<cword>')
   vim.lsp.buf_request(0, 'textDocument/rename', params, function(err, result, ctx, ...)
     vim.lsp.handlers['textDocument/rename'](err, result, ctx, ...)
     local changed = {}

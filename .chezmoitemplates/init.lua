@@ -222,7 +222,6 @@ vim.defer_fn(function()
             ['<C-p>'] = cmp.mapping.select_prev_item(),
             ['<C-n>'] = cmp.mapping.select_next_item(),
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-            ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-y>'] = cmp.mapping.complete(),
             ['<C-e>'] = cmp.mapping.close(),
             ['<CR>'] = cmp.mapping.confirm {
@@ -287,6 +286,7 @@ vim.defer_fn(function()
       config = function()
         require('goto-preview').setup {}
       end,
+      commit = '8093ded366e2e71e87f5e40da29994187c06fce1',
     }
     use {
       'jose-elias-alvarez/null-ls.nvim',
@@ -653,7 +653,7 @@ local on_attach = function(client)
     virtual_text = { severity_limit = 'Warning' },
   })
 
-  require "lsp_signature".on_attach()
+  -- require "lsp_signature".on_attach()
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -7,7 +7,7 @@ scripts
 *~
 
 {{ if ne .chezmoi.os "windows" }}
-AppLocal/*
+AppData/*
 {{ end }}
 
 {{ if eq .chezmoi.os "windows" }}

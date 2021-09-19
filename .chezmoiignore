@@ -1,5 +1,6 @@
 README.md
 *.orig
+**/.orig
 *.rej
 stylua.toml
 scripts

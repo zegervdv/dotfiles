@@ -306,12 +306,12 @@ vim.defer_fn(function()
     }
 
     use {
-      'glepnir/galaxyline.nvim',
+      'NTBBloodbath/galaxyline.nvim',
       branch = 'main',
       -- your statusline
       config = function()
         local gl = require 'galaxyline'
-        local colors = require('galaxyline.theme').default
+        local colors = require('galaxyline.themes.colors').default
         local condition = require 'galaxyline.condition'
         local gls = gl.section
 
@@ -329,7 +329,7 @@ vim.defer_fn(function()
         gls.left[2] = {
           FileName = {
             provider = function()
-              return require('galaxyline.provider_fileinfo').get_current_file_name '⊙'
+              return require('galaxyline.providers.fileinfo').get_current_file_name '⊙'
             end,
             condition = condition.buffer_not_empty,
             highlight = { colors.magenta, colors.bg, 'bold' },

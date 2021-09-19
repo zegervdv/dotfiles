@@ -721,6 +721,12 @@ end
 
 vim.cmd [[command! LspRename lua LspRename()]]
 
+local au = require 'au'
+
+au.TextYankPost = function()
+  vim.highlight.on_yank { timeout = 120 }
+end
+
 -- Try importing local config
 local ok, localconfig = pcall(require, 'localconfig')
 if ok then

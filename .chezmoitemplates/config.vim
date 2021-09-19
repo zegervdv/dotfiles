@@ -3,7 +3,7 @@
 let s:darwin = has('mac')
 let s:windows = has('win32')
 
-" Activate built in plugins 
+" Activate built in plugins
 if !has('nvim')
   if has('packages')
     packadd! matchit
@@ -21,9 +21,9 @@ if has("nvim")
   let g:python3_host_prog=expand('$HOME/.config/virtualenvs/python3/bin/python')
   let g:python_host_prog=expand('$HOME/.config/virtualenvs/python2/bin/python')
 endif
-" 
+"
 
-" General Settings and options 
+" General Settings and options
 
 augroup cline
   au!
@@ -46,9 +46,9 @@ if v:version >= 703
   endif
 endif
 
-" 
+"
 
-" Mappings 
+" Mappings
 " Set leader to spacebar
 map <space> <leader>
 
@@ -191,9 +191,9 @@ nnoremap <leader>t :vert stjump
 nnoremap <leader>f :vert sfind
 
 
-" 
+"
 
-" Functions 
+" Functions
 " When editing a file, always jump to the last known cursor position.
 " Don't do it for commit messages, when the position is invalid, or when
 " inside an event handler (happens when dropping a file on gvim).
@@ -219,34 +219,29 @@ augroup focus_lost
   au FocusLost * if !&readonly | :wa | endif
 augroup END
 
-augroup LuaHighlight
-  autocmd!
-  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
-augroup END
-
-" Resize splits after window resize 
+" Resize splits after window resize
 augroup vim_resize
   au!
   au VimResized * exe "normal! \<c-w>="
 augroup END
-" 
+"
 
-" Automatically reload vimrc when saving 
+" Automatically reload vimrc when saving
 augroup reload_vim
   autocmd!
   autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 augroup END
-" 
+"
 
-" Reload diffs 
+" Reload diffs
 augroup diff_files
   au!
   au BufWritePost * if &diff == 1 | diffupdate | endif
 augroup END
-" 
+"
 
 " Custom folding by Steve Losh
-function! MyFoldText() " 
+function! MyFoldText() "
   let line = getline(v:foldstart)
 
   let nucolwidth = &fdc + &number * &numberwidth
@@ -260,11 +255,11 @@ function! MyFoldText() "
   let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
   let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
   return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-endfunction " 
+endfunction "
 set foldtext=MyFoldText()
 set foldopen+=jump
 
-" Detect Filetype from content if file has no extension 
+" Detect Filetype from content if file has no extension
 augroup newFileDetection
   au!
   autocmd CursorMovedI * call CheckFileType()
@@ -283,9 +278,9 @@ function! CheckFileType()
     autocmd! newFileDetection
   endif
 endfunction
-" 
+"
 
-" Convert hex <-> decimal 
+" Convert hex <-> decimal
 command! -nargs=? -range Dec2hex call s:Dec2hex(<line1>, <line2>, '<args>')
 function! s:Dec2hex(line1, line2, arg) range
   if empty(a:arg)
@@ -321,9 +316,9 @@ function! s:Hex2dec(line1, line2, arg) range
     echo (a:arg =~? '^0x') ? a:arg + 0 : ('0x'.a:arg) + 0
   endif
 endfunction
-" 
+"
 
-" Recognize filetype for dup files 
+" Recognize filetype for dup files
 autocmd! BufRead *.dup call DupSetSyntax(@%)
 
 function! DupSetSyntax(name)
@@ -338,11 +333,11 @@ function! DupSetSyntax(name)
     echo "Unknown filetype"
   endif
 endfunction
-" 
+"
 
 " Create arguments list from files in quickfix list
 " Allows to Grep for a pattern and apply an argdo command on each of the
-" matching files 
+" matching files
 command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
 function! QuickfixFilenames()
   " Building a hash ensures we get each buffer only once
@@ -363,7 +358,7 @@ augroup mark_files
 augroup END
 
 
-" Toggle between opening/closing the quickfix window 
+" Toggle between opening/closing the quickfix window
 function! GetBufferList()
   redir =>buflist
   silent! ls!
@@ -392,10 +387,10 @@ function! ToggleList(bufname, pfx)
 endfunction
 
 nnoremap <silent> <F10> :call ToggleList("Quickfix List", 'c')<CR>
-" 
+"
 
 
-" Make list-like commands more intuitive 
+" Make list-like commands more intuitive
 " Copied from https://gist.github.com/romainl/047aca21e338df7ccf771f96858edb86
 function! CCR()
     let cmdline = getcmdline()
@@ -434,9 +429,9 @@ function! CCR()
     endif
 endfunction
 cnoremap <expr> <CR> CCR()
-" 
+"
 
-" Text objects 
+" Text objects
 function! s:inIndentation()
   " select all text in current indentation level excluding any empty lines
   " that precede or follow the current indentationt level;
@@ -568,11 +563,11 @@ endfunction
 " "around indentation" (indentation level and any surrounding empty lines)
 xnoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
 onoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
-" 
-" 
+"
+"
 
-" Filetype specific settings 
-" Text 
+" Filetype specific settings
+" Text
 augroup ft_text
   au!
   " au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
@@ -594,33 +589,33 @@ function! ColorRpt()
   " Color errors
   syn match Error "\v^ERROR:.*$"
 endfunction
-" 
-" Git commit messages 
+"
+" Git commit messages
 augroup ft_git
   au!
   au FileType gitcommit setlocal spell spelllang=en_gb
   autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 augroup END
-" 
-" Ruby 
+"
+" Ruby
 augroup ft_ruby
   au!
   autocmd BufRead *_spec.rb set filetype=rspec
 augroup END
-" 
-" Matlab 
+"
+" Matlab
 augroup ft_matlab
   au!
   autocmd FileType matlab setlocal commentstring=\%\ %s
 augroup END
-" 
-" C 
+"
+" C
 augroup ft_c
   au!
   au FileType c setlocal foldmethod=syntax
 augroup END
-" 
-" TCL 
+"
+" TCL
 
 augroup ft_tcl
   au!
@@ -634,8 +629,8 @@ augroup ft_tcl
 augroup END
 " shortcuts
 iabbrev procargs array set arg [::argument_processing::proces_arguments $args];
-" 
-" GPG 
+"
+" GPG
 " Don't save backups of gpg asc files
 set backupskip+=*.asc
 
@@ -648,8 +643,8 @@ augroup GPGASCII
   au BufWritePost *.asc u
   au VimLeave *.asc :!clear
 augroup END
-" 
-" System Verilog 
+"
+" System Verilog
 augroup ft_systemverilog
   au!
   au FileType systemverilog setlocal suffixesadd+=.sv,.v
@@ -665,21 +660,21 @@ function! SVAlign()
         \  ')': { 'pattern': '[()]', 'left_margin': 0, 'right_margin': 0, 'stick_to_left': 0}
         \}
 endfunction
-" 
-" Make 
+"
+" Make
 augroup ft_make
   autocmd!
   autocmd BufEnter *.make setlocal filetype=make
   autocmd FileType make setlocal noexpandtab
 augroup END
-" JSON 
+" JSON
 augroup ft_json
   autocmd!
   autocmd FileType json setlocal equalprg=jq
 augroup END
-" 
-" 
-" Python 
+"
+"
+" Python
 augroup f_python
   autocmd!
   autocmd FileType python setlocal shiftwidth=4
@@ -689,14 +684,14 @@ augroup f_python
 augroup END
 
 let g:python_highlight_all=1
-" 
-" 
+"
+"
 
-" Plugin settings 
-" Gundo tree 
+" Plugin settings
+" Gundo tree
 nnoremap <leader>u :GundoToggle<CR>
-" 
-" Projectionist 
+"
+" Projectionist
 let g:projectionist_heuristics = {
       \ "*.c": {
       \   "*.c": {
@@ -716,8 +711,8 @@ let g:projectionist_heuristics = {
       \   "*.py": { "make": "ipython {}" }
       \ },
       \ }
-" 
-" Grep 
+"
+" Grep
 let g:grepper = {
       \ 'tools': ['ag', 'hg'],
       \ 'highlight': 1,
@@ -730,11 +725,11 @@ xnoremap gs <plug>(GrepperOperator)
 
 
 command! -nargs=* -complete=file Ag Grepper -noprompt -tool ag -grepprg rg --vimgrep <args>
-" 
-" Vinegar/NetRW 
+"
+" Vinegar/NetRW
 autocmd FileType netrw setl bufhidden=delete
-" 
-" NCM 
+"
+" NCM
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -763,9 +758,9 @@ smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
-" 
-" 
-" 
+"
+"
+"
 
 function! SendOSCClipboard(lines, regtype)
    call SendViaOSC52(join(a:lines, "\n"))

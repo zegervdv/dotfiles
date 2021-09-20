@@ -12,7 +12,7 @@ AppData/*
 {{ end }}
 
 {{ if eq .chezmoi.os "windows" }}
-.config/*
+.config/nvim/*
 .bashrc
 .zshrc
 .Brewfile

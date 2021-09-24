@@ -669,36 +669,8 @@ local on_attach = function(client)
 
   inoremap { '<c-l>', vim.lsp.buf.signature_help, silent = true, buffer = 0 }
 
-  vim.fn.sign_define(
-    'LspDiagnosticsSignError',
-    { texthl = 'LspDiagnosticsSignError', linehl = '', numhl = '', text = '▎' }
-  )
-  vim.fn.sign_define('LspDiagnosticsSignWarning', {
-    texthl = 'LspDiagnosticsSignWarning',
-    linehl = '',
-    numhl = '',
-    text = '▎',
-  })
-  vim.fn.sign_define('LspDiagnosticsSignInformation', {
-    texthl = 'LspDiagnosticsSignInformation',
-    linehl = '',
-    numhl = '',
-    text = '▎',
-  })
-  vim.fn.sign_define(
-    'LspDiagnosticsSignHint',
-    { texthl = 'LspDiagnosticsSignHint', linehl = '', numhl = '', text = '▎' }
-  )
-
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
-  vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    update_in_insert = false,
-    virtual_text = { severity_limit = 'Warning' },
-    source = 'if_many',
-  })
-
   -- require "lsp_signature".on_attach()
 end
 
@@ -772,6 +744,28 @@ local au = require 'au'
 au.TextYankPost = function()
   vim.highlight.on_yank { timeout = 120 }
 end
+
+vim.diagnostic.config {
+  underline = true,
+  update_in_insert = false,
+  virtual_text = { severity = { min = vim.diagnostic.severity.WARN }, source = 'always' },
+  severity_sort = true,
+}
+
+vim.fn.sign_define('DiagnosticSignError', { texthl = 'DiagnosticSignError', linehl = '', numhl = '', text = '▎' })
+vim.fn.sign_define('DiagnosticSignWarn', {
+  texthl = 'DiagnosticSignWarn',
+  linehl = '',
+  numhl = '',
+  text = '▎',
+})
+vim.fn.sign_define('DiagnosticSignInfo', {
+  texthl = 'DiagnosticSignInfo',
+  linehl = '',
+  numhl = '',
+  text = '▎',
+})
+vim.fn.sign_define('DiagnosticSignHint', { texthl = 'DiagnosticSignHint', linehl = '', numhl = '', text = '▎' })
 
 -- Try importing local config
 local ok, localconfig = pcall(require, 'localconfig')

@@ -240,25 +240,6 @@ augroup diff_files
 augroup END
 "
 
-" Custom folding by Steve Losh
-function! MyFoldText() "
-  let line = getline(v:foldstart)
-
-  let nucolwidth = &fdc + &number * &numberwidth
-  let windowwidth = winwidth(0) - nucolwidth - 3
-  let foldedlinecount = v:foldend - v:foldstart
-
-  " expand tabs into spaces
-  let onetab = strpart('          ', 0, &tabstop)
-  let line = substitute(line, '\t', onetab, 'g')
-
-  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-  let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-  return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-endfunction "
-set foldtext=MyFoldText()
-set foldopen+=jump
-
 " Detect Filetype from content if file has no extension
 augroup newFileDetection
   au!
@@ -649,7 +630,6 @@ augroup ft_systemverilog
   au!
   au FileType systemverilog setlocal suffixesadd+=.sv,.v
   au FileType systemverilog setlocal foldmethod=expr
-  au FileType systemverilog setlocal foldexpr=nvim_treesitter#foldexpr()
   au FileType systemverilog,verilog call SVAlign()
   au FileType systemverilog,verilog let b:delimitMate_quotes = "\""
   au FileType systemverilog,verilog set iskeyword+='

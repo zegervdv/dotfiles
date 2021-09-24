@@ -565,6 +565,14 @@ opt.mouse = {
   c = true, -- Commandline mode
 }
 
+opt.foldmethod = 'expr'
+opt.foldexpr = 'nvim_treesitter#foldexpr()'
+opt.foldnestmax = 3
+opt.foldminlines = 1
+opt.foldtext =
+  [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+opt.foldenable = false
+
 -- LSP config
 local lsp = require 'lspconfig'
 local null_ls = require 'null-ls'

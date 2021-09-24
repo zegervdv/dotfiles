@@ -569,42 +569,79 @@ opt.mouse = {
 local lsp = require 'lspconfig'
 local null_ls = require 'null-ls'
 
+-- Use builtin tagfunc to query LSP
+-- source: https://github.com/mfussenegger/dotfiles/blob/076d77eafabe90327d1355dfbfb807085a795367/vim/.config/nvim/lua/me/lsp/ext.lua#L54
+local function make_tag_item(name, range, uri)
+  local start = range.start
+  return {
+    name = name,
+    filename = vim.uri_to_fname(uri),
+    cmd = string.format('call cursor(%d, %d)', start.line + 1, start.character + 1),
+  }
+end
+
+local function tag_definition_request(pattern)
+  local params = vim.lsp.util.make_position_params()
+  local results, err = vim.lsp.buf_request_sync(0, 'textDocument/definition', params, 10000)
+  if err then
+    print(vim.inspect(err))
+  end
+
+  local tags = {}
+
+  for _, lsp_result in pairs(results) do
+    local result = lsp_result.result or {}
+    if result.range then
+      table.insert(tags, make_tag_item(pattern, result.range, result.uri))
+    else
+      for _, item in pairs(result) do
+        if item.range then
+          table.insert(tags, make_tag_item(pattern, item.range, item.uri))
+        else
+          table.insert(tags, make_tag_item(pattern, item.targetSelectionRange, item.targetUri))
+        end
+      end
+    end
+  end
+  return tags
+end
+
+local function tag_symbol_request(pattern)
+  local results, err = vim.lsp.buf_request_sync(0, 'workspace/symbol', { query = pattern }, 10000)
+  if err then
+    print(vim.inspect(err))
+  end
+
+  local tags = {}
+
+  for _, symbols in pairs(results) do
+    for _, symbol in pairs(symbols.result or {}) do
+      local loc = symbol.location
+      local item = make_tag_item(symbol.name, loc.range, loc.uri)
+      item.kind = (vim.lsp.protocol.SymbolKind[symbol.kind] or 'Unknown')[1]
+      table.insert(tags, item)
+    end
+  end
+  return tags
+end
+
+_G.tagfunc = function(pattern, flags)
+  if flags == 'c' then
+    return tag_definition_request(pattern)
+  elseif flags == '' or flags == 'r' then
+    return tag_symbol_request(pattern)
+  else
+    return vim.NIL
+  end
+end
+
 local on_attach = function(client)
   local nnoremap = vim.keymap.nnoremap
   local inoremap = vim.keymap.inoremap
+
+  vim.bo.tagfunc = 'v:lua.tagfunc'
+
   nnoremap { 'gd', vim.lsp.buf.declaration, silent = true, buffer = 0 }
-  nnoremap { '<c-]>', vim.lsp.buf.definition, silent = true, buffer = 0 }
-  nnoremap {
-    'g<c-]>',
-    function()
-      local params = vim.lsp.util.make_position_params()
-      opts = {}
-      local results_lsp = vim.lsp.buf_request_sync(0, 'textDocument/definition', params, opts.timeout or 10000)
-      if not results_lsp or vim.tbl_isempty(results_lsp) then
-        print 'No results from textDocument/definition'
-        return
-      end
-      for _, lsp_data in pairs(results_lsp) do
-        if lsp_data ~= nil and lsp_data.result ~= nil and not vim.tbl_isempty(lsp_data.result) then
-          for _, value in pairs(lsp_data.result) do
-            local range = value.range or value.targetRange
-            if range ~= nil then
-              local file = value.uri or value.targetUri
-              if file ~= nil then
-                vim.api.nvim_command [[split]]
-                vim.lsp.util.jump_to_location(value)
-                return
-              end
-            end
-          end
-        end
-      end
-      -- try to call default lsp function
-      vim.lsp.buf.definition()
-    end,
-    silent = true,
-    buffer = 0,
-  }
   nnoremap { 'K', vim.lsp.buf.hover, silent = true, buffer = 0 }
   nnoremap { 'gD', vim.lsp.buf.implementation, silent = true, buffer = 0 }
   nnoremap { '1gD', vim.lsp.buf.type_definition, silent = true, buffer = 0 }

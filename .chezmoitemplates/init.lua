@@ -663,7 +663,6 @@ local on_attach = function(client)
     silent = true,
     buffer = 0,
   }
-  -- nnoremap { 'gp', require'lspsaga.provider'.preview_definition, silent = true }
   nnoremap { 'gp', require('goto-preview').goto_preview_definition, silent = true, buffer = 0 }
   nnoremap { 'gP', require('goto-preview').close_all_win, silent = true, buffer = 0 }
 
@@ -696,6 +695,7 @@ local on_attach = function(client)
     underline = true,
     update_in_insert = false,
     virtual_text = { severity_limit = 'Warning' },
+    source = 'if_many',
   })
 
   -- require "lsp_signature".on_attach()

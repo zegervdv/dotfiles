@@ -22,3 +22,7 @@ AppData/*
 bin/*
 .zsh/*
 {{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.local/share/applications/*
+{{ end }}

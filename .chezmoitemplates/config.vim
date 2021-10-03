@@ -771,5 +771,7 @@ endif
 augroup Chezmoi
   autocmd!
   autocmd BufWritePost ~/.local/share/chezmoi/* silent !chezmoi apply --source-path %
+  autocmd BufWritePost ~/.local/share/chezmoi/.chezmoitemplates/init.lua silent !chezmoi apply --source-path ~/.local/share/chezmoi/dot_config/nvim/init.lua.tmpl
+  autocmd BufWritePost ~/.local/share/chezmoi/.chezmoitemplates/config.vim silent !chezmoi apply --source-path ~/.local/share/chezmoi/dot_config/nvim/plugin/config.vim.tmpl
   autocmd BufWritePost ~/.local/share/chezmoi/dot_config/nvim/init.lua source <afile> | PackerCompile
 augroup END

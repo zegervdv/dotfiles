@@ -17,6 +17,8 @@ if has('packages')
   silent! packadd! snippets
 endif
 
+packadd vim-dirvish
+
 if has("nvim")
   let g:python3_host_prog=expand('$HOME/.config/virtualenvs/python3/bin/python')
   let g:python_host_prog=expand('$HOME/.config/virtualenvs/python2/bin/python')

@@ -400,7 +400,7 @@ vim.defer_fn(function()
     }
 
     -- File navigation
-    use { 'justinmk/vim-dirvish' }
+    use { 'justinmk/vim-dirvish', opt = true }
 
     -- Colorscheme
     use {

@@ -91,6 +91,7 @@ vim.defer_fn(function()
     use { 'tpope/vim-surround' }
     use {
       'windwp/nvim-autopairs',
+      commit = '0e5a11555ef4bfb18d21362119549a880031723b',
       config = function()
         local npairs = require 'nvim-autopairs'
         local Rule = require 'nvim-autopairs.rule'
@@ -286,7 +287,6 @@ vim.defer_fn(function()
       config = function()
         require('goto-preview').setup {}
       end,
-      commit = '8093ded366e2e71e87f5e40da29994187c06fce1',
     }
     use {
       'jose-elias-alvarez/null-ls.nvim',

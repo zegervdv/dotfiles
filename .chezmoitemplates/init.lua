@@ -91,7 +91,6 @@ vim.defer_fn(function()
     use { 'tpope/vim-surround' }
     use {
       'windwp/nvim-autopairs',
-      commit = '0e5a11555ef4bfb18d21362119549a880031723b',
       config = function()
         local npairs = require 'nvim-autopairs'
         local Rule = require 'nvim-autopairs.rule'
@@ -141,7 +140,7 @@ vim.defer_fn(function()
           return vim.bo.filetype ~= 'systemverilog'
         end)
 
-        npairs.get_rule("'"):with_pair(function()
+        npairs.get_rule("'")[1]:with_pair(function()
           return vim.bo.filetype ~= 'systemverilog'
         end)
       end,

@@ -13,8 +13,8 @@ PROMPT_COMMAND=prompt_env
 PS1="\[\e[36m\]\A \[\e[1;34m\]\[\e[31m\]\H\[\e[1;34m\] \w\[\e[0m\] \[\e[32m\]$prompt_branch\[\e[0m\]\n$prompt_jobs > \[\e[0m\]"
 
 
-alias ls="ls --hyperlink=auto"
-alias ll="ls -lAvhtr --color --hyperlink=auto"
+alias ls="ls"
+alias ll="ls -lAvhtr --color"
 alias l=ll
 alias fgrep='fgrep -nrI --color --exclude-dir=.hg --exclude=*.log --exclude=*.dup --exclude=*.orig --exclude=transcript --exclude=tags --exclude=Session.vim'
 alias xclip='xclip -selection clipboard'

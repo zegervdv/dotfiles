@@ -234,6 +234,10 @@ vim.defer_fn(function()
             { name = 'vsnip' },
             { name = 'path' },
           },
+          experimental = {
+            native_menu = false,
+            ghost_text = true,
+          },
         }
       end,
     }

@@ -27,7 +27,6 @@ vim.defer_fn(function()
     use { 'ShikChen/osc52.vim' }
     use { 'einfachtoll/didyoumean' }
 
-    use { 'tpope/vim-obsession' }
     use {
       'tpope/vim-eunuch',
       cmd = {
@@ -164,6 +163,16 @@ vim.defer_fn(function()
     -- Opening files
     use { 'wsdjeg/vim-fetch' }
 
+    -- session management
+    use {
+      'folke/persistence.nvim',
+      event = 'BufReadPre',
+      module = 'persistence',
+      config = function()
+        require('persistence').setup()
+      end,
+    }
+
     -- Indent lines
     use {
       'lukas-reineke/indent-blankline.nvim',
@@ -230,7 +239,7 @@ vim.defer_fn(function()
           },
           sources = {
             { name = 'nvim_lsp' },
-            { name = 'buffer' },
+            { name = 'buffer', keyword_length = 5 },
             { name = 'vsnip' },
             { name = 'path' },
           },

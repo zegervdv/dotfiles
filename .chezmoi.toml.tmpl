@@ -1,10 +1,33 @@
-{{- $email := promptString "email" -}}
-{{- $name := promptString "name" -}}
-{{- $signingkey := promptString "gpg key" -}}
-{{- $font_size := promptString "font_size" -}}
+{{- $email := "" -}}
+{{- if (hasKey . "email") -}}
+{{-   $email = .email -}}
+{{- else -}}
+{{-   $email = promptString "email" -}}
+{{- end -}}
+
+{{- $name := "" -}}
+{{- if (hasKey . "name") -}}
+{{-   $name = .name -}}
+{{- else -}}
+{{-   $name = promptString "name" -}}
+{{- end -}}
+
+{{- $signingkey := "" -}}
+{{- if (hasKey . "signingkey") -}}
+{{-   $signingkey = .signingkey -}}
+{{- else -}}
+{{-   $signingkey = promptString "GPG key" -}}
+{{- end -}}
+
+{{- $font_size := "" -}}
+{{- if (hasKey . "font_size") -}}
+{{-   $font_size = .font_size -}}
+{{- else -}}
+{{-   $font_size = promptString "font_size" -}}
+{{- end -}}
 
 [data]
-   email = "{{ $email }}"
-   name = "{{ $name }}"
-   signingkey = "{{ $signingkey }}"
-   font_size = "{{ $font_size }}"
+   email = {{ $email | quote }}
+   name = {{ $name | quote }}
+   signingkey = {{ $signingkey | quote }}
+   font_size = {{ $font_size | quote }}

@@ -250,7 +250,6 @@ vim.defer_fn(function()
         }
       end,
     }
-    use { 'ray-x/lsp_signature.nvim' }
     use {
       {
         'nvim-treesitter/nvim-treesitter',
@@ -683,7 +682,6 @@ local on_attach = function(client)
 
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
-  -- require "lsp_signature".on_attach()
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -48,6 +48,8 @@ vim.defer_fn(function()
 
     use { 'psliwka/vim-smoothie' }
 
+    use { 'lewis6991/impatient.nvim' }
+
     use { 'nvim-lua/plenary.nvim' }
 
     -- Spelling/autocorrection

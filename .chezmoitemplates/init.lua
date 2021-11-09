@@ -530,7 +530,7 @@ opt.cursorline = true
 
 -- Show certain characters
 opt.list = true
-opt.listchars = { trail = '·', extends = '>', precedes = '<', nbsp = '+' }
+opt.listchars = { trail = '·', extends = '>', precedes = '<', nbsp = '+', tab = '▸ ' }
 
 opt.sessionoptions:remove 'options' -- Remove options from saved sessions (reload from config)
 

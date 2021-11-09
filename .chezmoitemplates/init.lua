@@ -218,13 +218,13 @@ vim.defer_fn(function()
     use { 'neovim/nvim-lspconfig' }
     use {
       'hrsh7th/nvim-cmp',
-      requires = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-vsnip', 'hrsh7th/cmp-path' },
+      requires = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-path' },
       config = function()
         local cmp = require 'cmp'
         cmp.setup {
           snippet = {
             expand = function(args)
-              vim.fn['vsnip#anonymous'](args.body)
+              require('luasnip').lsp_expand(args.body)
             end,
           },
           mapping = {
@@ -240,7 +240,7 @@ vim.defer_fn(function()
           sources = {
             { name = 'nvim_lsp' },
             { name = 'buffer', keyword_length = 5 },
-            { name = 'vsnip' },
+            { name = 'luasnip' },
             { name = 'path' },
           },
           experimental = {
@@ -249,6 +249,7 @@ vim.defer_fn(function()
           },
         }
       end,
+      after = 'luasnip',
     }
     use {
       {
@@ -292,7 +293,7 @@ vim.defer_fn(function()
       'nvim-treesitter/nvim-treesitter-textobjects',
       { 'nvim-treesitter/playground', opt = true },
     }
-    use { 'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ' }
+    use { 'L3MON4D3/luasnip' }
     use {
       'rmagatti/goto-preview',
       config = function()

@@ -12,11 +12,6 @@ if !has('nvim')
 endif
 source $VIMRUNTIME/ftplugin/man.vim
 
-if has('packages')
-  silent! packadd! log_file
-  silent! packadd! snippets
-endif
-
 packadd vim-dirvish
 
 if has("nvim")

@@ -12,472 +12,470 @@ if fn.empty(fn.glob(install_path)) > 0 then
   execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
-vim.defer_fn(function()
-  -- Packer configuration is compiled and only needs to be loaded on changes
-  vim.cmd 'packadd packer.nvim'
+-- Packer configuration is compiled and only needs to be loaded on changes
+vim.cmd 'packadd packer.nvim'
 
-  require('packer').startup(function()
-    use { 'wbthomason/packer.nvim', opt = true }
+require('packer').startup(function()
+  use { 'wbthomason/packer.nvim', opt = true }
 
-    -- General plugins
-    use { 'tpope/vim-sensible' }
-    use { 'tpope/vim-repeat' }
-    use { 'tpope/vim-rsi' }
-    use { 'sgur/vim-editorconfig' }
-    use { 'ShikChen/osc52.vim' }
-    use { 'einfachtoll/didyoumean' }
+  -- General plugins
+  use { 'tpope/vim-sensible' }
+  use { 'tpope/vim-repeat' }
+  use { 'tpope/vim-rsi' }
+  use { 'sgur/vim-editorconfig' }
+  use { 'ShikChen/osc52.vim' }
+  use { 'einfachtoll/didyoumean' }
 
-    use {
-      'tpope/vim-eunuch',
-      cmd = {
-        'Delete',
-        'Unlink',
-        'Move',
-        'Rename',
-        'Mkdir',
-        'Chmod',
-        'Cfind',
-        'Clocate',
-        'Lfind',
-        'Llocate',
-        'SudoEdit',
-        'SudoWrite',
-        'Wall',
-      },
-    }
+  use {
+    'tpope/vim-eunuch',
+    cmd = {
+      'Delete',
+      'Unlink',
+      'Move',
+      'Rename',
+      'Mkdir',
+      'Chmod',
+      'Cfind',
+      'Clocate',
+      'Lfind',
+      'Llocate',
+      'SudoEdit',
+      'SudoWrite',
+      'Wall',
+    },
+  }
 
-    use { 'psliwka/vim-smoothie' }
+  use { 'psliwka/vim-smoothie' }
 
-    use { 'lewis6991/impatient.nvim' }
+  use { 'lewis6991/impatient.nvim' }
 
-    use { 'nvim-lua/plenary.nvim' }
+  use { 'nvim-lua/plenary.nvim' }
 
-    -- Spelling/autocorrection
-    use { 'tpope/vim-abolish' }
+  -- Spelling/autocorrection
+  use { 'tpope/vim-abolish' }
 
-    -- Git/VCS
-    use { 'vim-scripts/gitignore' }
-    use {
-      'sjl/splice.vim',
-      opt = true,
-      cmd = { 'SpliceInit' },
-      config = function()
-        vim.g.splice_initial_diff_grid = 1
-        vim.g.splice_initial_diff_compare = 1
-        vim.g.splice_initial_diff_path = 0
-        vim.g.splice_initial_scrollbind_grid = 1
-        vim.g.splice_initial_scrollbind_compare = 1
-        vim.g.splice_initial_scrollbind_path = 1
-        vim.g.splice_wrap = 'nowrap'
-      end,
-    }
-    use { 'tpope/vim-git', ft = { 'gitcommit', 'gitrebase' } }
+  -- Git/VCS
+  use { 'vim-scripts/gitignore' }
+  use {
+    'sjl/splice.vim',
+    opt = true,
+    cmd = { 'SpliceInit' },
+    config = function()
+      vim.g.splice_initial_diff_grid = 1
+      vim.g.splice_initial_diff_compare = 1
+      vim.g.splice_initial_diff_path = 0
+      vim.g.splice_initial_scrollbind_grid = 1
+      vim.g.splice_initial_scrollbind_compare = 1
+      vim.g.splice_initial_scrollbind_path = 1
+      vim.g.splice_wrap = 'nowrap'
+    end,
+  }
+  use { 'tpope/vim-git', ft = { 'gitcommit', 'gitrebase' } }
 
-    -- Comments
-    use {
-      'b3nj5m1n/kommentary',
-      config = function()
-        require('kommentary.config').configure_language('default', { prefer_single_line_comments = true })
-      end,
-      keys = {
-        { 'n', 'gcc' },
-        { 'v', 'gc' },
-      },
-    }
+  -- Comments
+  use {
+    'b3nj5m1n/kommentary',
+    config = function()
+      require('kommentary.config').configure_language('default', { prefer_single_line_comments = true })
+    end,
+    keys = {
+      { 'n', 'gcc' },
+      { 'v', 'gc' },
+    },
+  }
 
-    -- Undoing
-    use { 'sjl/gundo.vim', cmd = { 'GundoToggle' } }
+  -- Undoing
+  use { 'sjl/gundo.vim', cmd = { 'GundoToggle' } }
 
-    -- Parentheses etc
-    use { 'tpope/vim-surround' }
-    use {
-      'windwp/nvim-autopairs',
-      config = function()
-        local npairs = require 'nvim-autopairs'
-        local Rule = require 'nvim-autopairs.rule'
+  -- Parentheses etc
+  use { 'tpope/vim-surround' }
+  use {
+    'windwp/nvim-autopairs',
+    config = function()
+      local npairs = require 'nvim-autopairs'
+      local Rule = require 'nvim-autopairs.rule'
 
-        local cmp = require 'nvim-autopairs.completion.cmp'
+      local cmp = require 'nvim-autopairs.completion.cmp'
 
-        require('cmp').event:on('confirm_done', cmp.on_confirm_done())
+      require('cmp').event:on('confirm_done', cmp.on_confirm_done())
 
-        npairs.setup {
-          ignored_next_char = string.gsub([[ [%w%%%'%[%.] ]], '%s+', ''),
-        }
+      npairs.setup {
+        ignored_next_char = string.gsub([[ [%w%%%'%[%.] ]], '%s+', ''),
+      }
 
-        npairs.add_rules {
-          Rule(' ', ' '):with_pair(function(opts)
-            local pair = opts.line:sub(opts.col - 1, opts.col)
-            return vim.tbl_contains({ '()', '[]', '{}' }, pair)
-          end),
-          Rule('( ', ' )')
-            :with_pair(function()
-              return false
-            end)
-            :with_move(function(opts)
-              return opts.prev_char:match '.%)' ~= nil
-            end)
-            :use_key ')',
-          Rule('{ ', ' }')
-            :with_pair(function()
-              return false
-            end)
-            :with_move(function(opts)
-              return opts.prev_char:match '.%}' ~= nil
-            end)
-            :use_key '}',
-          Rule('[ ', ' ]')
-            :with_pair(function()
-              return false
-            end)
-            :with_move(function(opts)
-              return opts.prev_char:match '.%]' ~= nil
-            end)
-            :use_key ']',
-        }
+      npairs.add_rules {
+        Rule(' ', ' '):with_pair(function(opts)
+          local pair = opts.line:sub(opts.col - 1, opts.col)
+          return vim.tbl_contains({ '()', '[]', '{}' }, pair)
+        end),
+        Rule('( ', ' )')
+          :with_pair(function()
+            return false
+          end)
+          :with_move(function(opts)
+            return opts.prev_char:match '.%)' ~= nil
+          end)
+          :use_key ')',
+        Rule('{ ', ' }')
+          :with_pair(function()
+            return false
+          end)
+          :with_move(function(opts)
+            return opts.prev_char:match '.%}' ~= nil
+          end)
+          :use_key '}',
+        Rule('[ ', ' ]')
+          :with_pair(function()
+            return false
+          end)
+          :with_move(function(opts)
+            return opts.prev_char:match '.%]' ~= nil
+          end)
+          :use_key ']',
+      }
 
-        npairs.get_rule('`'):with_pair(function()
-          return vim.bo.filetype ~= 'systemverilog'
-        end)
+      npairs.get_rule('`'):with_pair(function()
+        return vim.bo.filetype ~= 'systemverilog'
+      end)
 
-        npairs.get_rule("'")[1]:with_pair(function()
-          return vim.bo.filetype ~= 'systemverilog'
-        end)
-      end,
-      after = { 'nvim-cmp' },
-    }
+      npairs.get_rule("'")[1]:with_pair(function()
+        return vim.bo.filetype ~= 'systemverilog'
+      end)
+    end,
+    after = { 'nvim-cmp' },
+  }
 
-    -- Moving around within lines
-    use { 'wellle/targets.vim', event = 'InsertEnter *' }
+  -- Moving around within lines
+  use { 'wellle/targets.vim', event = 'InsertEnter *' }
 
-    -- Searching
-    use { 'mhinz/vim-grepper', cmd = { 'Grepper' } }
+  -- Searching
+  use { 'mhinz/vim-grepper', cmd = { 'Grepper' } }
 
-    -- Keymaps TODO: to be removed when #13823 is merged
-    use {
-      'tjdevries/astronauta.nvim',
-      config = function()
-        require 'astronauta.keymap'
-      end,
-    }
+  -- Keymaps TODO: to be removed when #13823 is merged
+  use {
+    'tjdevries/astronauta.nvim',
+    config = function()
+      require 'astronauta.keymap'
+    end,
+  }
 
-    -- Opening files
-    use { 'wsdjeg/vim-fetch' }
+  -- Opening files
+  use { 'wsdjeg/vim-fetch' }
 
-    -- session management
-    use {
-      'folke/persistence.nvim',
-      event = 'BufReadPre',
-      module = 'persistence',
-      config = function()
-        require('persistence').setup()
-      end,
-    }
+  -- session management
+  use {
+    'folke/persistence.nvim',
+    event = 'BufReadPre',
+    module = 'persistence',
+    config = function()
+      require('persistence').setup()
+    end,
+  }
 
-    -- Indent lines
-    use {
-      'lukas-reineke/indent-blankline.nvim',
-      config = function()
-        vim.g.indent_blankline_buftype_exclude = { 'terminal', 'help', 'nofile' }
-        vim.g.indent_blankline_show_first_indent_level = false
-        vim.g.indent_blankline_char = '│'
-      end,
-    }
+  -- Indent lines
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    config = function()
+      vim.g.indent_blankline_buftype_exclude = { 'terminal', 'help', 'nofile' }
+      vim.g.indent_blankline_show_first_indent_level = false
+      vim.g.indent_blankline_char = '│'
+    end,
+  }
 
-    -- Increment/decrement
-    use {
-      'zegervdv/nrpattern.nvim',
-      requires = 'tpope/vim-repeat',
-      config = function()
-        local nrpattern = require 'nrpattern'
-        local defaults = require 'nrpattern.default'
+  -- Increment/decrement
+  use {
+    'zegervdv/nrpattern.nvim',
+    requires = 'tpope/vim-repeat',
+    config = function()
+      local nrpattern = require 'nrpattern'
+      local defaults = require 'nrpattern.default'
 
-        defaults[{ 'input', 'output' }] = { priority = 12, filetypes = { 'verilog', 'systemverilog' } }
-        defaults[{ "'1", "'0" }] = { priority = 9, filetypes = { 'verilog', 'systemverilog' } }
+      defaults[{ 'input', 'output' }] = { priority = 12, filetypes = { 'verilog', 'systemverilog' } }
+      defaults[{ "'1", "'0" }] = { priority = 9, filetypes = { 'verilog', 'systemverilog' } }
 
-        nrpattern.setup(defaults)
-      end,
-    }
+      nrpattern.setup(defaults)
+    end,
+  }
 
-    -- Tmux
-    use {
-      'numtostr/navigator.nvim',
-      config = function()
-        require('Navigator').setup { auto_save = 'current', disable_on_zoom = true }
+  -- Tmux
+  use {
+    'numtostr/navigator.nvim',
+    config = function()
+      require('Navigator').setup { auto_save = 'current', disable_on_zoom = true }
 
-        local nnoremap = vim.keymap.nnoremap
-        nnoremap { '<c-h>', require('Navigator').left, silent = true }
-        nnoremap { '<c-j>', require('Navigator').down, silent = true }
-        nnoremap { '<c-k>', require('Navigator').up, silent = true }
-        nnoremap { '<c-l>', require('Navigator').right, silent = true }
-      end,
-      requires = 'tjdevries/astronauta.nvim',
-      after = 'astronauta.nvim',
-    }
+      local nnoremap = vim.keymap.nnoremap
+      nnoremap { '<c-h>', require('Navigator').left, silent = true }
+      nnoremap { '<c-j>', require('Navigator').down, silent = true }
+      nnoremap { '<c-k>', require('Navigator').up, silent = true }
+      nnoremap { '<c-l>', require('Navigator').right, silent = true }
+    end,
+    requires = 'tjdevries/astronauta.nvim',
+    after = 'astronauta.nvim',
+  }
 
-    -- Completion/snippets/LSP
-    use { 'neovim/nvim-lspconfig' }
-    use {
-      'hrsh7th/nvim-cmp',
-      requires = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-path' },
-      config = function()
-        local cmp = require 'cmp'
-        local luasnip = require 'luasnip'
+  -- Completion/snippets/LSP
+  use { 'neovim/nvim-lspconfig' }
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-path' },
+    config = function()
+      local cmp = require 'cmp'
+      local luasnip = require 'luasnip'
 
-        local has_words_before = function()
-          local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-          return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
-        end
+      local has_words_before = function()
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
+      end
 
-        cmp.setup {
-          snippet = {
-            expand = function(args)
-              luasnip.lsp_expand(args.body)
-            end,
+      cmp.setup {
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+        mapping = {
+          ['<C-p>'] = cmp.mapping.select_prev_item(),
+          ['<C-n>'] = cmp.mapping.select_next_item(),
+          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-y>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.close(),
+          ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
           },
-          mapping = {
-            ['<C-p>'] = cmp.mapping.select_prev_item(),
-            ['<C-n>'] = cmp.mapping.select_next_item(),
-            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-            ['<C-y>'] = cmp.mapping.complete(),
-            ['<C-e>'] = cmp.mapping.close(),
-            ['<CR>'] = cmp.mapping.confirm {
-              behavior = cmp.ConfirmBehavior.Replace,
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end, {
+            'i',
+            's',
+          }),
+
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, {
+            'i',
+            's',
+          }),
+        },
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'buffer', keyword_length = 5 },
+          { name = 'luasnip' },
+          { name = 'path' },
+        },
+        experimental = {
+          native_menu = false,
+          ghost_text = true,
+        },
+      }
+    end,
+    after = 'luasnip',
+  }
+  use {
+    {
+      'nvim-treesitter/nvim-treesitter',
+      config = function()
+        require 'nvim-treesitter.highlight'
+
+        require('nvim-treesitter.configs').setup {
+          highlight = { enable = false },
+          incremental_selection = {
+            enable = true,
+            keymaps = {
+              init_selection = 'gnn',
+              node_incremental = 'grn',
+              scope_incremental = 'grc',
+              node_decremental = 'grm',
             },
-            ['<Tab>'] = cmp.mapping(function(fallback)
-              if cmp.visible() then
-                cmp.select_next_item()
-              elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-              elseif has_words_before() then
-                cmp.complete()
-              else
-                fallback()
-              end
-            end, {
-              'i',
-              's',
-            }),
-
-            ['<S-Tab>'] = cmp.mapping(function(fallback)
-              if cmp.visible() then
-                cmp.select_prev_item()
-              elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-              else
-                fallback()
-              end
-            end, {
-              'i',
-              's',
-            }),
           },
-          sources = {
-            { name = 'nvim_lsp' },
-            { name = 'buffer', keyword_length = 5 },
-            { name = 'luasnip' },
-            { name = 'path' },
-          },
-          experimental = {
-            native_menu = false,
-            ghost_text = true,
-          },
-        }
-      end,
-      after = 'luasnip',
-    }
-    use {
-      {
-        'nvim-treesitter/nvim-treesitter',
-        config = function()
-          require 'nvim-treesitter.highlight'
-
-          require('nvim-treesitter.configs').setup {
-            highlight = { enable = false },
-            incremental_selection = {
+          refactor = {
+            highlight_definitions = { enable = true },
+            smart_rename = { enable = true, keymaps = { smart_rename = 'gsr' } },
+            navigation = {
               enable = true,
-              keymaps = {
-                init_selection = 'gnn',
-                node_incremental = 'grn',
-                scope_incremental = 'grc',
-                node_decremental = 'grm',
-              },
+              keymaps = { goto_definition = 'gnd', list_definitions = 'gnD' },
             },
-            refactor = {
-              highlight_definitions = { enable = true },
-              smart_rename = { enable = true, keymaps = { smart_rename = 'gsr' } },
-              navigation = {
-                enable = true,
-                keymaps = { goto_definition = 'gnd', list_definitions = 'gnD' },
-              },
+          },
+          textobjects = {
+            move = {
+              enable = true,
+              goto_next_start = { [']]'] = '@block.outer' },
+              goto_previous_start = { ['[['] = '@block.outer' },
+              goto_next_end = { [']['] = '@block.outer' },
+              goto_previous_end = { ['[]'] = '@block.outer' },
             },
-            textobjects = {
-              move = {
-                enable = true,
-                goto_next_start = { [']]'] = '@block.outer' },
-                goto_previous_start = { ['[['] = '@block.outer' },
-                goto_next_end = { [']['] = '@block.outer' },
-                goto_previous_end = { ['[]'] = '@block.outer' },
-              },
-            },
-            playground = { enable = true, disable = {}, updatetime = 25, persist_queries = false },
-          }
-        end,
-      },
-      'nvim-treesitter/nvim-treesitter-refactor',
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      { 'nvim-treesitter/playground', opt = true },
-    }
-    use { 'L3MON4D3/luasnip' }
-    use {
-      'rmagatti/goto-preview',
-      config = function()
-        require('goto-preview').setup {}
-      end,
-    }
-    use {
-      'jose-elias-alvarez/null-ls.nvim',
-      requires = 'nvim-lua/plenary.nvim',
-    }
-    use { 'folke/lua-dev.nvim' }
-
-    use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
-
-    -- Vanity
-    use {
-      'yamatsum/nvim-web-nonicons',
-      requires = 'kyazdani42/nvim-web-devicons',
-      config = function()
-        require 'nvim-nonicons'
-      end,
-    }
-
-    use {
-      'NTBBloodbath/galaxyline.nvim',
-      branch = 'main',
-      -- your statusline
-      config = function()
-        local gl = require 'galaxyline'
-        local colors = require('galaxyline.themes.colors').default
-        local condition = require 'galaxyline.condition'
-        local gls = gl.section
-
-        colors.bg = '#2C323C'
-
-        gls.left[1] = {
-          RainbowRed = {
-            provider = function()
-              return '▊ '
-            end,
-            highlight = { colors.blue, colors.bg },
           },
-        }
-
-        gls.left[2] = {
-          FileName = {
-            provider = function()
-              return require('galaxyline.providers.fileinfo').get_current_file_name '⊙'
-            end,
-            condition = condition.buffer_not_empty,
-            highlight = { colors.magenta, colors.bg, 'bold' },
-          },
-        }
-
-        gls.right[1] = {
-          ShowLspClient = {
-            provider = 'GetLspClient',
-            condition = function()
-              local tbl = { ['dashboard'] = true, [''] = true }
-              if tbl[vim.bo.filetype] then
-                return false
-              end
-              return true
-            end,
-            highlight = { colors.green, colors.bg, 'bold' },
-          },
-        }
-
-        gls.right[2] = {
-          LineInfo = {
-            provider = 'LineColumn',
-            separator = ' ',
-            separator_highlight = { 'NONE', colors.bg },
-            highlight = { colors.fg, colors.bg },
-          },
-        }
-
-        gls.right[3] = {
-          PerCent = {
-            provider = 'LinePercent',
-            separator = ' ',
-            separator_highlight = { 'NONE', colors.bg },
-            highlight = { colors.fg, colors.bg, 'bold' },
-          },
-        }
-        gls.right[8] = {
-          RainbowBlue = {
-            provider = function()
-              return ' ▊'
-            end,
-            highlight = { colors.blue, colors.bg },
-          },
-        }
-
-        gls.short_line_left[1] = {
-          BufferType = {
-            provider = 'FileTypeName',
-            separator = ' ',
-            separator_highlight = { 'NONE', colors.bg },
-            highlight = { colors.blue, colors.bg, 'bold' },
-          },
-        }
-
-        gls.short_line_left[2] = {
-          SFileName = {
-            provider = 'SFileName',
-            condition = condition.buffer_not_empty,
-            highlight = { colors.fg, colors.bg, 'bold' },
-          },
-        }
-
-        gls.short_line_right[1] = {
-          BufferIcon = { provider = 'BufferIcon', highlight = { colors.fg, colors.bg } },
+          playground = { enable = true, disable = {}, updatetime = 25, persist_queries = false },
         }
       end,
-    }
+    },
+    'nvim-treesitter/nvim-treesitter-refactor',
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    { 'nvim-treesitter/playground', opt = true },
+  }
+  use { 'L3MON4D3/luasnip' }
+  use {
+    'rmagatti/goto-preview',
+    config = function()
+      require('goto-preview').setup {}
+    end,
+  }
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+  }
+  use { 'folke/lua-dev.nvim' }
 
-    -- File navigation
-    use { 'justinmk/vim-dirvish', opt = true }
+  use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
 
-    -- Colorscheme
-    use {
-      'zegervdv/one-lush',
-      requires = 'rktjmp/lush.nvim',
-      config = function()
-        require 'lush_theme.one-lush'
-        vim.cmd [[ colorscheme one-lush ]]
-      end,
-    }
+  -- Vanity
+  use {
+    'yamatsum/nvim-web-nonicons',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require 'nvim-nonicons'
+    end,
+  }
 
-    -- Terminal
-    use {
-      'akinsho/nvim-toggleterm.lua',
-      config = function()
-        require('toggleterm').setup {
-          size = 15,
-          open_mapping = [[<F12>]],
-          shade_filetypes = { 'none' },
-          shade_terminals = true,
-          persist_size = true,
-          direction = 'horizontal',
-        }
-      end,
-      keys = { [[<F12>]] },
-    }
+  use {
+    'NTBBloodbath/galaxyline.nvim',
+    branch = 'main',
+    -- your statusline
+    config = function()
+      local gl = require 'galaxyline'
+      local colors = require('galaxyline.themes.colors').default
+      local condition = require 'galaxyline.condition'
+      local gls = gl.section
 
-    -- Filetypes
-    use { 'lepture/vim-jinja' }
-  end)
-end, 0)
+      colors.bg = '#2C323C'
+
+      gls.left[1] = {
+        RainbowRed = {
+          provider = function()
+            return '▊ '
+          end,
+          highlight = { colors.blue, colors.bg },
+        },
+      }
+
+      gls.left[2] = {
+        FileName = {
+          provider = function()
+            return require('galaxyline.providers.fileinfo').get_current_file_name '⊙'
+          end,
+          condition = condition.buffer_not_empty,
+          highlight = { colors.magenta, colors.bg, 'bold' },
+        },
+      }
+
+      gls.right[1] = {
+        ShowLspClient = {
+          provider = 'GetLspClient',
+          condition = function()
+            local tbl = { ['dashboard'] = true, [''] = true }
+            if tbl[vim.bo.filetype] then
+              return false
+            end
+            return true
+          end,
+          highlight = { colors.green, colors.bg, 'bold' },
+        },
+      }
+
+      gls.right[2] = {
+        LineInfo = {
+          provider = 'LineColumn',
+          separator = ' ',
+          separator_highlight = { 'NONE', colors.bg },
+          highlight = { colors.fg, colors.bg },
+        },
+      }
+
+      gls.right[3] = {
+        PerCent = {
+          provider = 'LinePercent',
+          separator = ' ',
+          separator_highlight = { 'NONE', colors.bg },
+          highlight = { colors.fg, colors.bg, 'bold' },
+        },
+      }
+      gls.right[8] = {
+        RainbowBlue = {
+          provider = function()
+            return ' ▊'
+          end,
+          highlight = { colors.blue, colors.bg },
+        },
+      }
+
+      gls.short_line_left[1] = {
+        BufferType = {
+          provider = 'FileTypeName',
+          separator = ' ',
+          separator_highlight = { 'NONE', colors.bg },
+          highlight = { colors.blue, colors.bg, 'bold' },
+        },
+      }
+
+      gls.short_line_left[2] = {
+        SFileName = {
+          provider = 'SFileName',
+          condition = condition.buffer_not_empty,
+          highlight = { colors.fg, colors.bg, 'bold' },
+        },
+      }
+
+      gls.short_line_right[1] = {
+        BufferIcon = { provider = 'BufferIcon', highlight = { colors.fg, colors.bg } },
+      }
+    end,
+  }
+
+  -- File navigation
+  use { 'justinmk/vim-dirvish', opt = true }
+
+  -- Colorscheme
+  use {
+    'zegervdv/one-lush',
+    requires = 'rktjmp/lush.nvim',
+    config = function()
+      require 'lush_theme.one-lush'
+      vim.cmd [[ colorscheme one-lush ]]
+    end,
+  }
+
+  -- Terminal
+  use {
+    'akinsho/nvim-toggleterm.lua',
+    config = function()
+      require('toggleterm').setup {
+        size = 15,
+        open_mapping = [[<F12>]],
+        shade_filetypes = { 'none' },
+        shade_terminals = true,
+        persist_size = true,
+        direction = 'horizontal',
+      }
+    end,
+    keys = { [[<F12>]] },
+  }
+
+  -- Filetypes
+  use { 'lepture/vim-jinja' }
+end)
 
 -- Configuration
 local opt = vim.opt

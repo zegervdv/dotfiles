@@ -45,10 +45,13 @@ require('packer').startup(function()
     },
   }
 
+  -- Smooth scrolling
   use { 'psliwka/vim-smoothie' }
 
+  -- Faster lua package loading (until 15436 is merged)
   use { 'lewis6991/impatient.nvim' }
 
+  -- Library with lua functions
   use { 'nvim-lua/plenary.nvim' }
 
   -- Spelling/autocorrection
@@ -340,15 +343,6 @@ require('packer').startup(function()
   use { 'folke/lua-dev.nvim' }
 
   use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
-
-  -- Vanity
-  use {
-    'yamatsum/nvim-web-nonicons',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require 'nvim-nonicons'
-    end,
-  }
 
   use {
     'NTBBloodbath/galaxyline.nvim',

@@ -612,6 +612,48 @@ opt.foldtext =
   [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
 opt.foldenable = false
 
+local au = require 'au'
+
+-- Highlight yanked text
+au.TextYankPost = function()
+  vim.highlight.on_yank { timeout = 120 }
+end
+
+-- Automatic cursorline
+au.group('cline', {
+  {
+    'WinEnter',
+    '*',
+    function()
+      vim.opt_local.cursorline = true
+    end,
+  },
+  {
+    'WinLeave',
+    '*',
+    function()
+      vim.opt_local.cursorline = false
+    end,
+  },
+})
+
+-- Save files on focus lost
+au.FocusLost = function()
+  if not vim.o.readonly and vim.api.nvim_buf_get_name(0) ~= '' then
+    vim.cmd [[ wa ]]
+  end
+end
+
+-- Equalize splits after resizing
+au.VimResized = [[ exe "normal! \<c-w>=" ]]
+
+-- Reload diffs after editing
+au.BufWritePost = function()
+  if vim.o.diff then
+    vim.cmd [[ diffupdate ]]
+  end
+end
+
 -- LSP config
 local lsp = require 'lspconfig'
 local null_ls = require 'null-ls'
@@ -775,12 +817,6 @@ function LspRename()
 end
 
 vim.cmd [[command! LspRename lua LspRename()]]
-
-local au = require 'au'
-
-au.TextYankPost = function()
-  vim.highlight.on_yank { timeout = 120 }
-end
 
 vim.diagnostic.config {
   underline = true,

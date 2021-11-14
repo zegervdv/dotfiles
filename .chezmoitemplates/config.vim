@@ -22,12 +22,6 @@ endif
 
 " General Settings and options
 
-augroup cline
-  au!
-  autocmd WinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-augroup END
-
 if !s:windows
   if !isdirectory(expand(&backupdir))
     call mkdir(expand(&backupdir), "p")
@@ -119,19 +113,6 @@ endfunction
 nnoremap ` '
 nnoremap ' `
 
-" Open vimrc
-nnoremap <leader>ve :e $MYVIMRC<CR>
-nnoremap <leader>vs :so $MYVIMRC<CR>
-
-" Open dup in diffmode
-nnoremap <leader>d :call OpenDup(@%)<CR>
-
-function! OpenDup(file)
-  let l:filename = a:file . ".dup"
-  execute 'vsplit' l:filename
-  windo diffthis
-endfunction
-
 " Do not move on *
 nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
 
@@ -147,8 +128,6 @@ vnoremap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-" nnoremap <F10> :botright copen<CR>
-
 xnoremap <silent> p p:if v:register == '"'<Bar>let @@=@0<Bar>endif<CR>
 
 " Error navigation
@@ -158,15 +137,6 @@ nnoremap <RIGHT> :cnf<CR>
 nnoremap <LEFT> :cpf<CR>
 
 nnoremap <leader>y :ptjump <c-r><c-w><CR>
-
-function! ToggleDiff()
-  if &diff == 1
-    windo diffoff
-  else
-    windo diffthis
-  endif
-endfunction
-nnoremap <leader>g :call ToggleDiff()<CR>
 
 if has('nvim')
   tnoremap <C-h> <C-\><C-n><C-w>h
@@ -182,12 +152,6 @@ if has('nvim')
   let $GIT_EDITOR = 'nvr -cc split --remote-wait'
 endif
 
-" Open buffers, tags... in vertical splits
-nnoremap <leader>b :vert sbuffer
-nnoremap <leader>t :vert stjump
-nnoremap <leader>f :vert sfind
-
-
 "
 
 " Functions
@@ -199,43 +163,6 @@ autocmd BufReadPost *
       \   exe "normal g`\"" |
       \ endif
 
-" Thg mappings
-function! s:HGhist(file)
-  if !empty(a:file)
-    let path = a:file
-  else
-    let path = expand('%')
-  endif
-  exec 'silent! !thg filelog ' . path . ' &'
-endfunction
-
-command! -nargs=? -complete=file HGhist call s:HGhist(<q-args>)
-
-augroup focus_lost
-  au!
-  au FocusLost * if !&readonly | :wa | endif
-augroup END
-
-" Resize splits after window resize
-augroup vim_resize
-  au!
-  au VimResized * exe "normal! \<c-w>="
-augroup END
-"
-
-" Automatically reload vimrc when saving
-augroup reload_vim
-  autocmd!
-  autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
-augroup END
-"
-
-" Reload diffs
-augroup diff_files
-  au!
-  au BufWritePost * if &diff == 1 | diffupdate | endif
-augroup END
-"
 
 " Detect Filetype from content if file has no extension
 augroup newFileDetection

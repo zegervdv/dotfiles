@@ -11,6 +11,7 @@ local function autocmd(this, event, spec)
     action = this.set(action)
   end
   local e = type(event) == 'table' and table.concat(event, ',') or event
+  local pattern = type(pattern) == 'table' and table.concat(pattern, ',') or pattern
   cmd('autocmd ' .. e .. ' ' .. pattern .. ' ' .. action)
 end
 

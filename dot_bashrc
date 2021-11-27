@@ -104,6 +104,7 @@ alias psm='/bin/ps -u $USER --sort pgid,time,size,time,pcpu -o pid,pgid,state,us
 
 export EDITOR=nvim
 export HGEDITOR=nvim
+export SUDO_EDITOR=nvim
 
 stty > /dev/null
 

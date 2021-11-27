@@ -207,8 +207,10 @@ export PATH=$HOME/bin:$PATH
 
 export EDITOR=nvim
 export HGEDITOR=nvim
-export SUDO_EDITOR=nvim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# Must run after brew is loaded
+export SUDO_EDITOR=$(which nvim)

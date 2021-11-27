@@ -104,7 +104,6 @@ alias psm='/bin/ps -u $USER --sort pgid,time,size,time,pcpu -o pid,pgid,state,us
 
 export EDITOR=nvim
 export HGEDITOR=nvim
-export SUDO_EDITOR=nvim
 
 stty > /dev/null
 
@@ -135,6 +134,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
+
+# Must run after local paths are added
+export SUDO_EDITOR=$(which nvim)
 
 if [ ! -f ~/.lscolors.parsed.sh ]; then
   echo 'Generating ls colors'

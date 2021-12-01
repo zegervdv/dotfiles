@@ -556,7 +556,7 @@ augroup ft_systemverilog
   au FileType systemverilog setlocal foldmethod=expr
   au FileType systemverilog,verilog call SVAlign()
   au FileType systemverilog,verilog let b:delimitMate_quotes = "\""
-  au FileType systemverilog,verilog set iskeyword+='
+  au FileType systemverilog,verilog setlocal iskeyword+='
 augroup END
 
 function! SVAlign()

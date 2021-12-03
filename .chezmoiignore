@@ -6,6 +6,7 @@ stylua.toml
 scripts
 .pre-commit-config.yaml
 *~
+Dockerfile
 
 {{ if ne .chezmoi.os "windows" }}
 AppData/*

@@ -302,7 +302,17 @@ require('packer').startup(function()
         require 'nvim-treesitter.highlight'
 
         require('nvim-treesitter.configs').setup {
-          highlight = { enable = false },
+          highlight = {
+            enable = true,
+            disable = function(lang, bufnr)
+              -- Only enable for verilog/systemverilog
+              -- And disable for large files
+              if (lang ~= 'systemverilog' and lang ~= 'verilog') or vim.api.nvim_buf_line_count(bufnr) > 5000 then
+                return true
+              end
+              return false
+            end,
+          },
           incremental_selection = {
             enable = true,
             keymaps = {

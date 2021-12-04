@@ -77,18 +77,23 @@ require('packer').startup(function()
 
   -- Comments
   use {
-    'b3nj5m1n/kommentary',
+    'numToStr/Comment.nvim',
     config = function()
-      local config = require 'kommentary.config'
-      config.configure_language('default', { prefer_single_line_comments = true })
-      config.configure_language(
-        { 'systemverilog', 'verilog' },
-        { single_line_comment_string = '//', multi_line_comment_strings = { '/*', '*/' } }
-      )
+      local ft = require 'Comment.ft'
+      ft.systemverilog = { '//%s', '/*%s*/' }
+      ft.verilog = { '//%s', '/*%s*/' }
+
+      require('Comment').setup {
+        padding = true,
+        sticky = true,
+        ignore = '^(%s*)$',
+      }
     end,
     keys = {
-      { 'n', 'gcc' },
+      { 'n', 'gc' },
+      { 'n', 'gb' },
       { 'v', 'gc' },
+      { 'v', 'gb' },
     },
   }
 

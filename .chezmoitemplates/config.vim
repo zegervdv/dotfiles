@@ -553,17 +553,9 @@ augroup END
 augroup ft_systemverilog
   au!
   au FileType systemverilog setlocal suffixesadd+=.sv,.v
-  au FileType systemverilog setlocal foldmethod=expr
-  au FileType systemverilog,verilog call SVAlign()
-  au FileType systemverilog,verilog let b:delimitMate_quotes = "\""
   au FileType systemverilog,verilog setlocal iskeyword+='
 augroup END
 
-function! SVAlign()
-  let g:easy_align_delimiters = {
-        \  ')': { 'pattern': '[()]', 'left_margin': 0, 'right_margin': 0, 'stick_to_left': 0}
-        \}
-endfunction
 "
 " Make
 augroup ft_make

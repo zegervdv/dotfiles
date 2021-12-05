@@ -87,6 +87,10 @@ require('packer').startup(function()
         padding = true,
         sticky = true,
         ignore = '^(%s*)$',
+        mappings = {
+          basic = true,
+          extra = true,
+        },
       }
     end,
     keys = {

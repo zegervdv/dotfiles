@@ -4,21 +4,10 @@ set -x
 
 BIN_DIR="$HOME/bin"
 if [ "$(uname)" == "Darwin" ]; then
-  STYLUA_PLATFORM="macos"
   PLATFORM="macOS"
 else
-  STYLUA_PLATFORM="linux"
   PLATFORM="Linux"
 fi
-
-echo "Install stylua"
-STYLUA_VERSION="0.10.0"
-pushd /tmp
-wget https://github.com/JohnnyMorganz/StyLua/releases/download/v${STYLUA_VERSION}/stylua-${STYLUA_VERSION}-${STYLUA_PLATFORM}.zip
-unzip stylua-${STYLUA_VERSION}-${STYLUA_PLATFORM}.zip
-mv stylua "${BIN_DIR}/stylua"
-chmod +x "${BIN_DIR}/stylua"
-popd
 
 echo "Install sumneko language server"
 SUMNEKO_DIR="$HOME/.local/share/sumneko-lua/"

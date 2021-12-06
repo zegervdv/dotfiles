@@ -11,3 +11,8 @@ brew "ripgrep"
 brew "rust"
 brew "scc"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
+brew "fzf"
+brew "direnv"
+brew "stylua"
+brew "shellcheck"
+brew "jq"

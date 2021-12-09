@@ -1,0 +1,11 @@
+# Only be case sensitive if a case is present
+--smart-case
+
+# Limit output
+--max-columns=150
+--max-columns-preview
+
+--type-add
+hdl:*.{sv,vhd,v}
+--type-add
+rtl:*.rtl.{sv,vhd}

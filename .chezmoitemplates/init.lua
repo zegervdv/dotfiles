@@ -311,8 +311,11 @@ require('packer').startup(function()
         require 'nvim-treesitter.highlight'
 
         require('nvim-treesitter.configs').setup {
+          indent = {
+            enable = false,
+          },
           highlight = {
-            enable = true,
+            enable = false,
             disable = function(lang, bufnr)
               -- Only enable for verilog/systemverilog
               -- And disable for large files

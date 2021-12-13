@@ -1,0 +1,20 @@
+[".tmux/plugins/tmux-yank"]
+  type = "archive"
+  url = "https://github.com/tmux-plugins/tmux-yank/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+
+[".tmux/plugins/tmux-better-mouse-mode"]
+  type = "archive"
+  url = "https://github.com/NHDaly/tmux-better-mouse-mode/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+
+[".tmux/plugins/tmux-thumbs"]
+  type = "archive"
+  url = "https://github.com/fcsonline/tmux-thumbs/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"

@@ -217,3 +217,4 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 
 # Must run after brew is loaded
 export SUDO_EDITOR=$(which nvim)
+eval "$(direnv hook zsh)"

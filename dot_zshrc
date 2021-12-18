@@ -209,6 +209,7 @@ export EDITOR=nvim
 export HGEDITOR=nvim
 
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
+export BAT_CONFIG_PATH=$HOME/.config/bat/config
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag -g ""'

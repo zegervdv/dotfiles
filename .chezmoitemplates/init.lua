@@ -801,17 +801,15 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities }
 
-null_ls.config {
+null_ls.setup {
   sources = {
     null_ls.builtins.formatting.black,
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.formatting.prettier,
   },
-}
-lsp['null-ls'].setup {
   on_attach = on_attach,
-  root_dir = require('lspconfig.util').root_pattern('.hg', '.git', 'stylua.toml'),
+  root_dir = require('null-ls.utils').root_pattern('.hg', '.git', 'stylua.toml'),
 }
 
 local luadev = require('lua-dev').setup {

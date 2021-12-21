@@ -165,9 +165,6 @@ require('packer').startup(function()
   -- Moving around within lines
   use { 'wellle/targets.vim', event = 'InsertEnter *' }
 
-  -- Faster moving
-  use { 'ggandor/lightspeed.nvim' }
-
   -- Searching
   use { 'mhinz/vim-grepper', cmd = { 'Grepper' } }
 

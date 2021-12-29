@@ -46,7 +46,12 @@ require('packer').startup(function()
   }
 
   -- Smooth scrolling
-  use { 'psliwka/vim-smoothie' }
+  use {
+    'karb94/neoscroll.nvim',
+    config = function()
+      require('neoscroll').setup {}
+    end,
+  }
 
   -- Faster lua package loading (until 15436 is merged)
   use { 'lewis6991/impatient.nvim' }

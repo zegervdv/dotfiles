@@ -586,41 +586,8 @@ let g:python_highlight_all=1
 " Plugin settings
 " Gundo tree
 nnoremap <leader>u :GundoToggle<CR>
-"
-" Projectionist
-let g:projectionist_heuristics = {
-      \ "*.c": {
-      \   "*.c": {
-      \     "alternate": "{}.h",
-      \     "type": "source",
-      \     "template": ["#include \"{}.h\""],
-      \     "make": "make -wC {project}"
-      \   },
-      \   "*.h": {
-      \     "alternate": "{}.c",
-      \     "type": "header",
-      \     "template": ["#ifndef {uppercase}_H", "#define {uppercase}_H", "", "#endif"]
-      \   },
-      \   "Makefile": {"type": "makefile"},
-      \ },
-      \ "*.py": {
-      \   "*.py": { "make": "ipython {}" }
-      \ },
-      \ }
-"
-" Grep
-let g:grepper = {
-      \ 'tools': ['ag', 'hg'],
-      \ 'highlight': 1,
-      \ 'ag': {
-      \  'grepprg': 'rg --vimgrep',
-      \ }}
-
-nnoremap gs <plug>(GrepperOperator)
-xnoremap gs <plug>(GrepperOperator)
 
 
-command! -nargs=* -complete=file Ag Grepper -noprompt -tool ag -grepprg rg --vimgrep <args>
 "
 " Vinegar/NetRW
 autocmd FileType netrw setl bufhidden=delete

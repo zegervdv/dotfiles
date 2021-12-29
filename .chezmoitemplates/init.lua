@@ -166,7 +166,33 @@ require('packer').startup(function()
   use { 'wellle/targets.vim', event = 'InsertEnter *' }
 
   -- Searching
-  use { 'mhinz/vim-grepper', cmd = { 'Grepper' } }
+  use {
+    'mhinz/vim-grepper',
+    cmd = { 'Grepper', 'Ag' },
+    keys = { { 'n', 'gs' }, { 'x', 'gs' } },
+    config = function()
+      local nmap = vim.keymap.nmap
+      local xmap = vim.keymap.xmap
+
+      vim.g.grepper = {
+        tools = { 'ag', 'hg' },
+        highlight = 1,
+        ag = {
+          grepprg = 'rg --vimgrep',
+        },
+      }
+
+      nmap { 'gs', '<plug>(GrepperOperator)' }
+      xmap { 'gs', '<plug>(GrepperOperator)' }
+    end,
+    setup = function()
+      vim.api.nvim_add_user_command(
+        'Ag',
+        'Grepper -noprompt -tool ag -grepprg rg --vimgrep <args>',
+        { complete = 'file', nargs = '*' }
+      )
+    end,
+  }
 
   -- Keymaps TODO: to be removed when #13823 is merged
   use {
@@ -794,7 +820,7 @@ function LspRename()
   end)
 end
 
-vim.cmd [[command! LspRename lua LspRename()]]
+vim.api.nvim_add_user_command('LspRename', LspRename, {})
 
 vim.diagnostic.config {
   underline = true,

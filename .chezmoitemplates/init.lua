@@ -84,7 +84,13 @@ require('packer').startup(function()
     opt = true,
     cmd = { 'MergeInit' },
     config = function()
-      require('merge').setup { wrap = true }
+      require('merge').setup {
+        wrap = true,
+        pre_hook = function()
+          -- disable dirvish
+          vim.api.nvim_del_keymap('n', '-')
+        end,
+      }
     end,
   }
   use { 'tpope/vim-git', ft = { 'gitcommit', 'gitrebase' } }

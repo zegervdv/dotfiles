@@ -17,7 +17,7 @@
 [merge]
 	tool = splice
 [mergetool "splice"]
-	cmd = "nvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+	cmd = "nvim -f $BASE $LOCAL $REMOTE $MERGED -c 'MergeInit'"
 	trustExitCode = true
 [alias]
 	ls = log --format=\"%C(auto)%h %<(15)%C(auto, green)%cr %>(20)%C(auto, magenta)%an %C(auto)%s %D\"

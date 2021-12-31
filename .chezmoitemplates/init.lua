@@ -66,6 +66,7 @@ require('packer').startup(function()
   use { 'vim-scripts/gitignore' }
   use {
     'sjl/splice.vim',
+    disable = true,
     opt = true,
     cmd = { 'SpliceInit' },
     config = function()
@@ -76,6 +77,14 @@ require('packer').startup(function()
       vim.g.splice_initial_scrollbind_compare = 1
       vim.g.splice_initial_scrollbind_path = 1
       vim.g.splice_wrap = 'nowrap'
+    end,
+  }
+  use {
+    'zegervdv/merge.nvim',
+    opt = true,
+    cmd = { 'MergeInit' },
+    config = function()
+      require('merge').setup { wrap = true }
     end,
   }
   use { 'tpope/vim-git', ft = { 'gitcommit', 'gitrebase' } }

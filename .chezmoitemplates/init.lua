@@ -280,7 +280,13 @@ require('packer').startup(function()
   use { 'neovim/nvim-lspconfig' }
   use {
     'hrsh7th/nvim-cmp',
-    requires = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-path' },
+    requires = {
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-nvim-lsp',
+      'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+    },
     config = function()
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
@@ -344,6 +350,14 @@ require('packer').startup(function()
           ghost_text = true,
         },
       }
+
+      cmp.setup.cmdline(':', {
+        sources = cmp.config.sources({
+          { name = 'path' },
+        }, {
+          { name = 'cmdline' },
+        }),
+      })
     end,
     after = 'luasnip',
   }

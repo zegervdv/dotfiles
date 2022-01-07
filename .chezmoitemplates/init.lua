@@ -589,7 +589,23 @@ require('packer').startup(function()
 
   -- Filetypes
   use { 'lepture/vim-jinja' }
-end)
+
+    -- Integration with external tools
+    use {
+      'glacambre/firenvim',
+      run = function() vim.fn['firenvim#install'](0) end,
+      config = function ()
+        vim.g.firenvim_config = {
+          localSettings = {
+            ['.*'] = {
+              takeover = 'never',
+            }
+          }
+        }
+      end,
+    }
+
+  end)
 
 vim.cmd [[ packadd dirbuf.nvim ]]
 

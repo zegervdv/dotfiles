@@ -38,78 +38,9 @@ endif
 "
 
 " Mappings
-" Set leader to spacebar
-map <space> <leader>
-
-" See long lines as line breaks
-noremap <expr> j (v:count? 'j' : 'gj')
-noremap <expr> k (v:count? 'k' : 'gk')
-
-" Remap tag-search to better place
-nnoremap <C-$> g<C-]>
-nnoremap <C-w>y <C-w>g<C-]>
-
-nnoremap <C-s> <C-e>
-
-" Move while in insert mode
-inoremap <C-f> <right>
-
-" Switch between the last two files
-" nnoremap <space><space> <C-^>
-
-" " Very Magic search patterns
-nnoremap / /\v
-vnoremap / /\v
-
-" Keep search matches in the middle of the window.
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-" Search for beginning of command
-cnoremap <c-n>  <down>
-cnoremap <c-p>  <up>
-
-" Move whole lines
-nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
-nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
-
-" Insert empty lines
-nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
-nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
-
-" Clear highlight
-nnoremap <silent><leader>l :noh<CR>
-
-inoremap £ \
-
-" Highlight last inserted text
-nnoremap gV `[v`]
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" Use backspace as delete in visual mode
-vmap <BS> x
-
-" Redraw screen
-nnoremap <F3> :redraw!<CR>
-
-" Keep selection when shifting
-vmap <expr> > KeepVisualSelection(">")
-vmap <expr> < KeepVisualSelection("<")
-
-function! KeepVisualSelection(cmd)
-  set nosmartindent
-  if mode() ==# "V"
-    return a:cmd . ":set smartindent\<CR>gv"
-  else
-    return a:cmd . ":set smartindent\<CR>"
-  endif
-endfunction
-
-" Swap backticks and quotes
-nnoremap ` '
-nnoremap ' `
 
 " Do not move on *
 nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>

@@ -214,14 +214,6 @@ require('packer').startup(function()
     end,
   }
 
-  -- Keymaps TODO: to be removed when #13823 is merged
-  use {
-    'tjdevries/astronauta.nvim',
-    config = function()
-      require 'astronauta.keymap'
-    end,
-  }
-
   -- Opening files
   use { 'wsdjeg/vim-fetch' }
 
@@ -266,14 +258,14 @@ require('packer').startup(function()
     config = function()
       require('Navigator').setup { auto_save = 'current', disable_on_zoom = true }
 
-      local nnoremap = vim.keymap.nnoremap
-      nnoremap { '<c-h>', require('Navigator').left, silent = true }
-      nnoremap { '<c-j>', require('Navigator').down, silent = true }
-      nnoremap { '<c-k>', require('Navigator').up, silent = true }
-      nnoremap { '<c-l>', require('Navigator').right, silent = true }
+      local nmap = function(lhs, rhs, opts)
+        return vim.keymap.set('n', lhs, rhs, opts)
+      end
+      nmap('<c-h>', require('Navigator').left, { silent = true })
+      nmap('<c-j>', require('Navigator').down, { silent = true })
+      nmap('<c-k>', require('Navigator').up, { silent = true })
+      nmap('<c-l>', require('Navigator').right, { silent = true })
     end,
-    requires = 'tjdevries/astronauta.nvim',
-    after = 'astronauta.nvim',
   }
 
   -- Completion/snippets/LSP
@@ -709,6 +701,62 @@ opt.foldtext =
   [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
 opt.foldenable = false
 
+-- Clean up terminal codes from strings
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+-- General keymaps
+local map = vim.keymap.set
+
+-- Set leader to space
+map({ 'n', 'v', 'i', 'x' }, '<space>', '<leader>', { remap = true })
+
+-- Move while in insert mode
+map('i', '<C-f>', '<right>')
+
+-- Keep search matches centered
+map('n', 'n', 'nzzzv')
+map('n', 'N', 'Nzzzv')
+
+-- Very magic search patterns
+map({ 'n', 'v' }, '/', '/\\v')
+
+-- Move through long lines as breaks
+map('n', 'j', '(v:count ? "j" : "gj")', { expr = true })
+map('n', 'k', '(v:count ? "k" : "gk")', { expr = true })
+
+-- Command line search for commands
+map('c', '<c-n>', '<down>')
+map('c', '<c-p>', '<up>')
+
+-- Clear highlighs
+map('n', '<leader>l', '<cmd>noh<CR>', { silent = true })
+
+-- Reselect last selection
+map('n', 'gV', '`[v`]')
+
+-- Use backspace as normal in visual mode
+map('v', '<BS>', 'x', { remap = true })
+
+-- Keep selection when indenting
+local keep_visual_selection = function(cmd)
+  return function()
+    vim.opt.smartindent = false
+    if vim.fn.mode() == 'V' then
+      return cmd .. t ':set smartindent<CR>gv'
+    else
+      return cmd .. t ':set smartindent<CR>'
+    end
+  end
+end
+map('v', '>', keep_visual_selection '>', { expr = true, silent = true, desc = 'Indent right while keeping selection' })
+map('v', '<', keep_visual_selection '<', { expr = true, silent = true, desc = 'Indent left while keeping selection' })
+
+-- Swap backticks and quotes
+map('n', '`', "'")
+map('n', "'", '`')
+
 local au = require 'au'
 
 -- Highlight yanked text
@@ -756,38 +804,38 @@ local lsp = require 'lspconfig'
 local null_ls = require 'null-ls'
 
 local on_attach = function(client)
-  local nnoremap = vim.keymap.nnoremap
-  local inoremap = vim.keymap.inoremap
+  local map = vim.keymap.set
+  local nmap = function(lhs, rhs, opts)
+    return vim.keymap.set('n', lhs, rhs, opts)
+  end
 
   if client.resolved_capabilities.goto_definition == true then
     vim.bo.tagfunc = 'v:lua.vim.lsp.tagfunc'
-    nnoremap { 'gp', require('goto-preview').goto_preview_definition, silent = true, buffer = 0 }
-    nnoremap { 'gP', require('goto-preview').close_all_win, silent = true, buffer = 0 }
+    nmap('gp', require('goto-preview').goto_preview_definition, { silent = true, buffer = 0 })
+    nmap('gP', require('goto-preview').close_all_win, { silent = true, buffer = 0 })
   end
 
-  nnoremap { 'gd', vim.lsp.buf.declaration, silent = true, buffer = 0 }
-  nnoremap { 'K', vim.lsp.buf.hover, silent = true, buffer = 0 }
-  nnoremap { 'gD', vim.lsp.buf.implementation, silent = true, buffer = 0 }
-  nnoremap { '1gD', vim.lsp.buf.type_definition, silent = true, buffer = 0 }
-  nnoremap { 'gr', vim.lsp.buf.references, silent = true, buffer = 0 }
-  nnoremap { 'g0', vim.lsp.buf.document_symbol, silent = true, buffer = 0 }
+  nmap('gd', vim.lsp.buf.declaration, { silent = true, buffer = 0 })
+  nmap('K', vim.lsp.buf.hover, { silent = true, buffer = 0 })
+  nmap('gD', vim.lsp.buf.implementation, { silent = true, buffer = 0 })
+  nmap('1gD', vim.lsp.buf.type_definition, { silent = true, buffer = 0 })
+  nmap('gr', vim.lsp.buf.references, { silent = true, buffer = 0 })
+  nmap('g0', vim.lsp.buf.document_symbol, { silent = true, buffer = 0 })
 
   if client.resolved_capabilities.document_formatting == true then
-    nnoremap {
-      '<c-p>',
-      function()
-        vim.lsp.buf.formatting_sync({}, 5000)
-      end,
+    nmap('<c-p>', function()
+      vim.lsp.buf.formatting_sync({}, 5000)
+    end, {
       silent = true,
       buffer = 0,
-    }
+    })
   end
 
   if client.resolved_capabilities.document_range_formatting == true then
     vim.bo.formatexpr = 'v:lua.vim.lsp.formatexpr()'
   end
 
-  inoremap { '<c-l>', vim.lsp.buf.signature_help, silent = true, buffer = 0 }
+  map('i', '<c-l>', vim.lsp.buf.signature_help, { silent = true, buffer = 0 })
 
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })

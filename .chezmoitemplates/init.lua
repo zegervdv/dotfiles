@@ -566,6 +566,8 @@ require('packer').startup(function()
   use { 'lepture/vim-jinja' }
 end)
 
+vim.cmd [[ packadd vim-dirvish ]]
+
 -- Configuration
 local opt = vim.opt
 

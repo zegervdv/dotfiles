@@ -12,8 +12,6 @@ if !has('nvim')
 endif
 source $VIMRUNTIME/ftplugin/man.vim
 
-packadd vim-dirvish
-
 if has("nvim")
   let g:python3_host_prog=expand('$HOME/.config/virtualenvs/python3/bin/python')
   let g:python_host_prog=expand('$HOME/.config/virtualenvs/python2/bin/python')

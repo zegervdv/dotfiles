@@ -54,7 +54,13 @@ require('packer').startup(function()
   }
 
   -- Faster lua package loading (until 15436 is merged)
-  use { 'lewis6991/impatient.nvim' }
+  use {
+    'lewis6991/impatient.nvim',
+    module = { 'impatient' },
+    setup = function()
+      require 'impatient'
+    end,
+  }
 
   -- Library with lua functions
   use { 'nvim-lua/plenary.nvim' }

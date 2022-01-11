@@ -366,19 +366,25 @@ require('packer').startup(function()
         require 'nvim-treesitter.highlight'
 
         require('nvim-treesitter.configs').setup {
+          ensure_installed = {
+            'python',
+            'lua',
+            'verilog',
+            'json',
+            'yaml',
+            'bash',
+            'dockerfile',
+            'c',
+            'cpp',
+            'regex',
+            'vim',
+          },
           indent = {
             enable = false,
           },
           highlight = {
-            enable = false,
-            disable = function(lang, bufnr)
-              -- Only enable for verilog/systemverilog
-              -- And disable for large files
-              if (lang ~= 'systemverilog' and lang ~= 'verilog') or vim.api.nvim_buf_line_count(bufnr) > 5000 then
-                return true
-              end
-              return false
-            end,
+            enable = true,
+            disable = { 'systemverilog', 'verilog' },
           },
           incremental_selection = {
             enable = true,

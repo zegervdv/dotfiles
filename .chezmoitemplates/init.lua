@@ -536,11 +536,21 @@ require('packer').startup(function()
 
   -- Colorscheme
   use {
-    'zegervdv/one-lush',
-    requires = 'rktjmp/lush.nvim',
+    'navarasu/onedark.nvim',
     config = function()
-      require 'lush_theme.one-lush'
-      vim.cmd [[ colorscheme one-lush ]]
+      require('onedark').setup {
+        style = 'dark',
+        code_style = {
+          comments = 'italic',
+        },
+        ending_tildes = true,
+        diagnostics = {
+          darker = false,
+          undercurl = false,
+          background = false,
+        },
+      }
+      require('onedark').load()
     end,
   }
 

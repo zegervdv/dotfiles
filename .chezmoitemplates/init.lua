@@ -378,7 +378,6 @@ require('packer').startup(function()
             'c',
             'cpp',
             'regex',
-            'vim',
           },
           indent = {
             enable = false,
@@ -884,7 +883,17 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities }
+local root_dir = require('lspconfig.util').root_pattern('.git', '.hg')
+
+lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities, root_dir = root_dir }
+
+lsp.esbonio.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = root_dir,
+  -- Assume esbonio is installed with --user
+  cmd = { os.getenv 'HOME' .. '/.local/bin/esbonio' },
+}
 
 null_ls.setup {
   sources = {

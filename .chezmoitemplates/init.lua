@@ -539,7 +539,16 @@ require('packer').startup(function()
   }
 
   -- File navigation
-  use { 'justinmk/vim-dirvish', opt = true }
+  use {
+    'elihunter173/dirbuf.nvim',
+    opt = true,
+    config = function()
+      require('dirbuf').setup {
+        hash_padding = 2,
+        show_hidden = true,
+      }
+    end,
+  }
 
   -- Colorscheme
   use {
@@ -581,7 +590,7 @@ require('packer').startup(function()
   use { 'lepture/vim-jinja' }
 end)
 
-vim.cmd [[ packadd vim-dirvish ]]
+vim.cmd [[ packadd dirbuf.nvim ]]
 
 -- Configuration
 local opt = vim.opt

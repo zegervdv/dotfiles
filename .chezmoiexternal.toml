@@ -28,3 +28,8 @@
   type = "file"
   url = "https://github.com/zsh-users/zsh-history-substring-search/raw/master/zsh-history-substring-search.zsh"
   refreshPeriod = "168h"
+
+[".zsh/zsh-autosuggestions.zsh"]
+  type = "file"
+  url = "https://github.com/zsh-users/zsh-autosuggestions/raw/master/zsh-autosuggestions.zsh"
+  refreshPeriod = "168h"

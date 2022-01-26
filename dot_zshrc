@@ -5,6 +5,8 @@ export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=black'
 
 source ~/.zsh/zsh-autosuggestions.zsh
 
+fpath=(~/.zsh/completions $fpath)
+
 export TERM=xterm-256color
 
 export LC_ALL=$LANG
@@ -209,15 +211,6 @@ function fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
-
-# Ctags based completion for rg
-_rg() {
-  if (( CURRENT == 2 )); then
-    compadd $(cut -f 1 tags tmp/tags 2>/dev/null | grep -v '!_TAG')
-  fi
-}
-
-compdef _rg rg
 
 # Aliases
 alias l="ls -haltr"

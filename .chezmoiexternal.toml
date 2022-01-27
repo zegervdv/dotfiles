@@ -41,6 +41,18 @@
   stripComponents = 1
   refreshPeriod = "168h"
 
+[".zsh/zsh-histdb"]
+  type = "archive"
+  url = "https://github.com/larkery/zsh-histdb/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+
+[".zsh/fzf-histdb.zsh"]
+  type = "file"
+  url = "https://github.com/m42e/zsh-histdb-fzf/raw/master/fzf-histdb.zsh"
+  refreshPeriod = "168h"
+
 [".zsh/completions/_fd"]
   type = "file"
   url = "https://github.com/sharkdp/fd/raw/master/contrib/completion/_fd"

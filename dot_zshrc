@@ -7,6 +7,21 @@ source ~/.zsh/zsh-autosuggestions.zsh
 
 source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+source ~/.zsh/zsh-histdb/zsh-histdb.plugin.zsh
+source ~/.zsh/fzf-histdb.zsh
+
+_zsh_autosuggest_strategy_histdb_top_here() {
+    local query="select commands.argv from
+history left join commands on history.command_id = commands.rowid
+left join places on history.place_id = places.rowid
+where places.dir LIKE '$(sql_escape $PWD)%'
+and commands.argv LIKE '$(sql_escape $1)%'
+group by commands.argv order by count(*) desc limit 1"
+    suggestion=$(_histdb_query "$query")
+}
+
+ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
+
 fpath=(~/.zsh/completions $fpath)
 
 export TERM=xterm-256color
@@ -242,7 +257,9 @@ export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
 export BAT_CONFIG_PATH=$HOME/.config/bat/config
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='ag -g ""'
+
+bindkey '^r' histdb-fzf-widget
+
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # Must run after brew is loaded

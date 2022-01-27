@@ -34,6 +34,13 @@
   url = "https://github.com/zsh-users/zsh-autosuggestions/raw/master/zsh-autosuggestions.zsh"
   refreshPeriod = "168h"
 
+[".zsh/fast-syntax-highlighting"]
+  type = "archive"
+  url = "https://github.com/zdharma-continuum/fast-syntax-highlighting/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+
 [".zsh/completions/_fd"]
   type = "file"
   url = "https://github.com/sharkdp/fd/raw/master/contrib/completion/_fd"

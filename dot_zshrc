@@ -5,6 +5,8 @@ export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=black'
 
 source ~/.zsh/zsh-autosuggestions.zsh
 
+source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
 fpath=(~/.zsh/completions $fpath)
 
 export TERM=xterm-256color

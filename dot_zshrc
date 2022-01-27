@@ -84,6 +84,8 @@ bindkey '^n' history-substring-search-down
 
 bindkey '^f' autosuggest-accept
 
+bindkey '^u' push-line-or-edit
+
 zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history

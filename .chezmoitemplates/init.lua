@@ -640,7 +640,7 @@ opt.cindent = true -- C-syntax based indenting
 opt.updatetime = 300 -- Faster triggering of CursorHold events
 
 opt.errorbells = false -- Don't you beep to me
-opt.title = true -- Set the title for WezTerm to detect
+opt.title = false -- Don't set the shell title
 
 opt.history = 1000 -- Remember last commands
 

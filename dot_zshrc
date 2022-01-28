@@ -1,27 +1,5 @@
 # vim:ft=zsh
 
-source ~/.zsh/zsh-history-substring-search.zsh
-export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=black'
-
-source ~/.zsh/zsh-autosuggestions.zsh
-
-source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-
-source ~/.zsh/zsh-histdb/zsh-histdb.plugin.zsh
-source ~/.zsh/fzf-histdb.zsh
-
-_zsh_autosuggest_strategy_histdb_top_here() {
-    local query="select commands.argv from
-history left join commands on history.command_id = commands.rowid
-left join places on history.place_id = places.rowid
-where places.dir LIKE '$(sql_escape $PWD)%'
-and commands.argv LIKE '$(sql_escape $1)%'
-group by commands.argv order by count(*) desc limit 1"
-    suggestion=$(_histdb_query "$query")
-}
-
-ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
-
 fpath=(~/.zsh/completions $fpath)
 
 export TERM=xterm-256color
@@ -98,8 +76,6 @@ bindkey '^p' history-substring-search-up
 bindkey '^n' history-substring-search-down
 
 bindkey '^f' autosuggest-accept
-
-bindkey '^u' push-line-or-edit
 
 zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
@@ -258,10 +234,34 @@ export BAT_CONFIG_PATH=$HOME/.config/bat/config
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-bindkey '^r' histdb-fzf-widget
+bindkey '^t' push-line-or-edit
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # Must run after brew is loaded
 export SUDO_EDITOR=$(which nvim)
 eval "$(direnv hook zsh)"
+
+source ~/.zsh/zsh-history-substring-search.zsh
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=black'
+
+source ~/.zsh/zsh-autosuggestions.zsh
+
+source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+source ~/.zsh/zsh-histdb/sqlite-history.zsh
+source ~/.zsh/fzf-histdb.zsh
+
+bindkey '^r' histdb-fzf-widget
+
+_zsh_autosuggest_strategy_histdb_top_here() {
+    local query="select commands.argv from
+history left join commands on history.command_id = commands.rowid
+left join places on history.place_id = places.rowid
+where places.dir LIKE '$(sql_escape $PWD)%'
+and commands.argv LIKE '$(sql_escape $1)%'
+group by commands.argv order by count(*) desc limit 1"
+    suggestion=$(_histdb_query "$query")
+}
+
+ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here

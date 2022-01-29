@@ -674,6 +674,8 @@ opt.signcolumn = 'yes' -- Always show signcolumn
 
 opt.cursorline = true
 
+opt.startofline = false -- When moving try to keep cursor in column
+
 -- Show certain characters
 opt.list = true
 opt.listchars = { trail = '·', extends = '>', precedes = '<', nbsp = '+', tab = '▸ ' }

@@ -53,6 +53,11 @@
   url = "https://github.com/m42e/zsh-histdb-fzf/raw/master/fzf-histdb.zsh"
   refreshPeriod = "168h"
 
+[".zsh/zsh-vi-mode.zsh"]
+  type = "file"
+  url = "https://github.com/jeffreytse/zsh-vi-mode/raw/master/zsh-vi-mode.zsh"
+  refreshPeriod = "168h"
+
 [".zsh/completions/_fd"]
   type = "file"
   url = "https://github.com/sharkdp/fd/raw/master/contrib/completion/_fd"

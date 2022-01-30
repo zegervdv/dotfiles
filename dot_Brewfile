@@ -16,3 +16,7 @@ brew "stylua"
 brew "shellcheck"
 brew "jq"
 brew "tmux", args: ["HEAD"]
+brew "lua-language-server"
+brew "prettier"
+brew "pre-commit"
+brew "pyright"

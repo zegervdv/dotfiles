@@ -58,6 +58,13 @@
   url = "https://github.com/jeffreytse/zsh-vi-mode/raw/master/zsh-vi-mode.zsh"
   refreshPeriod = "168h"
 
+[".zsh/jq-zsh-plugin"]
+  type = "archive"
+  url = "https://github.com/reegnz/jq-zsh-plugin/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+
 [".zsh/completions/_fd"]
   type = "file"
   url = "https://github.com/sharkdp/fd/raw/master/contrib/completion/_fd"

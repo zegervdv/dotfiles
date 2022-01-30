@@ -190,8 +190,6 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle ':completion:*:*:nvim:*' ignored-patterns '*.(o|hex|elf|pyc|pdf|dup)'
 zstyle ':completion:*:*:nvim:*' file-sort modification
 
-autoload -U compinit && compinit
-
 # fg when pressing Ctrl+Z
 function fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
@@ -269,3 +267,5 @@ group by commands.argv order by count(*) desc limit 1"
 }
 
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
+
+autoload -U compinit && compinit

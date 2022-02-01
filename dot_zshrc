@@ -206,6 +206,7 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 # Aliases
+alias ls='ls --color=auto'
 alias l="ls -haltr"
 alias ll="ls -haltr"
 alias xclip='xclip -selection clipboard'

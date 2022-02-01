@@ -19,7 +19,7 @@ CAPABILITY 07;38;2;171;178;191 # file with capability
 STICKY_OTHER_WRITABLE 04;01;38;2;97;175;239 # dir that is sticky and other-writable (+t,o+w)
 OTHER_WRITABLE 01;38;2;97;175;239 # dir that is other-writable (o+w) and not sticky
 STICKY 04;38;2;97;175;239 # dir with the sticky bit set (+t) and not other-writable
-EXEC 00;38;2;152;195;121 # This is for files with execute permission:
+EXEC 00;38;2;86;182;194 # This is for files with execute permission:
 
 ## Source Code (yellow)
 .jl    00;38;2;255;194;75

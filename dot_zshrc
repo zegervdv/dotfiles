@@ -12,45 +12,34 @@ PROMPT='%F{cyan}%T%f %F{red}%m%f %F{blue}%~%b%f
 
 vim_ins_mode="%F{black}%K{yellow} INS %k%f"
 vim_cmd_mode="%F{white}%K{red} NRM %k%f"
+vim_vis_mode="%F{black}%K{blue} VIS %k%f"
+vim_visline_mode="%F{black}%K{blue} VIL %k%f"
+vim_rep_mode="%F{black}%K{green} REP %k%f"
 vim_mode=$vim_ins_mode
-
-# Cursor mapping from nyquase/vi-mode
-function select_cursor() {
-  case $KEYMAP in
-    # Block cursor in normal and visual mode
-    vicmd) echo -ne "\e[2 q";;
-    # Line cursor in insert mode
-    main|viins) echo -ne "\e[5 q";;
-    # Else Block cursor
-    *) echo -ne "\e[2 q";;
-  esac
-}
-
-function zle-keymap-select {
-  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-  zle reset-prompt
-  zle -R
-  select_cursor
-}
-zle -N zle-keymap-select
-
-function zle-line-init() {
-  echoti smkx
-  zle reset-prompt
-  select_cursor
-}
-zle -N zle-line-init
-
-function zle-line-finish {
-  vim_mode=$vim_ins_mode
-  echoti rmkx
-  echo -ne "\e[2 q"
-}
-zle -N zle-line-finish
 
 function TRAPINT() {
   vim_mode=$vim_ins_mode
   return $(( 128 + $1 ))
+}
+
+function zvm_after_select_vi_mode() {
+  case $ZVM_MODE in
+    $ZVM_MODE_NORMAL)
+      vim_mode=$vim_cmd_mode
+    ;;
+    $ZVM_MODE_INSERT)
+      vim_mode=$vim_ins_mode
+    ;;
+    $ZVM_MODE_VISUAL)
+      vim_mode=$vim_vis_mode
+    ;;
+    $ZVM_MODE_VISUAL_LINE)
+      vim_mode=$vim_visline_mode
+    ;;
+    $ZVM_MODE_REPLACE)
+      vim_mode=$vim_rep_mode
+    ;;
+  esac
 }
 
 autoload -Uz vcs_info

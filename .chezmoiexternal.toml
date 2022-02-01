@@ -19,11 +19,6 @@
   stripComponents = 1
   refreshPeriod = "168h"
 
-[".config/bat/themes/One Dark.tmTheme"]
-  type = "file"
-  url = "https://raw.githubusercontent.com/andresmichel/one-dark-theme/master/One Dark.tmTheme"
-  refreshPeriod = "168h"
-
 [".zsh/zsh-history-substring-search.zsh"]
   type = "file"
   url = "https://github.com/zsh-users/zsh-history-substring-search/raw/master/zsh-history-substring-search.zsh"

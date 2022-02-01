@@ -1,9 +1,6 @@
 # Only be case sensitive if a case is present
 --smart-case
 
-# include .hgignore in ignores
---ignore-file=.hgignore
-
 # Limit output
 --max-columns=150
 --max-columns-preview

@@ -75,7 +75,7 @@ export LESS_TERMCAP_ue=$(printf "\e[0m")
 export LESS_TERMCAP_us=$(printf "\e[1;32m")
 
 export CLICOLOR=1
-eval "$(dircolors ~/.lscolors)"
+eval "$(dircolors --sh ~/.lscolors)"
 
 # Options
 setopt monitor

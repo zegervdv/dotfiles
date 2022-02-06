@@ -842,11 +842,9 @@ local on_attach = function(client)
     return vim.keymap.set('n', lhs, rhs, opts)
   end
 
-  if client.resolved_capabilities.goto_definition == true then
-    vim.bo.tagfunc = 'v:lua.vim.lsp.tagfunc'
-    nmap('gp', require('goto-preview').goto_preview_definition, { silent = true, buffer = 0 })
-    nmap('gP', require('goto-preview').close_all_win, { silent = true, buffer = 0 })
-  end
+  vim.bo.tagfunc = 'v:lua.vim.lsp.tagfunc'
+  nmap('gp', require('goto-preview').goto_preview_definition, { silent = true, buffer = 0 })
+  nmap('gP', require('goto-preview').close_all_win, { silent = true, buffer = 0 })
 
   nmap('gd', vim.lsp.buf.declaration, { silent = true, buffer = 0 })
   nmap('K', vim.lsp.buf.hover, { silent = true, buffer = 0 })
@@ -855,18 +853,14 @@ local on_attach = function(client)
   nmap('gr', vim.lsp.buf.references, { silent = true, buffer = 0 })
   nmap('g0', vim.lsp.buf.document_symbol, { silent = true, buffer = 0 })
 
-  if client.resolved_capabilities.document_formatting == true then
-    nmap('<c-p>', function()
-      vim.lsp.buf.formatting_sync({}, 5000)
-    end, {
-      silent = true,
-      buffer = 0,
-    })
-  end
+  nmap('<c-p>', function()
+    vim.lsp.buf.formatting_sync({}, 5000)
+  end, {
+    silent = true,
+    buffer = 0,
+  })
 
-  if client.resolved_capabilities.document_range_formatting == true then
-    vim.bo.formatexpr = 'v:lua.vim.lsp.formatexpr()'
-  end
+  vim.bo.formatexpr = 'v:lua.vim.lsp.formatexpr()'
 
   map('i', '<c-l>', vim.lsp.buf.signature_help, { silent = true, buffer = 0 })
 

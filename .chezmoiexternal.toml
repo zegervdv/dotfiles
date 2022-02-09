@@ -14,7 +14,7 @@
 
 [".tmux/plugins/tmux-thumbs"]
   type = "archive"
-  url = "https://github.com/zegervdv/tmux-thumbs/releases/download/0.99.0/tmux-thumbs.x86_64-musl.tar.gz"
+  url = "https://github.com/fcsonline/tmux-thumbs/archive/a18ab2f49975c7b9d7e20e2d3b08696e1ec98f88.tar.gz"
   exact = true
   stripComponents = 1
   refreshPeriod = "168h"

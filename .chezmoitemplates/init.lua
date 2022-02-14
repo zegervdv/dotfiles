@@ -834,6 +834,29 @@ au.BufWritePost = function()
   end
 end
 
+-- Snippets
+local ls = require 'luasnip'
+-- Expand snippet or jump to next placeholder
+vim.keymap.set({ 'i', 's' }, '<c-k>', function()
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jump()
+  end
+end, { silent = true })
+
+-- Go back to previous placeholder
+vim.keymap.set({ 'i', 's' }, '<c-j>', function()
+  if ls.jumpable(-1) then
+    ls.jump(-1)
+  end
+end, { silent = true })
+
+-- Toggle options in snippets
+vim.keymap.set('i', '<c-l>', function()
+  if ls.choice_active() then
+    ls.change_choice()
+  end
+end)
+
 -- LSP config
 local lsp = require 'lspconfig'
 local null_ls = require 'null-ls'
@@ -863,8 +886,6 @@ local on_attach = function(client)
   })
 
   vim.bo.formatexpr = 'v:lua.vim.lsp.formatexpr()'
-
-  map('i', '<c-l>', vim.lsp.buf.signature_help, { silent = true, buffer = 0 })
 
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })

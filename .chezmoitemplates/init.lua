@@ -197,9 +197,6 @@ require('packer').startup(function()
     cmd = { 'Grepper', 'Ag' },
     keys = { { 'n', 'gs' }, { 'x', 'gs' } },
     config = function()
-      local nmap = vim.keymap.nmap
-      local xmap = vim.keymap.xmap
-
       vim.g.grepper = {
         tools = { 'ag', 'hg' },
         highlight = 1,
@@ -208,8 +205,7 @@ require('packer').startup(function()
         },
       }
 
-      nmap { 'gs', '<plug>(GrepperOperator)' }
-      xmap { 'gs', '<plug>(GrepperOperator)' }
+      vim.keymap.set({"x", "n"}, "gs", '<plug>(GrepperOperator)')
     end,
     setup = function()
       vim.api.nvim_add_user_command(

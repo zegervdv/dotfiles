@@ -239,6 +239,7 @@ source ~/.zsh/zsh-autosuggestions.zsh
 
 source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+export HISTDB_FILE="${HOME}/.histdb/zsh-history-$(hostname).db"
 source ~/.zsh/zsh-histdb/sqlite-history.zsh
 source ~/.zsh/fzf-histdb.zsh
 

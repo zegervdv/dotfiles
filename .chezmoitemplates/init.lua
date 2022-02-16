@@ -131,7 +131,18 @@ require('packer').startup(function()
   use { 'sjl/gundo.vim', cmd = { 'GundoToggle' } }
 
   -- Parentheses etc
-  use { 'tpope/vim-surround' }
+  use {
+    'echasnovski/mini.nvim',
+    config = function()
+      require('mini.surround').setup {
+        mappings = {
+          add = 'ys',
+          delete = 'ds',
+          replace = 'cs',
+        },
+      }
+    end,
+  }
   use {
     'windwp/nvim-autopairs',
     config = function()

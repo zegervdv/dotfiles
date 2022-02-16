@@ -205,9 +205,7 @@ require('packer').startup(function()
         },
       }
 
-      vim.keymap.set({"x", "n"}, "gs", '<plug>(GrepperOperator)')
-    end,
-    setup = function()
+      vim.keymap.set({ 'x', 'n' }, 'gs', '<plug>(GrepperOperator)')
       vim.api.nvim_add_user_command(
         'Ag',
         'Grepper -noprompt -tool ag -grepprg rg --vimgrep <args>',
@@ -837,14 +835,18 @@ vim.keymap.set({ 'i', 's' }, '<c-k>', function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jump()
   end
-end, { silent = true })
+end, {
+  silent = true,
+})
 
 -- Go back to previous placeholder
 vim.keymap.set({ 'i', 's' }, '<c-j>', function()
   if ls.jumpable(-1) then
     ls.jump(-1)
   end
-end, { silent = true })
+end, {
+  silent = true,
+})
 
 -- Toggle options in snippets
 vim.keymap.set('i', '<c-l>', function()

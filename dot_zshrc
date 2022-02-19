@@ -6,8 +6,8 @@ export TERM=xterm-256color
 
 export LC_ALL=$LANG
 
-PROMPT='%F{cyan}%T%f %F{red}%m%f %F{blue}%~%b%f
-%j -> '
+PROMPT=$'%F{cyan}%T%f %F{red}%m%f %F{blue}%~%b%f
+%j ->\u00A0'
 
 
 vim_ins_mode="%F{black}%K{yellow} INS %k%f"

@@ -17,7 +17,6 @@
   url = "https://github.com/fcsonline/tmux-thumbs/archive/a18ab2f49975c7b9d7e20e2d3b08696e1ec98f88.tar.gz"
   exact = true
   stripComponents = 1
-  refreshPeriod = "168h"
 
 [".zsh/zsh-history-substring-search.zsh"]
   type = "file"

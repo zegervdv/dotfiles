@@ -4,7 +4,8 @@ fpath=(~/.zsh/completions $fpath)
 
 export TERM=xterm-256color
 
-export LC_ALL=$LANG
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
 
 PROMPT=$'%F{cyan}%T%f %F{red}%m%f %F{blue}%~%b%f
 %j ->\u00A0'

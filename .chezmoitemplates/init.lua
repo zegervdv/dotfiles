@@ -435,6 +435,12 @@ require('packer').startup(function()
     'jose-elias-alvarez/null-ls.nvim',
     requires = 'nvim-lua/plenary.nvim',
   }
+  use {
+    'lukas-reineke/lsp-format.nvim',
+    config = function()
+      require('lsp-format').setup {}
+    end,
+  }
   use { 'folke/lua-dev.nvim' }
 
   use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
@@ -860,7 +866,7 @@ local lsp = require 'lspconfig'
 local null_ls = require 'null-ls'
 
 local on_attach = function(client)
-  local map = vim.keymap.set
+  require('lsp-format').on_attach(client)
   local nmap = function(lhs, rhs, opts)
     return vim.keymap.set('n', lhs, rhs, opts)
   end
@@ -877,7 +883,7 @@ local on_attach = function(client)
   nmap('g0', vim.lsp.buf.document_symbol, { silent = true, buffer = 0 })
 
   nmap('<c-p>', function()
-    vim.lsp.buf.formatting_sync({}, 5000)
+    require('lsp-format').format()
   end, {
     silent = true,
     buffer = 0,

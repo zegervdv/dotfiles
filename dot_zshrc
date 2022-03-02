@@ -250,7 +250,12 @@ source ~/.zsh/jq-zsh-plugin/jq.plugin.zsh
 function zvm_after_init() {
   [ -f ~/.fzf.zsh  ] && source ~/.fzf.zsh
   bindkey '^r' histdb-fzf-widget
+
+  # Postpone current command to next prompt
   bindkey '^t' push-line-or-edit
+
+  # Cut current command into killring
+  bindkey '^u' backward-kill-line
 
   bindkey '^[[A' history-substring-search-up
   bindkey '^[[B' history-substring-search-down

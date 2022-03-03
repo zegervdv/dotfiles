@@ -1,18 +1,20 @@
 --
 -- Copied from https://gist.github.com/numToStr/1ab83dd2e919de9235f9f774ef8076da
 --
-local cmd = vim.api.nvim_command
 
 local function autocmd(this, event, spec)
   local is_table = type(spec) == 'table'
   local pattern = is_table and spec[1] or '*'
   local action = is_table and spec[2] or spec
+
+  local opts = { pattern = pattern }
   if type(action) == 'function' then
-    action = this.set(action)
+    opts.callback = action
+  else
+    opts.command = action
   end
-  local e = type(event) == 'table' and table.concat(event, ',') or event
-  local pattern = type(pattern) == 'table' and table.concat(pattern, ',') or pattern
-  cmd('autocmd ' .. e .. ' ' .. pattern .. ' ' .. action)
+
+  vim.api.nvim_create_autocmd(event, opts)
 end
 
 local S = {
@@ -36,16 +38,21 @@ function S.set(fn)
 end
 
 function S.group(grp, cmds)
-  cmd('augroup ' .. grp)
-  cmd 'autocmd!'
+  vim.api.nvim_create_augroup(grp, { clear = true })
   if type(cmds) == 'function' then
+    -- TODO set group?
     cmds(X)
   else
     for _, au in ipairs(cmds) do
-      autocmd(S, au[1], { au[2], au[3] })
+      local opts = { group = grp, pattern = au[2] }
+      if type(au[3]) == 'function' then
+        opts.callback = au[3]
+      else
+        opts.command = au[3]
+      end
+      vim.api.nvim_create_autocmd(au[1], opts)
     end
   end
-  cmd 'augroup END'
 end
 
 return X

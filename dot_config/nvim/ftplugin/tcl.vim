@@ -1,0 +1,1 @@
+setlocal suffixesadd+=.tcl,.do

@@ -792,6 +792,18 @@ map('v', '<', keep_visual_selection '<', { expr = true, silent = true, desc = 'I
 map('n', '`', "'")
 map('n', "'", '`')
 
+-- Do not move on *
+map('n', '*', function()
+  local view = vim.fn.winsaveview()
+  vim.cmd [[ normal! * ]]
+  vim.fn.winrestview(view)
+end, { silent = true, desc = 'Search word under cursor without moving to first results' })
+
+map('n', '<UP>', ':cprev<CR>', { desc = 'Go to previous error/match' })
+map('n', '<DOWN>', ':cnext<CR>', { desc = 'Go to next error/match' })
+map('n', '<LEFT>', ':cpf<CR>', { desc = 'Go to previous error/match in previous file' })
+map('n', '<RIGHT>', ':cnf<CR>', { desc = 'Go to next error/match in next file' })
+
 local au = require 'au'
 
 -- Highlight yanked text

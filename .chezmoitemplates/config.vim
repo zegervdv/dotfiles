@@ -42,8 +42,6 @@ endif
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-" Do not move on *
-nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
 
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
@@ -59,13 +57,6 @@ vnoremap <silent> # :<C-U>
 
 xnoremap <silent> p p:if v:register == '"'<Bar>let @@=@0<Bar>endif<CR>
 
-" Error navigation
-nnoremap <UP> :cprev<CR>
-nnoremap <DOWN> :cnext<CR>
-nnoremap <RIGHT> :cnf<CR>
-nnoremap <LEFT> :cpf<CR>
-
-nnoremap <leader>y :ptjump <c-r><c-w><CR>
 
 if has('nvim')
   tnoremap <C-h> <C-\><C-n><C-w>h
@@ -113,116 +104,6 @@ function! CheckFileType()
   endif
 endfunction
 "
-
-" Convert hex <-> decimal
-command! -nargs=? -range Dec2hex call s:Dec2hex(<line1>, <line2>, '<args>')
-function! s:Dec2hex(line1, line2, arg) range
-  if empty(a:arg)
-    if histget(':', -1) =~# "^'<,'>" && visualmode() !=# 'V'
-      let cmd = 's/\%V\<\d\+\>/\=printf("0x%x",submatch(0)+0)/g'
-    else
-      let cmd = 's/\<\d\+\>/\=printf("0x%x",submatch(0)+0)/g'
-    endif
-    try
-      execute a:line1 . ',' . a:line2 . cmd
-    catch
-      echo 'Error: No decimal number found'
-    endtry
-  else
-    echo printf('%x', a:arg + 0)
-  endif
-endfunction
-
-command! -nargs=? -range Hex2dec call s:Hex2dec(<line1>, <line2>, '<args>')
-function! s:Hex2dec(line1, line2, arg) range
-  if empty(a:arg)
-    if histget(':', -1) =~# "^'<,'>" && visualmode() !=# 'V'
-      let cmd = 's/\%V0x\x\+/\=submatch(0)+0/g'
-    else
-      let cmd = 's/0x\x\+/\=submatch(0)+0/g'
-    endif
-    try
-      execute a:line1 . ',' . a:line2 . cmd
-    catch
-      echo 'Error: No hex number starting "0x" found'
-    endtry
-  else
-    echo (a:arg =~? '^0x') ? a:arg + 0 : ('0x'.a:arg) + 0
-  endif
-endfunction
-"
-
-" Recognize filetype for dup files
-autocmd! BufRead *.dup call DupSetSyntax(@%)
-
-function! DupSetSyntax(name)
-  let extension = matchlist(a:name, '\v.+.\.([^\.]+).dup')[1]
-  if extension == "vhd"
-    setlocal filetype=vhdl
-  elseif extension == "v"
-    setlocal filetype=verilog
-  elseif extension == "sv"
-    setlocal filetype=verilog
-  else
-    echo "Unknown filetype"
-  endif
-endfunction
-"
-
-" Create arguments list from files in quickfix list
-" Allows to Grep for a pattern and apply an argdo command on each of the
-" matching files
-command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
-function! QuickfixFilenames()
-  " Building a hash ensures we get each buffer only once
-  let buffer_numbers = {}
-  for quickfix_item in getqflist()
-    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-  endfor
-  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
-endfunction
-"
-
-augroup mark_files
-  au!
-  au BufLeave test.tcl mark T
-  au BufLeave case.do mark C
-  au BufLeave drv_*.tcl mark D
-  au BufLeave *.rtl.vhd mark R
-augroup END
-
-
-" Toggle between opening/closing the quickfix window
-function! GetBufferList()
-  redir =>buflist
-  silent! ls!
-  redir END
-  return buflist
-endfunction
-
-function! ToggleList(bufname, pfx)
-  let buflist = GetBufferList()
-  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
-    if bufwinnr(bufnum) != -1
-      exec(a:pfx.'close')
-      return
-    endif
-  endfor
-  if a:pfx == 'l' && len(getloclist(0)) == 0
-    echohl ErrorMsg
-    echo "Location List is Empty."
-    return
-  endif
-  let winnr = winnr()
-  exec('botright '.a:pfx.'open')
-  if winnr() != winnr
-    wincmd p
-  endif
-endfunction
-
-nnoremap <silent> <F10> :call ToggleList("Quickfix List", 'c')<CR>
-"
-
 
 " Make list-like commands more intuitive
 " Copied from https://gist.github.com/romainl/047aca21e338df7ccf771f96858edb86

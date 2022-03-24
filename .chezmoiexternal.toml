@@ -1,3 +1,4 @@
+{{- if ne .chezmoi.os "windows" }}
 [".tmux/plugins/tmux-yank"]
   type = "archive"
   url = "https://github.com/tmux-plugins/tmux-yank/archive/master.tar.gz"
@@ -68,3 +69,4 @@
   type = "file"
   url = "https://github.com/BurntSushi/ripgrep/raw/master/complete/_rg"
   refreshPeriod = "168h"
+{{- end}}

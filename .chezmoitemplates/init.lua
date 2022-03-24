@@ -5,6 +5,11 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
+local home = os.getenv('HOME')
+if home == nil then
+  home = os.getenv('USERPROFILE')
+end
+
 -- Bootstrap package manager
 local install_path = fn.stdpath 'data' .. '/site/pack/packer/opt/packer.nvim'
 
@@ -711,14 +716,10 @@ opt.pastetoggle = '<F2>' -- Enable paste mode
 
 opt.undofile = true -- Persistently remember undos
 opt.undolevels = 1000
-if os.getenv 'HOME' ~= nil then
-  opt.undodir = os.getenv 'HOME' .. '/.config/nvim/tmp/undo//'
-end
+opt.undodir = home .. '/.config/nvim/tmp/undo//'
 opt.swapfile = false -- Disable swap files
 opt.backup = true -- Keep backups
-if os.getenv 'HOME' ~= nil then
-  opt.backupdir = os.getenv 'HOME' .. '/.config/nvim/tmp/backup//'
-end
+opt.backupdir = home .. '/.config/nvim/tmp/backup//'
 
 -- Files to ignore from completion
 opt.wildignore:append {
@@ -943,7 +944,7 @@ lsp.esbonio.setup {
   capabilities = capabilities,
   root_dir = root_dir,
   -- Assume esbonio is installed with --user
-  cmd = { os.getenv 'HOME' .. '/.local/bin/esbonio' },
+  cmd = { home .. '/.local/bin/esbonio' },
 }
 
 null_ls.setup {

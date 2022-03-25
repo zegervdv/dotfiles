@@ -320,18 +320,20 @@ function! SendOSCClipboard(lines, regtype)
    call SendViaOSC52(join(a:lines, "\n"))
 endfunction
 
-let g:clipboard = {
-      \   'name': 'TMUX',
-      \   'copy': {
-      \      '+': function('SendOSCClipboard'),
-      \      '*': 'tmux load-buffer -',
-      \    },
-      \   'paste': {
-      \      '+': 'tmux save-buffer -',
-      \      '*': 'tmux save-buffer -',
-      \   },
-      \   'cache_enabled': 1,
-      \ }
+if !s:windows
+  let g:clipboard = {
+        \   'name': 'TMUX',
+        \   'copy': {
+        \      '+': function('SendOSCClipboard'),
+        \      '*': 'tmux load-buffer -',
+        \    },
+        \   'paste': {
+        \      '+': 'tmux save-buffer -',
+        \      '*': 'tmux save-buffer -',
+        \   },
+        \   'cache_enabled': 1,
+        \ }
+endif
 " Load local vimrc
 if filereadable($HOME . '/.vimrc.local')
   source ~/.vimrc.local

@@ -947,6 +947,12 @@ lsp.esbonio.setup {
   cmd = { home .. '/.local/bin/esbonio' },
 }
 
+lsp.clangd.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = root_dir,
+}
+
 null_ls.setup {
   sources = {
     null_ls.builtins.formatting.black,

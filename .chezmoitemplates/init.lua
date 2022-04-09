@@ -5,9 +5,9 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local home = os.getenv('HOME')
+local home = os.getenv 'HOME'
 if home == nil then
-  home = os.getenv('USERPROFILE')
+  home = os.getenv 'USERPROFILE'
 end
 
 -- Bootstrap package manager
@@ -595,22 +595,23 @@ require('packer').startup(function()
   -- Filetypes
   use { 'lepture/vim-jinja' }
 
-    -- Integration with external tools
-    use {
-      'glacambre/firenvim',
-      run = function() vim.fn['firenvim#install'](0) end,
-      config = function ()
-        vim.g.firenvim_config = {
-          localSettings = {
-            ['.*'] = {
-              takeover = 'never',
-            }
-          }
-        }
-      end,
-    }
-
-  end)
+  -- Integration with external tools
+  use {
+    'glacambre/firenvim',
+    run = function()
+      vim.fn['firenvim#install'](0)
+    end,
+    config = function()
+      vim.g.firenvim_config = {
+        localSettings = {
+          ['.*'] = {
+            takeover = 'never',
+          },
+        },
+      }
+    end,
+  }
+end)
 
 vim.cmd [[ packadd dirbuf.nvim ]]
 
@@ -1004,6 +1005,20 @@ function LspRename()
 end
 
 vim.api.nvim_add_user_command('LspRename', LspRename, {})
+
+local fd_quickfix = function(args)
+  local grepprg = vim.opt.grepprg
+  local grepformat = vim.opt.grepformat
+
+  vim.opt.grepprg = 'fd'
+  vim.opt.grepformat = '%f'
+  vim.cmd('execute' .. '"silent! grep! ' .. args.args .. '"')
+  vim.cmd 'copen'
+
+  vim.opt.grepprg = grepprg
+  vim.opt.grepformat = grepformat
+end
+vim.api.nvim_add_user_command('Cfd', fd_quickfix, { nargs = '+', complete = 'file' })
 
 vim.diagnostic.config {
   underline = true,

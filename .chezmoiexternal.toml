@@ -1,17 +1,15 @@
 {{- if ne .chezmoi.os "windows" }}
 [".tmux/plugins/tmux-yank"]
   type = "archive"
-  url = "https://github.com/tmux-plugins/tmux-yank/archive/master.tar.gz"
+  url = "https://github.com/tmux-plugins/tmux-yank/archive/1b1a436e19f095ae8f825243dbe29800a8acd25c.tar.gz"
   exact = true
   stripComponents = 1
-  refreshPeriod = "168h"
 
 [".tmux/plugins/tmux-better-mouse-mode"]
   type = "archive"
-  url = "https://github.com/NHDaly/tmux-better-mouse-mode/archive/master.tar.gz"
+  url = "https://github.com/NHDaly/tmux-better-mouse-mode/archive/aa59077c635ab21b251bd8cb4dc24c415e64a58e.tar.gz"
   exact = true
   stripComponents = 1
-  refreshPeriod = "168h"
 
 [".tmux/plugins/tmux-thumbs"]
   type = "archive"
@@ -21,52 +19,43 @@
 
 [".zsh/zsh-history-substring-search.zsh"]
   type = "file"
-  url = "https://github.com/zsh-users/zsh-history-substring-search/raw/master/zsh-history-substring-search.zsh"
-  refreshPeriod = "168h"
+  url = "https://github.com/zsh-users/zsh-history-substring-search/raw/4abed97b6e67eb5590b39bcd59080aa23192f25d/zsh-history-substring-search.zsh"
 
 [".zsh/zsh-autosuggestions.zsh"]
   type = "file"
-  url = "https://github.com/zsh-users/zsh-autosuggestions/raw/master/zsh-autosuggestions.zsh"
-  refreshPeriod = "168h"
+  url = "https://raw.githubusercontent.com/zsh-users/zsh-autosuggestions/fcca87555fe5c0c93c5ba865505a7e5d7a1a95cb/zsh-autosuggestions.zsh"
 
 [".zsh/fast-syntax-highlighting"]
   type = "archive"
-  url = "https://github.com/zdharma-continuum/fast-syntax-highlighting/archive/master.tar.gz"
+  url = "https://github.com/zdharma-continuum/fast-syntax-highlighting/archive/ef8ba84c3a76c768f49a0bdd2a620b2f53c2478a.tar.gz"
   exact = true
   stripComponents = 1
-  refreshPeriod = "168h"
 
 [".zsh/zsh-histdb"]
   type = "archive"
-  url = "https://github.com/larkery/zsh-histdb/archive/master.tar.gz"
+  url = "https://github.com/larkery/zsh-histdb/archive/30797f0c50c31c8d8de32386970c5d480e5ab35d.tar.gz"
   exact = true
   stripComponents = 1
-  refreshPeriod = "168h"
 
 [".zsh/fzf-histdb.zsh"]
   type = "file"
-  url = "https://github.com/m42e/zsh-histdb-fzf/raw/master/fzf-histdb.zsh"
-  refreshPeriod = "168h"
+  url = "https://github.com/m42e/zsh-histdb-fzf/raw/055523a798acf02a67e242b3281d917f5ee4309a/fzf-histdb.zsh"
 
 [".zsh/zsh-vi-mode.zsh"]
   type = "file"
-  url = "https://github.com/jeffreytse/zsh-vi-mode/raw/master/zsh-vi-mode.zsh"
-  refreshPeriod = "168h"
+  url = "https://github.com/jeffreytse/zsh-vi-mode/raw/9e909d0bdd0aff36ca60ea213ec92f46a554b288/zsh-vi-mode.zsh"
 
 [".zsh/jq-zsh-plugin"]
   type = "archive"
-  url = "https://github.com/reegnz/jq-zsh-plugin/archive/master.tar.gz"
+  url = "https://github.com/reegnz/jq-zsh-plugin/archive/v0.2.1.tar.gz"
   exact = true
   stripComponents = 1
-  refreshPeriod = "168h"
 
 [".zsh/completions/_fd"]
   type = "file"
-  url = "https://github.com/sharkdp/fd/raw/master/contrib/completion/_fd"
-  refreshPeriod = "168h"
+  url = "https://github.com/sharkdp/fd/raw/v8.3.2/contrib/completion/_fd"
 
 [".zsh/completions/_rg"]
   type = "file"
-  url = "https://github.com/BurntSushi/ripgrep/raw/master/complete/_rg"
-  refreshPeriod = "168h"
+  url = "https://github.com/BurntSushi/ripgrep/raw/13.0.0/complete/_rg"
 {{- end}}

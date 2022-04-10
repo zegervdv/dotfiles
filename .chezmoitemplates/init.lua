@@ -159,6 +159,7 @@ require('packer').startup(function()
 
       npairs.setup {
         ignored_next_char = string.gsub([[ [%w%%%'%[%.] ]], '%s+', ''),
+        enable_afterquote = false,
       }
 
       npairs.add_rules {

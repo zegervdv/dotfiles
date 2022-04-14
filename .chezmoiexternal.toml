@@ -58,4 +58,14 @@
 [".zsh/completions/_rg"]
   type = "file"
   url = "https://github.com/BurntSushi/ripgrep/raw/13.0.0/complete/_rg"
+
+[".zsh/completions/_brew"]
+  type = "file"
+  url = "https://github.com/Homebrew/brew/raw/master/completions/zsh/_brew"
+  refreshPeriod = "168h"
+
+[".zsh/completions/_chezmoi"]
+  type = "file"
+  url = "https://github.com/twpayne/chezmoi/raw/v2.15.1/completions/chezmoi.zsh"
+
 {{- end}}

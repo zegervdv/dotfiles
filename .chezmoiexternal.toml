@@ -51,6 +51,10 @@
   exact = true
   stripComponents = 1
 
+[".zsh/zsh-histdb-skim/zsh-histdb-skim.zsh"]
+  type = "file"
+  url = "https://github.com/m42e/zsh-histdb-skim/raw/v0.7.5/zsh-histdb-skim.zsh"
+
 [".zsh/completions/_fd"]
   type = "file"
   url = "https://github.com/sharkdp/fd/raw/v8.3.2/contrib/completion/_fd"

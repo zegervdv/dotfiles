@@ -212,21 +212,6 @@ export HGEDITOR=nvim
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
 export BAT_CONFIG_PATH=$HOME/.config/bat/config
 
-# # source: https://gist.github.com/gnanderson/d74079d16714bb8b2822a7a07cc883d4
-function fif() {
-  rg \
-  --column \
-  --no-heading \
-  --fixed-strings \
-  --ignore-case \
-  --hidden \
-  --follow \
-  --glob '!.git/*' "$1" \
-  | awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2 " " start ":" end " " $3}' \
-  | fzf --preview 'bat --wrap character --color always {1} --highlight-line {2} --line-range {3}' \
-        --bind 'ctrl-o:execute(nvim {1}:{2}:{4})+cancel'
-}
-
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # Must run after brew is loaded

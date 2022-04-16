@@ -222,7 +222,7 @@ require('packer').startup(function()
       }
 
       vim.keymap.set({ 'x', 'n' }, 'gs', '<plug>(GrepperOperator)')
-      vim.api.nvim_add_user_command(
+      vim.api.nvim_create_user_command(
         'Ag',
         'Grepper -noprompt -tool ag -grepprg rg --vimgrep <args>',
         { complete = 'file', nargs = '*' }
@@ -1015,7 +1015,7 @@ function LspRename()
   end)
 end
 
-vim.api.nvim_add_user_command('LspRename', LspRename, {})
+vim.api.nvim_create_user_command('LspRename', LspRename, {})
 
 local fd_quickfix = function(args)
   local grepprg = vim.opt.grepprg
@@ -1029,7 +1029,7 @@ local fd_quickfix = function(args)
   vim.opt.grepprg = grepprg
   vim.opt.grepformat = grepformat
 end
-vim.api.nvim_add_user_command('Cfd', fd_quickfix, { nargs = '+', complete = 'file' })
+vim.api.nvim_create_user_command('Cfd', fd_quickfix, { nargs = '+', complete = 'file' })
 
 vim.diagnostic.config {
   underline = true,

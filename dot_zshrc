@@ -202,6 +202,13 @@ alias ll="ls -haltr"
 alias xclip='xclip -selection clipboard'
 alias view='nvim -R'
 
+# Suffix aliases
+alias -s py=nvim
+alias -s sv=nvim
+alias -s v=nvim
+alias -s vhd=nvim
+alias -s sh=nvim
+
 # Exports
 export XDG_CONFIG_HOME=$HOME/.config
 export PATH=$HOME/bin:$PATH

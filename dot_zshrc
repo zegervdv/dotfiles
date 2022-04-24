@@ -208,6 +208,8 @@ alias -s sv=nvim
 alias -s v=nvim
 alias -s vhd=nvim
 alias -s sh=nvim
+# Global aliases
+alias -g X='| clip'
 
 # Exports
 export XDG_CONFIG_HOME=$HOME/.config

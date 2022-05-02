@@ -135,16 +135,6 @@ require('packer').startup(function()
   -- Undoing
   use { 'sjl/gundo.vim', cmd = { 'GundoToggle' } }
 
-  -- F/T navigation
-  use {
-    'unblevable/quick-scope',
-    config = function()
-      vim.g.qs_hightlight_on_keys = { 'f', 'F', 't', 'T' }
-      vim.g.qs_buftype_blacklist = { 'terminal', 'nofile', 'help' }
-      vim.cmd [[ highlight QuickScopePrimary gui=underline cterm=underline ]]
-    end,
-  }
-
   -- Parentheses etc
   use { 'tpope/vim-surround' }
   use {

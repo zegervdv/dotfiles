@@ -221,6 +221,8 @@ export HGEDITOR=nvim
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
 export BAT_CONFIG_PATH=$HOME/.config/bat/config
 
+export PS_FORMAT='pid,pgid,state,start_time,%cpu,command'
+
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # Must run after brew is loaded

@@ -53,7 +53,7 @@
 
 [".zsh/zsh-histdb-skim/zsh-histdb-skim.zsh"]
   type = "file"
-  url = "https://github.com/m42e/zsh-histdb-skim/raw/v0.7.5/zsh-histdb-skim.zsh"
+  url = "https://github.com/m42e/zsh-histdb-skim/raw/v0.7.6/zsh-histdb-skim.zsh"
 
 [".zsh/completions/_fd"]
   type = "file"

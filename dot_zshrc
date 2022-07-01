@@ -278,3 +278,7 @@ group by commands.argv order by count(*) desc limit 1"
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
 
 autoload -U compinit && compinit
+
+if [ ${TMUX} ]; then
+ unset zle_bracketed_paste
+fi

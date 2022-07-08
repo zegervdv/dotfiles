@@ -6,9 +6,7 @@ local execute = vim.api.nvim_command
 local fn = vim.fn
 
 local home = os.getenv 'HOME'
-if home == nil then
-  home = os.getenv 'USERPROFILE'
-end
+if home == nil then home = os.getenv 'USERPROFILE' end
 
 -- Bootstrap package manager
 local install_path = fn.stdpath 'data' .. '/site/pack/packer/opt/packer.nvim'
@@ -53,18 +51,14 @@ require('packer').startup(function()
   -- Smooth scrolling
   use {
     'karb94/neoscroll.nvim',
-    config = function()
-      require('neoscroll').setup {}
-    end,
+    config = function() require('neoscroll').setup {} end,
   }
 
   -- Faster lua package loading (until 15436 is merged)
   use {
     'lewis6991/impatient.nvim',
     module = { 'impatient' },
-    setup = function()
-      require 'impatient'
-    end,
+    setup = function() require 'impatient' end,
   }
 
   -- Library with lua functions
@@ -158,38 +152,22 @@ require('packer').startup(function()
           return vim.tbl_contains({ '()', '[]', '{}' }, pair)
         end),
         Rule('( ', ' )')
-          :with_pair(function()
-            return false
-          end)
-          :with_move(function(opts)
-            return opts.prev_char:match '.%)' ~= nil
-          end)
+          :with_pair(function() return false end)
+          :with_move(function(opts) return opts.prev_char:match '.%)' ~= nil end)
           :use_key ')',
         Rule('{ ', ' }')
-          :with_pair(function()
-            return false
-          end)
-          :with_move(function(opts)
-            return opts.prev_char:match '.%}' ~= nil
-          end)
+          :with_pair(function() return false end)
+          :with_move(function(opts) return opts.prev_char:match '.%}' ~= nil end)
           :use_key '}',
         Rule('[ ', ' ]')
-          :with_pair(function()
-            return false
-          end)
-          :with_move(function(opts)
-            return opts.prev_char:match '.%]' ~= nil
-          end)
+          :with_pair(function() return false end)
+          :with_move(function(opts) return opts.prev_char:match '.%]' ~= nil end)
           :use_key ']',
       }
 
-      npairs.get_rule('`'):with_pair(function()
-        return vim.bo.filetype ~= 'systemverilog'
-      end)
+      npairs.get_rule('`'):with_pair(function() return vim.bo.filetype ~= 'systemverilog' end)
 
-      npairs.get_rule("'")[1]:with_pair(function()
-        return vim.bo.filetype ~= 'systemverilog'
-      end)
+      npairs.get_rule("'")[1]:with_pair(function() return vim.bo.filetype ~= 'systemverilog' end)
     end,
     after = { 'nvim-cmp' },
   }
@@ -228,9 +206,7 @@ require('packer').startup(function()
     'folke/persistence.nvim',
     event = 'BufReadPre',
     module = 'persistence',
-    config = function()
-      require('persistence').setup()
-    end,
+    config = function() require('persistence').setup() end,
   }
 
   -- Indent lines
@@ -264,9 +240,7 @@ require('packer').startup(function()
     config = function()
       require('Navigator').setup { auto_save = 'current', disable_on_zoom = true }
 
-      local nmap = function(lhs, rhs, opts)
-        return vim.keymap.set('n', lhs, rhs, opts)
-      end
+      local nmap = function(lhs, rhs, opts) return vim.keymap.set('n', lhs, rhs, opts) end
       nmap('<c-h>', require('Navigator').left, { silent = true })
       nmap('<c-j>', require('Navigator').down, { silent = true })
       nmap('<c-k>', require('Navigator').up, { silent = true })
@@ -297,9 +271,7 @@ require('packer').startup(function()
 
       cmp.setup {
         snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
+          expand = function(args) luasnip.lsp_expand(args.body) end,
         },
         mapping = {
           ['<C-p>'] = { i = cmp.mapping.select_prev_item() },
@@ -410,9 +382,7 @@ require('packer').startup(function()
   use { 'L3MON4D3/luasnip' }
   use {
     'rmagatti/goto-preview',
-    config = function()
-      require('goto-preview').setup {}
-    end,
+    config = function() require('goto-preview').setup {} end,
   }
   use {
     'jose-elias-alvarez/null-ls.nvim',
@@ -420,9 +390,7 @@ require('packer').startup(function()
   }
   use {
     'lukas-reineke/lsp-format.nvim',
-    config = function()
-      require('lsp-format').setup {}
-    end,
+    config = function() require('lsp-format').setup {} end,
   }
   use { 'folke/lua-dev.nvim' }
   use {
@@ -459,18 +427,14 @@ require('packer').startup(function()
 
       gls.left[1] = {
         RainbowRed = {
-          provider = function()
-            return '▊ '
-          end,
+          provider = function() return '▊ ' end,
           highlight = { colors.blue, colors.bg },
         },
       }
 
       gls.left[2] = {
         FileName = {
-          provider = function()
-            return require('galaxyline.providers.fileinfo').get_current_file_name '⊙'
-          end,
+          provider = function() return require('galaxyline.providers.fileinfo').get_current_file_name '⊙' end,
           condition = condition.buffer_not_empty,
           highlight = { colors.magenta, colors.bg, 'bold' },
         },
@@ -481,9 +445,7 @@ require('packer').startup(function()
           provider = 'GetLspClient',
           condition = function()
             local tbl = { ['dashboard'] = true, [''] = true }
-            if tbl[vim.bo.filetype] then
-              return false
-            end
+            if tbl[vim.bo.filetype] then return false end
             return true
           end,
           highlight = { colors.green, colors.bg, 'bold' },
@@ -509,9 +471,7 @@ require('packer').startup(function()
       }
       gls.right[8] = {
         RainbowBlue = {
-          provider = function()
-            return ' ▊'
-          end,
+          provider = function() return ' ▊' end,
           highlight = { colors.blue, colors.bg },
         },
       }
@@ -593,9 +553,7 @@ require('packer').startup(function()
   -- Integration with external tools
   use {
     'glacambre/firenvim',
-    run = function()
-      vim.fn['firenvim#install'](0)
-    end,
+    run = function() vim.fn['firenvim#install'](0) end,
     config = function()
       vim.g.firenvim_config = {
         localSettings = {
@@ -750,9 +708,7 @@ opt.foldtext =
 opt.foldenable = false
 
 -- Clean up terminal codes from strings
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+local t = function(str) return vim.api.nvim_replace_termcodes(str, true, true, true) end
 
 -- General keymaps
 local map = vim.keymap.set
@@ -823,33 +779,25 @@ map('n', '<RIGHT>', ':cnf<CR>', { desc = 'Go to next error/match in next file' }
 local au = require 'au'
 
 -- Highlight yanked text
-au.TextYankPost = function()
-  vim.highlight.on_yank { timeout = 120 }
-end
+au.TextYankPost = function() vim.highlight.on_yank { timeout = 120 } end
 
 -- Automatic cursorline
 au.group('cline', {
   {
     'WinEnter',
     '*',
-    function()
-      vim.opt_local.cursorline = true
-    end,
+    function() vim.opt_local.cursorline = true end,
   },
   {
     'WinLeave',
     '*',
-    function()
-      vim.opt_local.cursorline = false
-    end,
+    function() vim.opt_local.cursorline = false end,
   },
 })
 
 -- Save files on focus lost
 au.FocusLost = function()
-  if not vim.o.readonly and vim.api.nvim_buf_get_name(0) ~= '' then
-    vim.cmd [[ wa ]]
-  end
+  if not vim.o.readonly and vim.api.nvim_buf_get_name(0) ~= '' then vim.cmd [[ wa ]] end
 end
 
 -- Equalize splits after resizing
@@ -857,36 +805,28 @@ au.VimResized = [[ exe "normal! \<c-w>=" ]]
 
 -- Reload diffs after editing
 au.BufWritePost = function()
-  if vim.o.diff then
-    vim.cmd [[ diffupdate ]]
-  end
+  if vim.o.diff then vim.cmd [[ diffupdate ]] end
 end
 
 -- Snippets
 local ls = require 'luasnip'
 -- Expand snippet or jump to next placeholder
 vim.keymap.set({ 'i', 's' }, '<c-k>', function()
-  if ls.expand_or_jumpable() then
-    ls.expand_or_jump()
-  end
+  if ls.expand_or_jumpable() then ls.expand_or_jump() end
 end, {
   silent = true,
 })
 
 -- Go back to previous placeholder
 vim.keymap.set({ 'i', 's' }, '<c-j>', function()
-  if ls.jumpable(-1) then
-    ls.jump(-1)
-  end
+  if ls.jumpable(-1) then ls.jump(-1) end
 end, {
   silent = true,
 })
 
 -- Toggle options in snippets
 vim.keymap.set('i', '<c-l>', function()
-  if ls.choice_active() then
-    ls.change_choice()
-  end
+  if ls.choice_active() then ls.change_choice() end
 end)
 
 -- LSP config
@@ -895,9 +835,7 @@ local null_ls = require 'null-ls'
 
 local on_attach = function(client)
   require('lsp-format').on_attach(client)
-  local nmap = function(lhs, rhs, opts)
-    return vim.keymap.set('n', lhs, rhs, opts)
-  end
+  local nmap = function(lhs, rhs, opts) return vim.keymap.set('n', lhs, rhs, opts) end
 
   vim.bo.tagfunc = 'v:lua.vim.lsp.tagfunc'
   nmap('gp', require('goto-preview').goto_preview_definition, { silent = true, buffer = 0 })
@@ -910,9 +848,7 @@ local on_attach = function(client)
   nmap('gr', vim.lsp.buf.references, { silent = true, buffer = 0 })
   nmap('g0', vim.lsp.buf.document_symbol, { silent = true, buffer = 0 })
 
-  nmap('<c-p>', function()
-    require('lsp-format').format()
-  end, {
+  nmap('<c-p>', function() require('lsp-format').format() end, {
     silent = true,
     buffer = 0,
   })
@@ -1042,6 +978,4 @@ vim.fn.sign_define('DiagnosticSignHint', { texthl = 'DiagnosticSignHint', linehl
 
 -- Try importing local config
 local ok, localconfig = pcall(require, 'localconfig')
-if ok then
-  localconfig.setup { on_attach = on_attach, capabilities = capabilities }
-end
+if ok then localconfig.setup { on_attach = on_attach, capabilities = capabilities } end

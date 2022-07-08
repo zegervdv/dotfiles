@@ -425,6 +425,23 @@ require('packer').startup(function()
     end,
   }
   use { 'folke/lua-dev.nvim' }
+  use {
+    'folke/trouble.nvim',
+    config = function()
+      require('trouble').setup {
+        icons = false,
+        fold_open = 'v',
+        fold_closed = '>',
+        signs = {
+          error = 'error',
+          warning = 'warn',
+          hint = 'hint',
+          information = 'info',
+        },
+        use_diagnostic_signs = true,
+      }
+    end,
+  }
 
   use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
 
@@ -793,7 +810,10 @@ map('n', '*', function()
   local view = vim.fn.winsaveview()
   vim.cmd [[ normal! * ]]
   vim.fn.winrestview(view)
-end, { silent = true, desc = 'Search word under cursor without moving to first results' })
+end, {
+  silent = true,
+  desc = 'Search word under cursor without moving to first results',
+})
 
 map('n', '<UP>', ':cprev<CR>', { desc = 'Go to previous error/match' })
 map('n', '<DOWN>', ':cnext<CR>', { desc = 'Go to next error/match' })

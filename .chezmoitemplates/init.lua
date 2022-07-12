@@ -410,6 +410,10 @@ require('packer').startup(function()
       }
     end,
   }
+  use {
+    'smjonas/inc-rename.nvim',
+    config = function() require('inc_rename').setup() end,
+  }
 
   use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
 

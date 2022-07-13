@@ -126,11 +126,8 @@ require('packer').startup(function()
     },
   }
 
-  -- Undoing
-  use { 'sjl/gundo.vim', cmd = { 'GundoToggle' } }
-
   -- Parentheses etc
-  use { 'tpope/vim-surround' }
+  use { 'kylechui/nvim-surround', config = function() require('nvim-surround').setup() end }
   use {
     'windwp/nvim-autopairs',
     config = function()

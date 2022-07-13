@@ -174,6 +174,7 @@ require('packer').startup(function()
 
   -- Moving around within lines
   use { 'wellle/targets.vim', event = 'InsertEnter *' }
+  use { 'jinh0/eyeliner.nvim', config = function() require('eyeliner').setup { underline = true } end }
 
   -- Searching
   use {

@@ -412,7 +412,25 @@ require('packer').startup(function()
   }
   use {
     'smjonas/inc-rename.nvim',
-    config = function() require('inc_rename').setup() end,
+    config = function()
+      require('inc_rename').setup {
+        post_hook = function(result)
+          local changed = {}
+          for uri, changes in pairs(result.changes or result.documentChanges) do
+            local bufnr = vim.uri_to_bufnr(uri)
+            for _, edits in ipairs(changes) do
+              table.insert(changed, {
+                bufnr = bufnr,
+                lnum = edits.range.start.line + 1,
+                col = edits.range.start.character + 1,
+                text = vim.api.nvim_buf_get_lines(bufnr, edits.range.start.line, edits.range.start.line + 1, false)[1],
+              })
+            end
+          end
+          vim.fn.setqflist(changed, 'r')
+        end,
+      }
+    end,
   }
 
   use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
@@ -919,30 +937,6 @@ local luadev = require('lua-dev').setup {
 }
 
 lsp.sumneko_lua.setup(luadev)
-
--- Populate quickfix with all locations of rename
-function LspRename()
-  local params = vim.lsp.util.make_position_params()
-  params.newName = vim.fn.input('Rename: ', vim.fn.expand '<cword>')
-  vim.lsp.buf_request(0, 'textDocument/rename', params, function(err, result, ctx, ...)
-    vim.lsp.handlers['textDocument/rename'](err, result, ctx, ...)
-    local changed = {}
-    for uri, changes in pairs(result.changes) do
-      local bufnr = vim.uri_to_bufnr(uri)
-      for _, edits in ipairs(changes) do
-        table.insert(changed, {
-          bufnr = bufnr,
-          lnum = edits.range.start.line + 1,
-          col = edits.range.start.character + 1,
-          text = vim.api.nvim_buf_get_lines(bufnr, edits.range.start.line, edits.range.start.line + 1, false)[1],
-        })
-      end
-    end
-    vim.fn.setqflist(changed, 'r')
-  end)
-end
-
-vim.api.nvim_create_user_command('LspRename', LspRename, {})
 
 local fd_quickfix = function(args)
   local grepprg = vim.opt.grepprg

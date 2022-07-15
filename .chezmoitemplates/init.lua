@@ -434,88 +434,105 @@ require('packer').startup(function()
   use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
 
   use {
-    'NTBBloodbath/galaxyline.nvim',
-    branch = 'main',
-    -- your statusline
+    'rebelot/heirline.nvim',
     config = function()
-      local gl = require 'galaxyline'
-      local colors = require('galaxyline.themes.colors').default
-      local condition = require 'galaxyline.condition'
-      local gls = gl.section
+      local utils = require 'heirline.utils'
+      local conditions = require 'heirline.conditions'
 
-      colors.bg = '#2C323C'
+      local colors = require('onedark.palette').dark
+      colors.diag_warn = utils.get_highlight('DiagnosticSignWarn').fg
+      colors.diag_error = utils.get_highlight('DiagnosticSignError').fg
 
-      gls.left[1] = {
-        RainbowRed = {
-          provider = function() return '▊ ' end,
-          highlight = { colors.blue, colors.bg },
-        },
+      require('heirline').load_colors(colors)
+
+      local align = { provider = '%=' }
+      local space = { provider = ' ' }
+      local lbound = { provider = '▊ ', hl = { fg = 'blue', bg = 'bg' } }
+      local rbound = { provider = ' ▊', hl = { fg = 'blue', bg = 'bg' } }
+
+      local FileNameBlock = {
+        init = function(self) self.filename = vim.api.nvim_buf_get_name(0) end,
       }
 
-      gls.left[2] = {
-        FileName = {
-          provider = function() return require('galaxyline.providers.fileinfo').get_current_file_name '⊙' end,
-          condition = condition.buffer_not_empty,
-          highlight = { colors.magenta, colors.bg, 'bold' },
-        },
+      local FileName = {
+        provider = function(self)
+          local filename = vim.fn.fnamemodify(self.filename, ':.')
+          if filename == '' then return '[No Name]' end
+
+          return filename
+        end,
+        hl = { fg = 'blue' },
       }
 
-      gls.right[1] = {
-        ShowLspClient = {
-          provider = 'GetLspClient',
-          condition = function()
-            local tbl = { ['dashboard'] = true, [''] = true }
-            if tbl[vim.bo.filetype] then return false end
-            return true
+      local FileFlags = {
+        {
+          provider = function()
+            if vim.bo.modified then return ' [+]' end
           end,
-          highlight = { colors.green, colors.bg, 'bold' },
+          hl = { fg = 'green' },
+        },
+        {
+          provider = function()
+            if not vim.bo.modifiable or vim.bo.readonly then return ' RO' end
+          end,
+          hl = { fg = 'orange' },
         },
       }
 
-      gls.right[2] = {
-        LineInfo = {
-          provider = 'LineColumn',
-          separator = ' ',
-          separator_highlight = { 'NONE', colors.bg },
-          highlight = { colors.fg, colors.bg },
+      FileNameBlock = utils.insert(FileNameBlock, FileName, unpack(FileFlags), { provider = '%<' })
+
+      local Ruler = { provider = '%l : %c  %P' }
+
+      local Lsp = {
+        condition = conditions.lsp_attached,
+        update = { 'LspAttach', 'LspDetach' },
+        provider = function()
+          local names = {}
+          for _, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
+            table.insert(names, server.name)
+          end
+          return table.concat(names, ', ')
+        end,
+        hl = { fg = 'green' },
+      }
+
+      local Diagnostics = {
+        condition = conditions.has_diagnostics,
+        init = function(self)
+          self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+          self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+        end,
+        update = { 'DiagnosticChanged', 'BufEnter' },
+        {
+          provider = function(self) return self.errors > 0 and self.errors .. ' ' end,
+          hl = { fg = 'diag_error' },
+        },
+        {
+          provider = function(self) return self.warnings > 0 and self.warnings .. ' ' end,
+        },
+        hl = { fg = 'diag_warn' },
+        on_click = {
+          callback = function() require('trouble').toggle { mode = 'document_diagnostics' } end,
+          name = 'heirline_diagnostics',
         },
       }
 
-      gls.right[3] = {
-        PerCent = {
-          provider = 'LinePercent',
-          separator = ' ',
-          separator_highlight = { 'NONE', colors.bg },
-          highlight = { colors.fg, colors.bg, 'bold' },
-        },
+      local statusline_default = { lbound, FileNameBlock, align, Diagnostics, Lsp, space, Ruler, rbound }
+      local statusline_inactive = {
+        condition = function() return not conditions.is_active() end,
+        lbound,
+        FileNameBlock,
+        align,
+        rbound,
       }
-      gls.right[8] = {
-        RainbowBlue = {
-          provider = function() return ' ▊' end,
-          highlight = { colors.blue, colors.bg },
-        },
-      }
-
-      gls.short_line_left[1] = {
-        BufferType = {
-          provider = 'FileTypeName',
-          separator = ' ',
-          separator_highlight = { 'NONE', colors.bg },
-          highlight = { colors.blue, colors.bg, 'bold' },
-        },
+      local statusline = {
+        init = utils.pick_child_on_condition,
+        hl = { bg = 'bg' },
+        statusline_inactive,
+        statusline_default,
       }
 
-      gls.short_line_left[2] = {
-        SFileName = {
-          provider = 'SFileName',
-          condition = condition.buffer_not_empty,
-          highlight = { colors.fg, colors.bg, 'bold' },
-        },
-      }
-
-      gls.short_line_right[1] = {
-        BufferIcon = { provider = 'BufferIcon', highlight = { colors.fg, colors.bg } },
-      }
+      require('heirline').setup(statusline)
     end,
   }
 

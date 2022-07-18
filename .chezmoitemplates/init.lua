@@ -736,6 +736,10 @@ opt.mouse = {
   c = true, -- Commandline mode
 }
 
+opt.fillchars = {
+  diff = '╱',
+}
+
 opt.foldmethod = 'expr'
 opt.foldexpr = 'nvim_treesitter#foldexpr()'
 opt.foldnestmax = 3

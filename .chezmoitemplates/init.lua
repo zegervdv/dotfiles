@@ -434,6 +434,7 @@ require('packer').startup(function()
 
   use {
     'rebelot/heirline.nvim',
+    after = 'onedark.nvim',
     config = function()
       local utils = require 'heirline.utils'
       local conditions = require 'heirline.conditions'

@@ -429,6 +429,19 @@ require('packer').startup(function()
       }
     end,
   }
+  use {
+    'j-hui/fidget.nvim',
+    config = function()
+      require('fidget').setup {
+        text = {
+          spinner = 'dots',
+        },
+        window = {
+          relative = 'editor',
+        },
+      }
+    end,
+  }
 
   use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
 

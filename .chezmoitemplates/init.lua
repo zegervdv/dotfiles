@@ -458,6 +458,8 @@ require('packer').startup(function()
           local filename = vim.fn.fnamemodify(self.filename, ':.')
           if filename == '' then return '[No Name]' end
 
+          if not conditions.width_percent_below(#filename, 0.25) then filename = vim.fn.pathshorten(filename) end
+
           return filename
         end,
         hl = { fg = 'blue' },

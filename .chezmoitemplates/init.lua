@@ -391,23 +391,6 @@ require('packer').startup(function()
   }
   use { 'folke/lua-dev.nvim' }
   use {
-    'folke/trouble.nvim',
-    config = function()
-      require('trouble').setup {
-        icons = false,
-        fold_open = 'v',
-        fold_closed = '>',
-        signs = {
-          error = 'error',
-          warning = 'warn',
-          hint = 'hint',
-          information = 'info',
-        },
-        use_diagnostic_signs = true,
-      }
-    end,
-  }
-  use {
     'smjonas/inc-rename.nvim',
     config = function()
       require('inc_rename').setup {
@@ -527,7 +510,10 @@ require('packer').startup(function()
         },
         hl = { fg = 'diag_warn' },
         on_click = {
-          callback = function() require('trouble').toggle { mode = 'document_diagnostics' } end,
+          callback = function()
+            vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN }
+            vim.cmd [[ botright copen ]]
+          end,
           name = 'heirline_diagnostics',
         },
       }

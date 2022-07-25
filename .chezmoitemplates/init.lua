@@ -16,7 +16,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Packer configuration is compiled and only needs to be loaded on changes
-vim.cmd 'packadd packer.nvim'
+vim.cmd.packadd 'packer.nvim'
 
 require('packer').startup(function()
   use { 'wbthomason/packer.nvim', opt = true }
@@ -512,7 +512,7 @@ require('packer').startup(function()
         on_click = {
           callback = function()
             vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN }
-            vim.cmd [[ botright copen ]]
+            vim.cmd.copen { mods = { split = 'botright' } }
           end,
           name = 'heirline_diagnostics',
         },
@@ -604,7 +604,7 @@ require('packer').startup(function()
   }
 end)
 
-vim.cmd [[ packadd dirbuf.nvim ]]
+vim.cmd.packadd 'dirbuf.nvim'
 
 -- Configuration
 local opt = vim.opt
@@ -806,7 +806,7 @@ map('n', "'", '`')
 -- Do not move on *
 map('n', '*', function()
   local view = vim.fn.winsaveview()
-  vim.cmd [[ normal! * ]]
+  vim.cmd.normal { '*', bang = true }
   vim.fn.winrestview(view)
 end, {
   silent = true,
@@ -839,7 +839,7 @@ au.group('cline', {
 
 -- Save files on focus lost
 au.FocusLost = function()
-  if not vim.o.readonly and vim.api.nvim_buf_get_name(0) ~= '' then vim.cmd [[ wa ]] end
+  if not vim.o.readonly and vim.api.nvim_buf_get_name(0) ~= '' then vim.cmd.wa() end
 end
 
 -- Equalize splits after resizing
@@ -847,7 +847,7 @@ au.VimResized = [[ exe "normal! \<c-w>=" ]]
 
 -- Reload diffs after editing
 au.BufWritePost = function()
-  if vim.o.diff then vim.cmd [[ diffupdate ]] end
+  if vim.o.diff then vim.cmd.diffupdate() end
 end
 
 -- Snippets
@@ -964,8 +964,8 @@ local fd_quickfix = function(args)
 
   vim.opt.grepprg = 'fd'
   vim.opt.grepformat = '%f'
-  vim.cmd('execute' .. '"silent! grep! ' .. args.args .. '"')
-  vim.cmd 'copen'
+  vim.cmd.execute('"silent! grep! ' .. args.args .. '"')
+  vim.cmd.copen()
 
   vim.opt.grepprg = grepprg
   vim.opt.grepformat = grepformat

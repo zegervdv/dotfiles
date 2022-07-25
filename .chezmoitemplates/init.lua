@@ -26,7 +26,18 @@ require('packer').startup(function()
   use { 'tpope/vim-repeat' }
   use { 'tpope/vim-rsi' }
   use { 'sgur/vim-editorconfig' }
-  use { 'ShikChen/osc52.vim' }
+  use {
+    'ojroques/nvim-osc52',
+    config = function()
+      local copy = function(lines, _) require('osc52').copy(table.concat(lines, '\n')) end
+      local paste = function() return { vim.fn.split(vim.fn.getreg '', '\n'), vim.fn.getregtype '' } end
+      vim.g.clipboard = {
+        name = 'osc52',
+        copy = { ['+'] = copy, ['*'] = copy },
+        paste = { ['+'] = paste, ['*'] = paste },
+      }
+    end,
+  }
   use { 'einfachtoll/didyoumean' }
 
   use {

@@ -29,7 +29,15 @@ require('packer').startup(function()
   use {
     'ojroques/nvim-osc52',
     config = function()
-      local copy = function(lines, _) require('osc52').copy(table.concat(lines, '\n')) end
+      require('osc52').setup { trim = false }
+      local copy = function(lines, _)
+        -- Trim indent before copying
+        local indent, _ = lines[1]:find '[^ ]'
+        for key, line in ipairs(lines) do
+          lines[key] = line:sub(indent)
+        end
+        require('osc52').copy(table.concat(lines, '\n'))
+      end
       local paste = function() return { vim.fn.split(vim.fn.getreg '', '\n'), vim.fn.getregtype '' } end
       vim.g.clipboard = {
         name = 'osc52',

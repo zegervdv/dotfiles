@@ -32,9 +32,18 @@ require('packer').startup(function()
       require('osc52').setup { trim = false }
       local copy = function(lines, _)
         -- Trim indent before copying
-        local indent, _ = lines[1]:find '[^ ]'
-        for key, line in ipairs(lines) do
-          lines[key] = line:sub(indent)
+        local indent = 0
+        for _, line in ipairs(lines) do
+          local index, _ = line:find '[^ ]'
+          if index ~= nil then
+            indent = index
+            break
+          end
+        end
+        if indent ~= nil then
+          for key, line in ipairs(lines) do
+            lines[key] = line:sub(indent)
+          end
         end
         require('osc52').copy(table.concat(lines, '\n'))
       end

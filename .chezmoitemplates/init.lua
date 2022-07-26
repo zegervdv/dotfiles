@@ -449,6 +449,7 @@ require('packer').startup(function()
         },
         window = {
           relative = 'editor',
+          blend = 0,
         },
       }
     end,

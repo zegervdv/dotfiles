@@ -25,38 +25,21 @@ endif
 
 " Mappings
 
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 
-" Search for selected text, forwards or backwards.
-vnoremap <silent> * :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy/<C-R><C-R>=substitute(
-  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-
-xnoremap <silent> p p:if v:register == '"'<Bar>let @@=@0<Bar>endif<CR>
-
-
-if has('nvim')
-  tnoremap <C-h> <C-\><C-n><C-w>h
-  tnoremap <C-j> <C-\><C-n><C-w>j
-  tnoremap <C-k> <C-\><C-n><C-w>k
-  tnoremap <C-l> <C-\><C-n><C-w>l
-  augroup enter_term
-    au!
-    autocmd TermOpen * startinsert!
-    autocmd BufEnter * if &buftype ==# 'terminal' | :startinsert! | endif
-    autocmd BufLeave * if &buftype ==# 'terminal' | :stopinsert! | endif
-  augroup END
-  let $GIT_EDITOR = 'nvr -cc split --remote-wait'
-endif
+" if has('nvim')
+"   tnoremap <C-h> <C-\><C-n><C-w>h
+"   tnoremap <C-j> <C-\><C-n><C-w>j
+"   tnoremap <C-k> <C-\><C-n><C-w>k
+"   tnoremap <C-l> <C-\><C-n><C-w>l
+"   augroup enter_term
+"     au!
+"     autocmd TermOpen * startinsert!
+"     autocmd BufEnter * if &buftype ==# 'terminal' | :startinsert! | endif
+"     autocmd BufLeave * if &buftype ==# 'terminal' | :stopinsert! | endif
+"   augroup END
+"   let $GIT_EDITOR = 'nvr -cc split --remote-wait'
+" endif
 
 "
 
@@ -129,7 +112,7 @@ function! CCR()
         return "\<CR>"
     endif
 endfunction
-cnoremap <expr> <CR> CCR()
+" cnoremap <expr> <CR> CCR()
 "
 
 " Filetype specific settings

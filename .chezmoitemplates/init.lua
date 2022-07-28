@@ -906,10 +906,27 @@ end, {
   desc = 'Search word under cursor without moving to first results',
 })
 
+map('x', 'p', [[ p:if v:register == '"'<Bar>let @@=@0<Bar>endif<CR> ]], { silent = true })
+
 map('n', '<UP>', ':cprev<CR>', { desc = 'Go to previous error/match' })
 map('n', '<DOWN>', ':cnext<CR>', { desc = 'Go to next error/match' })
 map('n', '<LEFT>', ':cpf<CR>', { desc = 'Go to previous error/match in previous file' })
 map('n', '<RIGHT>', ':cnf<CR>', { desc = 'Go to next error/match in next file' })
+
+map('t', '<C-h>', '<C-\\><C-n><C-w>h')
+map('t', '<C-j>', '<C-\\><C-n><C-w>j')
+map('t', '<C-k>', '<C-\\><C-n><C-w>k')
+map('t', '<C-l>', '<C-\\><C-n><C-w>l')
+
+map('c', '<CR>', function()
+  local cmdline = vim.fn.getcmdline()
+  print(cmdline)
+  if cmdline == 'ls' or cmdline == 'buffers' or cmdline == 'files' then return '<CR>:b' end
+  return '<CR>'
+end, { expr = true })
+
+-- Special highlighting
+vim.cmd.match { 'ErrorMsg', [[ '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' ]] }
 
 local au = require 'au'
 
@@ -945,6 +962,25 @@ au.VimResized = [[ exe "normal! \<c-w>=" ]]
 au.BufWritePost = function()
   if vim.o.diff then vim.cmd.diffupdate() end
 end
+
+-- Terminal
+au.group('enter_term', {
+  { 'TermOpen', '*', 'startinsert!' },
+  {
+    'BufEnter',
+    '*',
+    function()
+      if vim.bo.buftype == 'terminal' then vim.cmd.startinsert { bang = true } end
+    end,
+  },
+  {
+    'BufLeave',
+    '*',
+    function()
+      if vim.bo.buftype == 'terminal' then vim.cmd.stopinsert { bang = true } end
+    end,
+  },
+})
 
 -- Snippets
 local ls = require 'luasnip'

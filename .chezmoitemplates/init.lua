@@ -982,6 +982,7 @@ local on_attach = function(client)
   nmap('1gD', vim.lsp.buf.type_definition, { silent = true, buffer = 0 })
   nmap('gr', vim.lsp.buf.references, { silent = true, buffer = 0 })
   nmap('g0', vim.lsp.buf.document_symbol, { silent = true, buffer = 0 })
+  nmap('ga', vim.lsp.buf.code_action, { silent = true, buffer = 0 })
 
   nmap('<c-p>', function() require('lsp-format').format() end, {
     silent = true,

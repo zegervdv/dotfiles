@@ -439,6 +439,28 @@ require('packer').startup(function()
     end,
   }
 
+  use {
+    'nvim-telescope/telescope-ui-select.nvim',
+    requires = { 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('telescope').setup {
+        defaults = {
+          border = {},
+          borderchars = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+          winblend = 0,
+        },
+        extensions = {
+          ['ui-select'] = require('telescope.themes').get_dropdown {
+            border = {},
+            borderchars = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+            winblend = 0,
+          },
+        },
+      }
+      require('telescope').load_extension 'ui-select'
+    end,
+  }
+
   use { 'vimjas/vim-python-pep8-indent', ft = { 'python' } }
 
   use {
@@ -579,6 +601,17 @@ require('packer').startup(function()
         },
       }
       require('onedark').load()
+      local extras = {
+        TelescopeNormal = { link = 'Pmenu' },
+        TelescopeBorder = { link = 'Pmenu' },
+        TelescopePromptBorder = { link = 'Pmenu' },
+        TelescopePreviewBorder = { link = 'Pmenu' },
+        TelescopeResultsBorder = { link = 'Pmenu' },
+        TelescopeTitle = { link = 'identifier' },
+      }
+      for name, opt in pairs(extras) do
+        vim.api.nvim_set_hl(0, name, opt)
+      end
     end,
   }
 
@@ -885,7 +918,10 @@ au.group('cline', {
   {
     'WinEnter',
     '*',
-    function() vim.opt_local.cursorline = true end,
+    function()
+      print(vim.bo.buftype)
+      if vim.bo.buftype ~= 'nofile' then vim.opt_local.cursorline = true end
+    end,
   },
   {
     'WinLeave',

@@ -338,6 +338,8 @@ require('packer').startup(function()
             'c',
             'cpp',
             'regex',
+            'markdown',
+            'rst',
           },
           indent = {
             enable = false,
@@ -1028,6 +1030,7 @@ null_ls.setup {
   sources = {
     null_ls.builtins.formatting.black.with { extra_args = { '--line-length', '100' } },
     null_ls.builtins.formatting.stylua,
+    null_ls.builtins.formatting.cbfmt,
     null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.code_actions.gitrebase,

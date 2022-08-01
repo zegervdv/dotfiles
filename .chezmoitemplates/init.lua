@@ -39,7 +39,6 @@ require('packer').startup(function()
       }
     end,
   }
-  use { 'einfachtoll/didyoumean' }
 
   use {
     'tpope/vim-eunuch',

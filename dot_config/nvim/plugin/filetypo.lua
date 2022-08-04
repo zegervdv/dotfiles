@@ -5,7 +5,11 @@ local filetypo = function()
 
   local filename = vim.fn.expand '%'
   local matching_files = vim.fn.split(vim.fn.glob(filename .. '*', 0), '\n')
-  if matching_files == nil then matching_files = vim.fn.split(vim.fn.glob(filename .. '*', 1), '\n') end
+  if matching_files == nil or vim.tbl_isempty(matching_files) then
+    matching_files = vim.fn.split(vim.fn.glob(filename .. '*', 1), '\n')
+  end
+
+  if matching_files == nil or vim.tbl_isempty(matching_files) then return end
 
   local buf = vim.api.nvim_get_current_buf()
   vim.schedule(function()

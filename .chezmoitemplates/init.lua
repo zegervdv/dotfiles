@@ -96,12 +96,14 @@ require('packer').startup(function()
     end,
   }
   use {
-    'zegervdv/merge.nvim',
+    'zegervdv/settle.nvim',
     opt = true,
-    cmd = { 'MergeInit' },
+    cmd = { 'SettleInit' },
+    branch = 'extmarks',
     config = function()
-      require('merge').setup {
+      require('settle').setup {
         wrap = true,
+        symbol = '▊',
         pre_hook = function()
           -- disable dirvish
           vim.api.nvim_del_keymap('n', '-')

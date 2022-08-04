@@ -15,9 +15,9 @@
 [gpg]
 	program = gpg
 [merge]
-	tool = splice
-[mergetool "splice"]
-	cmd = "nvim -f $BASE $LOCAL $REMOTE $MERGED -c 'MergeInit'"
+	tool = settle
+[mergetool "settle"]
+	cmd = "nvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SettleInit'"
 	trustExitCode = true
 [alias]
 	ls = log --format=\"%C(auto)%h %<(15)%C(auto, green)%cr %>(20)%C(auto, magenta)%an %C(auto)%s %D\"

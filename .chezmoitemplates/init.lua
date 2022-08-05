@@ -402,7 +402,7 @@ require('packer').startup(function()
   }
   use {
     'lukas-reineke/lsp-format.nvim',
-    config = function() require('lsp-format').setup {} end,
+    config = function() require('lsp-format').setup { exclude = { 'sumneko_lua' } } end,
   }
   use { 'folke/lua-dev.nvim' }
   use {

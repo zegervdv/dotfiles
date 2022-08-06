@@ -264,6 +264,7 @@ require('packer').startup(function()
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-nvim-lsp-signature-help',
+      'dmitmel/cmp-cmdline-history',
     },
     config = function()
       local cmp = require 'cmp'
@@ -309,6 +310,7 @@ require('packer').startup(function()
         sources = cmp.config.sources({
           { name = 'path' },
         }, {
+          { name = 'cmdline_history' },
           { name = 'cmdline', keyword_length = 4 },
         }),
       })

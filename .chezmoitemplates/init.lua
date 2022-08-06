@@ -96,7 +96,6 @@ require('packer').startup(function()
     end,
   }
   use { 'tpope/vim-git', ft = { 'gitcommit', 'gitrebase' } }
-  use { 'sindrets/diffview.nvim', config = function() require('diffview').setup {} end }
 
   -- Comments
   use {
@@ -241,6 +240,16 @@ require('packer').startup(function()
       nmap('<c-j>', require('Navigator').down, { silent = true })
       nmap('<c-k>', require('Navigator').up, { silent = true })
       nmap('<c-l>', require('Navigator').right, { silent = true })
+    end,
+  }
+
+  -- Keymap help
+  use {
+    'folke/which-key.nvim',
+    config = function()
+      require('which-key').setup {
+        triggers = { '<leader>', 'g', '<c-w>', '"', '`' },
+      }
     end,
   }
 
@@ -885,10 +894,6 @@ local keep_visual_selection = function(cmd)
 end
 map('v', '>', keep_visual_selection '>', { expr = true, silent = true, desc = 'Indent right while keeping selection' })
 map('v', '<', keep_visual_selection '<', { expr = true, silent = true, desc = 'Indent left while keeping selection' })
-
--- Swap backticks and quotes
-map('n', '`', "'")
-map('n', "'", '`')
 
 -- Do not move on *
 map('n', '*', function()

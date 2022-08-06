@@ -81,25 +81,9 @@ require('packer').startup(function()
   -- Git/VCS
   use { 'vim-scripts/gitignore' }
   use {
-    'sjl/splice.vim',
-    disable = true,
-    opt = true,
-    cmd = { 'SpliceInit' },
-    config = function()
-      vim.g.splice_initial_diff_grid = 1
-      vim.g.splice_initial_diff_compare = 1
-      vim.g.splice_initial_diff_path = 0
-      vim.g.splice_initial_scrollbind_grid = 1
-      vim.g.splice_initial_scrollbind_compare = 1
-      vim.g.splice_initial_scrollbind_path = 1
-      vim.g.splice_wrap = 'nowrap'
-    end,
-  }
-  use {
     'zegervdv/settle.nvim',
     opt = true,
     cmd = { 'SettleInit' },
-    branch = 'extmarks',
     config = function()
       require('settle').setup {
         wrap = true,
@@ -112,6 +96,7 @@ require('packer').startup(function()
     end,
   }
   use { 'tpope/vim-git', ft = { 'gitcommit', 'gitrebase' } }
+  use { 'sindrets/diffview.nvim', config = function() require('diffview').setup {} end }
 
   -- Comments
   use {
@@ -232,6 +217,7 @@ require('packer').startup(function()
   -- Increment/decrement
   use {
     'zegervdv/nrpattern.nvim',
+    branch = 'lua',
     requires = 'tpope/vim-repeat',
     config = function()
       local nrpattern = require 'nrpattern'
@@ -439,6 +425,14 @@ require('packer').startup(function()
           blend = 0,
         },
       }
+    end,
+  }
+  use {
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    config = function()
+      require('lsp_lines').setup()
+      vim.diagnostic.config { virtual_lines = false, virtual_text = false }
+      vim.keymap.set('n', 'g?', function() require('lsp_lines').toggle() end, { desc = 'Toggle LSP diagnostic lines' })
     end,
   }
 

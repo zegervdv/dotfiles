@@ -793,6 +793,8 @@ opt.fillchars:append {
   diff = '╱',
 }
 
+opt.jumpoptions:append { 'view' }
+
 opt.foldmethod = 'expr'
 opt.foldexpr = 'nvim_treesitter#foldexpr()'
 opt.foldnestmax = 3

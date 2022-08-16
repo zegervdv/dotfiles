@@ -72,4 +72,8 @@
   type = "file"
   url = "https://github.com/twpayne/chezmoi/raw/v2.15.1/completions/chezmoi.zsh"
 
+[".zsh/completions/_pass"]
+  type = "file"
+  url = "https://git.zx2c4.com/password-store/plain/src/completion/pass.zsh-completion"
+
 {{- end}}

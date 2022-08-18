@@ -399,7 +399,7 @@ require('packer').startup(function()
   }
   use {
     'lukas-reineke/lsp-format.nvim',
-    config = function() require('lsp-format').setup { exclude = { 'sumneko_lua' } } end,
+    config = function() require('lsp-format').setup { exclude = { 'sumneko_lua', 'beancount' } } end,
   }
   use { 'folke/lua-dev.nvim' }
   use {
@@ -642,6 +642,8 @@ require('packer').startup(function()
 
   -- Filetypes
   use { 'lepture/vim-jinja' }
+
+  use { 'nathangrigg/vim-beancount' }
 
   -- Integration with external tools
   use {
@@ -1066,6 +1068,30 @@ lsp.clangd.setup {
   capabilities = capabilities,
   root_dir = root_dir,
 }
+
+local bean_file = os.getenv 'BEAN_FILE'
+if bean_file then
+  lsp.beancount.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    root_dir = root_dir,
+    init_options = {
+      journal_file = bean_file,
+    },
+  }
+  local helpers = require 'null-ls.helpers'
+  local bean_format = {
+    name = 'bean-format',
+    filetypes = { 'beancount' },
+    method = null_ls.methods.FORMATTING,
+    generator = helpers.formatter_factory {
+      command = 'bean-format',
+      args = { '-w', '80' },
+      to_stdin = true,
+    },
+  }
+  null_ls.register { bean_format }
+end
 
 null_ls.setup {
   sources = {

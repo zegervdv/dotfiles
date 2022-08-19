@@ -859,7 +859,7 @@ local t = function(str) return vim.api.nvim_replace_termcodes(str, true, true, t
 local map = vim.keymap.set
 
 -- Set leader to space
-map({ 'n', 'v', 'i', 'x' }, '<space>', '<leader>', { remap = true })
+vim.g.mapleader = ' '
 
 -- Move while in insert mode
 map('i', '<C-f>', '<right>')

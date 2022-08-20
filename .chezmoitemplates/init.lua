@@ -310,7 +310,7 @@ require('packer').startup(function()
         sources = cmp.config.sources({
           { name = 'path' },
         }, {
-          { name = 'cmdline_history' },
+          { name = 'cmdline_history', keyword_length = 4 },
           { name = 'cmdline', keyword_length = 4 },
         }),
       })

@@ -555,7 +555,8 @@ require('packer').startup(function()
         hl = { fg = 'diag_warn' },
         on_click = {
           callback = function()
-            vim.diagnostic.setqflist { severity = { min = vim.diagnostic.severity.WARN } }
+            local diagnostics = vim.diagnostic.get(0, { severity = { min = vim.diagnostic.severity.WARN } })
+            vim.fn.setqflist(vim.diagnostic.toqflist(diagnostics))
             vim.cmd.copen { mods = { split = 'botright' } }
           end,
           name = 'heirline_diagnostics',

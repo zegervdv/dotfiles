@@ -7,7 +7,9 @@ export TERM=xterm-256color
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
-PROMPT=$'%F{cyan}%T%f %F{red}%m%f %F{blue}%~%b%f
+autoload -U colors && colors
+
+PROMPT=$'%F{#2f6f9f}%K{#f4faff}%T%f%k %F{red}%m%f %F{#7653c1}%K{#f3f2ff}%~%b%f%k
 %j ->\u00A0'
 
 

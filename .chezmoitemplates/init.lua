@@ -474,12 +474,12 @@ require('packer').startup(function()
 
   use {
     'rebelot/heirline.nvim',
-    after = 'onedark.nvim',
+    after = 'espresso-tutti-colori.nvim',
     config = function()
       local utils = require 'heirline.utils'
       local conditions = require 'heirline.conditions'
 
-      local colors = require('onedark.palette').dark
+      local colors = require('tutti-colori.colors').setup()
       colors.diag_warn = utils.get_highlight('DiagnosticSignWarn').fg
       colors.diag_error = utils.get_highlight('DiagnosticSignError').fg
 
@@ -597,6 +597,7 @@ require('packer').startup(function()
   -- Colorscheme
   use {
     'navarasu/onedark.nvim',
+    disable = true,
     config = function()
       require('onedark').setup {
         style = 'dark',
@@ -622,6 +623,13 @@ require('packer').startup(function()
       for name, opt in pairs(extras) do
         vim.api.nvim_set_hl(0, name, opt)
       end
+    end,
+  }
+  use {
+    'zegervdv/espresso-tutti-colori.nvim',
+    config = function()
+      require('tutti-colori').setup()
+      require('tutti-colori').load()
     end,
   }
 

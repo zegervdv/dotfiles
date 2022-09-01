@@ -572,7 +572,7 @@ require('packer').startup(function()
         rbound,
       }
       local statusline = {
-        init = utils.pick_child_on_condition,
+        fallthrough = false,
         hl = { bg = 'bg' },
         statusline_inactive,
         statusline_default,
@@ -650,8 +650,6 @@ require('packer').startup(function()
   }
 
   -- Filetypes
-  use { 'lepture/vim-jinja' }
-
   use { 'nathangrigg/vim-beancount' }
 
   -- Integration with external tools

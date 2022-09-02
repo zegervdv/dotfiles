@@ -770,12 +770,19 @@ opt.conceallevel = 0 -- Disable conceal
 
 opt.pastetoggle = '<F2>' -- Enable paste mode
 
+local optdir = function(path)
+  local Path = require 'plenary.path'
+  local full_path = Path:new(vim.fn.stdpath 'cache' .. '/' .. path)
+  if not full_path:exists() then full_path:mkdir { parents = true } end
+  return full_path .. '//'
+end
+
 opt.undofile = true -- Persistently remember undos
 opt.undolevels = 1000
-opt.undodir = home .. '/.config/nvim/tmp/undo//'
+opt.undodir = optdir 'undo'
 opt.swapfile = false -- Disable swap files
 opt.backup = true -- Keep backups
-opt.backupdir = home .. '/.config/nvim/tmp/backup//'
+opt.backupdir = optdir 'backup'
 
 -- Files to ignore from completion
 opt.wildignore:append {

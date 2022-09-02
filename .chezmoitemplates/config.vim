@@ -4,25 +4,6 @@ let s:darwin = has('mac')
 let s:windows = has('win32')
 
 
-" General Settings and options
-
-if !s:windows
-  if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
-  endif
-  if !isdirectory(expand(&directory))
-    call mkdir(expand(&directory), "p")
-  endif
-end
-
-if v:version >= 703
-  if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
-  endif
-endif
-
-"
-
 " Mappings
 
 

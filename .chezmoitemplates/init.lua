@@ -18,6 +18,15 @@ end
 -- Packer configuration is compiled and only needs to be loaded on changes
 vim.cmd.packadd 'packer.nvim'
 
+local local_plugin = function(name)
+  local path = home .. '/Projects/' .. name
+  if vim.fn.isdirectory(path) > 0 then
+    return path
+  else
+    return 'zegervdv/' .. name
+  end
+end
+
 require('packer').startup(function()
   use { 'wbthomason/packer.nvim', opt = true }
 
@@ -626,7 +635,7 @@ require('packer').startup(function()
     end,
   }
   use {
-    'zegervdv/espresso-tutti-colori.nvim',
+    local_plugin 'espresso-tutti-colori.nvim',
     config = function()
       require('tutti-colori').setup()
       require('tutti-colori').load()

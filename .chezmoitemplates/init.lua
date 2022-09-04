@@ -1061,6 +1061,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local root_dir = require('lspconfig.util').root_pattern('.git', '.hg')
 
 lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities, root_dir = root_dir }
+lsp.bashls.setup { on_attach = on_attach, capabilities = capabilities }
 
 lsp.esbonio.setup {
   on_attach = on_attach,

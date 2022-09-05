@@ -13,7 +13,6 @@ autoload -U colors && colors
 PROMPT=$'%F{#2f6f9f}%K{#f4faff}%T%f%k %F{red}%m%f %F{#7653c1}%K{#f3f2ff}%~%b%f%k
 %j ->\u00A0'
 
-
 vim_ins_mode="%F{black}%K{yellow} INS %k%f"
 vim_cmd_mode="%F{white}%K{red} NRM %k%f"
 vim_vis_mode="%F{black}%K{blue} VIS %k%f"
@@ -233,7 +232,7 @@ export SUDO_EDITOR=$(which nvim)
 eval "$(direnv hook zsh)"
 
 source ~/.zsh/zsh-history-substring-search.zsh
-export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=black'
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=cyan,fg=white'
 
 source ~/.zsh/zsh-autosuggestions.zsh
 

@@ -182,6 +182,10 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle ':completion:*:*:nvim:*' ignored-patterns '*.(o|hex|elf|pyc|pdf|dup)'
 zstyle ':completion:*:*:nvim:*' file-sort modification
 
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  eval "$(ssh-agent)"
+fi
+
 # fg when pressing Ctrl+Z
 function fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then

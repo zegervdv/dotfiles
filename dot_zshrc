@@ -207,6 +207,7 @@ alias l="ls -haltr"
 alias ll="ls -haltr"
 alias xclip='xclip -selection clipboard'
 alias view='nvim -R'
+alias j='jobs'
 
 # Suffix aliases
 alias -s py=nvim

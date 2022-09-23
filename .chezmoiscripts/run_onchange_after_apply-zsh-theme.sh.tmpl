@@ -1,0 +1,7 @@
+{{ if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) -}}
+#!/usr/bin/env zsh
+
+# overlay hash: {{ include "dot_config/fsh/overlay.ini" | sha256sum }}
+
+fast-theme XDG:overlay
+{{ end -}}

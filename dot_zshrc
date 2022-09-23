@@ -10,7 +10,7 @@ export LC_CTYPE=en_US.UTF-8
 
 autoload -U colors && colors
 
-PROMPT=$'%F{#2f6f9f}%K{#f4faff}%T%f%k %F{red}%m%f %F{#7653c1}%K{#f3f2ff}%~%b%f%k
+PROMPT=$'%F{#2f6f9f}%K{#f4faff}%T%f%k %F{#d71707}%m%f %F{#0b51a6}%~%b%f%k
 %j ->\u00A0'
 
 vim_ins_mode="%F{black}%K{yellow} INS %k%f"

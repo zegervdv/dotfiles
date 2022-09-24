@@ -1,0 +1,7 @@
+{{ if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) -}}
+#!/usr/bin/env zsh
+
+# .lscolors hash: {{ include "dot_lscolors" | sha256sum }}
+
+dircolors --sh ~/.lscolors >> ~/.dircolors.zsh
+{{ end -}}

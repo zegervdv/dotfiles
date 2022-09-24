@@ -45,12 +45,6 @@
   type = "file"
   url = "https://github.com/jeffreytse/zsh-vi-mode/raw/9e909d0bdd0aff36ca60ea213ec92f46a554b288/zsh-vi-mode.zsh"
 
-[".zsh/jq-zsh-plugin"]
-  type = "archive"
-  url = "https://github.com/reegnz/jq-zsh-plugin/archive/v0.2.1.tar.gz"
-  exact = true
-  stripComponents = 1
-
 [".zsh/zsh-histdb-skim/zsh-histdb-skim.zsh"]
   type = "file"
   url = "https://github.com/m42e/zsh-histdb-skim/raw/v0.7.6/zsh-histdb-skim.zsh"

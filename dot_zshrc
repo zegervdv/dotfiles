@@ -106,6 +106,8 @@ setopt nobeep
 setopt notify
 REPORTTIME=5
 
+zle_highlight=('paste:none')
+
 HISTSIZE=3000
 SAVEHIST=3000
 HISTFILE=~/.zsh_history

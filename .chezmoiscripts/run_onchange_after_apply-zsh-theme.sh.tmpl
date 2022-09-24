@@ -3,5 +3,7 @@
 
 # overlay hash: {{ include "dot_config/fsh/overlay.ini" | sha256sum }}
 
+source ~/.zshrc
+
 fast-theme XDG:overlay
 {{ end -}}

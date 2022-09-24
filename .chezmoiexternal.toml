@@ -49,6 +49,10 @@
   type = "file"
   url = "https://github.com/m42e/zsh-histdb-skim/raw/v0.7.6/zsh-histdb-skim.zsh"
 
+[".zsh/zsh-defer.zsh"]
+  type = "file"
+  url = "https://github.com/romkatv/zsh-defer/raw/3770c54fb4b25a1256dfaabbde37c4399c1f9298/zsh-defer.plugin.zsh"
+
 [".zsh/completions/_fd"]
   type = "file"
   url = "https://github.com/sharkdp/fd/raw/v8.3.2/contrib/completion/_fd"

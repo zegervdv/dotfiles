@@ -1,0 +1,135 @@
+colors:
+
+  # Based on Espresso Tutti Colori theme
+  background_color: "fbfafc"
+  black: "000"
+
+  blue: "2f6f9f"
+  blue_bg: "f4faff"
+  bold_blue: "0b51a6"
+  light_blue: "4f9eeb"
+
+  purple: "4e279a"
+  light_purple: "7653ca"
+  purple_bg: "f3f2ff"
+
+  green: "73b00a"
+  light_green: "e8ffd5"
+
+  red: "d44950"
+  dark_red: d71707
+
+  error_fg: f93232
+  error_bg: facbcb
+
+  yellow: "fbe9ad"
+
+  gray: "a1a1a1"
+  darkgray: "888888"
+
+core:
+  normal_text:
+    foreground: darkgray
+
+  regular_file: {}
+  reset_to_normal: {}
+
+  directory:
+    foreground: light_blue
+
+  symlink:
+    foreground: purple
+
+  multi_hard_link: {}
+
+  fifo:
+    foreground: black
+    background: blue
+
+  socket:
+    foreground: black
+    background: purple
+
+  door:
+    foreground: black
+    background: purple
+
+  block_device:
+    foreground: black
+    background: light_blue
+
+  character_device:
+    foreground: black
+    background: green
+
+  broken_symlink:
+    foreground: purple
+
+  missing_symlink_target:
+    foreground: error_fg
+    background: error_bg
+
+  setuid: {}
+
+  setgid: {}
+
+  file_with_capability: {}
+
+  sticky_other_writable: {}
+
+  other_writable: {}
+
+  sticky: {}
+
+  executable_file:
+    foreground: light_purple
+    background: purple_bg
+
+text:
+  special:
+    foreground: black
+    background: light_green
+
+  todo:
+    font-style: bold
+
+  licenses:
+    foreground: gray
+
+  configuration:
+    foreground: blue
+    background: blue_bg
+
+  other:
+    foreground: bold_blue
+
+markup:
+  foreground: black
+  background: light_green
+
+programming:
+  source:
+    foreground: dark_red
+
+  tooling:
+    foreground: green
+
+    continuous-integration:
+      foreground: green
+
+media:
+  foreground: purple
+
+office:
+  foreground: light_blue
+
+archives:
+  foreground: green
+  font-style: underline
+
+executable:
+  foreground: light_blue
+  font-style: bold
+
+unimportant:
+  foreground: gray

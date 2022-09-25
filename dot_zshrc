@@ -78,7 +78,8 @@ export LESS_TERMCAP_ue=$(printf "\e[0m")
 export LESS_TERMCAP_us=$(printf "\e[1;32m")
 
 export CLICOLOR=1
-source ~/.dircolors.zsh
+export LS_COLORS=$(cat ~/.lscolors)
+export LSCOLORS=$LS_COLORS
 
 # Options
 setopt monitor

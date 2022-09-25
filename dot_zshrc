@@ -69,17 +69,18 @@ bindkey -M menuselect 'l' vi-forward-char
 # Enter interactive search
 bindkey -M menuselect '^xi' vi-insert
 
-export LESS_TERMCAP_mb=$(printf "\e[1;31m")
-export LESS_TERMCAP_md=$(printf "\e[1;31m")
-export LESS_TERMCAP_me=$(printf "\e[0m")
-export LESS_TERMCAP_se=$(printf "\e[0m")
-export LESS_TERMCAP_so=$(printf "\e[1;30;43m")
-export LESS_TERMCAP_ue=$(printf "\e[0m")
-export LESS_TERMCAP_us=$(printf "\e[1;32m")
-
 export CLICOLOR=1
 export LS_COLORS=$(cat ~/.lscolors)
 export LSCOLORS=$LS_COLORS
+
+export LESS_TERMCAP_mb=$'\e[1;31m'
+export LESS_TERMCAP_md=$'\e[38;2;47;111;159;48;2;244;250;255m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[38;2;215;23;7m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;32m'
+export GROFF_NO_SGR=1
 
 # Options
 setopt monitor

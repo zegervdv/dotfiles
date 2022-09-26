@@ -3,5 +3,7 @@
 
 # colors hash: {{ include "dot_config/vivid/themes/espresso.yml" | sha256sum }}
 
-vivid generate espresso > {{ joinPath .chezmoi.sourceDir "dot_lscolors" }}
+if [ -x "$(command -v vivid)" ]; then
+  vivid generate espresso > {{ joinPath .chezmoi.sourceDir "dot_lscolors" }}
+fi
 {{ end -}}

@@ -71,7 +71,6 @@ bindkey -M menuselect '^xi' vi-insert
 
 export CLICOLOR=1
 export LS_COLORS=$(cat ~/.lscolors)
-export LSCOLORS=$LS_COLORS
 
 export LESS_TERMCAP_mb=$'\e[1;31m'
 export LESS_TERMCAP_md=$'\e[38;2;47;111;159;48;2;244;250;255m'

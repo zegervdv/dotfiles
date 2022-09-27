@@ -345,6 +345,7 @@ require('packer').startup(function()
             'regex',
             'markdown',
             'rst',
+            'beancount',
           },
           indent = {
             enable = false,
@@ -655,9 +656,6 @@ require('packer').startup(function()
     end,
     keys = { [[<F12>]] },
   }
-
-  -- Filetypes
-  use { 'nathangrigg/vim-beancount' }
 
   -- Integration with external tools
   use {

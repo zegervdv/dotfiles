@@ -234,6 +234,9 @@ export BAT_CONFIG_PATH=$HOME/.config/bat/config
 
 export PS_FORMAT='pid,pgid,state,start_time,%cpu,command'
 
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# Must run after brew is loaded
 if command -v brew &> /dev/null
 then
   source $(brew --prefix asdf)/libexec/asdf.sh
@@ -244,9 +247,6 @@ then
   source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 fi
 
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
-
-# Must run after brew is loaded
 export SUDO_EDITOR=$(which nvim)
 eval "$(direnv hook zsh)"
 

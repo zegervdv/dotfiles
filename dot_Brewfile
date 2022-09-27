@@ -9,12 +9,10 @@ brew "fd"
 brew "chezmoi"
 brew "mercurial"
 brew "mosh", args: ["HEAD"]
-brew "neovim", args: ["HEAD"]
 brew "ripgrep"
 brew "scc"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 brew "fzf"
-brew "direnv"
 brew "stylua"
 brew "shellcheck"
 brew "jq"
@@ -26,3 +24,4 @@ brew "pyright"
 brew "git"
 brew "zegervdv/tools/cbfmt"
 brew "pass"
+brew "asdf"

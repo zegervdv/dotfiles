@@ -1,0 +1,21 @@
+{{ if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) -}}
+#!/usr/bin/env bash
+
+# asdf globals tools hash: {{ include "dot_tool-versions" | sha256sum }}
+
+asdf_plugin_add() {
+  if ! asdf plugin-list | grep -Fq "$1"
+  then
+    asdf plugin-add "$1"
+  else
+    echo "asdf plugin $1 already installed"
+  fi
+}
+
+asdf_plugin_add python
+asdf_plugin_add neovim
+asdf_plugin_add direnv
+
+asdf install
+
+{{ end -}}

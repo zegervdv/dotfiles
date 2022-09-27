@@ -1,0 +1,8 @@
+{{ if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) -}}
+#!/usr/bin/env bash
+
+# Brewfile hash: {{ include "dot_Brewfile" | sha256sum }}
+
+brew bundle --global
+
+{{ end -}}

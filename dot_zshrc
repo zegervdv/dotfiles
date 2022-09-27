@@ -234,6 +234,16 @@ export BAT_CONFIG_PATH=$HOME/.config/bat/config
 
 export PS_FORMAT='pid,pgid,state,start_time,%cpu,command'
 
+if command -v brew &> /dev/null
+then
+  source $(brew --prefix asdf)/libexec/asdf.sh
+fi
+
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]
+then
+  source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+fi
+
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # Must run after brew is loaded

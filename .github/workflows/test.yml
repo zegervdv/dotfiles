@@ -15,6 +15,7 @@ jobs:
 
       - name: Fill template data
         run: |
+          mkdir -p $HOME/.config/chezmoi/
           touch $HOME/.config/chezmoi/chezmoi.toml
           echo '  [data]' >> $HOME/.config/chezmoi/chezmoi.toml
           echo '    email = "john.doe@example.com"' >> $HOME/.config/chezmoi/chezmoi.toml

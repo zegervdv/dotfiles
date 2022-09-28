@@ -16,7 +16,7 @@ jobs:
       - name: Fill template data
         uses: DamianReeves/write-file-action@master
         with:
-          path: ~/.config/chezmoi/chezmoi.toml
+          path: $HOME/.config/chezmoi/chezmoi.toml
           contents: |
             [data]
               email = "john.doe@example.com"

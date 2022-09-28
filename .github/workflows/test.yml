@@ -7,14 +7,11 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-      - name: Clone repo
-        uses: actions/checkout@v3
-
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
       - name: Install chezmoi
         run: brew install chezmoi
 
-      - name: Apply config
-        run: chezmoi apply -v
+      - name: Get repo
+        run: chezmoi init zegervdv

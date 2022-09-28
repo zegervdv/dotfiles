@@ -204,13 +204,27 @@ function fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
+# Show backgrounded jobs in fzf
+j() {
+    jobids=$(jobs)
+
+    if [ -z "$jobids" ]
+    then
+      echo "No background jobs!"
+      return
+    fi
+
+    id=$(echo $jobids | fzf |  sed -nr 's/^\[([0-9]+)\].*/\1/p')
+
+    fg %${id}
+}
+
 # Aliases
 alias ls='ls --color=auto'
 alias l="ls -haltr"
 alias ll="ls -haltr"
 alias xclip='xclip -selection clipboard'
 alias view='nvim -R'
-alias j='jobs'
 
 # Suffix aliases
 alias -s py=nvim

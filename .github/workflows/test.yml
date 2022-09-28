@@ -1,0 +1,13 @@
+name: Environment build test
+
+on:
+  push:
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      - run: brew install chezmoi
+      - run: chezmoi apply -v

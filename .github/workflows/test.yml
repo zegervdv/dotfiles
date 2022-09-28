@@ -13,5 +13,8 @@ jobs:
       - name: Install chezmoi
         run: brew install chezmoi
 
+      - name: Fill template data
+        run: mkdir -p ~/.config/chezmoi/ && echo '[data]\nemail = "john.doe@example.com"\nname="jdoe"\nsigningkey=\nfont_size="10"' > ~/.config/chezmoi/chezmoi.toml
+
       - name: Get repo
         run: chezmoi init zegervdv

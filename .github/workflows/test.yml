@@ -25,6 +25,9 @@ jobs:
           
       - name: Get repo
         run: chezmoi init -v zegervdv
+
+      - name: add tap manually
+        run: brew tap zegervdv/tools
         
       - name: Apply dotfiles
         run: chezmoi apply -v

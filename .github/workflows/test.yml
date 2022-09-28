@@ -14,7 +14,15 @@ jobs:
         run: brew install chezmoi
 
       - name: Fill template data
-        run: mkdir -p ~/.config/chezmoi/ && echo '[data]\nemail = "john.doe@example.com"\nname="jdoe"\nsigningkey=\nfont_size="10"' > ~/.config/chezmoi/chezmoi.toml
+        uses: DamianReeves/write-file-action@master
+        with:
+          path: ~/.config/chezmoi/chezmoi.toml
+          contents: |
+            [data]
+              email = "john.doe@example.com"
+              name = "jdoe"
+              signingkey = ""
+              font_size = "10"
 
       - name: Get repo
         run: chezmoi init zegervdv

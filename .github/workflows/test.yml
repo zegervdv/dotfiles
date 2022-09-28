@@ -14,15 +14,13 @@ jobs:
         run: brew install chezmoi
 
       - name: Fill template data
-        uses: DamianReeves/write-file-action@master
-        with:
-          path: $HOME/.config/chezmoi/chezmoi.toml
-          contents: |
-            [data]
-              email = "john.doe@example.com"
-              name = "jdoe"
-              signingkey = ""
-              font_size = "10"
+        run: |
+          touch $HOME/.config/chezmoi/chezmoi.toml
+          echo '  [data]' >> $HOME/.config/chezmoi/chezmoi.toml
+          echo '    email = "john.doe@example.com"' >> $HOME/.config/chezmoi/chezmoi.toml
+          echo '    name = "jdoe"' >> $HOME/.config/chezmoi/chezmoi.toml
+          echo '    signingkey = "" ' >> $HOME/.config/chezmoi/chezmoi.toml
+          echo '    font_size = "10"' >> $HOME/.config/chezmoi/chezmoi.toml
       - name: check
         run: cat $HOME/.config/chezmoi/chezmoi.toml
       - name: Get repo

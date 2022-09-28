@@ -22,7 +22,9 @@ jobs:
           echo '    name = "jdoe"' >> $HOME/.config/chezmoi/chezmoi.toml
           echo '    signingkey = "" ' >> $HOME/.config/chezmoi/chezmoi.toml
           echo '    font_size = "10"' >> $HOME/.config/chezmoi/chezmoi.toml
-      - name: check
-        run: cat $HOME/.config/chezmoi/chezmoi.toml
+          
       - name: Get repo
         run: chezmoi init -v zegervdv
+        
+      - name: Apply dotfiles
+        run: chezmoi apply -v

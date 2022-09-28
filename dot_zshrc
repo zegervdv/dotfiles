@@ -326,3 +326,6 @@ compinit -C
 if [ ${TMUX} ]; then
  unset zle_bracketed_paste
 fi
+
+# Deduplicate PATH
+typeset -U path

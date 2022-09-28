@@ -23,6 +23,7 @@ jobs:
               name = "jdoe"
               signingkey = ""
               font_size = "10"
-
+      - name: check
+        run: cat $HOME/.config/chezmoi/chezmoi.toml
       - name: Get repo
-        run: chezmoi init zegervdv
+        run: chezmoi init -v zegervdv

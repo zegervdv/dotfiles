@@ -27,7 +27,7 @@ jobs:
       - name: Get repo
         uses: actions/checkout@v2
         with:
-          path: {{ env.HOME }}/.local/share/chezmoi
+          path: ${{ env.HOME }}/.local/share/chezmoi
 
       - name: Initialize chezmoi
         run: chezmoi init -v

@@ -1,0 +1,37 @@
+name: Environment build test
+
+on:
+  push:
+
+jobs:
+  install:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Install chezmoi
+        run: brew install chezmoi
+
+      - name: Bootstrap environment
+        run: |
+          mkdir -p $HOME/.config/chezmoi/
+          mkdir -p $HOME/.local/share
+          touch $HOME/.config/chezmoi/chezmoi.toml
+          echo '  [data]' >> $HOME/.config/chezmoi/chezmoi.toml
+          echo '    email = "john.doe@example.com"' >> $HOME/.config/chezmoi/chezmoi.toml
+          echo '    name = "jdoe"' >> $HOME/.config/chezmoi/chezmoi.toml
+          echo '    signingkey = "" ' >> $HOME/.config/chezmoi/chezmoi.toml
+          echo '    font_size = "10"' >> $HOME/.config/chezmoi/chezmoi.toml
+
+      - name: Initialize chezmoi
+        run: chezmoi init -v zegervdv --branch ${GITHUB_REF##*/}
+
+      - name: add tap manually
+        run: brew tap zegervdv/tools
+        
+      - name: Apply dotfiles
+        run: chezmoi apply -v

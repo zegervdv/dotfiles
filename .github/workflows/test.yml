@@ -23,14 +23,9 @@ jobs:
           echo '    name = "jdoe"' >> $HOME/.config/chezmoi/chezmoi.toml
           echo '    signingkey = "" ' >> $HOME/.config/chezmoi/chezmoi.toml
           echo '    font_size = "10"' >> $HOME/.config/chezmoi/chezmoi.toml
-          
-      - name: Get repo
-        uses: actions/checkout@v2
-        with:
-          path: ${{ env.HOME }}/.local/share/chezmoi
 
       - name: Initialize chezmoi
-        run: chezmoi init -v
+        run: chezmoi init -v zegervdv --branch ${GITHUB_REF##*/}
 
       - name: add tap manually
         run: brew tap zegervdv/tools

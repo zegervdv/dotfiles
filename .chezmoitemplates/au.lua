@@ -27,9 +27,7 @@ local X = setmetatable({}, {
   __call = autocmd,
 })
 
-function S.exec(id)
-  S.__au[id]()
-end
+function S.exec(id) S.__au[id]() end
 
 function S.set(fn)
   local id = string.format('%p', fn)

@@ -13,9 +13,10 @@ jobs:
       - name: Install chezmoi
         run: brew install chezmoi
 
-      - name: Fill template data
+      - name: Bootstrap environment
         run: |
           mkdir -p $HOME/.config/chezmoi/
+          mkdir -p $HOME/.local/share
           touch $HOME/.config/chezmoi/chezmoi.toml
           echo '  [data]' >> $HOME/.config/chezmoi/chezmoi.toml
           echo '    email = "john.doe@example.com"' >> $HOME/.config/chezmoi/chezmoi.toml
@@ -24,7 +25,12 @@ jobs:
           echo '    font_size = "10"' >> $HOME/.config/chezmoi/chezmoi.toml
           
       - name: Get repo
-        run: chezmoi init -v zegervdv
+        uses: actions/checkout@v2
+        with:
+          path: $HOME/.local/share/chezmoi
+
+      - name: Initialize chezmoi
+        run: chezmoi init -v
 
       - name: add tap manually
         run: brew tap zegervdv/tools

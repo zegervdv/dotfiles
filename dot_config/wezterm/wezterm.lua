@@ -7,57 +7,57 @@ local config = {
 
   -- Color scheme
   colors = {
-    foreground = "#abb2bf",
-    background = "#282c34",
-    cursor_bg = "#eeeeee",
-    cursor_border = "#eeeeee",
+    foreground = '#abb2bf',
+    background = '#282c34',
+    cursor_bg = '#eeeeee',
+    cursor_border = '#eeeeee',
 
-    selection_bg = "#ffc24b",
+    selection_bg = '#ffc24b',
 
     ansi = {
-      "#393e48",
-      "#f43753",
-      "#c9d05c",
-      "#ffc24b",
-      "#b3deef",
-      "#c678dd",
-      "#73cef4",
-      "#eeeeee",
+      '#393e48',
+      '#f43753',
+      '#c9d05c',
+      '#ffc24b',
+      '#b3deef',
+      '#c678dd',
+      '#73cef4',
+      '#eeeeee',
     },
     brights = {
-      "#393e48",
-      "#f43753",
-      "#c9d05c",
-      "#ffc24b",
-      "#b3deef",
-      "#c678dd",
-      "#73cef4",
-      "#ffffff",
+      '#393e48',
+      '#f43753',
+      '#c9d05c',
+      '#ffc24b',
+      '#b3deef',
+      '#c678dd',
+      '#73cef4',
+      '#ffffff',
     },
 
     tab_bar = {
-      background = "#3a3f4b",
+      background = '#3a3f4b',
       active_tab = {
-        bg_color = "#61afef",
-        fg_color = "#282c34",
+        bg_color = '#61afef',
+        fg_color = '#282c34',
       },
       inactive_tab = {
-        bg_color = "#3a3f4b",
-        fg_color = "#abb2bf",
+        bg_color = '#3a3f4b',
+        fg_color = '#abb2bf',
       },
       inactive_tab_hover = {
-        bg_color = "#3a3f4b",
-        fg_color = "#abb2bf",
+        bg_color = '#3a3f4b',
+        fg_color = '#abb2bf',
         italic = false,
       },
       new_tab = {
-        bg_color = "#3a3f4b",
-        fg_color = "#abb2bf",
+        bg_color = '#3a3f4b',
+        fg_color = '#abb2bf',
         italic = false,
       },
       new_tab_hover = {
-        bg_color = "#3a3f4b",
-        fg_color = "#abb2bf",
+        bg_color = '#3a3f4b',
+        fg_color = '#abb2bf',
         italic = false,
       },
     },
@@ -70,14 +70,12 @@ local config = {
   },
   -- Font settings
   font = wezterm.font_with_fallback {
-    {family="Fira Code Retina", weight = "Medium", italic=false},
-    {family="Iosevka Term Italic"},
+    { family = 'Fira Code Retina', weight = 'Medium', italic = false },
+    { family = 'Iosevka Term Italic' },
   },
   font_size = 9.0,
 }
 
-if localcfg_ok then
-   config.ssh_domains = localcfg.ssh_domains
-end
+if localcfg_ok then config.ssh_domains = localcfg.ssh_domains end
 
 return config

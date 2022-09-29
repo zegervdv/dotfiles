@@ -4,7 +4,7 @@ use_tab: false
 chop_down_parameter: true
 break_before_functionref_rp: true
 chop_down_table: true
-table_sep: ','
+table_sep: ","
 extra_sep_at_table_end: true
 double_quote_to_single_quote: true
 spaces_before_call: 1

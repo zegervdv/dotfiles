@@ -2,7 +2,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "universal-ctags/universal-ctags"
-tap "zegervdv/tools", "git@github.com:zegervdv/homebrew-tools.git"
+tap "zegervdv/tools"
 
 brew "bat"
 brew "fd"

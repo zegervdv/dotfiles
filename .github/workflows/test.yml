@@ -32,6 +32,6 @@ jobs:
 
       - name: add tap manually
         run: brew tap zegervdv/tools
-        
+
       - name: Apply dotfiles
         run: chezmoi apply -v

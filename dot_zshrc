@@ -281,6 +281,11 @@ export FZF_DEFAULT_OPTS="--color=fg:#000000,bg:#fbfafc,hl:#0b51a6 \
                          --color=info:#4f9fcf,prompt:#d44950,pointer:#d71707 \
                          --color=marker:#d71707,spinner:#4f9fcf,header:#7653c1"
 
+unix-word-rubout() {
+  local WORDCHARS=$'!"#$%&\'()*+,-.:;<=>?@[\\]^_`{|}~'
+  zle backward-kill-word
+}
+
 # The plugin will auto execute this zvm_after_init function
 function zvm_after_init() {
   [ -f ~/.fzf.zsh  ] && source ~/.fzf.zsh
@@ -300,6 +305,9 @@ function zvm_after_init() {
   bindkey '^n' history-substring-search-down
 
   bindkey '^f' autosuggest-accept
+
+  zle -N unix-word-rubout
+  bindkey '^w' unix-word-rubout
 }
 
 zsh-defer source ~/.zsh/zsh-vi-mode.zsh

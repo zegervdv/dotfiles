@@ -30,8 +30,5 @@ jobs:
       - name: Initialize chezmoi
         run: chezmoi init -v zegervdv --branch ${GITHUB_REF##*/}
 
-      - name: add tap manually
-        run: brew tap zegervdv/tools
-
       - name: Apply dotfiles
         run: chezmoi apply -v

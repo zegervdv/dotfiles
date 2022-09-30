@@ -3,8 +3,10 @@ repos:
     rev: v4.0.1
     hooks:
       - id: check-yaml
+      - id: check-toml
       - id: end-of-file-fixer
       - id: trailing-whitespace
+      - id: check-merge-conflict
 
   - repo: https://github.com/JohnnyMorganz/StyLua
     rev: v0.15.0
@@ -15,3 +17,4 @@ repos:
     rev: v2.7.1
     hooks:
       - id: prettier
+     

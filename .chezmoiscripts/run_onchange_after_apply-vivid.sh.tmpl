@@ -1,9 +1,0 @@
-{{ if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) -}}
-#!/usr/bin/env zsh
-
-# colors hash: {{ include "dot_config/vivid/themes/espresso.yml" | sha256sum }}
-
-if [ -x "$(command -v vivid)" ]; then
-  vivid generate espresso > {{ joinPath .chezmoi.sourceDir "dot_lscolors" }}
-fi
-{{ end -}}

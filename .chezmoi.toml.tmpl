@@ -31,3 +31,7 @@
    name = {{ $name | quote }}
    signingkey = {{ $signingkey | quote }}
    font_size = {{ $font_size | quote }}
+
+[merge]
+  command = "nvim"
+  args = ["-d", {{ "{{ .Destination }}" | quote }}, {{ "{{ .Source }}" | quote }}, {{ "{{ .Target }}" | quote }}]

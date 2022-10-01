@@ -17,3 +17,5 @@ repos:
     rev: v2.7.1
     hooks:
       - id: prettier
+      
+exclude: '^(.chezmoiexternal.toml)$'

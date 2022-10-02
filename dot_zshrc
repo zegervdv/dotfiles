@@ -249,11 +249,8 @@ export PS_FORMAT='pid,pgid,state,start_time,%cpu,command'
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-# Must run after brew is loaded
-if command -v brew &> /dev/null
-then
-  source $(brew --prefix asdf)/libexec/asdf.sh
-fi
+source $HOME/.asdf/asdf.sh
+fpath=(${ASDF_DIR}/completions $fpath)
 
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]
 then

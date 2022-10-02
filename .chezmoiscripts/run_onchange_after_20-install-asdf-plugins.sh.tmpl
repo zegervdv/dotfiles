@@ -3,6 +3,20 @@
 
 # asdf globals tools hash: {{ include "dot_tool-versions" | sha256sum }}
 
+ASDF_INSTALL="$HOME/.asdf"
+ASDF_VERSION="v0.10.2"
+
+if [[ -d "$ASDF_INSTALL" ]]
+then
+  cd "$ASDF_INSTALL"
+  git pull
+  git checkout "$ASDF_VERSION"
+else
+  git clone https://github.com/asdf-vm/asdf.git "$ASDF_INSTALL" --branch="$ASDF_VERSION"
+fi
+
+source ${ASDF_INSTALL}/asdf.sh
+
 asdf_plugin_add() {
   if ! asdf plugin-list | grep -Fq "$1"
   then
@@ -15,6 +29,7 @@ asdf_plugin_add() {
 asdf_plugin_add python
 asdf_plugin_add neovim
 asdf_plugin_add direnv
+asdf_plugin_add rust
 asdf_plugin_add sqlite
 
 asdf install

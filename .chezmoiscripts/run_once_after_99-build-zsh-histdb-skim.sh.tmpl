@@ -1,11 +1,20 @@
 {{ if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) -}}
 #!/usr/bin/env zsh
 
+source $(brew --prefix asdf)/libexec/asdf.sh
 asdf shell rust 1.64.0
 brew unlink sqlite
 
-git clone https://github.com/zegervdv/zsh-histdb-skim $HOME/.local/share/zsh-histdb-skim
-cd $HOME/.local/share/zsh-histdb-skim
+HISTDB_SKIM_DIR="$HOME/.local/share/zsh-histdb-skim"
+if [[ -d "$HISTDB_SKIM_DIR" ]]
+then
+  cd "$HISTDB_SKIM_DIR"
+  git pull
+else
+  git clone https://github.com/zegervdv/zsh-histdb-skim "$HISTDB_SKIM_DIR"
+fi
+cd "$HISTDB_SKIM_DIR"
+
 cargo build --release
 cp target/release/zsh-histdb-skim zsh-histdb-skim
 

@@ -1,0 +1,12 @@
+{{ if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) -}}
+#!/usr/bin/env zsh
+
+asdf shell rust 1.64.0
+brew unlink sqlite
+
+git clone https://github.com/zegervdv/zsh-histdb-skim $HOME/.local/share/zsh-histdb-skim
+cd $HOME/.local/share/zsh-histdb-skim
+cargo build --release
+cp target/release/zsh-histdb-skim zsh-histdb-skim
+
+{{ end -}}

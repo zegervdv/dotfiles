@@ -35,3 +35,6 @@
 [merge]
   command = "nvim"
   args = ["-d", {{ "{{ .Destination }}" | quote }}, {{ "{{ .Source }}" | quote }}, {{ "{{ .Target }}" | quote }}]
+
+[diff]
+  exclude = ["scripts"]

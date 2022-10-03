@@ -113,9 +113,10 @@ augroup END
 function! ColorRpt()
   " Color numbers based on length
   syn match String "\v<\d{1,3}>"
-  syn match Number "\v<\d{4,6}>"
-  syn match Statement "\v<\d{7,9}>"
+  syn match Statement "\v<\d{4,6}>"
+  syn match Function "\v<\d{7,9}>"
 
+  syn match Number "\v0+"
   " Color errors
   syn match Error "\v^ERROR:.*$"
 endfunction

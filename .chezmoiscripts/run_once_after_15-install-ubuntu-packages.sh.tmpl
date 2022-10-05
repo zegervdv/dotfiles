@@ -1,5 +1,7 @@
+{{ if eq .chezmoi.os "linux" -}}
 {{ if eq .chezmoi.osRelease.name "Ubuntu" -}}
 #!/usr/bin/env bash
 
 sudo apt install -y libsqlite3-dev libreadline-dev libbz2-dev libncurses-dev
+{{- end }}
 {{- end }}

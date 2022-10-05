@@ -405,10 +405,6 @@ require('packer').startup(function()
     'jose-elias-alvarez/null-ls.nvim',
     requires = 'nvim-lua/plenary.nvim',
   }
-  use {
-    'lukas-reineke/lsp-format.nvim',
-    config = function() require('lsp-format').setup { exclude = { 'sumneko_lua', 'beancount' } } end,
-  }
   use { 'folke/lua-dev.nvim' }
   use {
     'smjonas/inc-rename.nvim',
@@ -1042,11 +1038,20 @@ end)
 local lsp = require 'lspconfig'
 local null_ls = require 'null-ls'
 
+local lsp_formatting = function(bufnr)
+  vim.lsp.buf.format {
+    filter = function(client)
+      local force_null_ls = { 'lua', 'beancount' }
+      if vim.tbl_contains(force_null_ls, vim.bo.filetype) then return client.name == 'null-ls' end
+      return true
+    end,
+    bufnr = bufnr,
+  }
+end
+
 local on_attach = function(client)
-  require('lsp-format').on_attach(client)
   local nmap = function(lhs, rhs, opts) return vim.keymap.set('n', lhs, rhs, opts) end
 
-  vim.bo.tagfunc = 'v:lua.vim.lsp.tagfunc'
   nmap('gp', require('goto-preview').goto_preview_definition, { silent = true, buffer = 0 })
   nmap('gP', require('goto-preview').close_all_win, { silent = true, buffer = 0 })
 
@@ -1058,12 +1063,7 @@ local on_attach = function(client)
   nmap('g0', vim.lsp.buf.document_symbol, { silent = true, buffer = 0 })
   nmap('ga', vim.lsp.buf.code_action, { silent = true, buffer = 0 })
 
-  nmap('<c-p>', function() require('lsp-format').format() end, {
-    silent = true,
-    buffer = 0,
-  })
-
-  vim.bo.formatexpr = 'v:lua.vim.lsp.formatexpr()'
+  if client.supports_method 'textDocument/formatting' then nmap('<c-p>', function() lsp_formatting(0) end) end
 
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })

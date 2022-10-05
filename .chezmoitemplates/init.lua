@@ -984,6 +984,16 @@ au.BufWritePost = function()
   if vim.o.diff then vim.cmd.diffupdate() end
 end
 
+-- Open file at last position
+au.BufReadPost = function()
+  if vim.bo.filetype ~= 'gitcommit' and vim.fn.line '\'"' > 0 and vim.fn.line '\'"' <= vim.fn.line '$' then
+    vim.cmd.normal { 'g`"', bang = true }
+  end
+end
+
+-- Remove netrw buffers
+au.FileType = { 'netrw', 'setlocal bufhidden=delete' }
+
 -- Terminal
 au.group('enter_term', {
   { 'TermOpen', '*', 'startinsert!' },
@@ -1001,6 +1011,22 @@ au.group('enter_term', {
       if vim.bo.buftype == 'terminal' then vim.cmd.stopinsert { bang = true } end
     end,
   },
+})
+
+-- Color number categories in reports and logs
+au({ 'BufNewFile', 'BufRead', 'BufEnter' }, {
+  '*.rpt,*.log',
+  function()
+    vim.cmd.syntax { 'match', 'String', [["\v<\d{1,3}>"]] }
+    vim.cmd.syntax { 'match', 'Statement', [["\v<\d{4,6}>"]] }
+    vim.cmd.syntax { 'match', 'Function', [["\v<\d{7,9}>"]] }
+
+    vim.cmd.syntax { 'match', 'Number', [["\v<0+>"]] }
+
+    vim.cmd.syntax { 'match', 'Error', [["\v\c^error:"]] }
+
+    vim.wo.wrap = false
+  end,
 })
 
 -- Apply changes in chezmoi managed files

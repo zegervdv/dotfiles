@@ -268,6 +268,7 @@ zsh-defer source ~/.zsh/zsh-autosuggestions.zsh
 zsh-defer source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 export HISTDB_FILE="${HOME}/.histdb/zsh-history-$(hostname).db"
+export HISTDB_HEIGHT="70%"
 zsh-defer source ~/.zsh/zsh-histdb/sqlite-history.zsh
 zsh-defer source ~/.zsh/zsh-histdb-skim/zsh-histdb-skim.zsh
 

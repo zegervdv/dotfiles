@@ -1007,6 +1007,16 @@ au.group('enter_term', {
   },
 })
 
+-- Apply changes in chezmoi managed files
+au.group('chezmoi', {
+  { 'BufWritePost', os.getenv 'HOME' .. '/.local/share/chezmoi/*', 'silent !chezmoi apply --source-path %' },
+  {
+    'BufWritePost',
+    os.getenv 'HOME' .. '/.local/share/chezmoi/.chezmoitemplates/init.lua',
+    'silent !chezmoi apply --source-path $HOME/.local/share/chezmoi/dot_config/nvim/init.lua.tmpl',
+  },
+})
+
 -- Snippets
 local ls = require 'luasnip'
 -- Expand snippet or jump to next placeholder

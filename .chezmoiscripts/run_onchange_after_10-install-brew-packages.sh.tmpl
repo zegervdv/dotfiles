@@ -3,6 +3,8 @@
 
 # Brewfile hash: {{ include "dot_Brewfile" | sha256sum }}
 
+brew analytics off
+
 brew bundle --global
 
 {{ end -}}

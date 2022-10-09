@@ -994,6 +994,9 @@ end
 -- Remove netrw buffers
 au.FileType = { 'netrw', 'setlocal bufhidden=delete' }
 
+-- Enable spelling
+au.FileType = { { 'python', 'systemverilog', 'verilog', 'txt', 'lua' }, function() vim.opt_local.spell = true end }
+
 -- Terminal
 au.group('enter_term', {
   { 'TermOpen', '*', 'startinsert!' },

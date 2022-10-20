@@ -1102,7 +1102,7 @@ local on_attach = function(client)
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = {
@@ -1111,7 +1111,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits',
   },
 }
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local root_dir = require('lspconfig.util').root_pattern('.git', '.hg')
 

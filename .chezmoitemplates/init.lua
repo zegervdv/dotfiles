@@ -105,6 +105,10 @@ require('packer').startup(function()
     end,
   }
   use { 'tpope/vim-git', ft = { 'gitcommit', 'gitrebase' } }
+  use {
+    local_plugin 'diffview.nvim',
+    config = function() require('diffview').setup {} end,
+  }
 
   -- Comments
   use {

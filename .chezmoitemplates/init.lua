@@ -409,7 +409,7 @@ require('packer').startup(function()
     'jose-elias-alvarez/null-ls.nvim',
     requires = 'nvim-lua/plenary.nvim',
   }
-  use { 'folke/lua-dev.nvim' }
+  use { 'folke/neodev.nvim' }
   use {
     'smjonas/inc-rename.nvim',
     config = function()
@@ -1169,7 +1169,8 @@ null_ls.setup {
   root_dir = require('null-ls.utils').root_pattern('.hg', '.git', 'stylua.toml'),
 }
 
-local luadev = require('lua-dev').setup {
+require('neodev').setup {}
+lsp.sumneko_lua.setup {
   lspconfig = {
     cmd = { 'lua-language-server' },
     on_attach = on_attach,
@@ -1179,12 +1180,13 @@ local luadev = require('lua-dev').setup {
         diagnostics = {
           globals = { 'use' },
         },
+        completion = {
+          callSnippet = 'Replace',
+        },
       },
     },
   },
 }
-
-lsp.sumneko_lua.setup(luadev)
 
 local fd_quickfix = function(args)
   local grepprg = vim.opt.grepprg

@@ -247,6 +247,8 @@ export BAT_CONFIG_PATH=$HOME/.config/bat/config
 
 export PS_FORMAT='pid,pgid,state,start_time,%cpu,command'
 
+export GPG_TTY=$(tty)
+
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 source $HOME/.asdf/asdf.sh

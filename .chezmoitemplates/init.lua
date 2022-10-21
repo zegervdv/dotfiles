@@ -107,7 +107,7 @@ require('packer').startup(function()
   use { 'tpope/vim-git', ft = { 'gitcommit', 'gitrebase' } }
   use {
     local_plugin 'diffview.nvim',
-    config = function() require('diffview').setup {} end,
+    config = function() require('diffview').setup { use_icons = false } end,
   }
 
   -- Comments
@@ -945,7 +945,6 @@ map('t', '<C-l>', '<C-\\><C-n><C-w>l')
 
 map('c', '<CR>', function()
   local cmdline = vim.fn.getcmdline()
-  print(cmdline)
   if cmdline == 'ls' or cmdline == 'buffers' or cmdline == 'files' then return '<CR>:b' end
   return '<CR>'
 end, { expr = true })
@@ -964,7 +963,6 @@ au.group('cline', {
     'WinEnter',
     '*',
     function()
-      print(vim.bo.buftype)
       if vim.bo.buftype ~= 'nofile' then vim.opt_local.cursorline = true end
     end,
   },

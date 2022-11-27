@@ -28,7 +28,7 @@ local local_plugin = function(name)
 end
 
 require('packer').startup {
-  function()
+  function(use)
     use { 'wbthomason/packer.nvim', opt = true }
 
     -- General plugins
@@ -1174,7 +1174,16 @@ null_ls.setup {
   root_dir = require('null-ls.utils').root_pattern('.hg', '.git', 'stylua.toml'),
 }
 
-require('neodev').setup {}
+require('neodev').setup {
+  override = function(root_dir, options)
+    if require('neodev.util').has_file(root_dir, '~/.local/share/chezmoi') then
+      options.enabled = true
+      options.runtime = true
+      options.types = true
+      options.plugins = true
+    end
+  end,
+}
 lsp.sumneko_lua.setup {
   lspconfig = {
     cmd = { 'lua-language-server' },
@@ -1182,9 +1191,6 @@ lsp.sumneko_lua.setup {
     capabilities = capabilities,
     settings = {
       Lua = {
-        diagnostics = {
-          globals = { 'use' },
-        },
         completion = {
           callSnippet = 'Replace',
         },

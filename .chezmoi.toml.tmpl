@@ -26,11 +26,19 @@
 {{-   $font_size = promptString "font_size" -}}
 {{- end -}}
 
+{{- $dark := "" -}}
+{{- if (hasKey . "dark") -}}
+{{-   $dark = .dark -}}
+{{- else -}}
+{{-   $dark = promptBool "dark" -}}
+{{- end -}}
+
 [data]
    email = {{ $email | quote }}
    name = {{ $name | quote }}
    signingkey = {{ $signingkey | quote }}
    font_size = {{ $font_size | quote }}
+   dark = {{ $dark }}
 
 [merge]
   command = "nvim"

@@ -12,8 +12,8 @@ export LC_CTYPE=en_US.UTF-8
 
 autoload -U colors && colors
 
-PROMPT=$'%F{#2f6f9f}%K{#f4faff}%T%f%k %F{#d71707}%m%f %F{#0b51a6}%~%b%f%k
-%j ->\u00A0'
+source ~/.config/zsh.env.zsh
+source ~/.config/zsh/prompt/colors.zsh
 
 vim_ins_mode="%F{black}%K{yellow} INS %k%f"
 vim_cmd_mode="%F{white}%K{red} NRM %k%f"
@@ -288,10 +288,7 @@ zsh-defer source ~/.zsh/zsh-histdb-skim/zsh-histdb-skim.zsh
 
 zsh-defer source ~/.zsh/jq-zsh-plugin/jq.plugin.zsh
 
-export FZF_DEFAULT_OPTS="--color=fg:#000000,bg:#fbfafc,hl:#0b51a6 \
-                         --color=fg+:#000000,bg+:#dbebff,hl+:#0b51a6 \
-                         --color=info:#4f9fcf,prompt:#d44950,pointer:#d71707 \
-                         --color=marker:#d71707,spinner:#4f9fcf,header:#7653c1"
+source ~/.config/zsh/fzf/colors.zsh
 
 unix-word-rubout() {
   local WORDCHARS=$'!"#$%&\'()*+,-.:;<=>?@[\\]^_`{|}~'

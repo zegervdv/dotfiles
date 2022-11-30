@@ -6,47 +6,14 @@ font_size {{ .font_size }}
 
 symbol_map U+F100-U+F2FF nonicons
 
-cursor #facbcb
-
 window_margin_width 4
 window_padding_width 4
 
-foreground #000000
-background #FBFAFC
-
-color0 #000000
-color8 #d1d1d1
-
-color1 #d44950
-color9 #d44950
-
-color2  #73b00a
-color10 #73b00a
-
-color3  #faa500
-color11 #faa500
-
-color4  #2f6f9f
-color12 #2f6f9f
-
-color5  #3a1d72
-color13 #3a1d72
-
-color6  #4f9fcf
-color14 #4f9fcf
-
-color7  #ffffff
-color15 #ffffff
-
 scrollback_lines 10000
-
-selection_background #dbebff
 
 clipboard_control write-primary write-clipboard no-append
 
 draw_minimal_borders yes
-active_border_color #b3deef
-inactive_border_color #282c34
 
 mark1_foreground white
 mark1_background #f43753
@@ -58,3 +25,9 @@ editor nvim
 map ctrl+g kitten hints --type=linenum  nvim +{line} {path}
 
 confirm_os_window_close 0
+
+{{ if .dark }}
+include colors/catppuccin.conf
+{{ else }}
+include colors/espresso-tutti.conf
+{{ end }}

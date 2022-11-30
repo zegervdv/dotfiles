@@ -641,9 +641,15 @@ require('packer').startup {
     }
     use {
       local_plugin 'espresso-tutti-colori.nvim',
+      config = function() require('tutti-colori').setup() end,
+    }
+    use {
+      'catppuccin/nvim',
+      as = 'catppuccin',
       config = function()
-        require('tutti-colori').setup()
-        require('tutti-colori').load()
+        require('catppuccin').setup {
+          flavour = 'mocha',
+        }
       end,
     }
 
@@ -682,6 +688,12 @@ require('packer').startup {
 }
 
 vim.cmd.packadd 'dirbuf.nvim'
+
+if os.getenv 'DARKMODE' then
+  vim.cmd.colorscheme 'catppuccin'
+else
+  vim.cmd.colorscheme 'espresso-tutti-colori'
+end
 
 -- Configuration
 local opt = vim.opt

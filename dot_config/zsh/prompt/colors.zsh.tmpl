@@ -1,0 +1,7 @@
+{{ if .dark }}
+PROMPT=$'%F{#89dceb}%T%f%k %F{#f38ba8}%m%f %F{#89b4fa}%~%b%f%k
+%j ->\u00A0'
+{{ else }}
+PROMPT=$'%F{#2f6f9f}%K{#f4faff}%T%f%k %F{#d71707}%m%f %F{#0b51a6}%~%b%f%k
+%j ->\u00A0'
+{{ end }}

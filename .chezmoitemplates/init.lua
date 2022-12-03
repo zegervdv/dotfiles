@@ -497,12 +497,17 @@ require('packer').startup {
 
     use {
       'rebelot/heirline.nvim',
-      after = 'espresso-tutti-colori.nvim',
+      after = { 'espresso-tutti-colori.nvim', 'catppuccin' },
       config = function()
         local utils = require 'heirline.utils'
         local conditions = require 'heirline.conditions'
 
-        local colors = require('tutti-colori.colors').setup()
+        local colors
+        if os.getenv 'DARKMODE' then
+          colors = require('catppuccin.palettes').get_palette 'mocha'
+        else
+          colors = require('tutti-colori.colors').setup()
+        end
         colors.diag_warn = utils.get_highlight('DiagnosticSignWarn').fg
         colors.diag_error = utils.get_highlight('DiagnosticSignError').fg
 

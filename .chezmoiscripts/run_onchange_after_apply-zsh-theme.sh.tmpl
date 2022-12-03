@@ -1,7 +1,7 @@
 {{ if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) -}}
 #!/usr/bin/env zsh
 
-# overlay hash: {{ include "dot_config/fsh/overlay.ini" | sha256sum }}
+# overlay hash: {{ include "dot_config/fsh/overlay.ini.tmpl" | sha256sum }}
 
 source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 

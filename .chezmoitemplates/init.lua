@@ -443,6 +443,10 @@ require('packer').startup {
       end,
     }
     use {
+      local_plugin 'lsp-format-modifications.nvim',
+      requires = { 'nvim-lua/plenary.nvim' },
+    }
+    use {
       'j-hui/fidget.nvim',
       config = function()
         require('fidget').setup {
@@ -1114,7 +1118,7 @@ local lsp_formatting = function(bufnr)
   }
 end
 
-local on_attach = function(client)
+local on_attach = function(client, bufnr)
   local nmap = function(lhs, rhs, opts) return vim.keymap.set('n', lhs, rhs, opts) end
 
   nmap('gp', require('goto-preview').goto_preview_definition, { silent = true, buffer = 0 })
@@ -1128,10 +1132,21 @@ local on_attach = function(client)
   nmap('g0', vim.lsp.buf.document_symbol, { silent = true, buffer = 0 })
   nmap('ga', vim.lsp.buf.code_action, { silent = true, buffer = 0 })
 
-  if client.supports_method 'textDocument/formatting' then nmap('<c-p>', function() lsp_formatting(0) end) end
-
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
+
+  if client.supports_method 'textDocument/rangeFormatting' then
+    local root = vim.fs.find({ '.git', '.hg' }, { path = client.config.root_dir })
+    local vcs = 'git'
+    if root then vcs = vim.fs.basename(root[1]):sub(2) end
+
+    vim.notify('Enabled modification formatting via ' .. vcs .. ' using ' .. client.name, vim.log.levels.INFO)
+    local lsp_format_modifications = require 'lsp-format-modifications'
+    lsp_format_modifications.attach(client, bufnr, { format_on_save = false, vcs = 'hg' })
+    nmap('<c-p>', function() lsp_format_modifications.format_modifications_current_buffer() end)
+  elseif client.supports_method 'textDocument/formatting' then
+    nmap('<c-p>', function() lsp_formatting(0) end)
+  end
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()

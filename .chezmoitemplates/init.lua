@@ -108,7 +108,16 @@ require('packer').startup {
     use { 'tpope/vim-git', ft = { 'gitcommit', 'gitrebase' } }
     use {
       local_plugin 'diffview.nvim',
-      config = function() require('diffview').setup { use_icons = false } end,
+      config = function()
+        require('diffview').setup {
+          use_icons = false,
+          view = {
+            merge_tool = {
+              layout = 'diff4_mixed',
+            },
+          },
+        }
+      end,
     }
 
     -- Comments

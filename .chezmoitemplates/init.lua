@@ -447,18 +447,8 @@ require('packer').startup {
       requires = { 'nvim-lua/plenary.nvim' },
     }
     use {
-      'j-hui/fidget.nvim',
-      config = function()
-        require('fidget').setup {
-          text = {
-            spinner = 'dots',
-          },
-          window = {
-            relative = 'editor',
-            blend = 0,
-          },
-        }
-      end,
+      'vigoux/notifier.nvim',
+      config = function() require('notifier').setup { status_width = 70 } end,
     }
     use {
       'https://git.sr.ht/~whynothugo/lsp_lines.nvim',

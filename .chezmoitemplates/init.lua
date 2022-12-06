@@ -1111,16 +1111,18 @@ end
 local on_attach = function(client, bufnr)
   local nmap = function(lhs, rhs, opts) return vim.keymap.set('n', lhs, rhs, opts) end
 
-  nmap('gp', require('goto-preview').goto_preview_definition, { silent = true, buffer = 0 })
-  nmap('gP', require('goto-preview').close_all_win, { silent = true, buffer = 0 })
+  local opts = { silent = true, buffer = bufnr }
 
-  nmap('gd', vim.lsp.buf.declaration, { silent = true, buffer = 0 })
-  nmap('K', vim.lsp.buf.hover, { silent = true, buffer = 0 })
-  nmap('gD', vim.lsp.buf.implementation, { silent = true, buffer = 0 })
-  nmap('1gD', vim.lsp.buf.type_definition, { silent = true, buffer = 0 })
-  nmap('gr', vim.lsp.buf.references, { silent = true, buffer = 0 })
-  nmap('g0', vim.lsp.buf.document_symbol, { silent = true, buffer = 0 })
-  nmap('ga', vim.lsp.buf.code_action, { silent = true, buffer = 0 })
+  nmap('gp', require('goto-preview').goto_preview_definition, opts)
+  nmap('gP', require('goto-preview').close_all_win, opts)
+
+  nmap('gd', vim.lsp.buf.declaration, opts)
+  nmap('K', vim.lsp.buf.hover, opts)
+  nmap('gD', vim.lsp.buf.implementation, opts)
+  nmap('1gD', vim.lsp.buf.type_definition, opts)
+  nmap('gr', vim.lsp.buf.references, opts)
+  nmap('g0', vim.lsp.buf.document_symbol, opts)
+  nmap('ga', vim.lsp.buf.code_action, opts)
 
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
@@ -1133,9 +1135,9 @@ local on_attach = function(client, bufnr)
     vim.notify('Enabled modification formatting via ' .. vcs .. ' using ' .. client.name, vim.log.levels.INFO)
     local lsp_format_modifications = require 'lsp-format-modifications'
     lsp_format_modifications.attach(client, bufnr, { format_on_save = false, vcs = vcs })
-    nmap('<c-p>', function() lsp_format_modifications.format_modifications_current_buffer() end)
+    nmap('<c-p>', function() lsp_format_modifications.format_modifications_current_buffer() end, opts)
   elseif client.supports_method 'textDocument/formatting' then
-    nmap('<c-p>', function() lsp_formatting(0) end)
+    nmap('<c-p>', function() lsp_formatting(bufnr) end, opts)
   end
 end
 

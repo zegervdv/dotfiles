@@ -30,6 +30,7 @@ jobs:
           echo '    name = "jdoe"' >> $HOME/.config/chezmoi/chezmoi.toml
           echo '    signingkey = "" ' >> $HOME/.config/chezmoi/chezmoi.toml
           echo '    font_size = "10"' >> $HOME/.config/chezmoi/chezmoi.toml
+          echo '    dark = false' >> $HOME/.config/chezmoi/chezmoi.toml
 
       - name: Initialize chezmoi
         run: chezmoi init -v zegervdv --branch ${GITHUB_REF##*/}

@@ -1142,7 +1142,7 @@ local on_attach = function(client, bufnr)
 
     vim.notify('Enabled modification formatting via ' .. vcs .. ' using ' .. client.name, vim.log.levels.INFO)
     local lsp_format_modifications = require 'lsp-format-modifications'
-    lsp_format_modifications.attach(client, bufnr, { format_on_save = false, vcs = 'hg' })
+    lsp_format_modifications.attach(client, bufnr, { format_on_save = false, vcs = vcs })
     nmap('<c-p>', function() lsp_format_modifications.format_modifications_current_buffer() end)
   elseif client.supports_method 'textDocument/formatting' then
     nmap('<c-p>', function() lsp_formatting(0) end)

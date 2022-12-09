@@ -1093,6 +1093,18 @@ vim.keymap.set('i', '<c-l>', function()
   if ls.choice_active() then ls.change_choice() end
 end)
 
+-- Copy the current file and line number
+-- inspired by https://github.com/diegoulloao/nvim-file-location
+vim.keymap.set('n', '<leader>cp', function()
+  local Path = require 'plenary.path'
+  local current_file = Path:new(vim.fn.expand '%')
+  local root =
+    vim.fs.dirname(vim.fs.find({ '.hg', '.git' }, { path = tostring(current_file:parent()), upward = true })[1])
+  local current_line = vim.fn.line '.'
+  require('osc52').copy(current_file:make_relative(root) .. ':' .. current_line)
+  vim.notify 'Copied file path and line number'
+end, { desc = 'Yank current path and line number' })
+
 -- LSP config
 local lsp = require 'lspconfig'
 local null_ls = require 'null-ls'

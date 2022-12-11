@@ -585,12 +585,18 @@ require('packer').startup {
           },
         }
 
+        local Window = {
+          provider = function() return '- ' .. vim.api.nvim_win_get_number(0) .. ' -' end,
+          hl = { fg = 'blue' },
+        }
+
         local statusline_default = { lbound, FileNameBlock, align, Diagnostics, Lsp, space, Ruler, rbound }
         local statusline_inactive = {
           condition = function() return not conditions.is_active() end,
           lbound,
           FileNameBlock,
           align,
+          Window,
           rbound,
         }
         local statusline = {
@@ -1104,6 +1110,11 @@ vim.keymap.set('n', '<leader>cp', function()
   require('osc52').copy(current_file:make_relative(root) .. ':' .. current_line)
   vim.notify 'Copied file path and line number'
 end, { desc = 'Yank current path and line number' })
+
+-- Navigate between open windows
+for i = 1, 6 do
+  vim.keymap.set('n', '<leader>' .. i, i .. '<c-w>w', { desc = 'Go to window ' .. i })
+end
 
 -- LSP config
 local lsp = require 'lspconfig'

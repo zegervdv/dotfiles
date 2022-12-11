@@ -710,75 +710,73 @@ else
 end
 
 -- Configuration
-local opt = vim.opt
+vim.opt.backspace = { 'indent', 'eol', 'start' } -- Backspace everything
 
-opt.backspace = { 'indent', 'eol', 'start' } -- Backspace everything
-
-opt.autoread = true -- Read changed files
-opt.hidden = true -- Allow to move away from modified files
-opt.autowriteall = true -- Write changes when losing focus
+vim.opt.autoread = true -- Read changed files
+vim.opt.hidden = true -- Allow to move away from modified files
+vim.opt.autowriteall = true -- Write changes when losing focus
 
 -- Visuals
-opt.number = true
-opt.relativenumber = true
-opt.scrolloff = 4
-opt.showcmd = true -- Show incomplete commands while typing
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.scrolloff = 4
+vim.opt.showcmd = true -- Show incomplete commands while typing
 
-opt.termguicolors = true
-opt.background = 'dark'
+vim.opt.termguicolors = true
+vim.opt.background = 'dark'
 
-opt.showmatch = true -- Highligh matching braces
+vim.opt.showmatch = true -- Highligh matching braces
 
-opt.wrap = true -- Wrap lines
-opt.wrapmargin = 2 -- Stay 2 chars from side
-opt.textwidth = 79
-opt.colorcolumn = '81' -- Show indication of 81 chars
-opt.linebreak = true -- Smarter wrapping
-opt.breakindent = true -- Indent wrapped lines to same level
+vim.opt.wrap = true -- Wrap lines
+vim.opt.wrapmargin = 2 -- Stay 2 chars from side
+vim.opt.textwidth = 79
+vim.opt.colorcolumn = '81' -- Show indication of 81 chars
+vim.opt.linebreak = true -- Smarter wrapping
+vim.opt.breakindent = true -- Indent wrapped lines to same level
 
-opt.fixendofline = true -- Add EOL when missing
+vim.opt.fixendofline = true -- Add EOL when missing
 
-opt.expandtab = true -- Add spaces when pressing tab
-opt.tabstop = 2 -- Tab is 2 spaces
-opt.shiftwidth = 2 -- Shift per 2 spaces
-opt.shiftround = true -- Round shifts to allign (1 space + tab = 2 spaces)
+vim.opt.expandtab = true -- Add spaces when pressing tab
+vim.opt.tabstop = 2 -- Tab is 2 spaces
+vim.opt.shiftwidth = 2 -- Shift per 2 spaces
+vim.opt.shiftround = true -- Round shifts to allign (1 space + tab = 2 spaces)
 
 -- Searching and substitute
-opt.magic = true -- Enable regexes
-opt.hlsearch = true -- Highlight all matches
-opt.incsearch = true -- Show matches while typing
-opt.ignorecase = true
-opt.smartcase = true -- When search pattern contains cases, be case sensitive
-opt.gdefault = true -- Use global flag for substitute: replace all matches on line
-opt.inccommand = 'nosplit' -- Show live replacements directly in text
+vim.opt.magic = true -- Enable regexes
+vim.opt.hlsearch = true -- Highlight all matches
+vim.opt.incsearch = true -- Show matches while typing
+vim.opt.ignorecase = true
+vim.opt.smartcase = true -- When search pattern contains cases, be case sensitive
+vim.opt.gdefault = true -- Use global flag for substitute: replace all matches on line
+vim.opt.inccommand = 'nosplit' -- Show live replacements directly in text
 
-opt.autoindent = true
-opt.cindent = true -- C-syntax based indenting
+vim.opt.autoindent = true
+vim.opt.cindent = true -- C-syntax based indenting
 
-opt.updatetime = 300 -- Faster triggering of CursorHold events
+vim.opt.updatetime = 300 -- Faster triggering of CursorHold events
 
-opt.errorbells = false -- Don't you beep to me
-opt.title = false -- Don't set the shell title
+vim.opt.errorbells = false -- Don't you beep to me
+vim.opt.title = false -- Don't set the shell title
 
-opt.history = 1000 -- Remember last commands
+vim.opt.history = 1000 -- Remember last commands
 
-opt.wildmenu = true -- Command completion
-opt.wildmode = 'longest:full,full'
-opt.shortmess:append 'c' -- Hide ins-completion messages
+vim.opt.wildmenu = true -- Command completion
+vim.opt.wildmode = 'longest:full,full'
+vim.opt.shortmess:append 'c' -- Hide ins-completion messages
 
-opt.ttyfast = true -- fast terminal
-opt.lazyredraw = true
-opt.ttimeoutlen = -1 -- Minimum timeout
+vim.opt.ttyfast = true -- fast terminal
+vim.opt.lazyredraw = true
+vim.opt.ttimeoutlen = -1 -- Minimum timeout
 
-opt.diffopt:append 'iwhite' -- Ignore whitespace in diffs
-opt.diffopt:append 'internal' -- Internal diff engine
-opt.diffopt:append 'algorithm:patience' -- Use patience algorithm
+vim.opt.diffopt:append 'iwhite' -- Ignore whitespace in diffs
+vim.opt.diffopt:append 'internal' -- Internal diff engine
+vim.opt.diffopt:append 'algorithm:patience' -- Use patience algorithm
 
-opt.tags = { '.git/tags', 'tags' }
+vim.opt.tags = { '.git/tags', 'tags' }
 
-opt.path:append '**' -- Recursively search current directory
+vim.opt.path:append '**' -- Recursively search current directory
 
-opt.formatoptions = {
+vim.opt.formatoptions = {
   c = true, -- Wrap comments
   r = true, -- Continue comments
   o = true, -- Insert comment with o/O
@@ -788,26 +786,26 @@ opt.formatoptions = {
   [1] = true, -- Don't break before one letter words
 }
 
-opt.signcolumn = 'yes' -- Always show signcolumn
+vim.opt.signcolumn = 'yes' -- Always show signcolumn
 
-opt.cursorline = true
+vim.opt.cursorline = true
 
-opt.startofline = false -- When moving try to keep cursor in column
+vim.opt.startofline = false -- When moving try to keep cursor in column
 
 -- Show certain characters
-opt.list = true
-opt.listchars = { trail = '·', extends = '>', precedes = '<', nbsp = '+', tab = '▸ ' }
+vim.opt.list = true
+vim.opt.listchars = { trail = '·', extends = '>', precedes = '<', nbsp = '+', tab = '▸ ' }
 
-opt.sessionoptions:remove 'options' -- Remove options from saved sessions (reload from config)
+vim.opt.sessionoptions:remove 'options' -- Remove options from saved sessions (reload from config)
 
-opt.completeopt = { 'menu', 'menuone', 'noselect' }
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
-opt.splitright = true -- Open new splits to right
-opt.virtualedit = 'block' -- Enable block editting
+vim.opt.splitright = true -- Open new splits to right
+vim.opt.virtualedit = 'block' -- Enable block editting
 
-opt.conceallevel = 0 -- Disable conceal
+vim.opt.conceallevel = 0 -- Disable conceal
 
-opt.pastetoggle = '<F2>' -- Enable paste mode
+vim.opt.pastetoggle = '<F2>' -- Enable paste mode
 
 local optdir = function(path)
   local Path = require 'plenary.path'
@@ -816,15 +814,15 @@ local optdir = function(path)
   return full_path .. '//'
 end
 
-opt.undofile = true -- Persistently remember undos
-opt.undolevels = 1000
-opt.undodir = optdir 'undo'
-opt.swapfile = false -- Disable swap files
-opt.backup = true -- Keep backups
-opt.backupdir = optdir 'backup'
+vim.opt.undofile = true -- Persistently remember undos
+vim.opt.undolevels = 1000
+vim.opt.undodir = optdir 'undo'
+vim.opt.swapfile = false -- Disable swap files
+vim.opt.backup = true -- Keep backups
+vim.opt.backupdir = optdir 'backup'
 
 -- Files to ignore from completion
-opt.wildignore:append {
+vim.opt.wildignore:append {
   '*/tmp/*',
   '*.so',
   '*.swp',
@@ -841,25 +839,25 @@ opt.wildignore:append {
   '*.*~',
 }
 
-opt.mouse = {
+vim.opt.mouse = {
   n = true, -- Normal mode
   i = true, -- Insert mode
   c = true, -- Commandline mode
 }
 
-opt.fillchars:append {
+vim.opt.fillchars:append {
   diff = '╱',
 }
 
-opt.jumpoptions:append { 'view' }
+vim.opt.jumpoptions:append { 'view' }
 
-opt.foldmethod = 'expr'
-opt.foldexpr = 'nvim_treesitter#foldexpr()'
-opt.foldnestmax = 3
-opt.foldminlines = 1
-opt.foldtext =
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldnestmax = 3
+vim.opt.foldminlines = 1
+vim.opt.foldtext =
   [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
-opt.foldenable = false
+vim.opt.foldenable = false
 
 function _G.qftf(info)
   local items

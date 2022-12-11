@@ -624,36 +624,6 @@ require('packer').startup {
 
     -- Colorscheme
     use {
-      'navarasu/onedark.nvim',
-      disable = true,
-      config = function()
-        require('onedark').setup {
-          style = 'dark',
-          code_style = {
-            comments = 'italic',
-          },
-          ending_tildes = true,
-          diagnostics = {
-            darker = false,
-            undercurl = false,
-            background = false,
-          },
-        }
-        require('onedark').load()
-        local extras = {
-          TelescopeNormal = { link = 'Pmenu' },
-          TelescopeBorder = { link = 'Pmenu' },
-          TelescopePromptBorder = { link = 'Pmenu' },
-          TelescopePreviewBorder = { link = 'Pmenu' },
-          TelescopeResultsBorder = { link = 'Pmenu' },
-          TelescopeTitle = { link = 'identifier' },
-        }
-        for name, opt in pairs(extras) do
-          vim.api.nvim_set_hl(0, name, opt)
-        end
-      end,
-    }
-    use {
       local_plugin 'espresso-tutti-colori.nvim',
       config = function() require('tutti-colori').setup() end,
     }

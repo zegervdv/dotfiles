@@ -1120,6 +1120,11 @@ local on_attach = function(client, bufnr)
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
 
+  if client.name == 'sumneko_lua' then
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  end
+
   if client.supports_method 'textDocument/rangeFormatting' then
     local root = vim.fs.find({ '.git', '.hg' }, { path = client.config.root_dir })
     local vcs = 'git'

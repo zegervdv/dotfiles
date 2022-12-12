@@ -649,7 +649,11 @@ require('packer').startup {
     -- Colorscheme
     use {
       local_plugin 'espresso-tutti-colori.nvim',
-      config = function() require('tutti-colori').setup() end,
+      disable = os.getenv 'DARKMODE',
+      config = function()
+        require('tutti-colori').setup()
+        require('tutti-colori').load()
+      end,
     }
     use {
       'catppuccin/nvim',
@@ -700,6 +704,7 @@ vim.cmd.packadd 'dirbuf.nvim'
 if os.getenv 'DARKMODE' then
   vim.cmd.colorscheme 'catppuccin'
 else
+  require('tutti-colori').setup()
   vim.cmd.colorscheme 'espresso-tutti-colori'
 end
 

@@ -959,6 +959,13 @@ map('c', '<CR>', function()
   return '<CR>'
 end, { expr = true })
 
+-- Clean up screen
+map('n', '<ESC>', function()
+  vim.cmd.nohlsearch()
+  vim.cmd.cclose()
+  vim.cmd.lclose()
+end, { desc = 'Clean up screen' })
+
 -- Special highlighting
 vim.cmd.match { 'ErrorMsg', [[ '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' ]] }
 

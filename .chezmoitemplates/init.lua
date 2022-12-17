@@ -287,7 +287,13 @@ require('packer').startup {
       'folke/which-key.nvim',
       config = function()
         require('which-key').setup {
-          triggers = { '<leader>', 'g', '<c-w>', '"', '`' },
+          plugins = {
+            spelling = {
+              enabled = true,
+              suggestions = 20,
+            },
+          },
+          triggers = { '<leader>', 'g', '<c-w>', '"', '`', 'z' },
         }
       end,
     }

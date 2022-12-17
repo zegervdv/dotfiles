@@ -111,6 +111,15 @@ require('packer').startup {
       config = function()
         require('diffview').setup {
           use_icons = false,
+          icons = {
+            folder_closed = '+',
+            folder_open = '-',
+          },
+          signs = {
+            fold_closed = '+',
+            fold_open = '-',
+            done = '✓',
+          },
           hg_cmd = { 'chg' },
           view = {
             merge_tool = {
@@ -122,7 +131,7 @@ require('packer').startup {
         wk.register { ['<leader>d'] = { name = 'Diffview' } }
         vim.keymap.set('n', '<leader>do', '<cmd>DiffviewOpen<CR>', { desc = 'Open Diffview' })
         vim.keymap.set('n', '<leader>df', '<cmd>DiffviewFileHistory %<CR>', { desc = 'Show history for current file' })
-        vim.keymap.set('n', '<leader>dh', '<esc>DiffviewFileHistory ', { desc = 'Show history' })
+        vim.keymap.set('n', '<leader>dh', ':DiffviewFileHistory ', { desc = 'Show history' })
         vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<CR>', { desc = 'Close Diffview window' })
       end,
     }

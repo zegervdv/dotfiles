@@ -490,6 +490,65 @@ require('packer').startup {
     }
 
     use {
+      'ThePrimeagen/refactoring.nvim',
+      after = 'which-key.nvim',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'nvim-treesitter/nvim-treesitter',
+      },
+      config = function()
+        local refactoring = require 'refactoring'
+        local wk = require 'which-key'
+
+        refactoring.setup {}
+
+        wk.register { ['<leader>r'] = { name = 'Refactoring' } }
+
+        local maps = {
+          { mode = 'v', key = 'e', name = 'Extract Function' },
+          { mode = 'v', key = 'f', name = 'Extract Function To File' },
+          { mode = 'v', key = 'v', name = 'Extract Variable' },
+          { mode = 'v', key = 'i', name = 'Inline Variable' },
+          { mode = 'n', key = 'b', name = 'Extract Block' },
+          { mode = 'n', key = 'bf', name = 'Extract Block To File' },
+          { mode = 'n', key = 'i', name = 'Inline Variable' },
+        }
+        for _, map in ipairs(maps) do
+          vim.keymap.set(
+            map.mode,
+            '<leader>r' .. map.key,
+            function() refactoring.refactor(map.name) end,
+            { desc = map.name, silent = true, expr = false }
+          )
+        end
+        vim.keymap.set(
+          'n',
+          '<leader>rpp',
+          function() refactoring.debug.printf { below = false } end,
+          { desc = 'Add debug print statement', silent = true }
+        )
+        vim.keymap.set(
+          'n',
+          '<leader>rpv',
+          function() refactoring.debug.print_var { normal = true } end,
+          { desc = 'Print variable', silent = true }
+        )
+        vim.keymap.set(
+          'v',
+          '<leader>rpv',
+          function() refactoring.debug.print_var() end,
+          { desc = 'Print variable', silent = true }
+        )
+        vim.keymap.set(
+          'n',
+          '<leader>rpc',
+          function() refactoring.debug.cleanup {} end,
+          { desc = 'Clean up debug prints', silent = true }
+        )
+      end,
+    }
+
+    use {
       'nvim-telescope/telescope-ui-select.nvim',
       requires = { 'nvim-telescope/telescope.nvim' },
       config = function()

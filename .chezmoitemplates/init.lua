@@ -842,6 +842,7 @@ vim.opt.mouse = {
   n = true, -- Normal mode
   i = true, -- Insert mode
   c = true, -- Commandline mode
+  v = true, -- Visual mode
 }
 
 vim.opt.fillchars:append {

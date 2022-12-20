@@ -155,10 +155,10 @@ require('packer').startup {
         }
       end,
       keys = {
-        { 'n', 'gc' },
-        { 'n', 'gb' },
-        { 'v', 'gc' },
-        { 'v', 'gb' },
+        { 'n', 'gc', 'Comment toggle' },
+        { 'n', 'gb', 'Comment Block toggle' },
+        { 'v', 'gc', 'Comment toggle' },
+        { 'v', 'gb', 'Comment block toggle' },
       },
     }
 

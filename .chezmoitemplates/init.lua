@@ -1146,7 +1146,7 @@ au.group('chezmoi', {
 local ls = require 'luasnip'
 -- Expand snippet or jump to next placeholder
 vim.keymap.set({ 'i', 's' }, '<c-k>', function()
-  if ls.expand_or_jumpable() then ls.expand_or_jump() end
+  if ls.expand_or_locally_jumpable() then ls.expand_or_jump() end
 end, {
   silent = true,
 })

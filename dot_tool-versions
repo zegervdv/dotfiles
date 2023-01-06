@@ -1,5 +1,5 @@
 python 3.10.7
-neovim v0.8.1
+neovim 0.8.2
 direnv 2.32.1
 rust 1.64.0
 sqlite 3.39.4

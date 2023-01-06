@@ -549,24 +549,15 @@ require('packer').startup {
     }
 
     use {
-      'nvim-telescope/telescope-ui-select.nvim',
-      requires = { 'nvim-telescope/telescope.nvim' },
+      'ibhagwan/fzf-lua',
       config = function()
-        require('telescope').setup {
-          defaults = {
-            border = {},
-            borderchars = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-            winblend = 0,
-          },
-          extensions = {
-            ['ui-select'] = require('telescope.themes').get_dropdown {
-              border = {},
-              borderchars = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-              winblend = 0,
-            },
+        local fzf = require 'fzf-lua'
+        fzf.setup {
+          winopts = {
+            border = 'single',
           },
         }
-        require('telescope').load_extension 'ui-select'
+        fzf.register_ui_select()
       end,
     }
 

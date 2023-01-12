@@ -561,6 +561,7 @@ require('packer').startup {
         end
 
         vim.keymap.set({ 'n' }, '<leader>fg', function() grep_opts() end, { desc = 'Live grep prompting for options' })
+        vim.keymap.set({ 'n' }, '<leader>ff', function() fzf.files() end, { desc = 'Search for files' })
 
         function _G.__live_grep(motion)
           local word = get_selected_word()

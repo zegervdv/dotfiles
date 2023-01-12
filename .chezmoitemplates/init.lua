@@ -704,7 +704,7 @@ require('packer').startup {
           statusline_default,
         }
 
-        require('heirline').setup(statusline)
+        require('heirline').setup { statusline = statusline }
       end,
     }
 

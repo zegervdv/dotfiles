@@ -208,29 +208,7 @@ require('packer').startup {
     -- Moving around within lines
     use { 'wellle/targets.vim', event = 'InsertEnter *' }
 
-    -- Searching
-    use {
-      'mhinz/vim-grepper',
-      cmd = { 'Grepper', 'Ag' },
-      keys = { { 'n', 'gs' }, { 'x', 'gs' } },
-      config = function()
-        vim.g.grepper = {
-          tools = { 'ag', 'hg' },
-          highlight = 1,
-          ag = {
-            grepprg = 'rg --vimgrep',
-          },
-        }
-
-        vim.keymap.set({ 'x', 'n' }, 'gs', '<plug>(GrepperOperator)')
-        vim.api.nvim_create_user_command(
-          'Ag',
-          'Grepper -noprompt -tool ag -grepprg rg --vimgrep <args>',
-          { complete = 'file', nargs = '*' }
-        )
-      end,
-    }
-
+    -- Search
     -- Opening files
     use { 'wsdjeg/vim-fetch' }
 
@@ -558,6 +536,51 @@ require('packer').startup {
           },
         }
         fzf.register_ui_select()
+
+        local grep_opts = function(pattern)
+          local utils = require 'fzf-lua.utils'
+          local config = require 'fzf-lua.config'
+
+          local args = utils.input 'rg opts> '
+          local rg_opts = config.globals.grep.rg_opts .. ' ' .. args
+          local opts = config.normalize_opts({ rg_opts = rg_opts }, config.globals.grep)
+
+          opts.search = pattern
+          fzf.live_grep(opts)
+        end
+        local get_selected_word = function()
+          local start_pos = vim.fn.getpos "'["
+          local end_pos = vim.fn.getpos "']"
+          local start_line = math.min(start_pos[2], end_pos[2]) - 1
+          local end_line = math.max(start_pos[2], end_pos[2])
+          local start_col = math.min(start_pos[3], end_pos[3])
+          local end_col = math.max(start_pos[3], end_pos[3])
+
+          local line = vim.api.nvim_buf_get_lines(0, start_line, end_line, true)
+          return line[1]:sub(start_col, end_col)
+        end
+
+        vim.keymap.set({ 'n' }, '<leader>fg', function() grep_opts() end, { desc = 'Live grep prompting for options' })
+
+        function _G.__live_grep(motion)
+          local word = get_selected_word()
+          fzf.live_grep { search = word }
+        end
+
+        vim.keymap.set({ 'x', 'n' }, 'gs', function()
+          vim.o.operatorfunc = 'v:lua.__live_grep'
+          return 'g@'
+        end, { expr = true, desc = 'Live grep for word' })
+
+        function _G.__live_grep_opts(motion)
+          local word = get_selected_word()
+          grep_opts(word)
+        end
+
+        vim.keymap.set({ 'x', 'n' }, 'gt', function()
+          vim.o.operatorfunc = 'v:lua.__live_grep_opts'
+          return 'g@'
+        end, { expr = true, desc = 'Live grep for word with options' })
       end,
     }
 

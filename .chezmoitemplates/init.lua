@@ -445,7 +445,7 @@ require('packer').startup {
       end,
     }
     use {
-      local_plugin 'lsp-format-modifications.nvim',
+      'joechrisellis/lsp-format-modifications.nvim',
       requires = { 'nvim-lua/plenary.nvim' },
     }
     use {

@@ -1325,6 +1325,7 @@ require('neodev').setup {
     end
   end,
 }
+
 lsp.sumneko_lua.setup {
   lspconfig = {
     cmd = { 'lua-language-server' },
@@ -1339,20 +1340,6 @@ lsp.sumneko_lua.setup {
     },
   },
 }
-
-local fd_quickfix = function(args)
-  local grepprg = vim.opt.grepprg
-  local grepformat = vim.opt.grepformat
-
-  vim.opt.grepprg = 'fd'
-  vim.opt.grepformat = '%f'
-  vim.cmd.execute('"silent! grep! ' .. args.args .. '"')
-  vim.cmd.copen()
-
-  vim.opt.grepprg = grepprg
-  vim.opt.grepformat = grepformat
-end
-vim.api.nvim_create_user_command('Cfd', fd_quickfix, { nargs = '+', complete = 'file' })
 
 vim.diagnostic.config {
   underline = true,

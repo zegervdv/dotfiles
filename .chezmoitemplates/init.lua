@@ -1317,7 +1317,7 @@ null_ls.setup {
 
 require('neodev').setup {
   override = function(root_dir, options)
-    if require('neodev.util').has_file(root_dir, '~/.local/share/chezmoi') then
+    if root_dir:find 'chezmoi' then
       options.enabled = true
       options.runtime = true
       options.types = true

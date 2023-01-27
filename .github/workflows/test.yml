@@ -36,4 +36,4 @@ jobs:
         run: chezmoi init -v zegervdv --branch ${GITHUB_REF##*/}
 
       - name: Apply dotfiles
-        run: chezmoi apply -v
+        run: chezmoi apply

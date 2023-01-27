@@ -1,4 +1,4 @@
-{{ if (and (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) (ne .chezmoi.arch "arm64") (ne .chezmoi.osRelease.id "centos")) -}}
+{{ if (or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.arch "arm64") (ne .chezmoi.osRelease.id "centos"))) -}}
 #!/usr/bin/env bash
 
 # Brewfile hash: {{ include "dot_Brewfile" | sha256sum }}

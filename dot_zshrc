@@ -270,9 +270,6 @@ export SUDO_EDITOR=$(which nvim)
 eval "$(direnv hook zsh)"
 
 zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ':fzf-tab:*' default-color $'\033[30m'
-zsh-defer source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
 
 zsh-defer source ~/.zsh/zsh-history-substring-search.zsh
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=cyan,fg=white'

@@ -1229,7 +1229,7 @@ local on_attach = function(client, bufnr)
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
 
-  if client.name == 'sumneko_lua' then
+  if client.name == 'lua_ls' then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
@@ -1326,7 +1326,7 @@ require('neodev').setup {
   end,
 }
 
-lsp.sumneko_lua.setup {
+lsp.lua_ls.setup {
   lspconfig = {
     cmd = { 'lua-language-server' },
     on_attach = on_attach,

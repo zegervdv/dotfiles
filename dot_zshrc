@@ -232,8 +232,47 @@ alias -s sv=nvim
 alias -s v=nvim
 alias -s vhd=nvim
 alias -s sh=nvim
-# Global aliases
-alias -g X='| clip'
+
+setopt extendedglob
+typeset -Ag abbreviations
+abbreviations=(
+  # "ac"    "ack -C 5__CURSOR__--ignore-dir=.build"
+  "Ig"    "| rg"
+  "Ip"    "| $PAGER"
+  "Ih"    "| head"
+  "Ik"    "| keep"
+  "It"    "| tail"
+  "Is"    "| sort"
+  "Iv"    "| ${VISUAL:-${EDITOR}}"
+  "Iw"    "| wc"
+  "Ix"    "| xargs"
+  "Ic"    "| clip"
+)
+
+magic-abbrev-expand() {
+    local MATCH
+    LBUFFER=${LBUFFER%%(#m)[_a-zA-Z0-9]#}
+    command=${abbreviations[$MATCH]}
+    LBUFFER+=${command:-$MATCH}
+
+    if [[ "${command}" =~ "__CURSOR__" ]]
+    then
+        RBUFFER=${LBUFFER[(ws:__CURSOR__:)2]}
+        LBUFFER=${LBUFFER[(ws:__CURSOR__:)1]}
+    else
+        zle self-insert
+    fi
+}
+
+no-magic-abbrev-expand() {
+  LBUFFER+=' '
+}
+
+zle -N magic-abbrev-expand
+zle -N no-magic-abbrev-expand
+bindkey " " magic-abbrev-expand
+bindkey "^x " no-magic-abbrev-expand
+bindkey -M isearch " " self-insert
 
 # Exports
 export XDG_CONFIG_HOME=$HOME/.config

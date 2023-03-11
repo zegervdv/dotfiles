@@ -1,0 +1,38 @@
+// No fancy symbols
+simplified_ui true
+
+// No frames around panes
+pane_frames false
+
+default_mode "locked"
+
+keybinds {
+  locked {
+    bind "Alt h" "Alt Left" { MoveFocus "Left"; }
+    bind "Alt j" "Alt Down" { MoveFocus "Down"; }
+    bind "Alt k" "Alt Up" { MoveFocus "Up"; }
+    bind "Alt l" "Alt Right" { MoveFocus "Right"; }
+  }
+
+  shared_except "locked" {
+    bind "Esc" { SwitchToMode "locked"; }
+  }
+}
+
+themes {
+    catppuccin-macchiato {
+        fg 202 211 245
+        bg 91 96 120
+        black 30 32 48
+        red 237 135 150
+        green 166 218 149
+        yellow 238 212 159
+        blue 138 173 244
+        magenta 245 189 230
+        cyan 145 215 227
+        white 202 211 245
+        orange 245 169 127
+    }
+}
+
+theme "catppuccin-macchiato"

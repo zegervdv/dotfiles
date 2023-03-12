@@ -27,3 +27,4 @@ bin/*
 {{ if ne .chezmoi.os "linux" }}
 .local/share/applications/*
 {{ end }}
+.chezmoitemplates/lazy-lock.json

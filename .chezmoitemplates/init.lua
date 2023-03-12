@@ -22,9 +22,9 @@ vim.opt.rtp:prepend(lazypath)
 -- Set leader to space
 vim.g.mapleader = ' '
 
-require('lazy').setup {
+require('lazy').setup({
   -- General plugins
-  { 'tpope/vim-sensible' },
+  'tpope/vim-sensible',
   { 'tpope/vim-repeat' },
   { 'tpope/vim-rsi' },
   { 'sgur/vim-editorconfig' },
@@ -86,6 +86,7 @@ require('lazy').setup {
   { 'tpope/vim-git', ft = { 'gitcommit', 'gitrebase' } },
   {
     'sindrets/diffview.nvim',
+    dev = true,
     config = function()
       require('diffview').setup {
         use_icons = false,
@@ -687,6 +688,7 @@ require('lazy').setup {
     'zegervdv/espresso-tutti-colori.nvim',
     name = 'tutti-colori',
     cond = not os.getenv 'DARKMODE',
+    dev = true,
     config = function()
       require('tutti-colori').setup()
       require('tutti-colori').load()
@@ -722,7 +724,28 @@ require('lazy').setup {
       }
     end,
   },
-}
+}, {
+  dev = {
+    path = '~/Projects',
+    fallback = true,
+  },
+  ui = {
+    icons = {
+      cmd = '⌘',
+      config = '🛠',
+      event = '📅',
+      ft = '📂',
+      init = '⚙',
+      keys = '🗝',
+      plugin = '🔌',
+      runtime = '💻',
+      source = '📄',
+      start = '🚀',
+      task = '📌',
+      lazy = '💤 ',
+    },
+  },
+})
 
 -- Configuration
 vim.opt.backspace = { 'indent', 'eol', 'start' } -- Backspace everything

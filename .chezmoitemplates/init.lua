@@ -67,13 +67,6 @@ require('lazy').setup({
     config = function() require('neoscroll').setup {} end,
   },
 
-  -- Faster lua package loading (until 15436 is merged)
-  -- {
-  --   'lewis6991/impatient.nvim',
-  --   module = { 'impatient' },
-  --   setup = function() require 'impatient' end,
-  -- },
-
   -- Library with lua functions
   { 'nvim-lua/plenary.nvim' },
 
@@ -197,7 +190,6 @@ require('lazy').setup({
   {
     'folke/persistence.nvim',
     event = 'BufReadPre',
-    module = 'persistence',
     config = function() require('persistence').setup() end,
   },
 
@@ -319,78 +311,76 @@ require('lazy').setup({
     end,
   },
   {
-    {
-      'nvim-treesitter/nvim-treesitter',
-      config = function()
-        require 'nvim-treesitter.highlight'
+    'nvim-treesitter/nvim-treesitter',
+    config = function()
+      require 'nvim-treesitter.highlight'
 
-        require('nvim-treesitter.configs').setup {
-          ensure_installed = {
-            'python',
-            'lua',
-            'verilog',
-            'json',
-            'yaml',
-            'bash',
-            'dockerfile',
-            'c',
-            'cpp',
-            'regex',
-            'markdown',
-            'rst',
-            'beancount',
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = {
+          'python',
+          'lua',
+          'verilog',
+          'json',
+          'yaml',
+          'bash',
+          'dockerfile',
+          'c',
+          'cpp',
+          'regex',
+          'markdown',
+          'rst',
+          'beancount',
+        },
+        indent = {
+          enable = false,
+        },
+        highlight = {
+          enable = true,
+          disable = { 'systemverilog', 'verilog' },
+        },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = 'gnn',
+            node_incremental = 'grn',
+            scope_incremental = 'grc',
+            node_decremental = 'grm',
           },
-          indent = {
-            enable = false,
-          },
-          highlight = {
+        },
+        refactor = {
+          highlight_definitions = { enable = true },
+          smart_rename = { enable = true, keymaps = { smart_rename = 'gsr' } },
+          navigation = {
             enable = true,
-            disable = { 'systemverilog', 'verilog' },
+            keymaps = { goto_definition = 'gnd', list_definitions = 'gnD' },
           },
-          incremental_selection = {
+        },
+        textobjects = {
+          move = {
             enable = true,
+            goto_next_start = { [']]'] = '@block.outer' },
+            goto_previous_start = { ['[['] = '@block.outer' },
+            goto_next_end = { [']['] = '@block.outer' },
+            goto_previous_end = { ['[]'] = '@block.outer' },
+          },
+          select = {
+            enable = true,
+            lookahead = true,
             keymaps = {
-              init_selection = 'gnn',
-              node_incremental = 'grn',
-              scope_incremental = 'grc',
-              node_decremental = 'grm',
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ab'] = '@block.outer',
+              ['ib'] = '@block.inner',
             },
           },
-          refactor = {
-            highlight_definitions = { enable = true },
-            smart_rename = { enable = true, keymaps = { smart_rename = 'gsr' } },
-            navigation = {
-              enable = true,
-              keymaps = { goto_definition = 'gnd', list_definitions = 'gnD' },
-            },
-          },
-          textobjects = {
-            move = {
-              enable = true,
-              goto_next_start = { [']]'] = '@block.outer' },
-              goto_previous_start = { ['[['] = '@block.outer' },
-              goto_next_end = { [']['] = '@block.outer' },
-              goto_previous_end = { ['[]'] = '@block.outer' },
-            },
-            select = {
-              enable = true,
-              lookahead = true,
-              keymaps = {
-                ['af'] = '@function.outer',
-                ['if'] = '@function.inner',
-                ['ab'] = '@block.outer',
-                ['ib'] = '@block.inner',
-              },
-            },
-          },
-          playground = { enable = true, disable = {}, updatetime = 25, persist_queries = false },
-        }
-      end,
-    },
-    'nvim-treesitter/nvim-treesitter-refactor',
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    { 'nvim-treesitter/playground' },
+        },
+        playground = { enable = true, disable = {}, updatetime = 25, persist_queries = false },
+      }
+    end,
   },
+  'nvim-treesitter/nvim-treesitter-refactor',
+  'nvim-treesitter/nvim-treesitter-textobjects',
+  { 'nvim-treesitter/playground', command = 'TSPlaygroundToggle' },
   { 'L3MON4D3/luasnip' },
   {
     'rmagatti/goto-preview',
@@ -902,9 +892,9 @@ function _G.qftf(info)
   local items
   local ret = {}
   if info.quickfix == 1 then
-    items = fn.getqflist({ id = info.id, items = 0 }).items
+    items = vim.fn.getqflist({ id = info.id, items = 0 }).items
   else
-    items = fn.getloclist(info.winid, { id = info.id, items = 0 }).items
+    items = vim.fn.getloclist(info.winid, { id = info.id, items = 0 }).items
   end
   local limit = 31
   local fnameFmt1, fnameFmt2 = '%-' .. limit .. 's', '…%.' .. (limit - 1) .. 's'
@@ -915,7 +905,7 @@ function _G.qftf(info)
     local str
     if e.valid == 1 then
       if e.bufnr > 0 then
-        fname = fn.bufname(e.bufnr)
+        fname = vim.fn.bufname(e.bufnr)
         if fname == '' then
           fname = '[No Name]'
         else

@@ -380,7 +380,7 @@ require('lazy').setup({
   },
   'nvim-treesitter/nvim-treesitter-refactor',
   'nvim-treesitter/nvim-treesitter-textobjects',
-  { 'nvim-treesitter/playground', command = 'TSPlaygroundToggle' },
+  { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
   { 'L3MON4D3/luasnip' },
   {
     'rmagatti/goto-preview',

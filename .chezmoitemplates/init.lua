@@ -127,10 +127,10 @@ require('lazy').setup({
       }
     end,
     keys = {
-      { 'n', 'gc', 'Comment toggle' },
-      { 'n', 'gb', 'Comment Block toggle' },
-      { 'v', 'gc', 'Comment toggle' },
-      { 'v', 'gb', 'Comment block toggle' },
+      { 'gc', mode = 'n', desc = 'Comment toggle' },
+      { 'gb', mode = 'n', desc = 'Comment Block toggle' },
+      { 'gc', mode = 'v', desc = 'Comment toggle' },
+      { 'gb', mode = 'v', desc = 'Comment block toggle' },
     },
   },
 

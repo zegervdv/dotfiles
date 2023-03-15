@@ -39,3 +39,5 @@ jobs:
 
       - name: Apply dotfiles
         run: chezmoi apply
+        env:
+          HOMEBREW_NO_INSTALL_FROM_API: 1

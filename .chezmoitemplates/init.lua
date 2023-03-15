@@ -550,12 +550,17 @@ require('lazy').setup({
       local colors
       if os.getenv 'DARKMODE' then
         colors = require('catppuccin.palettes').get_palette 'macchiato'
+        colors.diag_warn = utils.get_highlight('DiagnosticSignWarn').fg
+        colors.diag_error = utils.get_highlight('DiagnosticSignError').fg
       else
-        colors = require('tutti-colori.colors').setup()
+        colors = {
+          blue = '#2f6f9f',
+          green = '#73b00a',
+          orange = '#e9a700',
+          diag_warn = '#e9a700',
+          diag_error = '#f93232',
+        }
       end
-
-      colors.diag_warn = utils.get_highlight('DiagnosticSignWarn').fg
-      colors.diag_error = utils.get_highlight('DiagnosticSignError').fg
 
       require('heirline').load_colors(colors)
 
@@ -676,13 +681,9 @@ require('lazy').setup({
   -- Colorscheme
   {
     'zegervdv/espresso-tutti-colori.nvim',
-    name = 'tutti-colori',
     cond = not os.getenv 'DARKMODE',
     dev = true,
-    config = function()
-      require('tutti-colori').setup()
-      require('tutti-colori').load()
-    end,
+    config = function() vim.cmd.colorscheme 'espresso_tutti_colori' end,
     priority = 1000,
     lazy = false,
   },

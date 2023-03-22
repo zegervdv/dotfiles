@@ -226,6 +226,15 @@ alias ll="ls -haltr"
 alias xclip='xclip -selection clipboard'
 alias view='nvim -R'
 
+function nrg {
+  results=$(rg --vimgrep $@)
+  if [ $? -eq 0 ]; then
+    nvim -q <(echo $results) -c 'copen'
+  else
+    echo "\033[0;31mNo results\033[0m"
+  fi
+}
+
 # Suffix aliases
 alias -s py=nvim
 alias -s sv=nvim

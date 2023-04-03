@@ -9,7 +9,7 @@ repos:
       - id: check-merge-conflict
 
   - repo: https://github.com/JohnnyMorganz/StyLua
-    rev: v0.17.0
+    rev: v0.17.1
     hooks:
       - id: stylua-github
 

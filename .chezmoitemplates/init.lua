@@ -800,6 +800,7 @@ vim.opt.ttimeoutlen = -1 -- Minimum timeout
 vim.opt.diffopt:append 'iwhite' -- Ignore whitespace in diffs
 vim.opt.diffopt:append 'internal' -- Internal diff engine
 vim.opt.diffopt:append 'algorithm:patience' -- Use patience algorithm
+vim.opt.diffopt:append 'linematch:60' -- Second order diff to align lines
 
 vim.opt.tags = { '.git/tags', 'tags' }
 

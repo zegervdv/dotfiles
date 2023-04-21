@@ -98,6 +98,9 @@ require('lazy').setup({
             layout = 'diff4_mixed',
           },
         },
+        default_args = {
+          DiffviewOpen = { '--untracked-files=no' },
+        },
       }
       local wk = require 'which-key'
       wk.register { ['<leader>d'] = { name = 'Diffview' } }

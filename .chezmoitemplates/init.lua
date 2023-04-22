@@ -384,7 +384,7 @@ require('lazy').setup({
   'nvim-treesitter/nvim-treesitter-refactor',
   'nvim-treesitter/nvim-treesitter-textobjects',
   { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
-  { 'L3MON4D3/luasnip' },
+  { 'L3MON4D3/luasnip', config = function() require('luasnip').setup { enable_autosnippets = true } end },
   {
     'rmagatti/goto-preview',
     config = function() require('goto-preview').setup {} end,

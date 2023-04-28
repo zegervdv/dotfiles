@@ -1194,7 +1194,7 @@ local on_attach = function(client, bufnr)
   if client.supports_method 'textDocument/rangeFormatting' then
     local root = vim.fs.find({ '.git', '.hg' }, { path = client.config.root_dir })
     local vcs = 'git'
-    if root then vcs = vim.fs.basename(root[1]):sub(2) end
+    if root and #root > 0 then vcs = vim.fs.basename(root[1]):sub(2) end
 
     vim.notify('Enabled modification formatting via ' .. vcs .. ' using ' .. client.name, vim.log.levels.INFO)
     local lsp_format_modifications = require 'lsp-format-modifications'

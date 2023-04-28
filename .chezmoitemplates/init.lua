@@ -92,7 +92,7 @@ require('lazy').setup({
           fold_open = '-',
           done = '✓',
         },
-        hg_cmd = { 'chg' },
+        hg_cmd = { 'rhg' },
         view = {
           merge_tool = {
             layout = 'diff4_mixed',
@@ -426,6 +426,11 @@ require('lazy').setup({
   },
 
   {
+    'SmiteshP/nvim-navic',
+    dependencies = { 'neovim/nvim-lspconfig' },
+  },
+
+  {
     'ThePrimeagen/refactoring.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -666,7 +671,61 @@ require('lazy').setup({
         statusline_default,
       }
 
-      require('heirline').setup { statusline = statusline }
+      local navic = require 'nvim-navic'
+      local winbar = {
+        fallthrough = false,
+        condition = function() return navic.is_available() end,
+        static = {
+          -- bit operation dark magic, see below...
+          enc = function(line, col, winnr) return bit.bor(bit.lshift(line, 16), bit.lshift(col, 6), winnr) end,
+          -- line: 16 bit (65535); col: 10 bit (1023); winnr: 6 bit (63)
+          dec = function(c)
+            local line = bit.rshift(c, 16)
+            local col = bit.band(bit.rshift(c, 6), 1023)
+            local winnr = bit.band(c, 63)
+            return line, col, winnr
+          end,
+        },
+        init = function(self)
+          local data = navic.get_data() or {}
+          local children = {}
+          for i, loc in ipairs(data) do
+            local pos = self.enc(loc.scope.start.line, loc.scope.start.character, self.winnr)
+            local child = {
+              {
+                provider = loc.name,
+                on_click = {
+                  minwid = pos,
+                  callback = function(_, minwid)
+                    local line, col, winnr = self.dec(minwid)
+                    vim.api.nvim_win_set_cursor(vim.fn.win_getid(winnr), { line, col })
+                  end,
+                  name = 'heirline_navic',
+                },
+              },
+            }
+
+            if #data > 1 and i < #data then table.insert(child, { provider = ' > ' }) end
+            table.insert(children, child)
+          end
+
+          self.child = self:new(children, 1)
+        end,
+        provider = function(self) return self.child:eval() end,
+        update = 'CursorMoved',
+      }
+
+      require('heirline').setup {
+        statusline = statusline,
+        winbar = winbar,
+        opts = {
+          disable_winbar_cb = function(args)
+            return not conditions.buffer_matches { filetype = { 'python', 'verilog', 'systemverilog', 'cpp', 'c' } }
+            -- TODO: If LSP is not attached when opening the window, this does not work
+            -- return not navic.is_available(args.bufnr)
+          end,
+        },
+      }
     end,
   },
 
@@ -1189,6 +1248,11 @@ local on_attach = function(client, bufnr)
   if client.name == 'lua_ls' then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
+  end
+
+  if client.server_capabilities.documentSymbolProvider then
+    local navic = require 'nvim-navic'
+    navic.attach(client, bufnr)
   end
 
   if client.supports_method 'textDocument/rangeFormatting' then

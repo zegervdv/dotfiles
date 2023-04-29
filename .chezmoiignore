@@ -28,3 +28,4 @@ bin/*
 .local/share/applications/*
 {{ end }}
 .chezmoitemplates/lazy-lock.json
+.envrc

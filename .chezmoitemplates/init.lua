@@ -417,6 +417,7 @@ require('lazy').setup({
       }
     end,
   },
+  { 'lewis6991/tree-sitter-tcl', build = 'make' },
   {
     'yaocccc/nvim-hl-mdcodeblock.lua',
     after = 'nvim-treesitter',

@@ -297,6 +297,8 @@ export PS_FORMAT='pid,pgid,state,start_time,%cpu,command'
 
 export GPG_TTY=$(tty)
 
+export ZK_NOTEBOOK_DIR=$HOME/notebook
+
 autoload -U compinit
 
 for dump in ~/.zcompdump(N.mh+24); do

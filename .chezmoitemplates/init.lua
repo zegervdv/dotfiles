@@ -418,6 +418,12 @@ require('lazy').setup({
     end,
   },
   {
+    'yaocccc/nvim-hl-mdcodeblock.lua',
+    after = 'nvim-treesitter',
+    config = function() require('hl-mdcodeblock').setup {} end,
+  },
+
+  {
     'joechrisellis/lsp-format-modifications.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
@@ -762,6 +768,11 @@ require('lazy').setup({
     end,
     priority = 1000,
     lazy = false,
+  },
+
+  -- Notekeeping
+  {
+    'mickael-menu/zk-nvim',
   },
 
   -- Integration with external tools
@@ -1361,6 +1372,10 @@ lsp.lua_ls.setup {
       },
     },
   },
+}
+
+require('zk').setup {
+  lsp = { on_attach = on_attach, capabilities = capabilities },
 }
 
 vim.diagnostic.config {

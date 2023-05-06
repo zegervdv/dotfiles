@@ -1,0 +1,17 @@
+[notebook]
+dir = "~/notebook"
+
+[alias]
+ed = "zk edit --interactive $@"
+ls = "zk list $@"
+
+
+[note]
+# Template used to generate a note's filename, without extension.
+filename = "{{id}}-{{slug title}}"
+
+# The file extension used for the notes.
+extension = "md"
+
+[extra]
+author = "zegervdv"

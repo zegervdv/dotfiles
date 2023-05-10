@@ -111,7 +111,6 @@ zle_highlight=('paste:none')
 
 HISTSIZE=3000
 SAVEHIST=3000
-HISTFILE=~/.zsh_history
 
 # Completion
 setopt complete_in_word
@@ -256,6 +255,7 @@ abbreviations=(
   "Iw"    "| wc"
   "Ix"    "| xargs"
   "Ic"    "| clip"
+  "psa"   "ps -ax -o pid,pgid,user,start_time,time,command | rg"
 )
 
 magic-abbrev-expand() {
@@ -295,7 +295,9 @@ export BAT_CONFIG_PATH=$HOME/.config/bat/config
 
 export PS_FORMAT='pid,pgid,state,start_time,%cpu,command'
 
-export GPG_TTY=$(tty)
+if [ -z "$GPG_TTY" ]; then
+  export GPG_TTY=$(tty)
+fi
 
 export ZK_NOTEBOOK_DIR=$HOME/notebook
 

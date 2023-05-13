@@ -334,6 +334,7 @@ require('lazy').setup({
           'markdown',
           'rst',
           'beancount',
+          'rust',
         },
         indent = {
           enable = false,
@@ -1296,6 +1297,7 @@ local root_dir = require('lspconfig.util').root_pattern('.git', '.hg')
 
 lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities, root_dir = root_dir }
 lsp.bashls.setup { on_attach = on_attach, capabilities = capabilities }
+lsp.rust_analyzer.setup { on_attach = on_attach, capabilities = capabilities, root_dir = root_dir }
 
 lsp.esbonio.setup {
   on_attach = on_attach,

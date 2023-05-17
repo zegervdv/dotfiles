@@ -79,7 +79,7 @@ require('lazy').setup({
   { 'tpope/vim-git', ft = { 'gitcommit', 'gitrebase' } },
   {
     'zegervdv/diffview.nvim',
-    branch = 'hg-linetrace',
+    branch = 'hg-linetrace-2',
     dev = true,
     config = function()
       require('diffview').setup {

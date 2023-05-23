@@ -35,4 +35,8 @@ themes {
     }
 }
 
+{{ if .dark -}}
 theme "catppuccin-macchiato"
+{{ else -}}
+theme "espresso-tutti-colori"
+{{ end -}}

@@ -363,6 +363,15 @@ require('lazy').setup({
             goto_next_end = { [']['] = '@block.outer' },
             goto_previous_end = { ['[]'] = '@block.outer' },
           },
+          swap = {
+            enable = true,
+            swap_next = {
+              ['<A-n>'] = '@parameter.inner',
+            },
+            swap_previous = {
+              ['<A-p>'] = '@parameter.inner',
+            },
+          },
           select = {
             enable = true,
             lookahead = true,

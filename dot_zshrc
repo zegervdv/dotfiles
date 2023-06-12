@@ -366,7 +366,9 @@ function zvm_after_init() {
 
   zle -N unix-word-rubout
   bindkey '^w' unix-word-rubout
-  bindkey '^g' insert-last-word
+  bindkey '^[f' insert-last-word
+
+  bindkey '^[x' execute-named-cmd
 }
 
 zsh-defer source ~/.zsh/zsh-vi-mode.zsh

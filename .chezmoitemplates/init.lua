@@ -311,6 +311,7 @@ require('lazy').setup({
   },
   {
     'nvim-treesitter/nvim-treesitter',
+    version = 'v0.9.1',
     config = function()
       require 'nvim-treesitter.highlight'
 

@@ -1,0 +1,76 @@
+"ui.background" = { bg = "white" }
+"ui.text" = { fg = "black" }
+
+"ui.linenr" = { fg = "line" }
+"ui.linenr.selected" = { fg = "blue" }
+"ui.cursorline" = { bg = "gray-light" }
+"ui.statusline" = { fg = "gray-darker", bg = "soft-blue" }
+"ui.cursor" = { bg = "gray-lighter" }
+"ui.cursor.match" = { bg = "sky", underline = { style = "line" } }
+"ui.cursor.select" = {bg = "gray-blue"}
+"ui.cursor.primary" =  { bg = "gray-blue" }
+"ui.selection" = { bg = "sky" }
+"ui.virtual.indent-guide" = { fg = "gray-blue" }
+"ui.menu" = { fg = "black", bg = "ice-light" }
+"ui.menu.selected" = { fg = "black", bg = "soft-blue" }
+"ui.popup" = { fg = "black", bg = "ice-light" }
+"ui.help" = { fg = "black", bg = "ice-light" }
+
+"diagnostic.error" = { underline = { color = "error-red", style = "line" }, bg = "error-bg" }
+
+"comment" = { fg = "gray", modifiers = ["italic"] }
+"operator" = { fg = "blue", bg = "ice-light", modifiers = ["bold"] }
+"variable" = { fg = "teal" }
+"number" = { fg = "purple-light", bg = "purple-lighter" }
+"constant" = { fg = "purple-light", bg = "purple-lighter" }
+"attributes" = { fg = "purple-dark" }
+"type" = { fg = "red" }
+"string" = { fg = "green" }
+"property" = { fg = "gray-darker" }
+"escape" = { fg = "red-light" }
+"function" = { fg = 'red-dark' }
+"function.builtin" = { fg = 'red-dark' } # TODO: could distinguish here
+"function.method" = { fg = "red-light" }
+"constructor" = { fg = "red-dark" }
+"special" = { fg = "blue", bg = "ice-light", modifiers = ["bold"] }
+"keyword" = { fg = "blue", bg = "ice-light"}
+"label" = { fg = "purple-light", modifiers = ["bold"] }
+"namespace" = { fg = "magenta", modifiers = ["bold"] }
+
+[palette]
+white = "#fbfafc"
+black = "#000000"
+red = "#d44950"
+green = "#73b00a"
+blue = "#2f6f9f"
+cyan = "#0b51a6"
+yellow = "#fbe9ad"
+magenta = "#4e279a"
+gray = "#a1a1a1"
+white-softer = "#f3f3f3"
+white-blue = "#fefeff"
+blue-gray = "#667786"
+gray-blue = "#e3ebf1"
+tan = "#fbe9ad"
+red-dark = "#d71707"
+red-light = "#cf4f5f"
+error-red = "#f93232"
+error-bg = "#facbcb"
+orange = "#e9a700"
+orange-light = "#faf1da"
+green-dark = "#7b8c4d"
+green-light = "#e8ffd5"
+ice-light = "#f4faff"
+teal = "#4f9fcf"
+blue-light = "#4f9eeb"
+ice = "#81c7ff"
+sky = "#d4e9fa"
+soft-blue = "#dbebff"
+purple-light = "#7653c1"
+purple-dark = "#3a1d72"
+purple-lighter = "#f3f2ff"
+gray-dark = "#888888"
+gray-darker = "#222222"
+gray-light = "#f5f5f5"
+gray-lighter = "#facbcb"
+line = "#d1d1d1"

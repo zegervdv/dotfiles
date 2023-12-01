@@ -1,7 +1,49 @@
 {{ if eq .chezmoi.os "linux" -}}
 {{ if eq .chezmoi.osRelease.name "Ubuntu" -}}
+
+{{ $packages := list
+	"build-essential"
+	"libsqlite3-dev"
+	"libreadline-dev"
+    "libbz2-dev"
+    "libncurses-dev"
+    "zlib1g-dev"
+    "libffi-dev"
+    "libssl-dev"
+    "software-properties-common"
+	"fzf"
+    "fd-find"
+    "ripgrep"
+	"jq"
+	"pass"
+	"apt-file"
+	"fonts-firacode"
+	"kitty" -}}
+
+{{ $ppa := list
+	"ppa:maveonair/helix-editor"
+	"ppa:mozillateam/ppa" -}}
+
+{{ $extra_packages := list
+	"helix"
+	"firefox" -}}
 #!/usr/bin/env bash
 
-sudo apt install -y libsqlite3-dev libreadline-dev libbz2-dev libncurses-dev zlib1g-dev libffi-dev libssl-dev
+set -xe
+
+sudo apt install -y  {{ $packages | join " "}}
+
+{{ range $ppa }}
+sudo add-apt-repository -y --no-update --ppa {{ . }}
+{{ end}}
+
+sudo mkdir -p /etc/apt/preferences.d/
+sudo cp -v {{ .chezmoi.sourceDir }}/system/ubuntu/mozilla-firefox /etc/apt/preferences.d/mozilla-firefox
+
+sudo apt update
+sudo apt install -y  {{ $extra_packages | join " " }}
+
+sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
+
 {{- end }}
 {{- end }}

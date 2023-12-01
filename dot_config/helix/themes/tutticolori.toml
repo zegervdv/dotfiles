@@ -16,11 +16,21 @@
 "ui.popup" = { fg = "black", bg = "ice-light" }
 "ui.help" = { fg = "black", bg = "ice-light" }
 
-"diagnostic.error" = { underline = { color = "error-red", style = "line" }, bg = "error-bg" }
+"diagnostic.error" = { underline = { color = "error-red", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "orange", style = "curl"}}
+
+"error" = { fg = "error-red" }
+"warning" = { fg = "orange" }
+"info" = { fg = "green" }
+"hint" = { fg = "sky" }
+
 
 "comment" = { fg = "gray", modifiers = ["italic"] }
 "operator" = { fg = "blue", bg = "ice-light", modifiers = ["bold"] }
-"variable" = { fg = "teal" }
+"variable" = { fg = "black" }
+"variable.other.member" = { fg = "teal" }
+"variable.parameter" = { fg = "cyan" }
+"variable.builtin" = { fg = "blue" }
 "number" = { fg = "purple-light", bg = "purple-lighter" }
 "constant" = { fg = "purple-light", bg = "purple-lighter" }
 "attributes" = { fg = "purple-dark" }

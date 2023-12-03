@@ -2,7 +2,10 @@
 {{ if eq .chezmoi.osRelease.name "Ubuntu" -}}
 #!/usr/bin/env bash
 
-dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
+if [ -x "$(command -v dconf)" ]; then
 
+	dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
+
+fi
 {{- end }}
 {{- end }}

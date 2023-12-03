@@ -1,5 +1,0 @@
-{{ if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) -}}
-#!/usr/bin/env bash
-
-bat cache --build
-{{ end -}}

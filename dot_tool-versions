@@ -4,3 +4,4 @@ direnv 2.32.1
 rust 1.64.0
 sqlite 3.39.4
 nodejs 19.2.0
+chezmoi 2.42.2

@@ -184,6 +184,10 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle ':completion:*:*:nvim:*' ignored-patterns '*.(o|hex|elf|pyc|pdf|dup)'
 zstyle ':completion:*:*:nvim:*' file-sort modification
 
+# hx completion
+zstyle ':completion:*:*:hx:*' ignored-patterns '*.(o|hex|elf|pyc|pdf|dup)'
+zstyle ':completion:*:*:hx:*' file-sort modification
+
 if [ -z "$SSH_AUTH_SOCK" ]; then
   eval "$(ssh-agent)"
 fi
@@ -286,9 +290,10 @@ bindkey -M isearch " " self-insert
 # Exports
 export XDG_CONFIG_HOME=$HOME/.config
 export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
-export EDITOR=nvim
-export HGEDITOR=nvim
+export EDITOR=hx
+export HGEDITOR=hx
 
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
 export BAT_CONFIG_PATH=$HOME/.config/bat/config
@@ -313,7 +318,7 @@ compinit -C
 eval "$($HOME/bin/rtx activate zsh)"
 eval "$($HOME/bin/rtx hook-env)"
 
-export SUDO_EDITOR=$(which nvim)
+export SUDO_EDITOR=$(which hx)
 eval "$(direnv hook zsh)"
 
 zstyle ':completion:*:descriptions' format '[%d]'

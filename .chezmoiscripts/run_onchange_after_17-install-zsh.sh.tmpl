@@ -1,0 +1,26 @@
+{{ if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.name "Ubuntu")) -}}
+#!/usr/bin/env bash
+
+{{ $version := "5.9" -}}
+
+set -xe
+
+TMP_BUILD_DIR=/tmp/zsh-install-dir
+rm -rf "$TMP_BUILD_DIR" || true
+mkdir -p $TMP_BUILD_DIR
+pushd "$TMP_BUILD_DIR"
+
+curl -L https://github.com/zsh-users/zsh/archive/refs/tags/zsh-{{ $version }}.tar.gz | tar xz
+pushd zsh-zsh-{{ $version }}
+./Util/preconfig
+./configure --prefix /usr/local/
+make -j
+sudo make install
+
+sudo chsh -s /usr/local/bin/zsh $USER
+
+cd
+
+rm -rf "$TMP_BUILD_DIR"
+
+{{ end }}

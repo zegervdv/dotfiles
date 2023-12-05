@@ -1,0 +1,18 @@
+{{ if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.name "Ubuntu" )) -}}
+#!/usr/bin/env bash
+
+set -xe
+
+# tool-versions hash: {{ include "dot_tool-versions" | sha256sum }}
+
+RTX_BIN=$HOME/bin/rxt
+curl https://github.com/jdx/rtx/releases/download/v2023.12.8/rtx-v2023.12.8-linux-x64 > $RTX_BIN
+chmod +x $RTX_BIN
+
+$RTX_BIN install --verbose --yes
+mkdir -p $XDG_CONFIG_HOME/direnv/lib
+$RTX_BIN direnv activate > $XDG_CONFIG_HOME/direnv/lib/use_rtx.sh
+$RTX_BIN completion zsh > ~/.zsh/completetions
+
+
+{{ end }}

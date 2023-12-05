@@ -1,0 +1,8 @@
+{{ if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.name "Ubuntu")) -}}
+#!/usr/bin/env bash
+
+set -xe
+
+chezmoi completion zsh > $HOME/.zsh/completions/_chezmoi
+
+{{ end }}

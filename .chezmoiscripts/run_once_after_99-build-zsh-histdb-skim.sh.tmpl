@@ -1,4 +1,4 @@
-{{ if (or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.arch "arm64") (ne .chezmoi.osRelease.id "centos"))) -}}
+{{ if (or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.name "Ubuntu"))) -}}
 #!/usr/bin/env zsh
 
 source $HOME/.asdf/asdf.sh

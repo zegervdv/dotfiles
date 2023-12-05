@@ -1,0 +1,22 @@
+{{ if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.name "Ubuntu")) -}}
+#!/usr/bin/env bash
+
+{{ $version := "3.3a" -}}
+
+set -xe
+
+TMP_BUILD_DIR=/tmp/tmux-install-dir
+mkdir -p "$TMP_BUILD_DIR"
+pushd "$TMP_BUILD_DIR"
+
+curl -L https://github.com/tmux/tmux/releases/download/{{ $version }}/tmux-{{ $version }}.tar.gz | tar xz
+pushd tmux-{{ $version }}
+./configure --prefix /usr/local/
+make -j
+sudo make install
+
+cd
+
+rm -rf "$TMP_BUILD_DIR"
+
+{{ end }}

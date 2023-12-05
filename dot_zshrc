@@ -310,13 +310,8 @@ compinit -C
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-source $HOME/.asdf/asdf.sh
-fpath=(${ASDF_DIR}/completions $fpath)
-
-if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]
-then
-  source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-fi
+eval "$($HOME/bin/rtx activate zsh)"
+eval "$($HOME/bin/rtx hook-env)"
 
 export SUDO_EDITOR=$(which nvim)
 eval "$(direnv hook zsh)"

@@ -7,16 +7,11 @@ jobs:
   install:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
-    env:
-      HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.BREW_TOKEN }}
     steps:
-      - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-
       - name: Install chezmoi
-        run: brew install chezmoi
+        run: sh -c "$(curl -fsLS get.chezmoi.io)"
 
       - name: Install system dependencies
         run: sudo apt install -y libsqlite3-dev

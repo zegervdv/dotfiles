@@ -1,0 +1,12 @@
+{{ if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.name "Ubuntu")) -}}
+#!/usr/bin/env bash
+
+# helix languages config {{ include "dot_config/helix/languages.toml" | sha256sum }}
+
+set -xe
+
+hx --grammar fetch
+hx --grammar build
+
+
+{{ end }}

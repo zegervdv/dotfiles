@@ -1,3 +1,5 @@
+use-grammars = { except = ["gemini"] }
+
 [language-server.pyright-langserver]
 command = "pyright-langserver"
 args = ["--stdio"]
@@ -11,3 +13,16 @@ name = "python"
 roots = ["pyproject.toml"]
 formatter = { command = "black", args = ["--quiet", "-"] }
 language-servers = ["ruff-lsp", "pyright-langserver"]
+
+[[grammar]]
+name = "tcl"
+source = { git = "https://github.com/lewis6991/tree-sitter-tcl", rev = "ac8b94b7a89825ddbdd6f8fc0a81c67c065be851" }
+
+[[language]]
+name = "tcl"
+scope = "source.tcl"
+injection-regex = "tcl"
+file-types = ["tcl"]
+comment-token = "#"
+indent = { tab-width = 2, unit = " " }
+roots = []

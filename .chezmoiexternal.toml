@@ -70,4 +70,12 @@
   type = "file"
   url = "https://git.zx2c4.com/password-store/plain/src/completion/pass.zsh-completion"
 
+[".config/helix/runtime/queries/tcl/highlights.scm"]
+  type = "file"
+  url = "https://github.com/lewis6991/tree-sitter-tcl/raw/ac8b94b7a89825ddbdd6f8fc0a81c67c065be851/queries/tcl/highlights.scm"
+
+[".config/helix/runtime/queries/tcl/indents.scm"]
+  type = "file"
+  url = "https://github.com/lewis6991/tree-sitter-tcl/raw/ac8b94b7a89825ddbdd6f8fc0a81c67c065be851/queries/tcl/indents.scm"
+
 {{- end}}

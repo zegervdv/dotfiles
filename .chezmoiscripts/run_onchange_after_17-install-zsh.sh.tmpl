@@ -13,7 +13,7 @@ pushd "$TMP_BUILD_DIR"
 curl -L https://github.com/zsh-users/zsh/archive/refs/tags/zsh-{{ $version }}.tar.gz | tar xz
 pushd zsh-zsh-{{ $version }}
 ./Util/preconfig
-./configure --prefix /usr/local/
+./configure --prefix /usr/local/ --with-tcsetpgrp
 make -j
 sudo make install
 

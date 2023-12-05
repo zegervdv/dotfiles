@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Install chezmoi
-        run: sh -c "$(curl -fsLS get.chezmoi.io)"
+        run: sh -c "cd /usr/local && $(curl -fsLS get.chezmoi.io)"
 
       - name: Install system dependencies
         run: sudo apt install -y libsqlite3-dev
@@ -30,9 +30,9 @@ jobs:
           echo '    dark = false' >> $HOME/.config/chezmoi/chezmoi.toml
 
       - name: Initialize chezmoi
-        run: ./bin/chezmoi init -v zegervdv --branch ${GITHUB_REF##*/}
+        run: /usr/local/bin/chezmoi init -v zegervdv --branch ${GITHUB_REF##*/}
 
       - name: Apply dotfiles
-        run: ./bin/chezmoi apply
+        run: /usr/local/bin/chezmoi apply
         env:
           HOMEBREW_NO_INSTALL_FROM_API: 1

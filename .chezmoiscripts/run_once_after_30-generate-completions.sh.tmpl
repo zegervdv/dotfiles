@@ -3,6 +3,10 @@
 
 set -xe
 
+
+eval "$($HOME/bin/rtx activate bash)"
+eval "$($HOME/bin/rtx hook-env)"
+
 chezmoi completion zsh > $HOME/.zsh/completions/_chezmoi
 
 {{ end }}

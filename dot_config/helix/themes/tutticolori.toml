@@ -24,6 +24,9 @@
 "info" = { fg = "green" }
 "hint" = { fg = "sky" }
 
+"diff.plus" = { fg = "green" }
+"diff.minus" = { fg = "error-red" }
+"diff.delta" = { fg = "purple-light" }
 
 "comment" = { fg = "gray", modifiers = ["italic"] }
 "operator" = { fg = "blue", bg = "ice-light", modifiers = ["bold"] }

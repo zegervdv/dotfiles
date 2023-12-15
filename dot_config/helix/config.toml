@@ -18,3 +18,8 @@ C-f = "move_char_right"
 
 [keys.normal."space"]
 o = "file_picker_in_current_buffer_directory"
+
+[keys.normal.g]
+l = ["collapse_selection", "extend_to_line_end"]
+h = ["collapse_selection", "extend_to_line_start"]
+s = ["collapse_selection", "select_mode", "goto_first_nonwhitespace", "exit_select_mode"]

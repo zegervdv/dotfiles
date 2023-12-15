@@ -50,6 +50,8 @@
 "label" = { fg = "purple-light", modifiers = ["bold"] }
 "namespace" = { fg = "magenta", modifiers = ["bold"] }
 
+"markup.link.url" = { fg = "blue", underline = { style = "line" } }
+
 [palette]
 white = "#fbfafc"
 black = "#000000"

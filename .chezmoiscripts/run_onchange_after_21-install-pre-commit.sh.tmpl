@@ -1,0 +1,9 @@
+{{ if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.name "Ubuntu")) -}}
+{{ $pre_commit_version := "3.6.0" -}}
+#!/usr/bin/env bash
+
+set -xe
+
+pipx install "pre-commit=={{ $pre_commit_version }}"
+
+{{ end }}

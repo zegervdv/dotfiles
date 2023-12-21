@@ -26,3 +26,7 @@ file-types = ["tcl"]
 comment-token = "#"
 indent = { tab-width = 2, unit = " " }
 roots = []
+
+[[language]]
+name = 'gotmpl'
+file-types = ["tmpl"]

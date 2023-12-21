@@ -39,7 +39,7 @@ sudo apt install -y  {{ $packages | join " "}}
 
 {{ range $ppa }}
 sudo add-apt-repository -y --no-update --ppa {{ . }}
-{{ end}}
+{{ end }}
 
 sudo mkdir -p /etc/apt/preferences.d/
 sudo cp -v {{ .chezmoi.sourceDir }}/system/ubuntu/mozilla-firefox /etc/apt/preferences.d/mozilla-firefox

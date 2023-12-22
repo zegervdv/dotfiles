@@ -30,3 +30,16 @@ roots = []
 [[language]]
 name = 'gotmpl'
 file-types = ["tmpl"]
+
+[[grammar]]
+name = "hgrc"
+source = { git = "https://github.com/zegervdv/tree-sitter-hgrc.git", rev = "d20aa925aa0c56d68215395b9e65dc6003cdcffb" }
+
+[[language]]
+name = "hgrc"
+scope = "source.hgrc"
+injection-regex = "hgrc"
+file-types = ["hgrc", ".hgrc"]
+comment-token = "#"
+indent = { tab-width = 2, unit = " " }
+roots = [".hg"]

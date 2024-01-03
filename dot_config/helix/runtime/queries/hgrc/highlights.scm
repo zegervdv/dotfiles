@@ -9,3 +9,17 @@
 (bool) @constant.builtin.boolean
 
 (comment) @comment
+
+(template
+  "{" @punctuation.special
+  "}" @punctuation.special)
+
+(template (number) @number)
+(template (bool) @constant.builtin.boolean)
+
+(function) @function
+(keyword) @keyword
+
+(operator) @operator
+
+(string (escape) @constant.character.escape)

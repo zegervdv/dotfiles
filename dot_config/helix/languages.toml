@@ -33,7 +33,7 @@ file-types = ["tmpl"]
 
 [[grammar]]
 name = "hgrc"
-source = { git = "https://github.com/zegervdv/tree-sitter-hgrc.git", rev = "d20aa925aa0c56d68215395b9e65dc6003cdcffb" }
+source = { git = "https://github.com/zegervdv/tree-sitter-hgrc.git", rev = "6bbb8cc15cd489b66244517c3c5bbf4b19fd8ffa" }
 
 [[language]]
 name = "hgrc"
@@ -41,5 +41,18 @@ scope = "source.hgrc"
 injection-regex = "hgrc"
 file-types = ["hgrc", ".hgrc"]
 comment-token = "#"
+indent = { tab-width = 2, unit = " " }
+roots = [".hg"]
+
+[[grammar]]
+name = "hg-commit"
+source = { git = "https://github.com/zegervdv/tree-sitter-hg-commit.git", rev = "310825fccba24d27d9da66597c372f697896a6d3" }
+
+[[language]]
+name = "hg-commit"
+scope = "source.hg-commit"
+injection-regex = "hgrc"
+file-types = [{ suffix = "commit.hg.txt" }]
+comment-token = "HG:"
 indent = { tab-width = 2, unit = " " }
 roots = [".hg"]

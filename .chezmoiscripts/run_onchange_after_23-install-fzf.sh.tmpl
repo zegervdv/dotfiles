@@ -1,0 +1,9 @@
+{{ if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.name "Ubuntu" )) -}}
+#!/usr/bin/env bash
+
+set -xe
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --all
+
+{{ end -}}

@@ -291,6 +291,7 @@ bindkey -M isearch " " self-insert
 export XDG_CONFIG_HOME=$HOME/.config
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export MANPATH=$HOME/.local/man:$MANPATH
 
 export EDITOR=hx
 export HGEDITOR=hx

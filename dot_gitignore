@@ -21,6 +21,7 @@ Icon
 
 *.s[a-w][a-z]
 !*.sch
+!*.scm
 *.un~
 Session.vim
 .netrwhist

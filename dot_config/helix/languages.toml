@@ -33,7 +33,7 @@ file-types = ["tmpl"]
 
 [[grammar]]
 name = "hgrc"
-source = { git = "https://github.com/zegervdv/tree-sitter-hgrc.git", rev = "6bbb8cc15cd489b66244517c3c5bbf4b19fd8ffa" }
+source = { git = "https://github.com/zegervdv/tree-sitter-hgrc.git", rev = "44d82932def8f7cdea0a57688ada136707a51fd7" }
 
 [[language]]
 name = "hgrc"

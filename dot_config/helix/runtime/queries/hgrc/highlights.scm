@@ -23,3 +23,5 @@
 (operator) @operator
 
 (string (escape) @constant.character.escape)
+
+(regex) @string

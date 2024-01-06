@@ -17,6 +17,9 @@ select = "underline"
 render = true
 skip-levels = 1
 
+[editor.statusline]
+right = ["diagnostics", "version-control", "selections", "register", "position", "file-encoding"]
+
 [keys.insert]
 C-f = "move_char_right"
 

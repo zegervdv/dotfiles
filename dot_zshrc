@@ -238,6 +238,10 @@ function nrg {
   fi
 }
 
+function try {
+  while "$@"; do :; done
+}
+
 # Suffix aliases
 alias -s py=nvim
 alias -s sv=nvim
@@ -316,8 +320,10 @@ compinit -C
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-eval "$($HOME/bin/rtx activate zsh)"
-eval "$($HOME/bin/rtx hook-env)"
+if [ -f "$HOME/bin/rtx" ]; then
+  eval "$($HOME/bin/rtx activate zsh)"
+  eval "$($HOME/bin/rtx hook-env)"
+fi
 
 export SUDO_EDITOR=$(which hx)
 eval "$(direnv hook zsh)"

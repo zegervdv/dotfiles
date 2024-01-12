@@ -18,10 +18,13 @@ render = true
 skip-levels = 1
 
 [editor.statusline]
-right = ["diagnostics", "version-control", "selections", "register", "position", "file-encoding"]
+right = ["diagnostics", "version-control", "selections", "register", "position", "position-percentage"]
 
 [keys.insert]
 C-f = "move_char_right"
+
+[keys.normal]
+x = "extend_line"
 
 [keys.normal."space"]
 o = "file_picker_in_current_buffer_directory"

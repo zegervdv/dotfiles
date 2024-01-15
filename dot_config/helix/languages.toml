@@ -46,7 +46,7 @@ roots = [".hg"]
 
 [[grammar]]
 name = "hg-commit"
-source = { git = "https://github.com/zegervdv/tree-sitter-hg-commit.git", rev = "310825fccba24d27d9da66597c372f697896a6d3" }
+source = { git = "https://github.com/zegervdv/tree-sitter-hg-commit.git", rev = "36cb1ed63f69b4a0d21d1ea1c25862d9ef812ea8" }
 
 [[language]]
 name = "hg-commit"

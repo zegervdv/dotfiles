@@ -1,8 +1,9 @@
 {{ if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.name "Ubuntu" )) -}}
 {{ $packages := dict
-				 "fd"    (dict "version" "9.0.0"  "url" "https://github.com/sharkdp/fd/releases/download/v${VERSION}/fd-v${VERSION}-i686-unknown-linux-musl.tar.gz")
-				 "rg"    (dict "version" "14.0.3" "url" "https://github.com/BurntSushi/ripgrep/releases/download/${VERSION}/ripgrep-${VERSION}-x86_64-unknown-linux-musl.tar.gz")
-				 "delta" (dict "version" "0.16.5" "url" "https://github.com/dandavison/delta/releases/download/${VERSION}/delta-${VERSION}-x86_64-unknown-linux-musl.tar.gz") -}}
+				 "fd"        (dict "version" "9.0.0"  "url" "https://github.com/sharkdp/fd/releases/download/v${VERSION}/fd-v${VERSION}-i686-unknown-linux-musl.tar.gz")
+				 "rg"        (dict "version" "14.0.3" "url" "https://github.com/BurntSushi/ripgrep/releases/download/${VERSION}/ripgrep-${VERSION}-x86_64-unknown-linux-musl.tar.gz")
+				 "delta"     (dict "version" "0.16.5" "url" "https://github.com/dandavison/delta/releases/download/${VERSION}/delta-${VERSION}-x86_64-unknown-linux-musl.tar.gz")
+				 "hyperfine" (dict "version" "1.18.0" "url" "https://github.com/sharkdp/hyperfine/releases/download/v${VERSION}/hyperfine-v${VERSION}-x86_64-unknown-linux-musl.tar.gz") -}}
 #!/usr/bin/env bash
 
 set -xe

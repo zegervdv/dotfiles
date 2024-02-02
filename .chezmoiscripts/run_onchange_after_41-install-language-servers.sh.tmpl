@@ -1,8 +1,8 @@
 {{ if (or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.name "Ubuntu"))) -}}
 {{ $taplo_version := "0.8.1" -}}
-{{ $ruff_version := "0.1.7" -}}
-{{ $ruff_lsp_version := "0.0.50" -}}
-{{ $pyright_version := "1.1.338" -}}
+{{ $pipx_pkgs := dict "ruff"     "0.2.0"
+                     "ruff-lsp" "0.0.51"
+                     "pyright"  "1.1.338" -}}
 #!/usr/bin/env bash
 
 set -xe
@@ -12,9 +12,9 @@ eval "$($HOME/bin/rtx hook-env)"
 
 curl -fsSL https://github.com/tamasfe/taplo/releases/download/{{ $taplo_version }}/taplo-full-linux-x86_64.gz | gzip -d - | sudo install -m 755 /dev/stdin /usr/local/bin/taplo
 
-pipx install "ruff=={{ $ruff_version }}"
-pipx install "ruff-lsp=={{ $ruff_lsp_version }}"
-pipx install "pyright=={{ $pyright_version }}"
+{{ range keys $pipx_pkgs }}
+pipx install --force "{{ . }}=={{ get $pipx_pkgs . }}"
+{{ end }}
 
 npm install -g "@ansible/ansible-language-server"
 npm install -g "vscode-langservers-extracted"

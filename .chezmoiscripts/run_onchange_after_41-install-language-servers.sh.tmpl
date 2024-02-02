@@ -12,7 +12,7 @@ eval "$($HOME/bin/rtx hook-env)"
 
 curl -fsSL https://github.com/tamasfe/taplo/releases/download/{{ $taplo_version }}/taplo-full-linux-x86_64.gz | gzip -d - | sudo install -m 755 /dev/stdin /usr/local/bin/taplo
 
-{{ range keys $pipx_pkgs }}
+{{ range keys $pipx_pkgs | sortAlpha }}
 pipx install --force "{{ . }}=={{ get $pipx_pkgs . }}"
 {{ end }}
 

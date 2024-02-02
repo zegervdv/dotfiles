@@ -17,7 +17,7 @@ mkdir -p $MANPAGE_DIR
 mkdir -p $DOWNLOAD_DIR
 pushd $DOWNLOAD_DIR
 
-{{ range keys $packages }}
+{{ range keys $packages | sortAlpha }}
 {{ $meta :=  get $packages . -}}
 VERSION={{ get $meta "version" }}
 echo "Downloading {{ . }} v{{ get $meta "version" }} ..."

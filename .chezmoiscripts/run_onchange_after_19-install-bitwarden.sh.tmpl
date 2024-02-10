@@ -1,0 +1,9 @@
+{{ if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.name "Ubuntu" )) -}}
+#!/usr/bin/env bash
+
+set -xe
+
+curl -fsSL "https://github.com/bitwarden/clients/releases/download/cli-v2024.2.0/bw-linux-2024.2.0.zip" | zcat | install -m 755 /dev/stdin $HOME/bin/bw
+
+
+{{ end }}

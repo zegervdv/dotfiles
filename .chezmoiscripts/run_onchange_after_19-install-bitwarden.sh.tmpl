@@ -9,5 +9,6 @@ curl -fsSL "https://github.com/bitwarden/clients/releases/download/desktop-v2024
 sudo dpkg --install --skip-same-version $DOWNLOADFILE
 rm -rf $DOWNLOADFILE
 
+rtx x rust@1.74.0 -- cargo install rbw
 
 {{ end }}

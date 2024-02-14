@@ -1,7 +1,7 @@
 {{ if .dark }}
-PROMPT=$'%F{#89dceb}%T%f%k %F{#f38ba8}%m%f %F{#89b4fa}%~%b%f%k
-%j ->\u00A0'
+PROMPT=$'%{\e]133;A\a%}%F{#89dceb}%T%f%k %F{#f38ba8}%m%f %F{#89b4fa}%~%b%f%k
+%j ->\u00A0%{\e]133;B\a%}'
 {{ else }}
-PROMPT=$'%F{#2f6f9f}%K{#f4faff}%T%f%k %F{#d71707}%m%f %F{#0b51a6}%~%b%f%k
-%j ->\u00A0'
+PROMPT=$'%{\e]133;A\a%}%F{#2f6f9f}%K{#f4faff}%T%f%k %F{#d71707}%m%f %F{#0b51a6}%~%b%f%k
+%j ->\u00A0{\e]133;B\a%}'
 {{ end }}

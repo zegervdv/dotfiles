@@ -22,7 +22,7 @@ source = { git = "https://github.com/lewis6991/tree-sitter-tcl", rev = "ac8b94b7
 name = "tcl"
 scope = "source.tcl"
 injection-regex = "tcl"
-file-types = ["tcl"]
+file-types = ["tcl", "do", "xdc", "sdc"]
 comment-token = "#"
 indent = { tab-width = 2, unit = " " }
 roots = []

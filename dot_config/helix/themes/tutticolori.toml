@@ -18,7 +18,7 @@
 "ui.virtual.whitespace" = { fg = "gray" }
 
 "diagnostic.error" = { underline = { color = "error-red", style = "curl" } }
-"diagnostic.warning" = { underline = { color = "orange", style = "curl"}}
+"diagnostic.warning" = { underline = { color = "orange", style = "curl"} }
 
 "error" = { fg = "error-red" }
 "warning" = { fg = "orange" }

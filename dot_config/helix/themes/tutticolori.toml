@@ -5,16 +5,17 @@
 "ui.linenr.selected" = { fg = "blue" }
 "ui.cursorline" = { bg = "gray-light" }
 "ui.statusline" = { fg = "gray-darker", bg = "soft-blue" }
-"ui.cursor" = { bg = "gray-lighter" }
+"ui.cursor" = { bg = "gray-blue" }
 "ui.cursor.match" = { bg = "sky", underline = { style = "line" } }
 "ui.cursor.select" = {bg = "gray-blue"}
-"ui.cursor.primary" =  { bg = "gray-blue" }
+"ui.cursor.primary" =  { bg = "error-bg" }
 "ui.selection" = { bg = "sky" }
 "ui.virtual.indent-guide" = { fg = "gray-blue" }
 "ui.menu" = { fg = "black", bg = "ice-light" }
 "ui.menu.selected" = { fg = "black", bg = "soft-blue" }
 "ui.popup" = { fg = "black", bg = "ice-light" }
 "ui.help" = { fg = "black", bg = "ice-light" }
+"ui.virtual.whitespace" = { fg = "gray" }
 
 "diagnostic.error" = { underline = { color = "error-red", style = "curl" } }
 "diagnostic.warning" = { underline = { color = "orange", style = "curl"}}
